@@ -1,14 +1,12 @@
-import './App.css';
-import CreateQuestionView from './components/createQuestionComponent/CreateQuestionView';
-import CreateQuestionViewModel from './components/createQuestionComponent/CreateQuestionViewModel';
+import './scss/main.scss'
+import CreateQuestionView from './components/createQuestionComponents/CreateQuestionView';
+import CreateQuestionViewModel from './components/createQuestionComponents/CreateQuestionViewModel';
 
 function App() {
 
-  const viewModel = CreateQuestionViewModel();
-
   return (
     <div className="App">
-      <CreateQuestionView viewModel={viewModel}/>
+      
     </div>
   );
 }
