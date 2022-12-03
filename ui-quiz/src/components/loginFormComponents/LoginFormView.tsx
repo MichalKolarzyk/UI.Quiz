@@ -17,7 +17,7 @@ const LoginFormView = (props: LoginFormViewProps) => {
       <input className="form--input" value={props.viewModel.login} onChange={loginChangeHandler} placeholder="login" />
       <input className="form--input" value={props.viewModel.password} onChange={passwordChangeHandler} placeholder="password"/>
       <div className="u-margin-bottom-small"></div>
-      <button disabled={viewModel.disabled} onClick={viewModel.submit} className="button">Submit</button>
+      <button disabled={viewModel.disabled} onClick={viewModel.submit} className="button">Sign in</button>
     </div>
   );
 };
