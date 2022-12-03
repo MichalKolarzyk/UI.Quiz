@@ -20,6 +20,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button{
+  font-family: 'Segoe UI';
+  font-size: $default-font-size;
+}
+
 html{
   font-size: 62.5%;
 }

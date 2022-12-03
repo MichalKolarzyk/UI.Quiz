@@ -1,0 +1,28 @@
+.header-flat{
+    height: 4rem;
+    position: relative;
+    padding-top: 1rem;
+
+    &__logo-box{
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        transform: translate(0%, -15%);
+    }
+
+    &__center-box{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    &__left-box{
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translate(-100%, -50%);
+        text-align: left;
+    }
+}
