@@ -1,34 +1,14 @@
 import { useState } from "react";
-import useQuizApi from "../../infrastructure/quizApis/useQuizApi";
+import IuseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
 import ILoginFormViewModel from "./ILoginFormViewModel";
 
-const LoginFormViewModel = () => {
-    const quizApi = useQuizApi();
-    const [disabled, setDisabled] = useState<boolean>(true);
-
-    const [login, setLoginInternal] = useState<string>("");
-    const setLogin = (value: string) => {
-        updateDisabledState(value, password)
-        setLoginInternal(value);
-    }
-    
-    const [password, setPasswordInternal] = useState<string>("");
-    const setPassword = (value: string) => {
-        updateDisabledState(login, value);
-        setPasswordInternal(value);
-    }
+const LoginFormViewModel = (props: LoginFormViewModelProps) => {
+    const quizApi = props.useQuizApi;
+    const [login, setLogin] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
     const submit = () => {
-        quizApi.login();
-    }
-
-    const updateDisabledState = (login: string, password: string) => {
-        if(login.length > 0 && password.length > 0){
-            setDisabled(false);
-        }
-        else{
-            setDisabled(true);
-        }
+        quizApi.signIn({login, password}, (e) => console.log(e), () => {setLogin(""); setPassword("")});
     }
 
     return {
@@ -36,9 +16,13 @@ const LoginFormViewModel = () => {
         setLogin,
         password,
         setPassword,
-        disabled,
+        disabled : quizApi.isBusy,
         submit,
     } as ILoginFormViewModel;
+}
+
+export interface LoginFormViewModelProps{
+    useQuizApi: IuseQuizApi
 }
 
 export default LoginFormViewModel;
