@@ -14,10 +14,15 @@ const LoginFormView = (props: LoginFormViewProps) => {
 
   return (
     <div className="flex--column u-gap-medium">
-      <input className="form--input" value={props.viewModel.login} onChange={loginChangeHandler} placeholder="login" />
-      <input className="form--input" value={props.viewModel.password} onChange={passwordChangeHandler} placeholder="password"/>
+      <input disabled={viewModel.disabled} className="form--input" value={props.viewModel.login} onChange={loginChangeHandler} placeholder="login" />
+      <span>{viewModel.loginError}</span>
+      <input type="password" disabled={viewModel.disabled} className="form--input" value={props.viewModel.password} onChange={passwordChangeHandler} placeholder="password"/>
+      <span>{viewModel.passwordError}</span>
+      <span>{viewModel.errorMessage}</span>
       <div className="u-margin-bottom-small"></div>
-      <button disabled={viewModel.disabled} onClick={viewModel.submit} className="button">Sign in</button>
+      <button 
+        disabled={viewModel.disabled || !!viewModel.loginError || !!viewModel.passwordError || !!viewModel.errorMessage} 
+        onClick={viewModel.submit} className="button">Sign in</button>
     </div>
   );
 };

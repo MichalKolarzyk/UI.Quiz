@@ -16,7 +16,7 @@ export class ApiQuizInstance{
     login = (request: ISignInRequest, onResponse : (response : ISignInResponse) => void, onError: (error: IErrorResponse) => void, onFinally: () => void) => {
         this.instance.post<ISignInRequest, AxiosResponse<ISignInResponse>>(`/account/login`, request)
         .then((axiosResponse) => onResponse(axiosResponse.data))
-        .catch(onError)
+        .catch((axiosError) => onError(axiosError.response.data))
         .finally(onFinally)
     }
 }

@@ -8,5 +8,5 @@ export interface ISignInResponse{
 }
 
 export interface IErrorResponse{
-    errors: Array<string>
+    errors: any
 }

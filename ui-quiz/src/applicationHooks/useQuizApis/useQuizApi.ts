@@ -9,13 +9,13 @@ const useQuizApi = () => {
     const [isBusy, setIsBusy] = useState<boolean>(false);
     const [isLogIn, setIsLogIn] = useState<boolean>(!!token);
 
-    const onSignInResponse = (response: ISignInResponse) => {
+    const onSignInResponseInternal = (response: ISignInResponse) => {
         setToken(response);
         setIsLogIn(true);
     }
 
-    const signIn = (request: ISignInRequest, onError: (error : IErrorResponse) => void, onFinally: () => void) => {
-        ApiQuizInstance.login(request, onSignInResponse, onError, () => {onFinally(); setIsBusy(false)});
+    const signIn = (request: ISignInRequest, onSignInResponse: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => {
+        ApiQuizInstance.login(request, (r) => {onSignInResponseInternal(r); onSignInResponse();}, onError, () => {onFinally(); setIsBusy(false)});
         setIsBusy(true);
     }
 
