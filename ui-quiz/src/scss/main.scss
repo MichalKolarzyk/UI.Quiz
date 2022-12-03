@@ -2,5 +2,12 @@
 
 @import './base/base';
 @import './base/typography';
+@import './base/utilities';
 
-@import './components/button'
+@import './components/button';
+@import './components/card';
+@import './components/flex';
+@import './components/input';
+
+@import './pages/home';
+@import './pages/login';

@@ -1,13 +1,9 @@
-import './scss/main.scss'
-import CreateQuestionView from './components/createQuestionComponents/CreateQuestionView';
-import CreateQuestionViewModel from './components/createQuestionComponents/CreateQuestionViewModel';
+import LoginPages from './components/loginPages/LoginPage';
 
 function App() {
 
   return (
-    <div className="App">
-      
-    </div>
+    <LoginPages/>
   );
 }
 

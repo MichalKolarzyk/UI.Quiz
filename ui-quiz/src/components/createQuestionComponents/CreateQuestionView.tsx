@@ -1,9 +1,6 @@
 import { ChangeEvent } from "react"
 import { ICreateQuestionViewModel } from "./ICreateQuestionViewModel"
 
-//import './RelativeTest.scss'
-import './GridTest.scss'
-
 const CreateQuestionView = (props: CreateQuestionViewProps) => {
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>) => {
