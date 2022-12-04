@@ -1,7 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const useBrowserCache = <T,>(key: string): [T | undefined, (value: T | null) => void] => {
+const useBrowserCache = <T,>(key: string): [T, (value: T | null) => void] => {
   const [stateValue, setStateValue] = useState<T>();
+  const value = () => {
+    if (!!stateValue) {
+      return stateValue;
+    }
+    try {
+      return JSON.parse(localStorage.getItem(key) ?? "") as T;
+    } catch {
+      return localStorage.getItem(key) as T;
+    }
+  };
 
   const setValue = (item: T | null) => {
     if (item === null) {
@@ -12,17 +22,7 @@ const useBrowserCache = <T,>(key: string): [T | undefined, (value: T | null) => 
     setStateValue(item);
   };
 
-  useEffect(() =>{
-    try {
-      const newState = JSON.parse(localStorage.getItem(key) ?? "") as T;
-      setStateValue(newState);
-    } catch {
-      const newState = localStorage.getItem(key) as T;
-      setStateValue(newState);
-    }
-  },[])
-
-  return [stateValue, setValue];
+  return [value(), setValue];
 };
 
 export default useBrowserCache;

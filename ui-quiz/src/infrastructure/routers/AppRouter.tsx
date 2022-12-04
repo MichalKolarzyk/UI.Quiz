@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import useQuizApi from "../../applicationHooks/useQuizApis/useQuizApi";
 import HomePage from "../../components/homePages/HomePage";
 import LoginFormViewModel from "../../components/loginFormComponents/LoginFormViewModel";
@@ -10,8 +10,9 @@ const AppRouter = () => {
     
     return <BrowserRouter>
         <Routes>
-            <Route path="login" element={<LoginPage loginFormViewModel={lovinFormViewModel} useQuizApi={quizApi}/>}/>
-            <Route path="home" element={<HomePage useQuizApi={quizApi}/>}/>
+            <Route path="*" element= {<Navigate to="/login"/>}/>
+            <Route path="/login" element={<LoginPage loginFormViewModel={lovinFormViewModel} useQuizApi={quizApi}/>}/>
+            <Route path="/home" element={<HomePage useQuizApi={quizApi}/>}/>
         </Routes>
     </BrowserRouter>
 }
