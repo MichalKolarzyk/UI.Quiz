@@ -5,6 +5,7 @@ import LoginFormViewModel from "../../components/loginFormComponents/LoginFormVi
 import LoginPage from "../../components/loginPages/LoginPage";
 import UserProfileViewModel from "../../components/userProfileComponents/UserProfileViewModel";
 import UserProfileView from "../../components/userProfileComponents/UserProfileView";
+import RegisterPage from "../../components/registerPages/RegisterPage";
 
 const AppRouter = () => {
     const quizApi = useQuizApi()
@@ -15,6 +16,7 @@ const AppRouter = () => {
         <Routes>
             <Route path="*" element= {<Navigate to="/login"/>}/>
             <Route path="/login" element={<LoginPage loginFormViewModel={loginFormViewModel} useQuizApi={quizApi}/>}/>
+            <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/home" element={<HomePage userProfileViewModel={userProfileViewModel} useQuizApi={quizApi} />}>
                 <Route path="profile" element={<UserProfileView viewModel={userProfileViewModel}/>}/>
             </Route>
