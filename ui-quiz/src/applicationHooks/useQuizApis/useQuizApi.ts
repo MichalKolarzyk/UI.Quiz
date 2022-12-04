@@ -1,16 +1,17 @@
 import { useState } from "react";
 import ApiQuizInstance from "../../infrastructure/apiQuiz/ApiQuizInstance";
-import { IErrorResponse, ISignInRequest as ISignInRequest, ISignInResponse as ISignInResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
+import { IErrorResponse, IGetUserProfileResponse, ISignInRequest as ISignInRequest, ISignInResponse as ISignInResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
 import useBrowserCache from "../../infrastructure/useBrowserCaches/useBrowserCache";
-import IuseQuizApi from "./IUseQuizApi";
+import IUseQuizApi from "./IUseQuizApi";
 
 const useQuizApi = () => {
-    const [token, setToken] = useBrowserCache<ISignInResponse>("USEQUIZAPI_ISIGNINRESPONSE");
+    const [signInResponse, setSignInResponse] = useBrowserCache<ISignInResponse>("USEQUIZAPI_ISIGNINRESPONSE");
+    const [userProfile, setUserProfile] = useState<IGetUserProfileResponse | null>(null);
     const [isBusy, setIsBusy] = useState<boolean>(false);
-    const [isLogIn, setIsLogIn] = useState<boolean>(!!token);
+    const [isLogIn, setIsLogIn] = useState<boolean>(!!signInResponse);
 
     const onSignInResponseInternal = (response: ISignInResponse) => {
-        setToken(response);
+        setSignInResponse(response);
         setIsLogIn(true);
     }
 
@@ -20,16 +21,23 @@ const useQuizApi = () => {
     }
 
     const singOut = () => {
-        setToken(null);
+        setSignInResponse(null);
         setIsLogIn(false);
+    }
+
+    const fetchUserProfile = (onGetUserProfileResponse: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => {
+        ApiQuizInstance.getUserProfile(signInResponse?.token, r => {console.log(r);setUserProfile(r); onGetUserProfileResponse()}, onError, () => {onFinally(); setIsBusy(false)})
+        setIsBusy(true);
     }
 
     return{
         signIn: signIn,
         singOut: singOut,
+        fetchUserProfile,
+        userProfile,
         isLogIn: isLogIn,
         isBusy: isBusy,
-    }as IuseQuizApi;
+    }as IUseQuizApi;
 }
 
 export default useQuizApi;

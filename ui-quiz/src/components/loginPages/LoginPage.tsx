@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import LoginFormView from "../loginFormComponents/LoginFormView";
-import IuseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
+import IUseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
 import ILoginFormViewModel from "../loginFormComponents/ILoginFormViewModel";
 
 const LoginPage = (props : LoginPageProps) => {
@@ -25,7 +25,7 @@ const LoginPage = (props : LoginPageProps) => {
 };
 
 export interface LoginPageProps{
-  useQuizApi : IuseQuizApi;
+  useQuizApi : IUseQuizApi;
   loginFormViewModel : ILoginFormViewModel
 }
 

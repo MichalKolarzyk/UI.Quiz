@@ -1,5 +1,7 @@
 import { Navigate } from "react-router-dom";
-import IuseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
+import IUseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
+import { IUserProfileViewModel } from "../userProfileComponents/IUserProfileViewModel";
+import UserProfileView from "../userProfileComponents/UserProfileView";
 
 const HomePage = (props: HomePageProps) => {
   const quizApi = props.useQuizApi;
@@ -28,14 +30,15 @@ const HomePage = (props: HomePageProps) => {
         </div>
       </header>
       <main>
-
+        <UserProfileView viewModel={props.userProfileViewModel}/>
       </main>
     </div>
   );
 };
 
 export interface HomePageProps {
-  useQuizApi: IuseQuizApi;
+  useQuizApi: IUseQuizApi;
+  userProfileViewModel: IUserProfileViewModel;
 }
 
 export default HomePage;

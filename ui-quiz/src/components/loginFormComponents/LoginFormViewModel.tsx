@@ -1,5 +1,5 @@
 import { useState } from "react";
-import IuseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
+import IUseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
 import { IErrorResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
 import ILoginFormViewModel from "./ILoginFormViewModel";
 
@@ -57,7 +57,7 @@ const LoginFormViewModel = (props: LoginFormViewModelProps) => {
 };
 
 export interface LoginFormViewModelProps {
-  useQuizApi: IuseQuizApi;
+  useQuizApi: IUseQuizApi;
 }
 
 export default LoginFormViewModel;

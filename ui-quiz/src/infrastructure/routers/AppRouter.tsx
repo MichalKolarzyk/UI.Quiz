@@ -3,16 +3,18 @@ import useQuizApi from "../../applicationHooks/useQuizApis/useQuizApi";
 import HomePage from "../../components/homePages/HomePage";
 import LoginFormViewModel from "../../components/loginFormComponents/LoginFormViewModel";
 import LoginPage from "../../components/loginPages/LoginPage";
+import UserProfileViewModel from "../../components/userProfileComponents/UserProfileViewModel";
 
 const AppRouter = () => {
     const quizApi = useQuizApi()
-    const lovinFormViewModel = LoginFormViewModel({useQuizApi: quizApi});
+    const loginFormViewModel = LoginFormViewModel({useQuizApi: quizApi});
+    const userProfileViewModel = UserProfileViewModel({useQuizApi: quizApi})
     
     return <BrowserRouter>
         <Routes>
             <Route path="*" element= {<Navigate to="/login"/>}/>
-            <Route path="/login" element={<LoginPage loginFormViewModel={lovinFormViewModel} useQuizApi={quizApi}/>}/>
-            <Route path="/home" element={<HomePage useQuizApi={quizApi}/>}/>
+            <Route path="/login" element={<LoginPage loginFormViewModel={loginFormViewModel} useQuizApi={quizApi}/>}/>
+            <Route path="/home" element={<HomePage userProfileViewModel={userProfileViewModel} useQuizApi={quizApi} />}/>
         </Routes>
     </BrowserRouter>
 }
