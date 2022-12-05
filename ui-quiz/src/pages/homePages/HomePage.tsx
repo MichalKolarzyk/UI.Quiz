@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import IUseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
-import { IUserProfileViewModel } from "../userProfileComponents/IUserProfileViewModel";
+import { IUserProfileViewModel } from "./userProfileComponents/IUserProfileViewModel";
 
 const HomePage = (props: HomePageProps) => {
   const navigate = useNavigate();

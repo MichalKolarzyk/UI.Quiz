@@ -1,4 +1,4 @@
-import { IGetUserProfileResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
+import { IGetUserProfileResponse } from "../../../infrastructure/apiQuiz/ApiQuizModels";
 
 export interface IUserProfileViewModel{
     userProfile:  IGetUserProfileResponse | null;

@@ -1,19 +1,17 @@
 .vertical-split {
-  &-left {
-    height: 100%;
-    width: 50%;
-    position: fixed;
-    top: 0;
-    overflow-x: hidden;
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  top: 0;
+  overflow-x: hidden;
+
+  &--left {
+    @extend .vertical-split;
     left: 0;
   }
 
-  &-right {
-    height: 100%;
-    width: 50%;
-    position: fixed;
-    top: 0;
-    overflow-x: hidden;
+  &--right {
+    @extend .vertical-split;
     right: 0;
   }
 }

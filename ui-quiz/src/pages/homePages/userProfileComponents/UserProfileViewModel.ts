@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import IUseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
-import { IGetUserProfileResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
+import IUseQuizApi from "../../../applicationHooks/useQuizApis/IUseQuizApi";
+import { IGetUserProfileResponse } from "../../../infrastructure/apiQuiz/ApiQuizModels";
 import { IUserProfileViewModel } from "./IUserProfileViewModel";
 
 const UserProfileViewModel = (props: UserProfileViewModelProps) => {

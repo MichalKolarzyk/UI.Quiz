@@ -1,6 +1,6 @@
 import { useState } from "react";
-import IUseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
-import { IErrorResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
+import IUseQuizApi from "../../../applicationHooks/useQuizApis/IUseQuizApi";
+import { IErrorResponse } from "../../../infrastructure/apiQuiz/ApiQuizModels";
 import ILoginFormViewModel from "./ILoginFormViewModel";
 
 const LoginFormViewModel = (props: LoginFormViewModelProps) => {
