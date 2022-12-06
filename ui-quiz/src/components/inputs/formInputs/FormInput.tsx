@@ -16,6 +16,7 @@ const FormInput = (props: FormInputProps) => {
   return (
     <div className="form-input">
       <input
+        disabled={props.disabled}
         type={props.type}
         onChange={props.onChange}
         onBlur={onInputBlur}

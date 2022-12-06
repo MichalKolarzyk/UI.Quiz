@@ -12,7 +12,7 @@ const AppRouter = () => {
     const quizApi = useQuizApi()
     const loginFormViewModel = LoginFormViewModel({useQuizApi: quizApi});
     const userProfileViewModel = UserProfileViewModel({useQuizApi: quizApi})
-    const registerPageViewModel = RegisterFormViewModel()
+    const registerPageViewModel = RegisterFormViewModel({useQuizApi: quizApi})
     
     return <BrowserRouter>
         <Routes>

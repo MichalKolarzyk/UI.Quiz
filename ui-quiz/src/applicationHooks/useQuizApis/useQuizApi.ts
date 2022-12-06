@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ApiQuizInstance from "../../infrastructure/apiQuiz/ApiQuizInstance";
-import { IErrorResponse, IGetUserProfileResponse, ISignInRequest as ISignInRequest, ISignInResponse as ISignInResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
+import { IErrorResponse, IGetUserProfileResponse, IRegisterRequest, ISignInRequest as ISignInRequest, ISignInResponse as ISignInResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
 import useBrowserCache from "../../infrastructure/useBrowserCaches/useBrowserCache";
 import IUseQuizApi from "./IUseQuizApi";
 
@@ -25,6 +25,11 @@ const useQuizApi = () => {
         setIsLogIn(false);
     }
 
+    const register = (request: IRegisterRequest, onRegisterRespons: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => {
+        ApiQuizInstance.register(request, (r) => onRegisterRespons(), onError,() => {onFinally(); setIsBusy(false)});
+        setIsBusy(true);
+    }
+
     const fetchUserProfile = (onGetUserProfileResponse: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => {
         ApiQuizInstance.getUserProfile(signInResponse?.token, r => {console.log(r);setUserProfile(r); onGetUserProfileResponse()}, onError, () => {onFinally(); setIsBusy(false)})
         setIsBusy(true);
@@ -33,6 +38,7 @@ const useQuizApi = () => {
     return{
         signIn: signIn,
         singOut: singOut,
+        register: register,
         fetchUserProfile,
         userProfile,
         isLogIn: isLogIn,

@@ -43,6 +43,7 @@
     transition: all 0.35s;
     font-size: 1.6rem;
     color: $color-grey-dark;
+    pointer-events: none;
 
     &--up{
       position: absolute;

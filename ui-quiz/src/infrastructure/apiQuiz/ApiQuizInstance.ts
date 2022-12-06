@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios"
-import { IErrorResponse, IGetUserProfileResponse, ISignInRequest, ISignInResponse } from "./ApiQuizModels";
+import { IErrorResponse, IGetUserProfileResponse, IRegisterRequest, IRegisterResponse, ISignInRequest, ISignInResponse } from "./ApiQuizModels";
 
 export class ApiQuizInstance{
     instance: AxiosInstance;
@@ -15,6 +15,13 @@ export class ApiQuizInstance{
 
     login = (request: ISignInRequest, onResponse : (response : ISignInResponse) => void, onError: (error: IErrorResponse) => void, onFinally: () => void) => {
         this.instance.post<ISignInRequest, AxiosResponse<ISignInResponse>>(`/account/login`, request)
+        .then((axiosResponse) => onResponse(axiosResponse.data))
+        .catch((axiosError) => onError(axiosError.response.data))
+        .finally(onFinally)
+    }
+
+    register = (request: IRegisterRequest, onResponse : (response : IRegisterResponse) => void, onError: (error: IErrorResponse) => void, onFinally: () => void) => {
+        this.instance.post<IRegisterRequest, AxiosResponse<IRegisterResponse>>(`/account/register`, request)
         .then((axiosResponse) => onResponse(axiosResponse.data))
         .catch((axiosError) => onError(axiosError.response.data))
         .finally(onFinally)
