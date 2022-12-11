@@ -21,18 +21,19 @@
 
   &__input{
     box-sizing: border-box;
-    border: solid 2px $color-grey-light;
+    border: solid 2px $color-grey-dark;
+    outline: none;
     border-radius: 5px;
     color: $color-black;
     font-size: $default-font-size;
     padding: 1.5rem 2rem;
-    background-color: transparent;
+    background-color: $color-white;
     width: 100%;
-    display: block;
+    display: inline-block;
     transition: all 0.3s;
 
     &:focus{
-      outline-color: $color-grey-dark;
+      outline: solid 2px $color-grey-dark;
     }
   }
 

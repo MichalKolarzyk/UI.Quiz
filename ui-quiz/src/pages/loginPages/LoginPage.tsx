@@ -29,7 +29,7 @@ const LoginPage = (props: LoginPageProps) => {
         </div>
         <div className="vertical-split--left position">
           <div className="position__centered">
-            <div className="h3 u-color-white">Login to your account</div>
+            <div className="h3 u-color-white  u-margin-bottom-small">Login to your account</div>
             <div className="card--white">
               <LoginFormView viewModel={loginFormViewModel} />
             </div>

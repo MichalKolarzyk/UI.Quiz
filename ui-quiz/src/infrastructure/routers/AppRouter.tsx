@@ -7,6 +7,7 @@ import UserProfileViewModel from "../../pages/homePages/userProfileComponents/Us
 import UserProfileView from "../../pages/homePages/userProfileComponents/UserProfileView";
 import RegisterPage from "../../pages/registerPages/RegisterPage";
 import RegisterFormViewModel from "../../pages/registerPages/registerFormComponents/RegisterFormViewModel";
+import WorkspacePage from "../../pages/workspacePages/WorkspacePage";
 
 const AppRouter = () => {
     const quizApi = useQuizApi()
@@ -21,6 +22,7 @@ const AppRouter = () => {
             <Route path="/register" element={<RegisterPage registerFormViewModel={registerPageViewModel}/>}/>
             <Route path="/home" element={<HomePage userProfileViewModel={userProfileViewModel} useQuizApi={quizApi} />}>
                 <Route path="profile" element={<UserProfileView viewModel={userProfileViewModel}/>}/>
+                <Route path="workspaces" element={<WorkspacePage/>}/>
             </Route>
         </Routes>
     </BrowserRouter>

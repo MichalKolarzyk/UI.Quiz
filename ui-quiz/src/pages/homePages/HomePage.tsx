@@ -14,12 +14,12 @@ const HomePage = (props: HomePageProps) => {
     <div className="home-page">
       <header className="header-flat">
         <div className="header-flat__logo-box">
-          <div className="heading-secondary">Quiz</div>
+        <button className="button--transparent" onClick={() => navigate("home")}>Home</button>
         </div>
         <div className="header-flat__center-box">
           <div className="flex--row u-gap-small">
-            <button className="button--transparent" onClick={() => navigate("workspace")}>Workspace</button>
-            <button className="button--transparent" onClick={quizApi.singOut}>Quiz events</button>
+            <button className="button--transparent" onClick={() => navigate("workspaces")}>Workspaces</button>
+            <button className="button--transparent" onClick={() => {}}>Quiz events</button>
           </div>
 
         </div>
@@ -30,9 +30,7 @@ const HomePage = (props: HomePageProps) => {
           </div>
         </div>
       </header>
-      <main>
-        <Outlet/>
-      </main>
+      <Outlet/>
     </div>
   );
 };
