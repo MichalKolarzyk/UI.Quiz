@@ -12,17 +12,13 @@ const RegisterFormViewModel = (props: RegisterFormViewModelProps) => {
     const [repetePasswordError, setRepetePasswordError] = useState<string>("");
 
     const submit = (onRegistartionSucceed: () => void) => {
-        setRepetePasswordError("");
-        if(password !== repetePassword){
-            setRepetePasswordError("Repete password doesn't match to password");
-            return;
-        }
-        props.useQuizApi.register({login, password}, onRegistartionSucceed, onSubmitError, () => {});
+        props.useQuizApi.register({login, password, repetePassword}, onRegistartionSucceed, onSubmitError, () => {});
     }
 
     const onSubmitError = (error: IErrorResponse) => {
         setLoginError(error.errors.Login);
         setPasswordError(error.errors.Password);
+        setRepetePasswordError(error.errors.RepetePassword);
       };
     
     return {

@@ -10,6 +10,7 @@ export interface ISignInResponse {
 export interface IRegisterRequest {
   login: string;
   password: string;
+  repetePassword: string,
 }
 
 export interface IRegisterResponse {}
