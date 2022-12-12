@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ApiQuizInstance from "../../infrastructure/apiQuiz/ApiQuizInstance";
 import { IErrorResponse, IGetUserProfileResponse, IRegisterRequest, ISignInRequest as ISignInRequest, ISignInResponse as ISignInResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
 import useBrowserCache from "../../infrastructure/useBrowserCaches/useBrowserCache";
@@ -9,6 +9,8 @@ const useQuizApi = () => {
     const [userProfile, setUserProfile] = useState<IGetUserProfileResponse | null>(null);
     const [isBusy, setIsBusy] = useState<boolean>(false);
     const [isLogIn, setIsLogIn] = useState<boolean>(!!signInResponse);
+
+
 
     const onSignInResponseInternal = (response: ISignInResponse) => {
         setSignInResponse(response);
@@ -30,6 +32,12 @@ const useQuizApi = () => {
         setIsBusy(true);
     }
 
+    useEffect(() => {
+        if(isLogIn){
+            fetchUserProfile(() => {}, (e) => {}, () => {setIsBusy(false)});
+        }
+    },[isLogIn])
+    
     const fetchUserProfile = (onGetUserProfileResponse: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => {
         ApiQuizInstance.getUserProfile(signInResponse?.token, r => {console.log(r);setUserProfile(r); onGetUserProfileResponse()}, onError, () => {onFinally(); setIsBusy(false)})
         setIsBusy(true);
@@ -39,7 +47,6 @@ const useQuizApi = () => {
         signIn: signIn,
         singOut: singOut,
         register: register,
-        fetchUserProfile,
         userProfile,
         isLogIn: isLogIn,
         isBusy: isBusy,

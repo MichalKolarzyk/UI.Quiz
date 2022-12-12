@@ -3,9 +3,8 @@ import { IErrorResponse, IGetUserProfileResponse, IRegisterRequest, ISignInReque
 export default interface IUseQuizApi{
     signIn: (request: ISignInRequest, onSignInResponse: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => void;
     register: (request: IRegisterRequest, onRegisterRespons: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => void;
-    fetchUserProfile: (onGetUserProfileResponse: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => void;
-    userProfile: IGetUserProfileResponse | null,
     singOut: () => void;
+    userProfile: IGetUserProfileResponse | null,
     isLogIn: boolean;
     isBusy: boolean;
 }
