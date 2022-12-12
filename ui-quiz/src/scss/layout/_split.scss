@@ -1,29 +1,37 @@
 .vertical-split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  top: 0;
-  overflow-x: hidden;
-
-  &--left {
-    @extend .vertical-split;
-    left: 0;
+  &__box{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
   }
 
-  &--right {
-    @extend .vertical-split;
-    right: 0;
+  &__left {
+    width: 50%;
+    order: 0;
+  }
+
+  &__right {
+    width: 50%;
+    order: 1;
   }
 }
-// @media all and (max-width: 1000px) {
-//   .vertical-split{
-//     &-left{
-//       width: 100%;
-//       display: block;
-//     }
-//     &-right{
-//       width: 100%;
-//       display: block;
-//     }
-//   }
-// }
+@media all and (max-width: 1200px) {
+  .vertical-split{
+    &__box{
+      flex-direction: column;
+    }
+  
+    &__left {
+      width: 100%;
+      height: 50%;
+      order: 0;
+    }
+  
+    &__right {
+      width: 100%;
+      height: 50%;
+      order: 1;
+    }
+  }
+}

@@ -1,5 +1,8 @@
 .position {
-  position: relative;
+
+  &__box{
+    position: relative;
+  }
 
   &__top {
     position: absolute;

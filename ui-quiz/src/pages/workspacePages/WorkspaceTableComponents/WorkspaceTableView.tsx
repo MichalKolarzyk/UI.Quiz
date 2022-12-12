@@ -5,7 +5,7 @@ const WorkspaceTableView = () => {
     <div className="table">
       <div className="table__description u-color-white h3">Your workspaces</div>
       <div className="table__actions">
-        <button className="button">Create workspace</button>
+        <button className="button--submit">Create workspace</button>
       </div>
       <div className="table__filters flex--row u-gap-small">
         <p className="u-color-white"></p>
