@@ -20,12 +20,27 @@ export interface IGetUserProfileResponse {
   accountId: string;
   image: string;
   userName: string;
-  userProfileWorkspaces: [
-    {
-      name: string;
-      workspaceId: string;
-    }
-  ];
+  userProfileWorkspaces: Array<IUserProfileWorkspace>
+}
+
+export interface IUserProfileWorkspace{
+  name: string;
+  workspaceId: string;
+}
+
+export interface IGetQuizesRequest{
+  workspaceId: string;
+}
+
+export interface IGetQuizesResponse{
+  quizes: Array<IQuiz>
+}
+
+export interface IQuiz{
+  id: string;
+  questionIds : Array<string>;
+  themeId: string;
+  workspaceId: string;
 }
 
 export interface IErrorResponse {

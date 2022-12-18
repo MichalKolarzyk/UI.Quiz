@@ -10,6 +10,8 @@ const useQuizApi = () => {
     const [isBusy, setIsBusy] = useState<boolean>(false);
     const [isLogIn, setIsLogIn] = useState<boolean>(!!signInResponse);
 
+    const [currentWorkspaceId, setCurrentWorkspaceId] = useState<string>("");
+
 
 
     const onSignInResponseInternal = (response: ISignInResponse) => {
@@ -39,9 +41,13 @@ const useQuizApi = () => {
     },[isLogIn])
     
     const fetchUserProfile = (onGetUserProfileResponse: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => {
-        ApiQuizInstance.getUserProfile(signInResponse?.token, r => {console.log(r);setUserProfile(r); onGetUserProfileResponse()}, onError, () => {onFinally(); setIsBusy(false)})
+        ApiQuizInstance.getUserProfile(signInResponse?.token, r => {setUserProfile(r); onGetUserProfileResponse()}, onError, () => {onFinally(); setIsBusy(false)})
         setIsBusy(true);
     }
+
+    useEffect(()=>{
+
+    },[currentWorkspaceId])
 
     return{
         signIn: signIn,

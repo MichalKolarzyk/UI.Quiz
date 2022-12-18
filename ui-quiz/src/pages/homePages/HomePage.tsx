@@ -1,9 +1,8 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import IUseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
-import PopupCard from "../../components/popups/PopupCard";
-import PopupWrapper from "../../components/popups/PopupWrapper";
-import SimplePopup from "../../components/popups/SimplePopup";
 import { IUserProfileViewModel } from "./userProfileComponents/IUserProfileViewModel";
+import IUserWorkflowsViewModel from "./userWorkflowsComponents/IUserWorkflowsViewModel";
+import UserWorkflowsView from "./userWorkflowsComponents/UserWorkflowsView";
 
 const HomePage = (props: HomePageProps) => {
   const navigate = useNavigate();
@@ -17,30 +16,21 @@ const HomePage = (props: HomePageProps) => {
     <div className="home-page">
       <header className="header-flat">
         <div className="header-flat__logo-box">
-          <button className="button--transparent" onClick={() => navigate("home")}>
+          <button className="button--transparent" onClick={() => navigate("/home")}>
             Home
           </button>
         </div>
         <div className="header-flat__center-box">
           <div className="flex--row u-gap-small">
-            <PopupWrapper>
+            <div className="popup__wrapper">
               <button className="button--transparent" onClick={() => navigate("workspaces")}>
                 Workflows
               </button>
-              <PopupCard>
-                <PopupWrapper>
-                  <div className="card--white">
-                    <button>Hello!!</button>
-                  </div>
-                  <PopupCard>
-                    <div className="card--white">
-                      <button>Hello!!</button>
-                    </div>
-                  </PopupCard>
-                </PopupWrapper>
-              </PopupCard>
-              {/* <SimplePopup items={props.useQuizApi.userProfile?.userProfileWorkspaces.map(w => w.name)}/> */}
-            </PopupWrapper>
+              <div className="popup__box--bottom popup__wrapper">
+                <UserWorkflowsView onWorkspaceClick={(w) => navigate(w.workspaceId)} viewModel={props.userWorkflowsViewModel}/>
+              </div>
+            </div>
+            {/* <SimplePopup items={props.useQuizApi.userProfile?.userProfileWorkspaces.map(w => w.name)}/> */}
             <button className="button--transparent" onClick={() => {}}>
               Quiz events
             </button>
@@ -65,6 +55,7 @@ const HomePage = (props: HomePageProps) => {
 export interface HomePageProps {
   useQuizApi: IUseQuizApi;
   userProfileViewModel: IUserProfileViewModel;
+  userWorkflowsViewModel: IUserWorkflowsViewModel;
 }
 
 export default HomePage;

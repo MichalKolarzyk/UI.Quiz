@@ -1,11 +1,9 @@
-import WorkspaceTableView from "./WorkspaceTableComponents/WorkspaceTableView";
+import { useParams } from "react-router-dom";
 
 const WorkspacePage = () => {
-  return (
-    <div className="workspace-page position">
-      <WorkspaceTableView />
-    </div>
-  );
-};
+    const { workspaceId } = useParams();
+
+    return <div>{workspaceId}</div>
+}
 
 export default WorkspacePage;

@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios"
-import { IErrorResponse, IGetUserProfileResponse, IRegisterRequest, IRegisterResponse, ISignInRequest, ISignInResponse } from "./ApiQuizModels";
+import { IErrorResponse, IGetQuizesRequest, IGetQuizesResponse, IGetUserProfileResponse, IRegisterRequest, IRegisterResponse, ISignInRequest, ISignInResponse } from "./ApiQuizModels";
 
 export class ApiQuizInstance{
     instance: AxiosInstance;
@@ -30,6 +30,17 @@ export class ApiQuizInstance{
     getUserProfile = (token: string, onResponse : (response : IGetUserProfileResponse) => void, onError: (error: IErrorResponse) => void, onFinally: () => void) => {
         const config = {headers: { Authorization: `Bearer ${token}` }}
         this.instance.get("/userProfile", config)
+        .then((axiosResponse) => onResponse(axiosResponse.data))
+        .catch((axiosError) => onError(axiosError.response.data))
+        .finally(onFinally)
+    }
+
+    getQuizes = (token: string, request: IGetQuizesRequest, onResponse : (response : IGetQuizesResponse) => void, onError: (error: IErrorResponse) => void, onFinally: () => void) => {
+        const config = {
+            headers: { Authorization: `Bearer ${token}` },
+            params: request,
+         }
+        this.instance.get("/quiz", config)
         .then((axiosResponse) => onResponse(axiosResponse.data))
         .catch((axiosError) => onError(axiosError.response.data))
         .finally(onFinally)
