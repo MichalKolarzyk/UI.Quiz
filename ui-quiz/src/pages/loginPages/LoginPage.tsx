@@ -14,29 +14,25 @@ const LoginPage = (props: LoginPageProps) => {
 
   return (
     <div className="login-page">
-      <main className="vertical-split__box">
-        <div className="vertical-split__right position__box u-background-color-secondary">
-          <div className="position__centered">
-            <div className="h1">Quiz</div>
-            <div className="u-margin-bottom-big u-color-white">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate debitis consequatur ab, fugit et eius
-              provident odio, repudiandae quam cum cumque facilis delectus iure maiores incidunt tenetur nulla! Maiores,
-              repellendus.
-            </div>
-            <span className="h3 u-color-white">Are you new here?</span>
-            <button className="button--transparent" onClick={() => navigate("/register")}>Register</button>
-          </div>
+      <section className="login-page__form-section position">
+        <div className="position__centered">
+          <LoginFormView viewModel={loginFormViewModel} />
         </div>
-        <div className="vertical-split__left  position__box">
-          <div className="position__centered">
-            <div className="h3 u-color-white  u-margin-bottom-small">Login to your account</div>
-            <div className="card--white">
-              <LoginFormView viewModel={loginFormViewModel} />
-            </div>
+      </section>
+      <section className="login-page__description-section position">
+        <div className="position__centered">
+          <div className="h1">Quiz</div>
+          <div className="u-margin-bottom-big u-color-white">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate debitis consequatur ab, fugit et eius
+            provident odio, repudiandae quam cum cumque facilis delectus iure maiores incidunt tenetur nulla! Maiores,
+            repellendus.
           </div>
+          <span className="h3 u-color-white">Are you new here?</span>
+          <button className="button button--transparent" onClick={() => navigate("/register")}>
+            Register
+          </button>
         </div>
-      </main>
-      <footer></footer>
+      </section>
     </div>
   );
 };

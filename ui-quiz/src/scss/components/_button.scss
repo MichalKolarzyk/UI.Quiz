@@ -8,73 +8,38 @@
   display: inline-block;
   padding: 1.5rem 4rem;
   transition: all .3s;
+  font-weight: 600;
 
-  &:hover:enabled{
-    background-color: lighten($color-red, 8%);
-    transform: translateY(0);
-    box-shadow: rgba($color-white, .2) 0 1rem 2rem;
-  }
 
-  &:active:enabled{
-    transform: translateY(2px);
-  }
-  
   &:disabled{
     background-color: gray;
     cursor: not-allowed;
+  }
+
+  &:hover:enabled{
+    transform: translateY(-3px);
+    box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
+  }
+
+  &:active:enabled{
+    transform: translateY(1px);
   }
 }
 
 .button--transparent {
   background-color: transparent;
-  border-style: none;
   color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  padding: 1.5rem 3rem;
-  transition: all .3s;
   border: solid 2px transparent;
+  border-radius: 0.5rem;
 
   &:hover:enabled{
     border-color: white;
     background-color: transparent;
-    box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
-  }
-
-  &:active{
-    transform: translateY(2px);
-    transition-duration: .35s;
-  }
-
-  &:disabled{
-    background-color: gray;
-    cursor: not-allowed;
   }
 }
 
 .button--submit {
-  backface-visibility: hidden;
   background-color: $color-gradient5;
   border-radius: 0.5rem;
-  border-style: none;
   color: $color-gradient1;
-  cursor: pointer;
-  display: inline-block;
-  padding: 1.2rem 3rem;
-  transition: all .3s;
-  font-weight: 500;
-
-  &:hover:enabled{
-    background-color: lighten($color-gradient5, 8%);
-    transform: translateY(0);
-  }
-
-  &:active:enabled{
-    transform: translateY(2px);
-  }
-  
-  &:disabled{
-    background-color: gray;
-    cursor: not-allowed;
-  }
 }

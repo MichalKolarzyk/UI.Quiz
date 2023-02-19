@@ -24,15 +24,12 @@ const RegisterPage = (props: RegisterPageProps) => {
   return (
     <div className="register-page position">
       <div className="position__centered ">
-        <div className="h3 u-color-white  u-margin-bottom-small">Create your new account! </div>
-        <div className="card--white u-margin-bottom-small">
-          <RegisterFormView
-            viewModel={props.registerFormViewModel}
-            onRegistartionSucceed={() => setSucceedRegister(true)}
-          />
-        </div>
+        <RegisterFormView
+          viewModel={props.registerFormViewModel}
+          onRegistartionSucceed={() => setSucceedRegister(true)}
+        />
         <span className="h3 u-color-white">Already have account? </span>
-        <button onClick={() => navigate("/login")} className="button--transparent">
+        <button onClick={() => navigate("/login")} className="button button--transparent">
           Sign in
         </button>
       </div>
