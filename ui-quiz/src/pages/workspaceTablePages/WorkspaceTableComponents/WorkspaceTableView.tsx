@@ -22,7 +22,7 @@ const WorkspaceTableView = () => {
               workspace name
             </div>
             <button className="button workspaces__item__goto">
-              open
+              Open
             </button>
           </div>
         </div>

@@ -1,16 +1,21 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
+import useAccountActions from "../../../actions/useAccountActions";
+import useUserActions from "../../../actions/useUserActions";
 import FormInput from "../../../components/inputs/formInputs/FormInput";
-import ILoginFormViewModel from "./ILoginFormViewModel";
 
-const LoginFormView = (props: LoginFormViewProps) => {
-  const viewModel = props.viewModel;
+
+const LoginFormView = () => {
+
+  const accountActions = useAccountActions();
+  const [login, setLogin] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const loginChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    viewModel.setLogin(event.target.value);
+    setLogin(event.target.value);
   };
 
   const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    viewModel.setPassword(event.target.value);
+    setPassword(event.target.value);
   };
 
   return (
@@ -19,27 +24,25 @@ const LoginFormView = (props: LoginFormViewProps) => {
       <div className="card--white">
         <div className="flex--column u-gap-medium">
           <FormInput
-            disabled={viewModel.disabled}
-            value={props.viewModel.login}
-            errorMessage={viewModel.loginError}
+            disabled={false}
+            value={login}
+            errorMessage=""
             onChange={loginChangeHandler}
             placeholder="login"
           />
           <FormInput
             type="password"
-            disabled={viewModel.disabled}
-            value={props.viewModel.password}
-            errorMessage={viewModel.passwordError}
+            disabled={false}
+            value={password}
+            errorMessage=""
             onChange={passwordChangeHandler}
             placeholder="password"
           />
-          <span className="u-color-dark">{viewModel.errorMessage}</span>
+          <span className="u-color-dark"></span>
           <div className="u-margin-bottom-small"></div>
           <button
-            disabled={
-              viewModel.disabled || !!viewModel.loginError || !!viewModel.passwordError || !!viewModel.errorMessage
-            }
-            onClick={viewModel.submit}
+            disabled={false}
+            onClick={() => accountActions.loginUser(login, password)}
             className="button"
           >
             Sign in
@@ -49,9 +52,5 @@ const LoginFormView = (props: LoginFormViewProps) => {
     </>
   );
 };
-
-export interface LoginFormViewProps {
-  viewModel: ILoginFormViewModel;
-}
 
 export default LoginFormView;

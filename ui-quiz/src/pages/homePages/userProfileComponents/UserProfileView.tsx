@@ -1,17 +1,16 @@
-import { IUserProfileViewModel } from "./IUserProfileViewModel";
+import useUserActions from "../../../actions/useUserActions";
 
-const UserProfileView = (props: UserProfileViewProps) => {
+const UserProfileView = () => {
+  const userActions = useUserActions();
+
   return (
     <div>
-      <div>{props.viewModel.userProfile?.userName ?? "Not loaded yet"}</div>
-      <div>{props.viewModel.userProfile?.id ?? "Not loaded yet"}</div>
-      <div>{props.viewModel.userProfile?.accountId ?? "Not loaded yet"}</div>
+      <div>{userActions?.user?.userName ?? "Not loaded yet"}</div>
+      <div>{userActions?.user?.id ?? "Not loaded yet"}</div>
+      <div>{userActions?.user?.accountId ?? "Not loaded yet"}</div>
     </div>
   );
 };
 
-export interface UserProfileViewProps {
-  viewModel: IUserProfileViewModel;
-}
 
 export default UserProfileView;

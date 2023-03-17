@@ -1,16 +1,20 @@
+import { useEffect } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import IUseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
+import useAccountActions from "../../actions/useAccountActions";
+import useUserActions from "../../actions/useUserActions";
 import { IUserProfileViewModel } from "./userProfileComponents/IUserProfileViewModel";
 import IUserWorkflowsViewModel from "./userWorkflowsComponents/IUserWorkflowsViewModel";
 import UserWorkflowsView from "./userWorkflowsComponents/UserWorkflowsView";
 
 const HomePage = (props: HomePageProps) => {
   const navigate = useNavigate();
+  const userActions = useUserActions()
 
-  const quizApi = props.useQuizApi;
-  if (!quizApi.isLogIn) {
-    return <Navigate to="/login" />;
-  }
+  const accountActions = useAccountActions();
+
+  useEffect(() => {
+    userActions.fetchUser();
+  }, [])
 
   return (
     <div className="home-page">
@@ -40,7 +44,7 @@ const HomePage = (props: HomePageProps) => {
             <button className="button button--transparent" onClick={() => navigate("profile")}>
               Profile
             </button>
-            <button className="button button--transparent" onClick={quizApi.singOut}>
+            <button className="button button--transparent" onClick={() => accountActions.signOut()}>
               Sing out
             </button>
           </div>
@@ -52,7 +56,6 @@ const HomePage = (props: HomePageProps) => {
 };
 
 export interface HomePageProps {
-  useQuizApi: IUseQuizApi;
   userProfileViewModel: IUserProfileViewModel;
   userWorkflowsViewModel: IUserWorkflowsViewModel;
 }

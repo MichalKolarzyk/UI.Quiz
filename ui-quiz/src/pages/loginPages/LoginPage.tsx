@@ -1,22 +1,14 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoginFormView from "./loginFormComponents/LoginFormView";
-import IUseQuizApi from "../../applicationHooks/useQuizApis/IUseQuizApi";
-import ILoginFormViewModel from "./loginFormComponents/ILoginFormViewModel";
 
-const LoginPage = (props: LoginPageProps) => {
-  const quizApi = props.useQuizApi;
-  const loginFormViewModel = props.loginFormViewModel;
+const LoginPage = () => {
   const navigate = useNavigate();
-
-  if (quizApi.isLogIn) {
-    return <Navigate to="/home" />;
-  }
 
   return (
     <div className="login-page">
       <section className="login-page__form-section position">
         <div className="position__centered">
-          <LoginFormView viewModel={loginFormViewModel} />
+          <LoginFormView />
         </div>
       </section>
       <section className="login-page__description-section position">
@@ -36,10 +28,5 @@ const LoginPage = (props: LoginPageProps) => {
     </div>
   );
 };
-
-export interface LoginPageProps {
-  useQuizApi: IUseQuizApi;
-  loginFormViewModel: ILoginFormViewModel;
-}
 
 export default LoginPage;

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from "react-redux";
 import reportWebVitals from './reportWebVitals';
 import './scss/main.scss'
-import { store } from './infrastructure/store';
-import AppRouter from './infrastructure/routers/AppRouter';
+import AppRouter from './routers/AppRouter';
+import { store } from './store/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
