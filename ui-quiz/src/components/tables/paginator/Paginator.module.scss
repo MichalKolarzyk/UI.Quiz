@@ -1,11 +1,12 @@
 @import '../../../scss/abstract/variables';
 
 .paginator{
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1rem
+    gap: 1rem;
+    position: relative;
 }
 
 .number{
@@ -16,6 +17,23 @@
 
 .space{
     color: $color-white;
+    font-weight: 700;
+}
+
+.space-right{
+    color: $color-white;
+    position: absolute;
+    right: 17.8rem;
+    bottom: 1.2rem;
+    font-weight: 700;
+}
+
+.space-left{
+    color: $color-white;
+    position: absolute;
+    left: 16.8rem;
+    bottom: 1.2rem;
+    font-weight: 700;
 }
 
 .selected-number{
@@ -24,6 +42,7 @@
     background-color: $color-primary-light2;
     border-radius: 10rem;
     padding: 1.2rem 2.2rem;
+    font-weight: 700;
 }
 
 .end-number{

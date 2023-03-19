@@ -2,7 +2,7 @@ import Paginator from "../../../components/tables/paginator/Paginator";
 
 const QuestionsTablePage = () => {
     return <div>
-        <Paginator onPageChange={() => {}} pagesNumber={10}/>
+        <Paginator initialPage={8} onPageChange={() => {}} pages={10}/>
     </div>
 }
 
