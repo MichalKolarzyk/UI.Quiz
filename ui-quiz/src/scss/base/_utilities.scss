@@ -6,6 +6,11 @@
     margin-bottom: 8rem;
 }
 
+.u-margin-horizontal-auto{
+    margin: 0 auto;
+    display: block;
+}
+
 .u-margin-bottom-medium{
     margin-bottom: 4rem;
 }
@@ -32,4 +37,11 @@
 
 .u-color-dark{
     color: $color-black;
+}
+
+.u-icon-big{
+    font-size: 12rem;
+    margin-bottom: .5rem;
+    display: inline-block;
+    color: $color-white
 }

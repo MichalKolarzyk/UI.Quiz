@@ -1,0 +1,28 @@
+@import "../../scss/abstract/variables";
+
+.page {
+  background-color: $color-primary-dark;
+  height: 100vh;
+}
+
+.desctiption {
+  float: left;
+  width: 50%;
+  height: 100%;
+  padding: 22rem;
+  box-sizing: border-box;
+}
+
+.form-section {
+  float: left;
+  width: 50%;
+  height: 100%;
+  position: relative;
+
+  &__box {
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    text-align: center;
+  }
+}

@@ -1,0 +1,23 @@
+@import '../../../scss/abstract/variables';
+
+.input{
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: $color-text-grey-light;
+    font-size: $default-font-size;
+    padding: 1.5rem 2rem;
+    background-color: $color-white;
+    width: 100%;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.error{
+
+}
+
+.placeholder{
+    
+}

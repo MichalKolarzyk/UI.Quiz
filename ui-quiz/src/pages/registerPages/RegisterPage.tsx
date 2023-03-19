@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IRegisterFormViewModel } from "./registerFormComponents/IRegisterFormViewModel";
 import RegisterFormView from "./registerFormComponents/RegisterFormView";
+import classes from "./RegisterPage.module.scss";
 
 const RegisterPage = (props: RegisterPageProps) => {
   const navigate = useNavigate();
@@ -22,16 +23,23 @@ const RegisterPage = (props: RegisterPageProps) => {
   }
 
   return (
-    <div className="register-page position">
-      <div className="position__centered ">
-        <RegisterFormView
-          viewModel={props.registerFormViewModel}
-          onRegistartionSucceed={() => setSucceedRegister(true)}
-        />
-        <span className="h3 u-color-white">Already have account? </span>
-        <button onClick={() => navigate("/login")} className="button button--transparent">
-          Sign in
-        </button>
+    <div className={classes.page}>
+      <div className={classes.desctiption}>
+        <div className="h1 u-center-text u-margin-bottom-big">Sign in</div>
+        <div className="h2 u-center-text u-margin-bottom-big">welcome in the first game for</div>
+        <div className="u-center-text">
+          <button onClick={() => navigate("/login")} className="button button--transparent">
+            Go back to login page
+          </button>
+        </div>
+      </div>
+      <div className={classes["form-section"]}>
+        <div className={classes["form-section__box"]}>
+          <RegisterFormView
+            viewModel={props.registerFormViewModel}
+            onRegistartionSucceed={() => setSucceedRegister(true)}
+          />
+        </div>
       </div>
     </div>
   );

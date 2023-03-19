@@ -1,0 +1,9 @@
+@import '../../scss/abstract/variables';
+
+.card{
+    display: block;
+    background-color: $color-primary-light;
+    border: solid $color-white .5rem;
+    padding: 8rem;
+    border-radius: 1rem;
+}

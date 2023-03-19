@@ -23,6 +23,7 @@ body {
 }
 
 .h2 {
+  color: $color-white;
   font-size: 3.5rem;
   text-transform: uppercase;
   font-weight: 700;
@@ -35,12 +36,14 @@ body {
 }
 
 .h3 {
+  color: $color-white;
   font-size: $default-font-size;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .p {
+  color: $color-white;
   font-size: $default-font-size;
 
   &:not(:last-child) {

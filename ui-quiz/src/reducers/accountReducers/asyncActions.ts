@@ -8,7 +8,7 @@ export const accountLogIn = createAsyncThunk("login", async (request: ISignInReq
         return response.data;
     }
     catch(err : any){
-        console.log(err?.response?.data);
+        console.log(err);
         return thunkAPI.rejectWithValue(err?.response?.data);
     }
 })
