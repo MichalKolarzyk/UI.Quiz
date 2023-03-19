@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ApiQuizInstance from "../../infrastructure/apiQuiz/ApiQuizInstance";
-import { IErrorResponse, IGetUserProfileResponse, IRegisterRequest, ISignInRequest as ISignInRequest, ISignInResponse as ISignInResponse } from "../../infrastructure/apiQuiz/ApiQuizModels";
-import useBrowserCache from "../../infrastructure/useBrowserCaches/useBrowserCache";
+import { IErrorResponse, IGetUserProfileResponse, IRegisterRequest, ISignInRequest as ISignInRequest, ISignInResponse as ISignInResponse } from "../../apis/apiQuiz/ApiQuizModels";
+import useBrowserCache from "../../hooks/useBrowserCache";
 import IUseQuizApi from "./IUseQuizApi";
 
 const useQuizApi = () => {
@@ -31,17 +31,6 @@ const useQuizApi = () => {
 
     const register = (request: IRegisterRequest, onRegisterRespons: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => {
         ApiQuizInstance.register(request, (r) => onRegisterRespons(), onError,() => {onFinally(); setIsBusy(false)});
-        setIsBusy(true);
-    }
-
-    useEffect(() => {
-        if(isLogIn){
-            fetchUserProfile(() => {}, (e) => {}, () => {setIsBusy(false)});
-        }
-    },[isLogIn])
-    
-    const fetchUserProfile = (onGetUserProfileResponse: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => {
-        ApiQuizInstance.getUserProfile(signInResponse?.token, r => {setUserProfile(r); onGetUserProfileResponse()}, onError, () => {onFinally(); setIsBusy(false)})
         setIsBusy(true);
     }
 

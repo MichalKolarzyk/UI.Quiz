@@ -1,6 +1,6 @@
 import { useState } from "react";
 import IUseQuizApi from "../../../applicationHooks/useQuizApis/IUseQuizApi";
-import { IErrorResponse } from "../../../infrastructure/apiQuiz/ApiQuizModels";
+import { IErrorResponse } from "../../../apis/apiQuiz/ApiQuizModels";
 import { IRegisterFormViewModel } from "./IRegisterFormViewModel";
 
 const RegisterFormViewModel = (props: RegisterFormViewModelProps) => {

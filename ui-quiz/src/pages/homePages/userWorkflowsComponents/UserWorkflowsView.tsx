@@ -1,4 +1,4 @@
-import { IUserProfileWorkspace } from "../../../infrastructure/apiQuiz/ApiQuizModels";
+import { IUserProfileWorkspace } from "../../../apis/apiQuiz/ApiQuizModels";
 import IUserWorkflowsViewModel from "./IUserWorkflowsViewModel";
 
 const UserWorkflowsView = (props: UserWorkflowsViewProps) => {

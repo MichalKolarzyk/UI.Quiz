@@ -1,13 +1,14 @@
-import useUserActions from "../../../actions/useUserActions";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 const UserProfileView = () => {
-  const userActions = useUserActions();
+  const user = useSelector((state: RootState) => state.user);
 
   return (
     <div>
-      <div>{userActions?.user?.userName ?? "Not loaded yet"}</div>
-      <div>{userActions?.user?.id ?? "Not loaded yet"}</div>
-      <div>{userActions?.user?.accountId ?? "Not loaded yet"}</div>
+      <div>{user?.userName ?? "Not loaded yet"}</div>
+      <div>{user?.id ?? "Not loaded yet"}</div>
+      <div>{user?.accountId ?? "Not loaded yet"}</div>
     </div>
   );
 };

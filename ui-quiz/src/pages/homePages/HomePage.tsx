@@ -1,20 +1,13 @@
-import { useEffect } from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import useAccountActions from "../../actions/useAccountActions";
-import useUserActions from "../../actions/useUserActions";
+import { useDispatch } from "react-redux";
+import {  Outlet, useNavigate } from "react-router-dom";
+import { setToken } from "../../reducers/accountReducers/slice";
 import { IUserProfileViewModel } from "./userProfileComponents/IUserProfileViewModel";
 import IUserWorkflowsViewModel from "./userWorkflowsComponents/IUserWorkflowsViewModel";
 import UserWorkflowsView from "./userWorkflowsComponents/UserWorkflowsView";
 
 const HomePage = (props: HomePageProps) => {
   const navigate = useNavigate();
-  const userActions = useUserActions()
-
-  const accountActions = useAccountActions();
-
-  useEffect(() => {
-    userActions.fetchUser();
-  }, [])
+  const dispatch = useDispatch();
 
   return (
     <div className="home-page">
@@ -44,7 +37,7 @@ const HomePage = (props: HomePageProps) => {
             <button className="button button--transparent" onClick={() => navigate("profile")}>
               Profile
             </button>
-            <button className="button button--transparent" onClick={() => accountActions.signOut()}>
+            <button className="button button--transparent" onClick={() => dispatch(setToken(""))}>
               Sing out
             </button>
           </div>

@@ -1,4 +1,4 @@
-import { IErrorResponse, IGetUserProfileResponse, IRegisterRequest, ISignInRequest } from "../../infrastructure/apiQuiz/ApiQuizModels";
+import { IErrorResponse, IGetUserProfileResponse, IRegisterRequest, ISignInRequest } from "../../apis/apiQuiz/ApiQuizModels";
 
 export default interface IUseQuizApi{
     signIn: (request: ISignInRequest, onSignInResponse: () => void, onError: (error : IErrorResponse) => void, onFinally: () => void) => void;

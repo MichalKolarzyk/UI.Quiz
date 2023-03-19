@@ -1,0 +1,36 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ApiQuizInstance from "./apis/apiQuiz/ApiQuizInstance";
+import useBrowserCache from "./hooks/useBrowserCache";
+import { selectAccountIsLoading, seletToken } from "./reducers/accountReducers/selectors";
+import { setToken } from "./reducers/accountReducers/slice";
+import AppRouter from "./routers/AppRouter";
+
+const App = () => {
+    const [usertokenInCache, setUserTokenInCache] = useBrowserCache<string>("USEQUIZAPI_ISIGNINRESPONSE");
+    const dispach = useDispatch();
+
+    const token = useSelector(seletToken);
+    const accountIsLoading = useSelector(selectAccountIsLoading);
+
+    useEffect(() => {
+        dispach(setToken(usertokenInCache));
+    }, [])
+
+    useEffect(() => {
+        setUserTokenInCache(token ?? "");
+        ApiQuizInstance.setJWT(token);
+        if(token != undefined){
+            ApiQuizInstance.getUserProfile();
+        }
+    },[token])
+
+    if(accountIsLoading){
+        return <div>loading</div>
+    }
+    
+    return <AppRouter/>
+    
+}
+
+export default App;
