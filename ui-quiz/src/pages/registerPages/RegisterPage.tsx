@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TextButton from "../../components/buttons/TextButton/TextButton";
 import { IRegisterFormViewModel } from "./registerFormComponents/IRegisterFormViewModel";
 import RegisterFormView from "./registerFormComponents/RegisterFormView";
 import classes from "./RegisterPage.module.scss";
@@ -28,9 +29,9 @@ const RegisterPage = (props: RegisterPageProps) => {
         <div className="h1 u-center-text u-margin-bottom-big">Sign in</div>
         <div className="h2 u-center-text u-margin-bottom-big">welcome in the first game for</div>
         <div className="u-center-text">
-          <button onClick={() => navigate("/login")} className="button button--transparent">
+          <TextButton onClick={() => navigate("/login")}>
             Go back to login page
-          </button>
+          </TextButton>
         </div>
       </div>
       <div className={classes["form-section"]}>

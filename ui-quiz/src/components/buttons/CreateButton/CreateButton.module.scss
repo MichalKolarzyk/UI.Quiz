@@ -1,18 +1,19 @@
 @import '../../../scss/abstract/variables';
 
+
 .button{
-    background-color: transparent;
-    border: solid 2px $color-white;
-    border-radius: .5rem;
+    display: inline;
+    background-color: $color-green;
+    color: $color-white;
+    border: solid $color-white 2px;
+    cursor: pointer;
     border-radius: 0.5rem;
     padding: 1.5rem 4rem;
     transition: all .3s;
     font-weight: 600;
-    cursor: pointer;
-    color: $color-white;
-
+    
     &:disabled{
-        background-color: rgba($color: $color-white, $alpha: .25);
+        background-color: rgba($color: $color-black, $alpha: .25);
         cursor: not-allowed;
     }
 

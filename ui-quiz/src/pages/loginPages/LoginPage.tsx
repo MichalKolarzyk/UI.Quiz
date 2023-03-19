@@ -35,45 +35,51 @@ const LoginPage = () => {
   return (
     <div className={classes["login-page"]}>
       <section className={classes["login-page__form"]}>
-      <div className="h1 u-margin-bottom-medium u-center-text">Quiz</div>
-      <div className="h2 u-margin-bottom-big u-center-text">welcome in the quiz live game </div>
-      <div className="u-margin-bottom-medium">
-        <FormInput
-          disabled={isLoading}
-          value={login}
-          errorMessage=""
-          onChange={loginChangeHandler}
-          placeholder="Email *"
-        />
-      </div>
-      <div className="u-margin-bottom-medium">
-        <FormInput
-          type="password"
-          disabled={isLoading}
-          value={password}
-          errorMessage=""
-          onChange={passwordChangeHandler}
-          placeholder="Password *"
-        />
-      </div>
+        <div className="u-margin-bottom-big u-center-text">
+          <span className="h1">Quiz</span>
+        </div>
 
-      <span className="u-color-dark"></span>
-      <div className="u-margin-bottom-small u-center-text">
-        <SignInButton disabled={isLoading} onClick={() => dispatch(accountLogIn({ login, password }))}>
-          Sign in
-        </SignInButton>
-      </div>
+        <div className="u-margin-bottom-big u-center-text">
+          <div className="h2">
+            welcome in the <br /> quiz live game{" "}
+          </div>
+        </div>
+        <div className="u-margin-bottom-medium">
+          <FormInput
+            disabled={isLoading}
+            value={login}
+            errorMessage=""
+            onChange={loginChangeHandler}
+            placeholder="Email *"
+          />
+        </div>
+        <div className="u-margin-bottom-medium">
+          <FormInput
+            type="password"
+            disabled={isLoading}
+            value={password}
+            errorMessage=""
+            onChange={passwordChangeHandler}
+            placeholder="Password *"
+          />
+        </div>
 
-      <div className="h3 u-margin-bottom-small u-center-text">Or</div>
+        <span className="u-color-dark"></span>
+        <div className="u-margin-bottom-small u-center-text">
+          <SignInButton disabled={isLoading} onClick={() => dispatch(accountLogIn({ login, password }))}>
+            Sign in
+          </SignInButton>
+        </div>
 
-      <div className="u-margin-bottom-small u-center-text">
-        <TransparentButton disabled={isLoading} onClick={() => nav("/register")}>
-          Sign up
-        </TransparentButton>
-      </div>
+        <div className="h4 u-margin-bottom-small u-center-text">Or</div>
+
+        <div className="u-margin-bottom-small u-center-text">
+          <TransparentButton disabled={isLoading} onClick={() => nav("/register")}>
+            Sign up
+          </TransparentButton>
+        </div>
       </section>
-      <section className={classes["login-page__description"]}>
-      </section>
+      <section className={classes["login-page__description"]}></section>
     </div>
   );
 };

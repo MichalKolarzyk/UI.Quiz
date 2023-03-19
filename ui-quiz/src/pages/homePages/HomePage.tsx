@@ -1,46 +1,33 @@
 import { useDispatch } from "react-redux";
-import {  Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { setToken } from "../../reducers/accountReducers/slice";
-import { IUserProfileViewModel } from "./userProfileComponents/IUserProfileViewModel";
-import IUserWorkflowsViewModel from "./userWorkflowsComponents/IUserWorkflowsViewModel";
-import UserWorkflowsView from "./userWorkflowsComponents/UserWorkflowsView";
+import classes from "./HomePage.module.scss";
+import TextButton from "../../components/buttons/TextButton/TextButton";
+import RoundedButton from "../../components/buttons/RoundedButton/RoundedButton";
 
-const HomePage = (props: HomePageProps) => {
+const HomePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   return (
-    <div className="home-page">
-      <header className="header-flat">
-        <div className="header-flat__logo-box">
-          <button className="button button--transparent" onClick={() => navigate("/home")}>
-            Home
-          </button>
+    <div className={classes.page}>
+      <header className={classes.header}>
+        <div className={classes.header__left}>
+          <div className="h3">Quiz</div> 
         </div>
-        <div className="header-flat__center-box">
-          <div className="flex--row u-gap-small">
-            <div className="popup__wrapper">
-              <button className="button button--transparent" onClick={() => navigate("workspaces")}>
-                Workflows
-              </button>
-              <div className="popup__box--bottom popup__wrapper">
-                <UserWorkflowsView onWorkspaceClick={(w) => navigate(w.workspaceId)} viewModel={props.userWorkflowsViewModel}/>
-              </div>
+        <div className={classes.header__center}>
+          <div className="popup__wrapper">
+            <TextButton onClick={() => navigate("/home")}>About</TextButton>
+            <div className="popup__box--bottom popup__wrapper">
+              
             </div>
-            <button className="button button--transparent" onClick={() => {}}>
-              Quiz events
-            </button>
           </div>
+          <TextButton onClick={() => {}}>Quiz</TextButton>
+          <TextButton onClick={() => {}}>Session</TextButton>
+          <TextButton onClick={() => {}}>Questions</TextButton>
         </div>
-        <div className="header-flat__left-box">
-          <div className="flex--row u-gap-small">
-            <button className="button button--transparent" onClick={() => navigate("profile")}>
-              Profile
-            </button>
-            <button className="button button--transparent" onClick={() => dispatch(setToken(""))}>
-              Sing out
-            </button>
-          </div>
+        <div className={classes.header__right}>
+          <RoundedButton onClick={() => dispatch(setToken(""))}>Sing out</RoundedButton>
         </div>
       </header>
       <Outlet />
@@ -48,9 +35,5 @@ const HomePage = (props: HomePageProps) => {
   );
 };
 
-export interface HomePageProps {
-  userProfileViewModel: IUserProfileViewModel;
-  userWorkflowsViewModel: IUserWorkflowsViewModel;
-}
 
 export default HomePage;

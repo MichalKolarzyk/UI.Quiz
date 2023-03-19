@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ApiQuizInstance from "./apis/apiQuiz/ApiQuizInstance";
 import useBrowserCache from "./hooks/useBrowserCache";
 import LoadingPage from "./pages/loadingPages/LoadingPage";
-import { seletToken } from "./reducers/accountReducers/selectors";
+import { accountStateSelector } from "./reducers/accountReducers/selectors";
 import { setToken } from "./reducers/accountReducers/slice";
 import AppRouter from "./routers/AppRouter";
 
@@ -14,7 +14,7 @@ const App = () => {
     
     const dispach = useDispatch();
 
-    const token = useSelector(seletToken);
+    const {token} = useSelector(accountStateSelector);
 
     useEffect(() => {
         dispach(setToken(usertokenInCache));
