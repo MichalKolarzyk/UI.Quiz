@@ -24,7 +24,7 @@ const HomePage = () => {
           </div>
           <TextButton onClick={() => {}}>Quiz</TextButton>
           <TextButton onClick={() => {}}>Session</TextButton>
-          <TextButton onClick={() => {}}>Questions</TextButton>
+          <TextButton onClick={() => {navigate("Questions")}}>Questions</TextButton>
         </div>
         <div className={classes.header__right}>
           <RoundedButton onClick={() => dispatch(setToken(""))}>Sing out</RoundedButton>

@@ -5,6 +5,7 @@ import RegisterFormViewModel from "../pages/registerPages/registerFormComponents
 import ProtectedRoute from "./ProtectedRoute";
 import LoginPage from "../pages/loginPages/LoginPage";
 import AboutPage from "../pages/aboutPages/AboutPage";
+import QuestionsTablePage from "../pages/questionsPages/QuestionsTablePage/QuestionsTablePage";
 
 const AppRouter = () => {
   const registerPageViewModel = RegisterFormViewModel();
@@ -24,6 +25,7 @@ const AppRouter = () => {
           }
         >
           <Route index element={<AboutPage />} />
+          <Route path="questions" element={<QuestionsTablePage />} />
           {/* <Route path=":workspaceId" element={<WorkspacePage />} /> */}
         </Route>
       </Routes>
