@@ -4,14 +4,14 @@ import NumberView from "./NumberView";
 import classes from "./Paginator.module.scss";
 
 const Paginator = (props: PaginatorProps) => {
-  const visibleNumbers = 7
-  const centerNumbers = Math.round(visibleNumbers/2);
+  const visibleNumbers = 7;
+  const centerNumbers = Math.round(visibleNumbers / 2);
   const sideNumbers = Math.round((visibleNumbers - 3) / 2);
-  
+
   const [selectedNumber, setSelectedNumber] = useState(props.initialPage);
   const leftSpaceVisible = selectedNumber > centerNumbers;
   const rightSpaceVisible = selectedNumber <= props.pages - centerNumbers;
-  
+
   const numberView: JSX.Element[] = new Array<JSX.Element>();
 
   const getNumberView = (number: number) => {

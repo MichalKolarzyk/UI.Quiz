@@ -4,9 +4,10 @@ import { setToken } from "../../reducers/accountReducers/slice";
 import classes from "./HomePage.module.scss";
 import TextButton from "../../components/buttons/TextButton/TextButton";
 import RoundedButton from "../../components/buttons/RoundedButton/RoundedButton";
+import useAppNavigation from "../../hooks/useAppNavigation";
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  const navigate = useAppNavigation();
   const dispatch = useDispatch();
 
   return (
@@ -17,14 +18,14 @@ const HomePage = () => {
         </div>
         <div className={classes.header__center}>
           <div className="popup__wrapper">
-            <TextButton onClick={() => navigate("/home")}>About</TextButton>
+            <TextButton onClick={() => navigate.toHomePage()}>About</TextButton>
             <div className="popup__box--bottom popup__wrapper">
               
             </div>
           </div>
-          <TextButton onClick={() => {}}>Quiz</TextButton>
-          <TextButton onClick={() => {}}>Session</TextButton>
-          <TextButton onClick={() => {navigate("Questions")}}>Questions</TextButton>
+          <TextButton>Quiz</TextButton>
+          <TextButton>Session</TextButton>
+          <TextButton onClick={() => navigate.toQuestionsPage()}>Questions</TextButton>
         </div>
         <div className={classes.header__right}>
           <RoundedButton onClick={() => dispatch(setToken(""))}>Sing out</RoundedButton>

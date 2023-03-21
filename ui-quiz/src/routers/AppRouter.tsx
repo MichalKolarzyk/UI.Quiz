@@ -6,6 +6,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import LoginPage from "../pages/loginPages/LoginPage";
 import AboutPage from "../pages/aboutPages/AboutPage";
 import QuestionsTablePage from "../pages/questionsPages/QuestionsTablePage/QuestionsTablePage";
+import QuestionCreatePage from "../pages/questionsPages/QuestionCreatePage/QuestionCreatePage";
 
 const AppRouter = () => {
   const registerPageViewModel = RegisterFormViewModel();
@@ -26,6 +27,7 @@ const AppRouter = () => {
         >
           <Route index element={<AboutPage />} />
           <Route path="questions" element={<QuestionsTablePage />} />
+          <Route path="create-question" element={<QuestionCreatePage />} />
           {/* <Route path=":workspaceId" element={<WorkspacePage />} /> */}
         </Route>
       </Routes>

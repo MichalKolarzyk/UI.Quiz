@@ -10,9 +10,14 @@
 }
 
 .number{
-    cursor: pointer;
     color: $color-white;
-    padding: 1rem 2rem;
+    text-align: center;
+}
+
+.number-box{
+    width: 5rem;
+    cursor: pointer;
+    text-align: center;
 }
 
 .space{
@@ -41,7 +46,7 @@
     color: $color-white;
     background-color: $color-primary-light2;
     border-radius: 10rem;
-    padding: 1.2rem 2.2rem;
+    padding: 1rem 0rem;
     font-weight: 700;
 }
 

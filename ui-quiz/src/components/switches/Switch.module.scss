@@ -1,0 +1,47 @@
+@import '../../scss/abstract/variables';
+
+.box{
+    display: flex;
+    gap: 1rem;
+}
+
+.switch{
+    display: inline-block;
+    background-color: $color-white;
+    width: 4.5rem;
+    height: 2.5rem;
+    border-radius: 100rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.35s;
+}
+
+.on{
+    background-color: $color-green;
+    & > .toggle{
+        top: .3rem;
+        left: .4rem
+    }
+}
+
+.off{
+    background-color: $color-grey-light;
+    & > .toggle{
+        top: .3rem;
+        left: 2.2rem
+    }
+}
+
+.toggle{
+    position: absolute;
+    background-color: $color-white;
+    height: 1.9rem;
+    width: 1.9rem;
+    border-radius: 10rem;
+    transition: all 0.35s;
+}
+
+.label{
+    color: $color-white;
+    display: inline;
+}
