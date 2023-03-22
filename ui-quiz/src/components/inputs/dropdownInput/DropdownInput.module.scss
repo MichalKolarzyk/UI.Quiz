@@ -1,9 +1,12 @@
 @import '../../../scss/abstract/variables';
 
-.dropdown{
+.wrapper{
     display: inline-block;
+    min-width: 45rem
+}
+
+.dropdown{
     position: relative;
-    width: 100%;
 }
 
 .button{
@@ -14,6 +17,7 @@
     border: none;
     cursor: pointer;
     text-align: left;
+    font-weight: 400;
     width: 100%;
 }
 

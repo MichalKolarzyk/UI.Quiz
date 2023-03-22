@@ -22,7 +22,7 @@ const DropdownInput = (props: DropdownInputProps) => {
   ));
 
   return (
-    <div>
+    <div className={classes.wrapper}>
       <div className={classes.label}>{props.labelTop}</div>
       <div className={classes.dropdown}>
         <button onBlur={() => setIsListVisible(false)} onClick={onClickHandler} className={classes.button}>

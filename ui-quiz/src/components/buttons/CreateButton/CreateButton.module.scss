@@ -5,7 +5,7 @@
     display: inline;
     background-color: $color-green;
     color: $color-white;
-    border: solid $color-white 2px;
+    border: solid rgba($color-white, .5) 2px;
     cursor: pointer;
     border-radius: 0.5rem;
     padding: 1.5rem 4rem;

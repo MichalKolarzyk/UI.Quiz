@@ -1,0 +1,18 @@
+@import '../../../scss/abstract/variables';
+
+.button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    
+    &:hover > .icon{
+        color: rgba($color-white, 0.5);
+    }
+}
+
+.icon{
+    color: $color-white;
+    height: 2.4rem;
+    width: 2.4rem;
+    transition: all .3s;
+}
