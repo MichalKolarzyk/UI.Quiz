@@ -3,7 +3,7 @@ import classes from './FormInput.module.scss'
 const FormInput = (props: FormInputProps) => {
   return (
     <div className={classes.box}>
-      <input className={classes.input} {...props}></input>
+      <input {...props} className={classes.input} ></input>
       <div className={classes.error}>{props.errorMessage}</div>
     </div>
   );

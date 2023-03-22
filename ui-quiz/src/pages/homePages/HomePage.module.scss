@@ -8,8 +8,9 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 2rem 6.2rem;
-  border-bottom: solid $color-grey-light 2px;
+  align-items: center;
+  padding: 1rem 6.2rem;
+  border-bottom: solid rgba($color-white, .25) 2px;
 
   &__left {
     order: 0;

@@ -66,7 +66,6 @@ const RegisterFormView = (props: RegisterFormViewProps) => {
       <div className="u-center-text">
         <SignInButton
           disabled={viewModel.disabled}
-          className="button"
           onClick={onSignUpHandler}
         >
           Sign up!

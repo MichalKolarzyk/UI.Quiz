@@ -34,7 +34,7 @@ const DropdownInput = (props: DropdownInputProps) => {
           <div className={classes.list}>{itemsView}</div>
         </div>
       </div>
-      <div className={classes.label}>{props.labelBottom}</div>
+      <div className={classes["label--bottom"]}>{props.labelBottom}</div>
     </div>
   );
 };

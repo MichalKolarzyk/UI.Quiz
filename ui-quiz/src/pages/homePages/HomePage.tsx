@@ -14,7 +14,7 @@ const HomePage = () => {
     <div className={classes.page}>
       <header className={classes.header}>
         <div className={classes.header__left}>
-          <div className="h3">Quiz</div> 
+          <div className="h2">Quiz</div> 
         </div>
         <div className={classes.header__center}>
           <div className="popup__wrapper">

@@ -1,0 +1,15 @@
+@import '../../../scss/abstract/variables';
+
+.textarea{
+    display: block;
+    border: none;
+    outline: none;
+    font-size: $default-font-size;
+    resize: none;
+    width: 100%;
+    min-height: 14rem;
+    padding: 2rem;
+    color: $color-black;
+    border-radius: .5rem;
+    box-sizing: border-box;
+}

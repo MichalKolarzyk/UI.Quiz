@@ -10,11 +10,10 @@
   display: inline-block;
   padding: 1.5rem 4rem;
   transition: all 0.3s;
-  font-weight: 600;
   border: solid 2px transparent;
 
   &:disabled {
-    background-color: gray;
+    color: rgba($color-white, 0.5);
     cursor: not-allowed;
   }
 

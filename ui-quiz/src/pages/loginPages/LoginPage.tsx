@@ -41,7 +41,7 @@ const LoginPage = () => {
 
         <div className="u-margin-bottom-big u-center-text">
           <div className="h2">
-            welcome in the <br /> quiz live game{" "}
+            Welcome in the <br /> quiz live game{" "}
           </div>
         </div>
         <div className="u-margin-bottom-medium">

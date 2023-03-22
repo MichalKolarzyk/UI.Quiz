@@ -2,6 +2,7 @@
 
 .box{
     position: relative;
+    background-color: transparent;
 }
 
 .input{
@@ -9,13 +10,17 @@
     border: none;
     outline: none;
     border-radius: 5px;
-    color: $color-text-grey-light;
-    font-size: $default-font-size;
+    color: $color-black;
+    font-size: 1.4rem;
     padding: 1.5rem 2rem;
     background-color: $color-white;
     width: 100%;
     display: inline-block;
     transition: all 0.3s;
+
+    &:disabled{
+        cursor: not-allowed;
+    }
     
 }
 
@@ -23,6 +28,7 @@
     position: absolute;
     color: rgb(255, 255, 255);
     text-align: left;
+    font-size: $small-font-size;
 
     & + .input{
         background-color: red;
