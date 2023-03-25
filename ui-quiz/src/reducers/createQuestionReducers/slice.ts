@@ -30,10 +30,25 @@ export const createQuestionStateSlice = createSlice({
             state.correctAnswerIndex = action.payload;
         },
         addAnswer: (state) => {
+            console.log("aaddd")
             state.answers.push("");
         },
         setAnswer: (state, action: PayloadAction<SetAnswerPayload>) => {
             state.answers[action.payload.index] = action.payload.text;
+        },
+        setCategory: (state, action: PayloadAction<string>) => {
+            state.category= action.payload;
+        },
+        deleteAnswer: (state, action: PayloadAction<number>) => {
+            state.answers.splice(action.payload, 1);
+            if(action.payload > state.correctAnswerIndex){
+                return;
+            }
+            if(action.payload == state.correctAnswerIndex){
+                state.correctAnswerIndex = -1;
+                return;
+            }
+            state.correctAnswerIndex -= 1;
         }
     }
 });
@@ -43,6 +58,6 @@ export interface SetAnswerPayload {
     text: string,
 }
 
-export const {setIsPrivate, setQuestion, setCorrectAnswerIndex} = createQuestionStateSlice.actions;
+export const createQuestionActions = createQuestionStateSlice.actions;
 
 export default createQuestionStateSlice.reducer;

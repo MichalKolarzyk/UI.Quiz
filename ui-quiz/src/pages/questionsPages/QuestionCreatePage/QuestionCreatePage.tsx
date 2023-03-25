@@ -1,42 +1,33 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DeleteButton from "../../../components/buttons/DeleteButton/DeleteButton";
 import GoBackButton from "../../../components/buttons/GoBackButton/GoBackButton";
 import RoundedButton from "../../../components/buttons/RoundedButton/RoundedButton";
 import DropdownInput from "../../../components/inputs/dropdownInput/DropdownInput";
 import FormInput from "../../../components/inputs/formInputs/FormInput";
 import Textarea from "../../../components/inputs/textarea/Textarea";
+import WindowUnloadListener from "../../../components/listeners/WindowUnloadListener";
 import Switch from "../../../components/switches/Switch";
 import useAppNavigation from "../../../hooks/useAppNavigation";
+import { createQuestionStateSelector } from "../../../reducers/createQuestionReducers/selectors";
+import { createQuestionActions } from "../../../reducers/createQuestionReducers/slice";
 import classes from "./QuestionCreatePage.module.scss";
 
 const QuestionCreatePage = () => {
   const nav = useAppNavigation();
-
-  const [answers, setAnswers] = useState<Array<string>>(["", "", ""]);
-  const [isCorrectArray, setIsCorrectArray] = useState<Array<boolean>>([false, false, false]);
-  const [isPrivate, setIsPrivate] = useState(true);
-  const [question, setQuestion] = useState("");
+  const dispatch = useDispatch();
+  const { answers, category, correctAnswerIndex, isPrivate, question } = useSelector(createQuestionStateSelector);
 
   const answerChangeHandler = (event: ChangeEvent<HTMLInputElement>, index: number) => {
-    const newAnswers = answers;
-    newAnswers[index] = event.target.value;
-    setAnswers([...newAnswers]);
+    dispatch(createQuestionActions.setAnswer({ index, text: event.target.value }));
   };
 
   const correctAnswerChangeHandler = (index: number, value: boolean) => {
-    const newState = Array.from({ length: isCorrectArray.length }, (i) => (i = false));
-    newState[index] = value;
-    setIsCorrectArray([...newState]);
+    dispatch(createQuestionActions.setCorrectAnswerIndex(index));
   };
 
   const deleteAnswer = (index: number) => {
-    const newAnswers = answers;
-    newAnswers.splice(index, 1);
-    setAnswers([...newAnswers]);
-
-    const newStates = isCorrectArray;
-    newStates.splice(index, 1);
-    setIsCorrectArray([...newStates]);
+    dispatch(createQuestionActions.deleteAnswer(index));
   };
 
   const goBackClickHandler = () => {
@@ -45,17 +36,22 @@ const QuestionCreatePage = () => {
 
   const answersView = answers.map((value, index) => {
     return (
-      <div className={classes["answers-section__answer"]}>
-        <div className={classes["answers-section__answer__switch"]}>
-          <Switch value={isCorrectArray[index]} onChange={(newState) => correctAnswerChangeHandler(index, newState)} />
+      <WindowUnloadListener>
+        <div className={classes["answers-section__answer"]}>
+          <div className={classes["answers-section__answer__switch"]}>
+            <Switch
+              value={index == correctAnswerIndex}
+              onChange={(newState) => correctAnswerChangeHandler(index, newState)}
+            />
+          </div>
+          <div className={classes["answers-section__answer__text"]}>
+            <FormInput value={value} onChange={(event) => answerChangeHandler(event, index)} placeholder="answer" />
+          </div>
+          <div className={classes["answers-section__answer__switch"]}>
+            <DeleteButton onClick={() => deleteAnswer(index)} />
+          </div>
         </div>
-        <div className={classes["answers-section__answer__text"]}>
-          <FormInput value={value} onChange={(event) => answerChangeHandler(event, index)} placeholder="answer" />
-        </div>
-        <div className={classes["answers-section__answer__switch"]}>
-          <DeleteButton onClick={() => deleteAnswer(index)}/>
-        </div>
-      </div>
+      </WindowUnloadListener>
     );
   });
 
@@ -68,16 +64,32 @@ const QuestionCreatePage = () => {
         </div>
       </header>
       <section className={classes["top-section"]}>
-        <Switch label="Private" value={isPrivate} onChange={(newState) => setIsPrivate(newState)} />
+        <Switch
+          label="Private"
+          value={isPrivate}
+          onChange={(newState) => dispatch(createQuestionActions.setIsPrivate(newState))}
+        />
       </section>
       <section className={classes["question-section"]}>
-        <Textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Question" />
-        <DropdownInput labelTop="Category" labelBottom="Choose from the list..." items={["1", "2"]} />
+        <Textarea
+          value={question}
+          onChange={(event) => dispatch(createQuestionActions.setQuestion(event.target.value))}
+          placeholder="Question"
+        />
+        <DropdownInput
+          value={category}
+          onChange={(value, index) => {
+            dispatch(createQuestionActions.setCategory(value));
+          }}
+          labelTop="Category"
+          labelBottom="Choose from the list..."
+          items={["1", "2"]}
+        />
         <DropdownInput labelTop="Language" labelBottom="Choose from the list..." items={["1", "2"]} />
       </section>
       <section className={classes["answers-section"]}>
         {answersView}
-        <RoundedButton disabled={answers.length >= 6} onClick={() => setAnswers([...answers, ""])}>
+        <RoundedButton disabled={answers.length >= 6} onClick={() => dispatch(createQuestionActions.addAnswer())}>
           + Add answer
         </RoundedButton>
       </section>

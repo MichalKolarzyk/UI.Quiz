@@ -3,14 +3,12 @@ import classes from "./DropdownInput.module.scss";
 
 const DropdownInput = (props: DropdownInputProps) => {
   const [isListVisible, setIsListVisible] = useState<boolean>(false);
-  const [selectedValue, setSelectedValue] = useState<string>(props.items[0] ?? "");
 
   const onClickHandler = () => {
     setIsListVisible(!isListVisible);
   };
 
   const onIntemClick = (value: string, index: number) => {
-    setSelectedValue(props.items[index]);
     props.onChange?.(value, index);
     setIsListVisible(false);
   };
@@ -26,7 +24,7 @@ const DropdownInput = (props: DropdownInputProps) => {
       <div className={classes.label}>{props.labelTop}</div>
       <div className={classes.dropdown}>
         <button onBlur={() => setIsListVisible(false)} onClick={onClickHandler} className={classes.button}>
-          {selectedValue}
+          {props.value}
         </button>
         <div
           className={`${classes["list-wrapper"]} ${isListVisible && classes["list-wrapper--visible"]}`}
@@ -41,6 +39,7 @@ const DropdownInput = (props: DropdownInputProps) => {
 
 export interface DropdownInputProps {
   onChange?: (value: string, index: number) => void;
+  value?: string,
   items: Array<string>;
   labelTop?: string;
   labelBottom?: string;
