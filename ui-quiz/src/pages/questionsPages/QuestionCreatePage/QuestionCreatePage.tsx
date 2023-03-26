@@ -1,8 +1,5 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DeleteButton from "../../../components/buttons/DeleteButton/DeleteButton";
-import GoBackButton from "../../../components/buttons/GoBackButton/GoBackButton";
-import RoundedButton from "../../../components/buttons/RoundedButton/RoundedButton";
 import DropdownInput from "../../../components/inputs/dropdownInput/DropdownInput";
 import FormInput from "../../../components/inputs/formInputs/FormInput";
 import Textarea from "../../../components/inputs/textarea/Textarea";
@@ -13,7 +10,9 @@ import { createQuestionStateSelector } from "../../../reducers/createQuestionRed
 import { createQuestionActions } from "../../../reducers/createQuestionReducers/slice";
 import classes from "./QuestionCreatePage.module.scss";
 import pageClasses from "../../scss/page-base.module.scss";
-import TextButton from "../../../components/buttons/TextButton/TextButton";
+import ButtonContainer from "../../../components/buttons/ButtonContainer";
+import { AddIcon, CancelIcon } from "../../../components/icons/Icons";
+import { CancelButton, DeleteButton, GoBackButton, RoundedButton } from "../../../components/buttons";
 
 const QuestionCreatePage = () => {
   const nav = useAppNavigation();
@@ -38,11 +37,11 @@ const QuestionCreatePage = () => {
 
   const onCancelHandler = () => {
     const result = window.confirm("Do you want to discard all changes?");
-    if(result){
-      dispatch(createQuestionActions.clearAll())
+    if (result) {
+      dispatch(createQuestionActions.clearAll());
       nav.toPreviousPage();
     }
-  }
+  };
 
   const answersView = answers.map((value, index) => {
     return (
@@ -101,13 +100,13 @@ const QuestionCreatePage = () => {
         <section className={classes["answers-section"]}>
           {answersView}
           <RoundedButton disabled={answers.length >= 6} onClick={() => dispatch(createQuestionActions.addAnswer())}>
-            + Add answer
+            + Add
           </RoundedButton>
         </section>
       </div>
       <div className={pageClasses.page__footer}>
         <div className={classes.actions}>
-          <TextButton onClick={onCancelHandler}>Cancel</TextButton>
+          <CancelButton onClick={onCancelHandler} />
           <RoundedButton>Save</RoundedButton>
         </div>
       </div>

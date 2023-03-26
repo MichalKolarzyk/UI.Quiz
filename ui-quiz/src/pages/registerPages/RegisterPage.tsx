@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TextButton from "../../components/buttons/TextButton/TextButton";
+import { TextButton } from "../../components/buttons";
 import { IRegisterFormViewModel } from "./registerFormComponents/IRegisterFormViewModel";
 import RegisterFormView from "./registerFormComponents/RegisterFormView";
 import classes from "./RegisterPage.module.scss";

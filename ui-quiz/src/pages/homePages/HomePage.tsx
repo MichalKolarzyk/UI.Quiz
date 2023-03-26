@@ -2,11 +2,9 @@ import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { setToken } from "../../reducers/accountReducers/slice";
 import classes from "./HomePage.module.scss";
-import TextButton from "../../components/buttons/TextButton/TextButton";
-import RoundedButton from "../../components/buttons/RoundedButton/RoundedButton";
 import useAppNavigation from "../../hooks/useAppNavigation";
-
 import pageClasses from '../scss/page-base.module.scss'
+import { RoundedButton, TextButton } from "../../components/buttons";
 
 const HomePage = () => {
   const navigate = useAppNavigation();

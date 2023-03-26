@@ -1,15 +1,40 @@
-import CreateButton from "../../../components/buttons/CreateButton/CreateButton";
-import GoBackButton from "../../../components/buttons/GoBackButton/GoBackButton";
 import DropdownInput from "../../../components/inputs/dropdownInput/DropdownInput";
 import FormInput from "../../../components/inputs/formInputs/FormInput";
 import Paginator from "../../../components/tables/paginator/Paginator";
 import Table from "../../../components/tables/table/Table";
 import useAppNavigation from "../../../hooks/useAppNavigation";
 import classes from "./QuestionsTablePage.module.scss";
-import pageClasses from '../../scss/page-base.module.scss'
+import pageClasses from "../../scss/page-base.module.scss";
+import TableHeader from "../../../components/tables/table/TableHeader";
+import TableRow from "../../../components/tables/table/TableRow";
+import TableCell from "../../../components/tables/table/TableCell";
+import { CreateButton, EdiiButton, GoBackButton, RoundedButton } from "../../../components/buttons";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
+
+  const onEditRowHandler = (item: QuestionRow) => {
+    nav.toQuestionPage(item.id);
+  }
+
+  const items = [
+    {
+      id: "1",
+      approved: 12,
+      author: "Majkel23",
+      category: "Math",
+      defaultLanguage: "Pl",
+      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum",
+    },
+    {
+      id: "2",
+      approved: 12,
+      author: "Majkel23",
+      category: "Math",
+      defaultLanguage: "Pl",
+      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum",
+    },
+  ] as Array<QuestionRow>;
 
   return (
     <>
@@ -37,7 +62,20 @@ const QuestionsTablePage = () => {
           <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
         </section>
         <section className={classes["table-section"]}>
-          <Table></Table>
+          <Table>
+            <TableHeader columns={["#", "Author", "Category", "Approved", "Default language", "Question", "Edit"]} />
+            {items.map((item, index) => { 
+              return <TableRow>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{item.author}</TableCell>
+                <TableCell>{item.category}</TableCell>
+                <TableCell>{item.approved}</TableCell>
+                <TableCell>{item.defaultLanguage}</TableCell>
+                <TableCell>{item.question}</TableCell>
+                <TableCell><EdiiButton onClick={() => onEditRowHandler(item)}/></TableCell>
+              </TableRow>;
+            })}
+          </Table>
         </section>
       </div>
       <div className={pageClasses.page__footer}>
@@ -48,5 +86,14 @@ const QuestionsTablePage = () => {
     </>
   );
 };
+
+export interface QuestionRow {
+  id: string;
+  author: string;
+  category: string;
+  approved: number;
+  defaultLanguage: string;
+  question: string;
+}
 
 export default QuestionsTablePage;

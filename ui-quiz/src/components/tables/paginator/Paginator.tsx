@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RoundedButton from "../../buttons/RoundedButton/RoundedButton";
+import { NextButton, PreviousButton, RoundedButton, TextButton } from "../../buttons";
 import NumberView from "./NumberView";
 import classes from "./Paginator.module.scss";
 
@@ -9,8 +9,6 @@ const Paginator = (props: PaginatorProps) => {
   const sideNumbers = Math.round((visibleNumbers - 3) / 2);
 
   const [selectedNumber, setSelectedNumber] = useState(props.initialPage);
-  const leftSpaceVisible = selectedNumber > centerNumbers;
-  const rightSpaceVisible = selectedNumber <= props.pages - centerNumbers;
 
   const numberView: JSX.Element[] = new Array<JSX.Element>();
 
@@ -67,15 +65,13 @@ const Paginator = (props: PaginatorProps) => {
 
   return (
     <div className={classes.paginator}>
-      {/* {leftSpaceVisible && <div className={classes["space-left"]}>...</div>}
-      {rightSpaceVisible && <div className={classes["space-right"]}>...</div>} */}
-      <RoundedButton disabled={selectedNumber <= 1} onClick={onPrevClickHandler}>
+      <PreviousButton disabled={selectedNumber <= 1} onClick={onPrevClickHandler}>
         Prev
-      </RoundedButton>
+      </PreviousButton>
       {numberView}
-      <RoundedButton disabled={selectedNumber >= props.pages} onClick={onNextClickHandler}>
+      <NextButton disabled={selectedNumber >= props.pages} onClick={onNextClickHandler}>
         Next
-      </RoundedButton>
+      </NextButton>
     </div>
   );
 };

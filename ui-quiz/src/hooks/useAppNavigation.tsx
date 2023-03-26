@@ -15,6 +15,10 @@ const useAppNavigation = () => {
         nav("/home/create-question");
     }
 
+    const toQuestionPage = (questionId: string) => {
+        nav(`/home/questions/${questionId}`);
+    }
+
     const toLoginPage = () => {
         nav("/login")
     }
@@ -33,6 +37,7 @@ const useAppNavigation = () => {
         toRegisterPage,
         toHomePage,
         toQuestionsPage,
+        toQuestionPage,
         toCreateQuestionPage,
         toPreviousPage,
     }

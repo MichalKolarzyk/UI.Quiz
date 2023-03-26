@@ -1,8 +1,7 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import SignInButton from "../../components/buttons/SignInButton/SignInButton";
-import TransparentButton from "../../components/buttons/TransparentButton/TransparentButton";
+import { SignInButton, TransparentButton } from "../../components/buttons";
 import FormInput from "../../components/inputs/formInputs/FormInput";
 import { accountLogIn } from "../../reducers/accountReducers/asyncActions";
 import { selectIsLogIn } from "../../reducers/accountReducers/selectors";

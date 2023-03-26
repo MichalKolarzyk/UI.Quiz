@@ -1,5 +1,4 @@
-import CreateButton from "../../components/buttons/CreateButton/CreateButton";
-import TransparentButton from "../../components/buttons/TransparentButton/TransparentButton";
+import { CreateButton, TextButton } from "../../components/buttons";
 import classes from "./AboutPage.module.scss";
 
 const AboutPage = () => {
@@ -13,7 +12,7 @@ const AboutPage = () => {
         Vivamus feugiat purus a facili.
       </div>
       <div className="u-margin-bottom-big">
-        <TransparentButton>Go to the session page</TransparentButton>
+        <TextButton>Go to the session page</TextButton>
       </div>
       <div className="h3 u-margin-bottom-medium">
         Lorem ipsum dolor sit <br /> amet, consectetur <br />

@@ -1,4 +1,3 @@
-import SignInButton from "../../../components/buttons/SignInButton/SignInButton";
 import Card from "../../../components/cards/Card";
 import FormInput from "../../../components/inputs/formInputs/FormInput";
 import { IRegisterFormViewModel } from "./IRegisterFormViewModel";
@@ -9,6 +8,7 @@ import { useAppDispatch } from "../../../store/store";
 import { useSelector } from "react-redux";
 import { registrationErrors } from "../../../reducers/registrationReducers/selectors";
 import { registrationClearLoginError } from "../../../reducers/registrationReducers/slice";
+import { SignInButton } from "../../../components/buttons";
 
 const RegisterFormView = (props: RegisterFormViewProps) => {
   const viewModel = props.viewModel;
