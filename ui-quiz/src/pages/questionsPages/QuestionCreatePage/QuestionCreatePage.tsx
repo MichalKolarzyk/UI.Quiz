@@ -12,6 +12,8 @@ import useAppNavigation from "../../../hooks/useAppNavigation";
 import { createQuestionStateSelector } from "../../../reducers/createQuestionReducers/selectors";
 import { createQuestionActions } from "../../../reducers/createQuestionReducers/slice";
 import classes from "./QuestionCreatePage.module.scss";
+import pageClasses from "../../scss/page-base.module.scss";
+import TextButton from "../../../components/buttons/TextButton/TextButton";
 
 const QuestionCreatePage = () => {
   const nav = useAppNavigation();
@@ -33,6 +35,14 @@ const QuestionCreatePage = () => {
   const goBackClickHandler = () => {
     nav.toPreviousPage();
   };
+
+  const onCancelHandler = () => {
+    const result = window.confirm("Do you want to discard all changes?");
+    if(result){
+      dispatch(createQuestionActions.clearAll())
+      nav.toPreviousPage();
+    }
+  }
 
   const answersView = answers.map((value, index) => {
     return (
@@ -56,44 +66,52 @@ const QuestionCreatePage = () => {
   });
 
   return (
-    <div className={classes.page}>
-      <header className={classes.header}>
-        <div className={classes.header__title}>
-          <GoBackButton onClick={goBackClickHandler} />
-          <span className="h3">Create Question</span>
+    <>
+      <div className={pageClasses.page__article}>
+        <header className={classes.header}>
+          <div className={classes.header__title}>
+            <GoBackButton onClick={goBackClickHandler} />
+            <span className="h3">Create Question</span>
+          </div>
+        </header>
+        <section className={classes["top-section"]}>
+          <Switch
+            label="Private"
+            value={isPrivate}
+            onChange={(newState) => dispatch(createQuestionActions.setIsPrivate(newState))}
+          />
+        </section>
+        <section className={classes["question-section"]}>
+          <Textarea
+            value={question}
+            onChange={(event) => dispatch(createQuestionActions.setQuestion(event.target.value))}
+            placeholder="Question"
+          />
+          <DropdownInput
+            value={category}
+            onChange={(value, index) => {
+              dispatch(createQuestionActions.setCategory(value));
+            }}
+            labelTop="Category"
+            labelBottom="Choose from the list..."
+            items={["1", "2"]}
+          />
+          <DropdownInput labelTop="Language" labelBottom="Choose from the list..." items={["1", "2"]} />
+        </section>
+        <section className={classes["answers-section"]}>
+          {answersView}
+          <RoundedButton disabled={answers.length >= 6} onClick={() => dispatch(createQuestionActions.addAnswer())}>
+            + Add answer
+          </RoundedButton>
+        </section>
+      </div>
+      <div className={pageClasses.page__footer}>
+        <div className={classes.actions}>
+          <TextButton onClick={onCancelHandler}>Cancel</TextButton>
+          <RoundedButton>Save</RoundedButton>
         </div>
-      </header>
-      <section className={classes["top-section"]}>
-        <Switch
-          label="Private"
-          value={isPrivate}
-          onChange={(newState) => dispatch(createQuestionActions.setIsPrivate(newState))}
-        />
-      </section>
-      <section className={classes["question-section"]}>
-        <Textarea
-          value={question}
-          onChange={(event) => dispatch(createQuestionActions.setQuestion(event.target.value))}
-          placeholder="Question"
-        />
-        <DropdownInput
-          value={category}
-          onChange={(value, index) => {
-            dispatch(createQuestionActions.setCategory(value));
-          }}
-          labelTop="Category"
-          labelBottom="Choose from the list..."
-          items={["1", "2"]}
-        />
-        <DropdownInput labelTop="Language" labelBottom="Choose from the list..." items={["1", "2"]} />
-      </section>
-      <section className={classes["answers-section"]}>
-        {answersView}
-        <RoundedButton disabled={answers.length >= 6} onClick={() => dispatch(createQuestionActions.addAnswer())}>
-          + Add answer
-        </RoundedButton>
-      </section>
-    </div>
+      </div>
+    </>
   );
 };
 

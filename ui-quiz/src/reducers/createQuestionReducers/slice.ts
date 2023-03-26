@@ -49,6 +49,14 @@ export const createQuestionStateSlice = createSlice({
                 return;
             }
             state.correctAnswerIndex -= 1;
+        },
+
+        clearAll: (state) => {
+            state.answers = initialState.answers;
+            state.category = initialState.category;
+            state.correctAnswerIndex = initialState.correctAnswerIndex;
+            state.isPrivate = initialState.isPrivate;
+            state.question = initialState.question;
         }
     }
 });

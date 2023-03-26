@@ -30,6 +30,51 @@ const Table = (props: TableProps) => {
         <th>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum</th>
         <th>/</th>
       </tr>
+      <tr>
+        <th>2</th>
+        <th>Majkel23</th>
+        <th>Math</th>
+        <th>12</th>
+        <th>Pl</th>
+        <th>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum</th>
+        <th>/</th>
+      </tr>
+      <tr>
+        <th>2</th>
+        <th>Majkel23</th>
+        <th>Math</th>
+        <th>12</th>
+        <th>Pl</th>
+        <th>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum</th>
+        <th>/</th>
+      </tr>
+      <tr>
+        <th>2</th>
+        <th>Majkel23</th>
+        <th>Math</th>
+        <th>12</th>
+        <th>Pl</th>
+        <th>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum</th>
+        <th>/</th>
+      </tr>
+      <tr>
+        <th>2</th>
+        <th>Majkel23</th>
+        <th>Math</th>
+        <th>12</th>
+        <th>Pl</th>
+        <th>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum</th>
+        <th>/</th>
+      </tr>
+      <tr>
+        <th>2</th>
+        <th>Majkel23</th>
+        <th>Math</th>
+        <th>12</th>
+        <th>Pl</th>
+        <th>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum</th>
+        <th>/</th>
+      </tr>
     </table>
   );
 };

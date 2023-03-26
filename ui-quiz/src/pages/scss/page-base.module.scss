@@ -1,0 +1,22 @@
+@import "../../scss/abstract/variables";
+
+.page{
+    display: flex;
+    flex-direction: column;
+    background-color: $color-primary-dark;
+    min-height: 100vh;
+
+    &__header{
+        height: 6rem;
+    }
+
+    &__article{
+        flex-grow: 1;
+        padding: 0 6.2rem;
+    }
+
+    &__footer{
+        height: 10rem;
+        padding: 0 6.2rem;
+    }
+}

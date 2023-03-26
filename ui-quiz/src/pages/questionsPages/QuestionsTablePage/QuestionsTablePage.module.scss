@@ -1,9 +1,5 @@
 @import "../../../scss/abstract/variables";
 
-.page {
-  background-color: $color-primary-dark;
-  padding: 0 6.2rem;
-}
 
 .header {
   margin-top: 2rem;
@@ -36,8 +32,6 @@
     }
   }
 
-  &__actions {
-  }
 }
 
 .table-section {

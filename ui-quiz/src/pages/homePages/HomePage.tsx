@@ -6,13 +6,15 @@ import TextButton from "../../components/buttons/TextButton/TextButton";
 import RoundedButton from "../../components/buttons/RoundedButton/RoundedButton";
 import useAppNavigation from "../../hooks/useAppNavigation";
 
+import pageClasses from '../scss/page-base.module.scss'
+
 const HomePage = () => {
   const navigate = useAppNavigation();
   const dispatch = useDispatch();
 
   return (
-    <div className={classes.page}>
-      <header className={classes.header}>
+    <div className={pageClasses.page}>
+      <header className={`${classes.header} ${pageClasses.header}`}>
         <div className={classes.header__left}>
           <div className="h2">Quiz</div> 
         </div>

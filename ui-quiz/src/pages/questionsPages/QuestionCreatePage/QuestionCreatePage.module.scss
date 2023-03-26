@@ -1,9 +1,5 @@
 @import "../../../scss/abstract/variables";
 
-.page{
-    padding: 0 6.2rem;
-}
-
 .header{
     margin-top: 2rem;
     margin-bottom: 8rem;
@@ -50,4 +46,8 @@
             flex-grow: 0;
         }
     }
+}
+
+.actions{
+    text-align: right;
 }
