@@ -86,3 +86,43 @@
         align-self: start;
     }
 }
+
+.subpage-question{
+    padding: 0 6.2rem;
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 40% auto;
+    grid-template-rows: 10rem auto 10rem;
+    column-gap: 3rem;
+    grid-template-areas:
+        "title title"
+        "question action"
+        "footer footer";
+
+    &__title{
+        display: flex;
+        gap: 3rem;
+        grid-area: title;
+        align-items: center;
+    }
+
+    &__question{
+        grid-area: question;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    &__action{
+        grid-area: action;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    &__footer{
+        grid-area: footer;
+        place-self: end;
+        align-self: start;
+    }
+}

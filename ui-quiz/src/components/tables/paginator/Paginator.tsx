@@ -14,7 +14,7 @@ const Paginator = (props: PaginatorProps) => {
 
   const getNumberView = (number: number) => {
     return (
-      <NumberView isSelected={number == selectedNumber} number={number} onClick={() => onNumberClickHandler(number)} />
+      <NumberView key={number} isSelected={number == selectedNumber} number={number} onClick={() => onNumberClickHandler(number)} />
     );
   };
 

@@ -20,7 +20,7 @@ export const QuestionsTable: React.FC<QuestionsTableProps> = (props) => {
       </TableHeader>
       {props.items.map((item, index) => {
         return (
-          <TableRow>
+          <TableRow key={index}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>{item.author}</TableCell>
             <TableCell>{item.category}</TableCell>
@@ -65,7 +65,7 @@ export const QuizzesTable: React.FC<QuizzesTableProps> = (props)  => {
       </TableHeader>
       {props.items.map((item, index) => {
         return (
-          <TableRow>
+          <TableRow key={index}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>{item.author}</TableCell>
             <TableCell>{item.category}</TableCell>
@@ -110,7 +110,7 @@ export const SessionsTable: React.FC<SessionsTableProps> = (props) => {
       </TableHeader>
       {props.items?.map((item, index) => {
         return (
-          <TableRow>
+          <TableRow key={index}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>{item.state}</TableCell>
             <TableCell>{item.assignUsers}</TableCell>

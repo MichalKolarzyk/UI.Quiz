@@ -1,39 +1,16 @@
 @import "../../../scss/abstract/variables";
 
-.question {
-  float: left;
-  width: 40%;
-  height: 100;
-  margin-right: 3%;
-  & > * {
-    margin-bottom: 3rem;
-  }
-}
+.answer {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
 
-.answers {
-  float: left;
-  height: 100;
-  width: 57%;
-  & > * {
-    margin-bottom: 3rem;
+  &__text {
+    flex-grow: 1;
   }
 
-  &__answer {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    align-items: center;
-
-    &__text {
-      flex-grow: 1;
-    }
-
-    &__switch {
-      flex-grow: 0;
-    }
+  &__switch {
+    flex-grow: 0;
   }
-}
-
-.actions {
-  text-align: right;
 }

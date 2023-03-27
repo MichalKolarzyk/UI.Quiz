@@ -4,7 +4,7 @@ import FormInput from "../../components/inputs/formInputs/FormInput";
 import { SessionsTable } from "../../components/tables";
 import Paginator from "../../components/tables/paginator/Paginator";
 import useAppNavigation from "../../hooks/useAppNavigation";
-import { ActionSection, FilterSection, FooterSection, Subpage, TableSection, TitleSection } from "../../layouts/TablePageLayout";
+import { FilterSection, FooterSection, Subpage, TableSection, TitleSection } from "../../layouts/TablePageLayout";
 
 const SessionsTablePage = () => {
     const nav = useAppNavigation();
@@ -23,9 +23,6 @@ const SessionsTablePage = () => {
             />
             <FormInput placeholder="Author"></FormInput>
           </FilterSection>
-          <ActionSection>
-            <CreateButton>Create Quiz</CreateButton>
-          </ActionSection>
           <TableSection>
             <SessionsTable onEditClick={() => {}} />
           </TableSection>

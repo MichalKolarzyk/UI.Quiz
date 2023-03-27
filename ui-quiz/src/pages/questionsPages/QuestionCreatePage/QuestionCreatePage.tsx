@@ -9,8 +9,14 @@ import useAppNavigation from "../../../hooks/useAppNavigation";
 import { createQuestionStateSelector } from "../../../reducers/createQuestionReducers/selectors";
 import { createQuestionActions } from "../../../reducers/createQuestionReducers/slice";
 import classes from "./QuestionCreatePage.module.scss";
-import { CancelButton, DeleteButton, GoBackButton, RoundedButton } from "../../../components/buttons";
-import { ArticleSection, FooterSection, Subpage, SubTitleSection, TitleSection } from "../../../layouts/PageLayout";
+import { CancelButton, CreateButton, DeleteButton, GoBackButton, RoundedButton } from "../../../components/buttons";
+import {
+  AnswerSection,
+  FooterSection,
+  QuestionSection,
+  Subpage,
+  TitleSection,
+} from "../../../layouts/QuestionPageLayout";
 
 const QuestionCreatePage = () => {
   const nav = useAppNavigation();
@@ -43,33 +49,31 @@ const QuestionCreatePage = () => {
 
   const answersView = answers.map((value, index) => {
     return (
-      <WindowUnloadListener>
-        <div className={classes["answers__answer"]}>
-          <div className={classes["answers__answer__switch"]}>
-            <Switch
-              value={index == correctAnswerIndex}
-              onChange={(newState) => correctAnswerChangeHandler(index, newState)}
-            />
-          </div>
-          <div className={classes["answers__answer__text"]}>
-            <FormInput value={value} onChange={(event) => answerChangeHandler(event, index)} placeholder="answer" />
-          </div>
-          <div className={classes["answers__answer__switch"]}>
-            <DeleteButton onClick={() => deleteAnswer(index)} />
-          </div>
+      <div key={index} className={classes["answer"]}>
+        <div className={classes["answer__switch"]}>
+          <Switch
+            value={index == correctAnswerIndex}
+            onChange={(newState) => correctAnswerChangeHandler(index, newState)}
+          />
         </div>
-      </WindowUnloadListener>
+        <div className={classes["answer__text"]}>
+          <FormInput value={value} onChange={(event) => answerChangeHandler(event, index)} placeholder="answer" />
+        </div>
+        <div className={classes["answer__switch"]}>
+          <DeleteButton onClick={() => deleteAnswer(index)} />
+        </div>
+      </div>
     );
   });
 
   return (
-    <Subpage>
-      <TitleSection>
-        <GoBackButton onClick={goBackClickHandler} />
-        <span className="h3">Create Question</span>
-      </TitleSection>
-      <ArticleSection>
-        <section className={classes["question"]}>
+    <WindowUnloadListener>
+      <Subpage>
+        <TitleSection>
+          <GoBackButton onClick={goBackClickHandler} />
+          <span className="h3">Create Question</span>
+        </TitleSection>
+        <QuestionSection>
           <Textarea
             value={question}
             onChange={(event) => dispatch(createQuestionActions.setQuestion(event.target.value))}
@@ -80,31 +84,33 @@ const QuestionCreatePage = () => {
             value={isPrivate}
             onChange={(newState) => dispatch(createQuestionActions.setIsPrivate(newState))}
           />
-          <DropdownInput
-            value={category}
-            onChange={(value, index) => {
-              dispatch(createQuestionActions.setCategory(value));
-            }}
-            labelTop="Category"
-            labelBottom="Choose from the list..."
-            items={["1", "2"]}
-          />
-          <DropdownInput labelTop="Language" labelBottom="Choose from the list..." items={["1", "2"]} />
-        </section>
-        <section className={classes["answers"]}>
+          <div>
+            <DropdownInput
+              value={category}
+              onChange={(value, index) => {
+                dispatch(createQuestionActions.setCategory(value));
+              }}
+              labelTop="Category"
+              labelBottom="Choose from the list..."
+              items={["1", "2"]}
+            />
+            <DropdownInput labelTop="Language" labelBottom="Choose from the list..." items={["1", "2"]} />
+          </div>
+        </QuestionSection>
+        <AnswerSection>
           {answersView}
-          <RoundedButton disabled={answers.length >= 6} onClick={() => dispatch(createQuestionActions.addAnswer())}>
-            + Add
-          </RoundedButton>
-        </section>
-      </ArticleSection>
-      <FooterSection>
-        <div className={classes.actions}>
+          <div>
+            <RoundedButton disabled={answers.length >= 6} onClick={() => dispatch(createQuestionActions.addAnswer())}>
+              + Add
+            </RoundedButton>
+          </div>
+        </AnswerSection>
+        <FooterSection>
           <CancelButton onClick={onCancelHandler} />
-          <RoundedButton>Save</RoundedButton>
-        </div>
-      </FooterSection>
-    </Subpage>
+          <CreateButton>Create</CreateButton>
+        </FooterSection>
+      </Subpage>
+    </WindowUnloadListener>
   );
 };
 
