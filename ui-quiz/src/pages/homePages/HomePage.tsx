@@ -3,8 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { setToken } from "../../reducers/accountReducers/slice";
 import classes from "./HomePage.module.scss";
 import useAppNavigation from "../../hooks/useAppNavigation";
-import pageClasses from '../scss/page-base.module.scss'
-import { RoundedButton, TextButton } from "../../components/buttons";
+import { HeaderPageButton, RoundedButton, TextButton } from "../../components/buttons";
 
 const HomePage = () => {
   const navigate = useAppNavigation();
@@ -14,18 +13,13 @@ const HomePage = () => {
     <div className={classes.page}>
       <header className={classes.page__header}>
         <div className={classes.page__header__left}>
-          <div className="h2">Quiz</div> 
+          <div className="h2">Quiz</div>
         </div>
         <div className={classes.page__header__center}>
-          <div className="popup__wrapper">
-            <TextButton onClick={() => navigate.toHomePage()}>About</TextButton>
-            <div className="popup__box--bottom popup__wrapper">
-              
-            </div>
-          </div>
-          <TextButton>Quiz</TextButton>
-          <TextButton>Session</TextButton>
-          <TextButton onClick={() => navigate.toQuestionsPage()}>Questions</TextButton>
+          <HeaderPageButton to={navigate.aboutUrl}>About</HeaderPageButton>
+          <HeaderPageButton to={navigate.quizzesUrl}>Quizzes</HeaderPageButton>
+          <HeaderPageButton to={navigate.sessionsUrl}>Sessions</HeaderPageButton>
+          <HeaderPageButton to={navigate.questionsUrl}>Questions</HeaderPageButton>
         </div>
         <div className={classes.page__header__right}>
           <RoundedButton onClick={() => dispatch(setToken(""))}>Sing out</RoundedButton>
@@ -35,6 +29,5 @@ const HomePage = () => {
     </div>
   );
 };
-
 
 export default HomePage;

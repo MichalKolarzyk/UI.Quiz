@@ -17,7 +17,6 @@
     flex-grow: 1;
 
     &__title{
-        margin-top: 2.5rem;
         height: 10rem;
         display: flex;
         gap: 3rem;
@@ -34,5 +33,56 @@
 
     &__footer{
         height: 10rem;
+    }
+}
+
+.subpage-grid{
+    padding: 0 6.2rem;
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 10rem 13rem auto 10rem;
+    grid-template-areas:
+        "title title title title"
+        "filter filter filter action"
+        "table table table table"
+        "footer footer footer footer";
+
+    &__title{
+        height: 10rem;
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+        grid-area: title;
+    }
+
+    &__filter{
+        height: 13rem;
+        grid-area: filter;
+        place-self: center stretch;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+      
+        & > div {
+          flex-grow: 1;
+        }
+    }
+
+    &__action{
+        grid-area: action;
+        place-self: center end;
+    }
+
+    &__table{
+        grid-area: table;
+    }
+
+    &__footer{
+        grid-area: footer;
+        place-self: center;
+        align-self: start;
     }
 }

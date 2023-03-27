@@ -2,10 +2,16 @@ import DropdownInput from "../../../components/inputs/dropdownInput/DropdownInpu
 import FormInput from "../../../components/inputs/formInputs/FormInput";
 import Paginator from "../../../components/tables/paginator/Paginator";
 import useAppNavigation from "../../../hooks/useAppNavigation";
-import classes from "./QuestionsTablePage.module.scss";
 import { CreateButton, GoBackButton } from "../../../components/buttons";
 import { QuestionRow, QuestionsTable } from "../../../components/tables";
-import { SubTitleSection, FooterSection, Subpage, ArticleSection, TitleSection } from "../../../layouts/PageLayout";
+import {
+  ActionSection,
+  FilterSection,
+  FooterSection,
+  Subpage,
+  TableSection,
+  TitleSection,
+} from "../../../layouts/TablePageLayout";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
@@ -35,31 +41,23 @@ const QuestionsTablePage = () => {
         <GoBackButton onClick={() => nav.toPreviousPage()} />
         <span className="h3">Quesions</span>
       </TitleSection>
-      <SubTitleSection>
-        <div className={classes["filter-section"]}>
-          <div className={classes["filter-section__filters"]}>
-            <DropdownInput
-              labelTop="Category"
-              labelBottom="chose from list..."
-              items={["Math", "Geo", "IT", "Math", "Geo"]}
-            />
-            <DropdownInput
-              labelTop="State"
-              labelBottom="chose from list..."
-              items={["Math", "Geo", "IT", "Math", "Geo"]}
-            />
-            <FormInput placeholder="Author"></FormInput>
-          </div>
-          <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
-        </div>
-      </SubTitleSection>
-      <ArticleSection>
+      <FilterSection>
+        <DropdownInput
+          labelTop="Category"
+          labelBottom="chose from list..."
+          items={["Math", "Geo", "IT", "Math", "Geo"]}
+        />
+        <DropdownInput labelTop="State" labelBottom="chose from list..." items={["Math", "Geo", "IT", "Math", "Geo"]} />
+        <FormInput placeholder="Author"></FormInput>
+      </FilterSection>
+      <ActionSection>
+        <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
+      </ActionSection>
+      <TableSection>
         <QuestionsTable items={items} onEditClick={(item) => nav.toQuestionPage(item.id)} />
-      </ArticleSection>
-      <FooterSection className={classes["pagination-section"]}>
-        <div className={classes["pagination"]}>
-          <Paginator initialPage={8} onPageChange={() => {}} pages={20} />
-        </div>
+      </TableSection>
+      <FooterSection>
+        <Paginator initialPage={8} onPageChange={() => {}} pages={20} />
       </FooterSection>
     </Subpage>
   );

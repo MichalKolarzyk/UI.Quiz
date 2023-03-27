@@ -9,11 +9,8 @@ import useAppNavigation from "../../../hooks/useAppNavigation";
 import { createQuestionStateSelector } from "../../../reducers/createQuestionReducers/selectors";
 import { createQuestionActions } from "../../../reducers/createQuestionReducers/slice";
 import classes from "./QuestionCreatePage.module.scss";
-import pageClasses from "../../scss/page-base.module.scss";
-import ButtonContainer from "../../../components/buttons/ButtonContainer";
-import { AddIcon, CancelIcon } from "../../../components/icons";
 import { CancelButton, DeleteButton, GoBackButton, RoundedButton } from "../../../components/buttons";
-import { ArticleSection, Subpage, SubTitleSection, TitleSection } from "../../../layouts/PageLayout";
+import { ArticleSection, FooterSection, Subpage, SubTitleSection, TitleSection } from "../../../layouts/PageLayout";
 
 const QuestionCreatePage = () => {
   const nav = useAppNavigation();
@@ -101,12 +98,12 @@ const QuestionCreatePage = () => {
           </RoundedButton>
         </section>
       </ArticleSection>
-      <div className={pageClasses.page__footer}>
+      <FooterSection>
         <div className={classes.actions}>
           <CancelButton onClick={onCancelHandler} />
           <RoundedButton>Save</RoundedButton>
         </div>
-      </div>
+      </FooterSection>
     </Subpage>
   );
 };

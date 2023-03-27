@@ -2,6 +2,7 @@ import { CancelIcon, DeleteIcon, EditIcon, GoBackIcon, NextIcon, PreviousIcon } 
 import Button, { ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import classes from "./Button.module.scss";
+import { NavLink, NavLinkProps } from "react-router-dom";
 
 export const GoBackButton: React.FC<ButtonProps> = (props) => {
   return (
@@ -88,3 +89,15 @@ export const PreviousButton: React.FC<ButtonProps> = (props) => {
     </Button>
   );
 };
+
+export const HeaderPageButton: React.FC<HeaderPageButtonProps> = (props) => {
+  return (
+    <NavLink
+      {...props}
+      end
+      className={({ isActive, isPending }) => `${classes.button} ${classes['button--text']} ${(isPending ? "" : isActive ? classes["button--text--active"] : "")}`}
+    ></NavLink>
+  );
+};
+
+export interface HeaderPageButtonProps extends NavLinkProps {}

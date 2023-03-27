@@ -1,4 +1,4 @@
-import { LayoutProps } from './scss/Layout';
+import { LayoutProps } from './Layout';
 import classes from './scss/Layout.module.scss';
 
 export const Subpage : React.FC<LayoutProps> = (props) => {

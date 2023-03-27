@@ -1,7 +1,10 @@
 import { CreateButton, TextButton } from "../../components/buttons";
+import useAppNavigation from "../../hooks/useAppNavigation";
 import classes from "./AboutPage.module.scss";
 
 const AboutPage = () => {
+  const nav = useAppNavigation();
+
   return (
     <div className={classes.page}>
       <div className="h3 u-margin-bottom-medium u-margin-top-big">
@@ -12,7 +15,7 @@ const AboutPage = () => {
         Vivamus feugiat purus a facili.
       </div>
       <div className="u-margin-bottom-big">
-        <TextButton>Go to the session page</TextButton>
+        <TextButton onClick={() => nav.toSessionsPage()}>Go to the session page</TextButton>
       </div>
       <div className="h3 u-margin-bottom-medium">
         Lorem ipsum dolor sit <br /> amet, consectetur <br />

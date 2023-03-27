@@ -7,6 +7,11 @@
   padding: 1.5rem 4rem;
   transition: all 0.3s;
 
+  font-family:'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: $default-font-size;
+  text-decoration: none;
+
   &:disabled {
     cursor: not-allowed;
   }
@@ -26,6 +31,11 @@
 
     &:disabled {
       color: rgba($color-white, 0.5);
+    }
+
+    &--active{
+      text-decoration: underline;
+      transform: translateY(-3px);
     }
   }
 
