@@ -11,12 +11,12 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className={pageClasses.page}>
-      <header className={`${classes.header} ${pageClasses.header}`}>
-        <div className={classes.header__left}>
+    <div className={classes.page}>
+      <header className={classes.page__header}>
+        <div className={classes.page__header__left}>
           <div className="h2">Quiz</div> 
         </div>
-        <div className={classes.header__center}>
+        <div className={classes.page__header__center}>
           <div className="popup__wrapper">
             <TextButton onClick={() => navigate.toHomePage()}>About</TextButton>
             <div className="popup__box--bottom popup__wrapper">
@@ -27,7 +27,7 @@ const HomePage = () => {
           <TextButton>Session</TextButton>
           <TextButton onClick={() => navigate.toQuestionsPage()}>Questions</TextButton>
         </div>
-        <div className={classes.header__right}>
+        <div className={classes.page__header__right}>
           <RoundedButton onClick={() => dispatch(setToken(""))}>Sing out</RoundedButton>
         </div>
       </header>

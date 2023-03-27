@@ -1,0 +1,38 @@
+@import "../../scss/abstract/variables";
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    &__header{
+        height: 6rem;
+    }
+}
+
+.subpage{
+    padding: 0 6.2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &__title{
+        margin-top: 2.5rem;
+        height: 10rem;
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    &__sub-title{
+        height: 13rem;
+    }
+
+    &__article{
+        flex-grow: 1;
+    }
+
+    &__footer{
+        height: 10rem;
+    }
+}

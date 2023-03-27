@@ -1,4 +1,4 @@
-import { CancelIcon, DeleteIcon, EditIcon, GoBackIcon, NextIcon, PreviousIcon } from "../icons/Icons";
+import { CancelIcon, DeleteIcon, EditIcon, GoBackIcon, NextIcon, PreviousIcon } from "../icons";
 import Button, { ButtonProps } from "./Button";
 import ButtonContainer from "./ButtonContainer";
 import classes from "./Button.module.scss";
@@ -58,7 +58,7 @@ export const EdiiButton: React.FC<ButtonProps> = (props) => {
   return (
     <Button
       {...props}
-      className={`${classes["button--text"]} ${classes["button-padding-small"]} ${classes["button-color-black"]}`}
+      className={`${classes["button--text"]} ${classes["button-padding-none"]} ${classes["button-color-black"]}`}
     >
       <ButtonContainer>
         <EditIcon className={classes.icon} />

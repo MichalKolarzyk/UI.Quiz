@@ -1,28 +1,40 @@
 @import "../../scss/abstract/variables";
 
-.header {
+.page{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 6.2rem;
-  border-bottom: solid rgba($color-white, .25) 2px;
+  flex-direction: column;
+  background-color: $color-primary-dark;
+  min-height: 100vh;
 
-  &__left {
-    order: 0;
-  }
-
-  &__center {
-    text-align: center;
-    order: 1;
+  &__header {
     display: flex;
-    flex-direction: row;
-    gap: 6rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 6.2rem;
+    border-bottom: solid rgba($color-white, .25) 2px;
+  
+    &__left {
+      order: 0;
+    }
+  
+    &__center {
+      text-align: center;
+      order: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 6rem;
+    }
+  
+    &__right {
+      order: 2;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+    }
   }
-
-  &__right {
-    order: 2;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
+  
+  &__article{
+    flex-grow: 1;
   }
 }
+

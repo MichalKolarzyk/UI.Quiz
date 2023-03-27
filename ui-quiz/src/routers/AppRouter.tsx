@@ -27,9 +27,8 @@ const AppRouter = () => {
           }
         >
           <Route index element={<AboutPage />} />
-          <Route path="questions" element={<QuestionsTablePage />}>
-            <Route path=":questionId" element={<QuestionPage />} />
-          </Route>
+          <Route path="questions" element={<QuestionsTablePage />} />
+          <Route path="questions/:questionId" element={<QuestionPage />} />
           <Route path="create-question" element={<QuestionCreatePage />} />
         </Route>
       </Routes>

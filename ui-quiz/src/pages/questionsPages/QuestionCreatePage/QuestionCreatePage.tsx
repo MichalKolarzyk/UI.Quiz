@@ -11,8 +11,9 @@ import { createQuestionActions } from "../../../reducers/createQuestionReducers/
 import classes from "./QuestionCreatePage.module.scss";
 import pageClasses from "../../scss/page-base.module.scss";
 import ButtonContainer from "../../../components/buttons/ButtonContainer";
-import { AddIcon, CancelIcon } from "../../../components/icons/Icons";
+import { AddIcon, CancelIcon } from "../../../components/icons";
 import { CancelButton, DeleteButton, GoBackButton, RoundedButton } from "../../../components/buttons";
+import { ArticleSection, Subpage, SubTitleSection, TitleSection } from "../../../layouts/PageLayout";
 
 const QuestionCreatePage = () => {
   const nav = useAppNavigation();
@@ -46,17 +47,17 @@ const QuestionCreatePage = () => {
   const answersView = answers.map((value, index) => {
     return (
       <WindowUnloadListener>
-        <div className={classes["answers-section__answer"]}>
-          <div className={classes["answers-section__answer__switch"]}>
+        <div className={classes["answers__answer"]}>
+          <div className={classes["answers__answer__switch"]}>
             <Switch
               value={index == correctAnswerIndex}
               onChange={(newState) => correctAnswerChangeHandler(index, newState)}
             />
           </div>
-          <div className={classes["answers-section__answer__text"]}>
+          <div className={classes["answers__answer__text"]}>
             <FormInput value={value} onChange={(event) => answerChangeHandler(event, index)} placeholder="answer" />
           </div>
-          <div className={classes["answers-section__answer__switch"]}>
+          <div className={classes["answers__answer__switch"]}>
             <DeleteButton onClick={() => deleteAnswer(index)} />
           </div>
         </div>
@@ -65,26 +66,22 @@ const QuestionCreatePage = () => {
   });
 
   return (
-    <>
-      <div className={pageClasses.page__article}>
-        <header className={classes.header}>
-          <div className={classes.header__title}>
-            <GoBackButton onClick={goBackClickHandler} />
-            <span className="h3">Create Question</span>
-          </div>
-        </header>
-        <section className={classes["top-section"]}>
-          <Switch
-            label="Private"
-            value={isPrivate}
-            onChange={(newState) => dispatch(createQuestionActions.setIsPrivate(newState))}
-          />
-        </section>
-        <section className={classes["question-section"]}>
+    <Subpage>
+      <TitleSection>
+        <GoBackButton onClick={goBackClickHandler} />
+        <span className="h3">Create Question</span>
+      </TitleSection>
+      <ArticleSection>
+        <section className={classes["question"]}>
           <Textarea
             value={question}
             onChange={(event) => dispatch(createQuestionActions.setQuestion(event.target.value))}
             placeholder="Question"
+          />
+          <Switch
+            label="Private"
+            value={isPrivate}
+            onChange={(newState) => dispatch(createQuestionActions.setIsPrivate(newState))}
           />
           <DropdownInput
             value={category}
@@ -97,20 +94,20 @@ const QuestionCreatePage = () => {
           />
           <DropdownInput labelTop="Language" labelBottom="Choose from the list..." items={["1", "2"]} />
         </section>
-        <section className={classes["answers-section"]}>
+        <section className={classes["answers"]}>
           {answersView}
           <RoundedButton disabled={answers.length >= 6} onClick={() => dispatch(createQuestionActions.addAnswer())}>
             + Add
           </RoundedButton>
         </section>
-      </div>
+      </ArticleSection>
       <div className={pageClasses.page__footer}>
         <div className={classes.actions}>
           <CancelButton onClick={onCancelHandler} />
           <RoundedButton>Save</RoundedButton>
         </div>
       </div>
-    </>
+    </Subpage>
   );
 };
 

@@ -1,21 +1,14 @@
 import DropdownInput from "../../../components/inputs/dropdownInput/DropdownInput";
 import FormInput from "../../../components/inputs/formInputs/FormInput";
 import Paginator from "../../../components/tables/paginator/Paginator";
-import Table from "../../../components/tables/table/Table";
 import useAppNavigation from "../../../hooks/useAppNavigation";
 import classes from "./QuestionsTablePage.module.scss";
-import pageClasses from "../../scss/page-base.module.scss";
-import TableHeader from "../../../components/tables/table/TableHeader";
-import TableRow from "../../../components/tables/table/TableRow";
-import TableCell from "../../../components/tables/table/TableCell";
-import { CreateButton, EdiiButton, GoBackButton, RoundedButton } from "../../../components/buttons";
+import { CreateButton, GoBackButton } from "../../../components/buttons";
+import { QuestionRow, QuestionsTable } from "../../../components/tables";
+import { SubTitleSection, FooterSection, Subpage, ArticleSection, TitleSection } from "../../../layouts/PageLayout";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
-
-  const onEditRowHandler = (item: QuestionRow) => {
-    nav.toQuestionPage(item.id);
-  }
 
   const items = [
     {
@@ -37,15 +30,13 @@ const QuestionsTablePage = () => {
   ] as Array<QuestionRow>;
 
   return (
-    <>
-      <div className={pageClasses.page__article}>
-        <header className={classes.header}>
-          <div className={classes.header__title}>
-            <GoBackButton onClick={() => nav.toPreviousPage()} />
-            <span className="h3">Quesions</span>
-          </div>
-        </header>
-        <section className={classes["filter-section"]}>
+    <Subpage>
+      <TitleSection>
+        <GoBackButton onClick={() => nav.toPreviousPage()} />
+        <span className="h3">Quesions</span>
+      </TitleSection>
+      <SubTitleSection>
+        <div className={classes["filter-section"]}>
           <div className={classes["filter-section__filters"]}>
             <DropdownInput
               labelTop="Category"
@@ -60,40 +51,18 @@ const QuestionsTablePage = () => {
             <FormInput placeholder="Author"></FormInput>
           </div>
           <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
-        </section>
-        <section className={classes["table-section"]}>
-          <Table>
-            <TableHeader columns={["#", "Author", "Category", "Approved", "Default language", "Question", "Edit"]} />
-            {items.map((item, index) => { 
-              return <TableRow>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{item.author}</TableCell>
-                <TableCell>{item.category}</TableCell>
-                <TableCell>{item.approved}</TableCell>
-                <TableCell>{item.defaultLanguage}</TableCell>
-                <TableCell>{item.question}</TableCell>
-                <TableCell><EdiiButton onClick={() => onEditRowHandler(item)}/></TableCell>
-              </TableRow>;
-            })}
-          </Table>
-        </section>
-      </div>
-      <div className={pageClasses.page__footer}>
-        <section className={classes["pagination-section"]}>
+        </div>
+      </SubTitleSection>
+      <ArticleSection>
+        <QuestionsTable items={items} onEditClick={(item) => nav.toQuestionPage(item.id)} />
+      </ArticleSection>
+      <FooterSection className={classes["pagination-section"]}>
+        <div className={classes["pagination"]}>
           <Paginator initialPage={8} onPageChange={() => {}} pages={20} />
-        </section>
-      </div>
-    </>
+        </div>
+      </FooterSection>
+    </Subpage>
   );
 };
-
-export interface QuestionRow {
-  id: string;
-  author: string;
-  category: string;
-  approved: number;
-  defaultLanguage: string;
-  question: string;
-}
 
 export default QuestionsTablePage;

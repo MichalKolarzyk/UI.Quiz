@@ -4,7 +4,6 @@ import classes from "./Table.module.scss";
 const Table = (props: TableProps) => {
   return (
     <table className={classes.table} {...props}>
-      {props.children}
     </table>
   );
 };

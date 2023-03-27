@@ -8,7 +8,7 @@ import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 export const DeleteIcon = ImBin;
 export const CancelIcon = GiCancel;
 export const GoBackIcon = RiArrowGoBackFill;
-export const AddIcon = IoMdAddCircleOutline
-export const EditIcon = MdModeEdit
-export const NextIcon = MdNavigateNext
-export const PreviousIcon = MdNavigateBefore
+export const AddIcon = IoMdAddCircleOutline;
+export const EditIcon = MdModeEdit;
+export const NextIcon = MdNavigateNext;
+export const PreviousIcon = MdNavigateBefore;
