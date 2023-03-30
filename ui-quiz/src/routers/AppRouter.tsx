@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Routes } from "react-router-dom";
 import HomePage from "../pages/homePages/HomePage";
 import RegisterPage from "../pages/registerPages/RegisterPage";
 import RegisterFormViewModel from "../pages/registerPages/registerFormComponents/RegisterFormViewModel";
@@ -14,9 +14,9 @@ import SessionsTablePage from "../pages/sessionsPages/SessionsTablePage";
 const AppRouter = () => {
   const registerPageViewModel = RegisterFormViewModel();
 
-  return (
-    <BrowserRouter>
-      <Routes>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
         <Route index element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage registerFormViewModel={registerPageViewModel} />} />
@@ -35,9 +35,11 @@ const AppRouter = () => {
           <Route path="questions/:questionId" element={<QuestionPage />} />
           <Route path="create-question" element={<QuestionCreatePage />} />
         </Route>
-      </Routes>
-    </BrowserRouter>
+      </>
+    )
   );
+
+  return <RouterProvider router={router}/>;
 };
 
 export default AppRouter;

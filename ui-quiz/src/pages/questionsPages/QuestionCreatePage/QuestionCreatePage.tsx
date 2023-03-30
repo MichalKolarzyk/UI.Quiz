@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DropdownInput from "../../../components/inputs/dropdownInput/DropdownInput";
 import FormInput from "../../../components/inputs/formInputs/FormInput";
@@ -19,6 +19,8 @@ import {
 } from "../../../layouts/QuestionPageLayout";
 
 const QuestionCreatePage = () => {
+  const [isModify, setIsModify] = useState(false);
+
   const nav = useAppNavigation();
   const dispatch = useDispatch();
   const { answers, category, correctAnswerIndex, isPrivate, question } = useSelector(createQuestionStateSelector);
@@ -40,11 +42,7 @@ const QuestionCreatePage = () => {
   };
 
   const onCancelHandler = () => {
-    const result = window.confirm("Do you want to discard all changes?");
-    if (result) {
-      dispatch(createQuestionActions.clearAll());
       nav.toPreviousPage();
-    }
   };
 
   const answersView = answers.map((value, index) => {
@@ -67,7 +65,7 @@ const QuestionCreatePage = () => {
   });
 
   return (
-    <WindowUnloadListener>
+    <WindowUnloadListener isModify={isModify} >
       <Subpage>
         <TitleSection>
           <GoBackButton onClick={goBackClickHandler} />
@@ -76,7 +74,7 @@ const QuestionCreatePage = () => {
         <QuestionSection>
           <Textarea
             value={question}
-            onChange={(event) => dispatch(createQuestionActions.setQuestion(event.target.value))}
+            onChange={(event) => {dispatch(createQuestionActions.setQuestion(event.target.value)); setIsModify(true);}}
             placeholder="Question"
           />
           <Switch

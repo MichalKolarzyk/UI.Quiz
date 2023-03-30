@@ -1,128 +1,160 @@
 @import "../../scss/abstract/variables";
 
-.mainPage{
+.mainPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &__header {
+    height: 6rem;
+  }
+}
+
+.subpage {
+  padding: 0 6.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &__title {
+    height: 10rem;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  &__sub-title {
+    height: 13rem;
+  }
+
+  &__article {
+    flex-grow: 1;
+  }
+
+  &__footer {
+    height: 10rem;
+  }
+}
+
+.subpage-grid {
+  padding: 0 6.2rem;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 10rem 13rem auto 10rem;
+  grid-template-areas:
+    "title title title title"
+    "filter filter filter action"
+    "table table table table"
+    "footer footer footer footer";
+
+  &__title {
+    height: 10rem;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    grid-area: title;
+  }
+
+  &__filter {
+    height: 13rem;
+    grid-area: filter;
+    place-self: center stretch;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+
+    & > div {
+      flex-grow: 1;
+    }
+  }
+
+  &__action {
+    grid-area: action;
+    place-self: center end;
+  }
+
+  &__table {
+    grid-area: table;
+  }
+
+  &__footer {
+    grid-area: footer;
+    place-self: center;
+    align-self: start;
+  }
+}
+
+.subpage-question {
+  padding: 0 6.2rem;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 40% auto;
+  grid-template-rows: 10rem auto 10rem;
+  column-gap: 3rem;
+  grid-template-areas:
+    "title title"
+    "question action"
+    "footer footer";
+
+  &__title {
+    display: flex;
+    gap: 3rem;
+    grid-area: title;
+    align-items: center;
+  }
+
+  &__question {
+    grid-area: question;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    gap: 3rem;
+  }
 
-    &__header{
-        height: 6rem;
-    }
-}
-
-.subpage{
-    padding: 0 6.2rem;
+  &__action {
+    grid-area: action;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    gap: 3rem;
+  }
 
-    &__title{
-        height: 10rem;
-        display: flex;
-        gap: 3rem;
-        align-items: center;
-    }
-
-    &__sub-title{
-        height: 13rem;
-    }
-
-    &__article{
-        flex-grow: 1;
-    }
-
-    &__footer{
-        height: 10rem;
-    }
+  &__footer {
+    grid-area: footer;
+    place-self: end;
+    align-self: start;
+  }
 }
 
-.subpage-grid{
-    padding: 0 6.2rem;
-    flex-grow: 1;
+.prompt-page {
+  width: 80rem;
+  margin: 2rem auto;
+  flex-grow: 1;
+  transition: all 0.3s;
+
+  &__content {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 10rem 13rem auto 10rem;
-    grid-template-areas:
-        "title title title title"
-        "filter filter filter action"
-        "table table table table"
-        "footer footer footer footer";
-
-    &__title{
-        height: 10rem;
-        display: flex;
-        gap: 3rem;
-        align-items: center;
-        grid-area: title;
-    }
-
-    &__filter{
-        height: 13rem;
-        grid-area: filter;
-        place-self: center stretch;
-
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 2rem;
-      
-        & > div {
-          flex-grow: 1;
-        }
-    }
-
-    &__action{
-        grid-area: action;
-        place-self: center end;
-    }
-
-    &__table{
-        grid-area: table;
-    }
-
-    &__footer{
-        grid-area: footer;
-        place-self: center;
-        align-self: start;
-    }
-}
-
-.subpage-question{
-    padding: 0 6.2rem;
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: 40% auto;
-    grid-template-rows: 10rem auto 10rem;
+    grid-template-columns: auto;
+    grid-template-rows: 5rem 5rem auto;
     column-gap: 3rem;
     grid-template-areas:
-        "title title"
-        "question action"
-        "footer footer";
+      "title"
+      "question"
+      "footer";
 
-    &__title{
-        display: flex;
-        gap: 3rem;
-        grid-area: title;
-        align-items: center;
+    &__title {
+      grid-area: title;
+      place-self: center;
     }
 
-    &__question{
-        grid-area: question;
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
+    &__article {
+      grid-area: question;
     }
 
-    &__action{
-        grid-area: action;
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
+    &__footer {
+      grid-area: footer;
+      place-self: center;
     }
-
-    &__footer{
-        grid-area: footer;
-        place-self: end;
-        align-self: start;
-    }
+  }
 }

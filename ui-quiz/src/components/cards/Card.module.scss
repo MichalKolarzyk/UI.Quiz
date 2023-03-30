@@ -7,3 +7,11 @@
     padding: 8rem;
     border-radius: 1rem;
 }
+
+.dark-card{
+    display: block;
+    background-color: $color-primary-dark;
+    border: solid rgba($color-white, .5) .5rem;
+    padding: 3.1rem;
+    border-radius: 1rem;
+}
