@@ -4,47 +4,49 @@ import DropdownInput from "../../../components/inputs/dropdownInput/DropdownInpu
 import Textarea from "../../../components/inputs/textarea/Textarea";
 import Switch from "../../../components/switches/Switch";
 import useAppNavigation from "../../../hooks/useAppNavigation";
-import { QuestionSection, AnswerSection, TitleSection, FooterSection, Subpage } from "../../../layouts/QuestionPageLayout";
+import {
+  QuestionSection,
+  AnswerSection,
+  TitleSection,
+  FooterSection,
+  Subpage,
+} from "../../../layouts/QuestionPageLayout";
+import QuestionLoader from "../../../components/loaders/QuestionLoader";
+import { useSelector } from "react-redux";
+import { questionStateSelector } from "../../../reducers/questionReducers/selectors";
 const QuestionPage = () => {
   const params = useParams();
   const id = params["questionId"];
 
   const nav = useAppNavigation();
+  const {question} = useSelector(questionStateSelector);
 
   return (
-    <Subpage>
-      <TitleSection>
-        <GoBackButton onClick={() => nav.toPreviousPage()} />
-        <span className="h3">Question</span>
-      </TitleSection>
-      <QuestionSection>
-          <Textarea
-            placeholder="Question"
-          />
-          <Switch
-            label="Private"
-          />
+    <QuestionLoader questionId={id}>
+      <Subpage>
+        <TitleSection>
+          <GoBackButton onClick={() => nav.toPreviousPage()} />
+          <span className="h3">Question</span>
+        </TitleSection>
+        <QuestionSection>
+          <Textarea placeholder="Question" value={question?.description}/>
+          <Switch label="Private" value={question?.isPrivate}/>
           <div>
-            <DropdownInput
-              labelTop="Category"
-              labelBottom="Choose from the list..."
-              items={["1", "2"]}
-            />
-            <DropdownInput labelTop="Language" labelBottom="Choose from the list..." items={["1", "2"]} />
+            <DropdownInput value={question?.category} labelTop="Category" labelBottom="Choose from the list..." items={["1", "2"]} />
+            <DropdownInput value={question?.defaultLanugage} labelTop="Language" labelBottom="Choose from the list..." items={["1", "2"]} />
           </div>
         </QuestionSection>
         <AnswerSection>
           <div>
-            <RoundedButton>
-              + Add
-            </RoundedButton>
+            <RoundedButton>+ Add</RoundedButton>
           </div>
         </AnswerSection>
         <FooterSection>
-          <CancelButton/>
+          <CancelButton />
           <RoundedButton>Save</RoundedButton>
         </FooterSection>
-    </Subpage>
+      </Subpage>
+    </QuestionLoader>
   );
 };
 

@@ -43,6 +43,50 @@ export interface IQuiz{
   workspaceId: string;
 }
 
+export interface Question{
+  id: string,
+  description: string,
+  answers: Array<string>,
+  correctAnswerIndex: number,
+  isPrivate: boolean,
+  category: string,
+  defaultLanugage: string,
+  author: string,
+}
+
+export interface CreateQuestionRequest{
+  question: string,
+  answers: Array<string>,
+  correctAnswerIndex: number,
+  isPrivate: boolean,
+  category: string,
+  defaultLanugage: string
+}
+
+export interface CreateQuestionResponse{
+  id: string,
+}
+
+export interface UpdateQuestionRequest{
+  id: string,
+  question: string,
+  answers: Array<string>,
+  correctAnswerIndex: number,
+  isPrivate: boolean,
+  category: string,
+  defaultLanugage: string
+}
+
+export interface FilterQuestionsRequest{
+  take: number,
+  skip: number,
+}
+
+export interface FilterQuestionResponse{
+  questions: Array<Question>,
+  count: number,
+}
+
 export interface IErrorResponse {
   errors: any;
 }

@@ -18,7 +18,7 @@ const QuestionsTablePage = () => {
 
   const items = [
     {
-      id: "1",
+      id: "7b01b63d-cd6c-4f05-b479-4ce63bbf1f21",
       approved: 12,
       author: "Majkel23",
       category: "Math",
@@ -26,7 +26,7 @@ const QuestionsTablePage = () => {
       question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum",
     },
     {
-      id: "2",
+      id: "09fba225-58bf-4b06-8d3f-82fd7cb33fc3",
       approved: 12,
       author: "Majkel23",
       category: "Math",

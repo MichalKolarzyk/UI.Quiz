@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
-import { ISignInRequest, ISignInResponse, IGetUserProfileResponse, IRegisterRequest, IRegisterResponse } from "./ApiQuizModels";
+import { ISignInRequest, ISignInResponse, IGetUserProfileResponse, IRegisterRequest, IRegisterResponse, CreateQuestionRequest, UpdateQuestionRequest, Question, FilterQuestionsRequest, FilterQuestionResponse, CreateQuestionResponse } from "./ApiQuizModels";
 
 export class ApiQuizInstance{
     instance: AxiosInstance;
@@ -29,6 +29,22 @@ export class ApiQuizInstance{
 
     getUserProfile = async () : Promise<AxiosResponse<IGetUserProfileResponse>> =>{
         return await this.instance.get<IGetUserProfileResponse>("/userProfile")
+    }
+
+    createQuestion = async (request: CreateQuestionRequest) =>{
+        return await this.instance.post<CreateQuestionRequest, AxiosResponse<CreateQuestionResponse>>("/question/create", request)
+    }
+
+    updateQuestion = async (request: UpdateQuestionRequest) =>{
+        return await this.instance.put<CreateQuestionRequest>("/question/update", request)
+    }
+
+    getQuestionById = async (id: string) : Promise<AxiosResponse<Question>>=>{
+        return await this.instance.get(`/question/${id}`)
+    }
+
+    getQuestions = async (request: FilterQuestionsRequest): Promise<AxiosResponse<FilterQuestionResponse>> =>{
+        return await this.instance.post<FilterQuestionsRequest, AxiosResponse<FilterQuestionResponse>>("/question", request)
     }
 
 }
