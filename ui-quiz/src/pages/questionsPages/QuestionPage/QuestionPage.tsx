@@ -14,12 +14,32 @@ import {
 import QuestionLoader from "../../../components/loaders/QuestionLoader";
 import { useSelector } from "react-redux";
 import { questionStateSelector } from "../../../reducers/questionReducers/selectors";
+import classes from './QuestionPage.module.scss';
+import FormInput from "../../../components/inputs/formInputs/FormInput";
+
 const QuestionPage = () => {
   const params = useParams();
   const id = params["questionId"];
 
   const nav = useAppNavigation();
   const {question} = useSelector(questionStateSelector);
+
+  const answersView = question?.answers.map((value, index) => {
+    return (
+      <div key={index} className={classes["answer"]}>
+        <div className={classes["answer__switch"]}>
+          <Switch
+            value={index == question?.correctAnswerIndex}
+          />
+        </div>
+        <div className={classes["answer__text"]}>
+          <FormInput value={value} />
+        </div>
+        <div className={classes["answer__switch"]}>
+        </div>
+      </div>
+    );
+  });
 
   return (
     <QuestionLoader questionId={id}>
@@ -37,6 +57,7 @@ const QuestionPage = () => {
           </div>
         </QuestionSection>
         <AnswerSection>
+        {answersView}
           <div>
             <RoundedButton>+ Add</RoundedButton>
           </div>

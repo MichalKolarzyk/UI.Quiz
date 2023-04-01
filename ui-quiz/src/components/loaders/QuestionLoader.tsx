@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import LoadingPage from "../../pages/loadingPages/LoadingPage";
-import { LoaderProps } from "./base";
+import { LoaderProps, LoaderState } from "./base";
 import { useAppDispatch } from "../../store/store";
 import { getQuestionById } from "../../reducers/questionReducers/asyncActions";
 import { useSelector } from "react-redux";
 import { questionStateSelector } from "../../reducers/questionReducers/selectors";
 
 const QuestionLoader :React.FC<QuestionLoaderProps> = (props) => {
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [state, setState] = useState<LoaderState>(LoaderState.ready);
     const appDispatch = useAppDispatch();
     const {question} = useSelector(questionStateSelector)
 
@@ -15,19 +15,20 @@ const QuestionLoader :React.FC<QuestionLoaderProps> = (props) => {
       const setupAsync = async () => {
         appDispatch(getQuestionById(props.questionId ?? ""))
       };
-      if(question?.id != undefined && question.id == props.questionId){
+      if(state != LoaderState.ready){
         return;
       }
+      setState(LoaderState.inProgress)
       setupAsync();
     }, []);
 
     useEffect(() => {
       if(question != undefined){
-        setIsLoaded(true);
+        setState(LoaderState.done);
       }
     }, [question]);
   
-    if (!isLoaded) {
+    if (state != LoaderState.done) {
       return <LoadingPage />;
     }
 

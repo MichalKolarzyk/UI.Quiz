@@ -3,7 +3,7 @@ import FormInput from "../../../components/inputs/formInputs/FormInput";
 import Paginator from "../../../components/tables/paginator/Paginator";
 import useAppNavigation from "../../../hooks/useAppNavigation";
 import { CreateButton, GoBackButton } from "../../../components/buttons";
-import { QuestionRow, QuestionsTable } from "../../../components/tables";
+import { QuestionsTable } from "../../../components/tables";
 import {
   ActionSection,
   FilterSection,
@@ -12,54 +12,66 @@ import {
   TableSection,
   TitleSection,
 } from "../../../layouts/TablePageLayout";
+import QuestionTableLoader from "../../../components/loaders/QuestionTableLoader";
+import { useSelector } from "react-redux";
+import { questionStateSelector } from "../../../reducers/questionReducers/selectors";
+import { useAppDispatch } from "../../../store/store";
+import { setFilter } from "../../../reducers/questionReducers/slice";
+import Switch from "../../../components/switches/Switch";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
+  const {questions, questionsCount, questionsFilter} = useSelector(questionStateSelector);
 
-  const items = [
-    {
-      id: "7b01b63d-cd6c-4f05-b479-4ce63bbf1f21",
-      approved: 12,
-      author: "Majkel23",
-      category: "Math",
-      defaultLanguage: "Pl",
-      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum",
-    },
-    {
-      id: "09fba225-58bf-4b06-8d3f-82fd7cb33fc3",
-      approved: 12,
-      author: "Majkel23",
-      category: "Math",
-      defaultLanguage: "Pl",
-      question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in urna sed felis condimentum",
-    },
-  ] as Array<QuestionRow>;
+  const appDispatch = useAppDispatch();
+  const items = questions ?? [];
+
+  const onPageChangeHandler = (newPage: number) => {
+    appDispatch(setFilter({
+      ...questionsFilter,
+       skip: (newPage - 1) * 5,
+    }))
+  }
+
+  const onPrivateChange = (newState: boolean) => {
+    appDispatch(setFilter({
+      ...questionsFilter,
+       isPrivate: newState,
+    }))
+  }
 
   return (
-    <Subpage>
-      <TitleSection>
-        <GoBackButton onClick={() => nav.toPreviousPage()} />
-        <span className="h3">Quesions</span>
-      </TitleSection>
-      <FilterSection>
-        <DropdownInput
-          labelTop="Category"
-          labelBottom="chose from list..."
-          items={["Math", "Geo", "IT", "Math", "Geo"]}
-        />
-        <DropdownInput labelTop="State" labelBottom="chose from list..." items={["Math", "Geo", "IT", "Math", "Geo"]} />
-        <FormInput placeholder="Author"></FormInput>
-      </FilterSection>
-      <ActionSection>
-        <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
-      </ActionSection>
-      <TableSection>
-        <QuestionsTable items={items} onEditClick={(item) => nav.toQuestionPage(item.id)} />
-      </TableSection>
-      <FooterSection>
-        <Paginator initialPage={8} onPageChange={() => {}} pages={20} />
-      </FooterSection>
-    </Subpage>
+    <QuestionTableLoader>
+      <Subpage>
+        <TitleSection>
+          <GoBackButton onClick={() => nav.toPreviousPage()} />
+          <span className="h3">Quesions</span>
+        </TitleSection>
+        <FilterSection>
+          <DropdownInput
+            labelTop="Category"
+            labelBottom="chose from list..."
+            items={["Math", "Geo", "IT", "Math", "Geo"]}
+          />
+          <DropdownInput
+            labelTop="State"
+            labelBottom="chose from list..."
+            items={["Math", "Geo", "IT", "Math", "Geo"]}
+          />
+          <FormInput placeholder="Author"></FormInput>
+          <Switch value={questionsFilter.isPrivate} onChange={onPrivateChange} label="IsPrivate"></Switch>
+        </FilterSection>
+        <ActionSection>
+          <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
+        </ActionSection>
+        <TableSection>
+          <QuestionsTable items={items} onEditClick={(item) => nav.toQuestionPage(item.id)} />
+        </TableSection>
+        <FooterSection>
+          <Paginator initialPage={1} onPageChange={onPageChangeHandler} pages={(questionsCount ?? 0)/5} />
+        </FooterSection>
+      </Subpage>
+    </QuestionTableLoader>
   );
 };
 

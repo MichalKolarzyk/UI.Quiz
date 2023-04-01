@@ -56,11 +56,15 @@ const Paginator = (props: PaginatorProps) => {
   };
 
   const onPrevClickHandler = () => {
-    setSelectedNumber(selectedNumber - 1);
+    const newNumber = selectedNumber - 1
+    setSelectedNumber(newNumber);
+    props.onPageChange(newNumber);
   };
 
   const onNextClickHandler = () => {
-    setSelectedNumber(selectedNumber + 1);
+    const newNumber = selectedNumber + 1
+    setSelectedNumber(newNumber);
+    props.onPageChange(newNumber);
   };
 
   return (
