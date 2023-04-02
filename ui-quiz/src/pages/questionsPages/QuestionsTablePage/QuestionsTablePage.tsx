@@ -21,7 +21,7 @@ import Switch from "../../../components/switches/Switch";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
-  const {questions, questionsCount, questionsFilter} = useSelector(questionStateSelector);
+  const {questions, questionsFilter, questionsPagesCount} = useSelector(questionStateSelector);
 
   const appDispatch = useAppDispatch();
   const items = questions ?? [];
@@ -37,9 +37,9 @@ const QuestionsTablePage = () => {
     appDispatch(setFilter({
       ...questionsFilter,
        isPrivate: newState,
+       skip:0,
     }))
   }
-
   return (
     <QuestionTableLoader>
       <Subpage>
@@ -68,7 +68,7 @@ const QuestionsTablePage = () => {
           <QuestionsTable items={items} onEditClick={(item) => nav.toQuestionPage(item.id)} />
         </TableSection>
         <FooterSection>
-          <Paginator initialPage={1} onPageChange={onPageChangeHandler} pages={(questionsCount ?? 0)/5} />
+          <Paginator initialPage={1} onPageChange={onPageChangeHandler} pages={questionsPagesCount}/>
         </FooterSection>
       </Subpage>
     </QuestionTableLoader>

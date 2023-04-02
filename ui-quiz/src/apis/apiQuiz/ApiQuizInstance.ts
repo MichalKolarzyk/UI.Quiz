@@ -36,7 +36,7 @@ export class ApiQuizInstance{
     }
 
     updateQuestion = async (request: UpdateQuestionRequest) =>{
-        return await this.instance.put<CreateQuestionRequest>("/question/update", request)
+        return await this.instance.put<CreateQuestionRequest, AxiosResponse>("/question/update", request)
     }
 
     getQuestionById = async (id: string) : Promise<AxiosResponse<Question>>=>{

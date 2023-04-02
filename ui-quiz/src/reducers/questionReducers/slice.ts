@@ -8,6 +8,7 @@ export interface CreateQuestionState {
     questions?: Array<Question>;
     questionsCount?: number;
     questionsFilter: FilterQuestionsRequest;
+    questionsPagesCount: number;
 }
 
 const initialState: CreateQuestionState = {
@@ -19,7 +20,8 @@ const initialState: CreateQuestionState = {
         isPrivate: true,
         skip: 0,
         take: 5,
-    }
+    },
+    questionsPagesCount: 0,
 }
 
 export const questionStateSlice = createSlice({
@@ -29,6 +31,9 @@ export const questionStateSlice = createSlice({
         setFilter: (state, action: PayloadAction<FilterQuestionsRequest>) => {
             state.questionsFilter = action.payload;
         },
+        setQuestion: (state, action: PayloadAction<Question>) => {
+            state.question = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(createQuestion.fulfilled, (state, action) => {
@@ -40,6 +45,7 @@ export const questionStateSlice = createSlice({
         builder.addCase(getQuestions.fulfilled, (state, action) => {
             state.questions = action.payload.questions;
             state.questionsCount = action.payload.count;
+            state.questionsPagesCount = Math.floor(action.payload.count / state.questionsFilter.take) + (action.payload.count % state.questionsFilter.take > 0 ? 1 : 0) ;
         })
     }});
 
@@ -48,6 +54,6 @@ export interface SetAnswerPayload {
     text: string,
 }
 
-export const {setFilter} = questionStateSlice.actions;
+export const {setFilter, setQuestion} = questionStateSlice.actions;
 
 export default questionStateSlice.reducer;

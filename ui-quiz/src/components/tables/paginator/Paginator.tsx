@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NextButton, PreviousButton, RoundedButton, TextButton } from "../../buttons";
 import NumberView from "./NumberView";
 import classes from "./Paginator.module.scss";
@@ -17,6 +17,10 @@ const Paginator = (props: PaginatorProps) => {
       <NumberView key={number} isSelected={number == selectedNumber} number={number} onClick={() => onNumberClickHandler(number)} />
     );
   };
+
+  useEffect(() => {
+    setSelectedNumber(props.initialPage)
+  }, [props.pages])
 
   const getDotsView = () => {
     return <div className={classes.space}>...</div>;
