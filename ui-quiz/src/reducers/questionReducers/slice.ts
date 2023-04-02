@@ -9,6 +9,13 @@ export interface CreateQuestionState {
     questionsCount?: number;
     questionsFilter: FilterQuestionsRequest;
     questionsPagesCount: number;
+    error: QuestionError;
+}
+
+export interface QuestionError{
+    question: string,
+    answers: string,
+    correctAnswerIndex: string,
 }
 
 const initialState: CreateQuestionState = {
@@ -22,6 +29,11 @@ const initialState: CreateQuestionState = {
         take: 5,
     },
     questionsPagesCount: 0,
+    error: {
+        answers: "",
+        correctAnswerIndex: "",
+        question: "",
+    }
 }
 
 export const questionStateSlice = createSlice({
@@ -37,6 +49,11 @@ export const questionStateSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(createQuestion.fulfilled, (state, action) => {
+            state.error = {
+                answers: "",
+                correctAnswerIndex: "",
+                question: "",
+            }
             state.createdQuestionId = action.payload.id;
         })
         builder.addCase(getQuestionById.fulfilled, (state, action) => {
@@ -46,6 +63,12 @@ export const questionStateSlice = createSlice({
             state.questions = action.payload.questions;
             state.questionsCount = action.payload.count;
             state.questionsPagesCount = Math.floor(action.payload.count / state.questionsFilter.take) + (action.payload.count % state.questionsFilter.take > 0 ? 1 : 0) ;
+        })
+        builder.addCase(createQuestion.rejected, (state, action) => {
+            const payload : any = action.payload;
+            state.error.answers = payload.errors["Answers"];
+            state.error.question = payload.errors["Description"];
+            state.error.correctAnswerIndex = payload.errors["CorrectAnswerIndex"];
         })
     }});
 

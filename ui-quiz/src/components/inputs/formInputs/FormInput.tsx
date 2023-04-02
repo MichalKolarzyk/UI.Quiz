@@ -1,10 +1,11 @@
+import ErrorMessage from '../../errors/ErrorMessage';
 import classes from './FormInput.module.scss'
 
 const FormInput = (props: FormInputProps) => {
   return (
     <div className={classes.box}>
       <input {...props} className={classes.input} ></input>
-      <div className={classes.error}>{props.errorMessage}</div>
+      <ErrorMessage message={props.errorMessage}/>
     </div>
   );
 };

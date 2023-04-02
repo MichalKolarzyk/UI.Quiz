@@ -41,7 +41,7 @@ export const registrationSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(registerUser.rejected, (state, action) => {
-            const payload : any = action.payload as any;
+            const payload : any = action.payload;
             state.isLoading = false;
             state.error.repetePassword = payload.errors["RepetePassword"];
             state.error.password = payload.errors["Password"];

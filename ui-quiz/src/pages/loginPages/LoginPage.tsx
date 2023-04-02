@@ -7,6 +7,7 @@ import { accountLogIn } from "../../reducers/accountReducers/asyncActions";
 import { selectIsLogIn } from "../../reducers/accountReducers/selectors";
 import { useAppDispatch, RootState } from "../../store/store";
 import classes from "./LoginPage.module.scss";
+import ErrorMessage from "../../components/errors/ErrorMessage";
 
 const LoginPage = () => {
   const [login, setLogin] = useState<string>("");
@@ -62,8 +63,6 @@ const LoginPage = () => {
             placeholder="Password *"
           />
         </div>
-
-        <span className="u-color-dark"></span>
         <div className="u-margin-bottom-small u-center-text">
           <SignInButton disabled={isLoading} onClick={() => dispatch(accountLogIn({ login, password }))}>
             Sign in

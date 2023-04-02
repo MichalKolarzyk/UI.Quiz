@@ -23,20 +23,3 @@
     }
     
 }
-
-.error{
-    position: absolute;
-    color: rgb(255, 255, 255);
-    text-align: left;
-    font-size: $small-font-size;
-
-    & + .input{
-        background-color: red;
-    }
-}
-
-
-
-.placeholder{
-    
-}

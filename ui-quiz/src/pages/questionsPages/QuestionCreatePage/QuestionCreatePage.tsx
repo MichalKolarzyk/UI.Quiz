@@ -17,6 +17,9 @@ import {
 import { useAppDispatch } from "../../../store/store";
 import { createQuestion } from "../../../reducers/questionReducers/asyncActions";
 import { CreateQuestionRequest } from "../../../apis/apiQuiz/ApiQuizModels";
+import { useSelector } from "react-redux";
+import { questionStateSelector } from "../../../reducers/questionReducers/selectors";
+import ErrorMessage from "../../../components/errors/ErrorMessage";
 
 const QuestionCreatePage = () => {
   const [isModify, setIsModify] = useState(false);
@@ -24,68 +27,61 @@ const QuestionCreatePage = () => {
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [question, setQuestion] = useState("");
   const [category, setCategory] = useState("");
-  const [answers, setAnswers] = useState<Array<string>>(['','','']);
+  const [answers, setAnswers] = useState<Array<string>>(["", "", ""]);
 
   const nav = useAppNavigation();
   const dispatch = useAppDispatch();
+  const { error } = useSelector(questionStateSelector);
 
   const answerChangeHandler = (event: ChangeEvent<HTMLInputElement>, index: number) => {
     const newAnswers = [...answers];
-    newAnswers[index] = event.target.value
+    newAnswers[index] = event.target.value;
     setAnswers([...newAnswers]);
   };
 
   useEffect(() => {
-    if(isPrivate == false 
-      && correctAnswer == 0 
-      && question == ""
-      && category == ""
-      && answers.every(e => e == "")){
-        setIsModify(false);
-      }
-      else{
-        setIsModify(true);
-      }
-    },[isPrivate, correctAnswer, question, category, answers])
+    if (isPrivate == false && correctAnswer == 0 && question == "" && category == "" && answers.every((e) => e == "")) {
+      setIsModify(false);
+    } else {
+      setIsModify(true);
+    }
+  }, [isPrivate, correctAnswer, question, category, answers]);
 
   const correctAnswerChangeHandler = (index: number, value: boolean) => {
     setCorrectAnswer(index);
   };
 
   const deleteAnswer = (index: number) => {
-    answers.splice(index, 1)
+    answers.splice(index, 1);
     setAnswers([...answers]);
-    if(index < correctAnswer){
-        setCorrectAnswer(correctAnswer-1)
-        return;
+    if (index < correctAnswer) {
+      setCorrectAnswer(correctAnswer - 1);
+      return;
     }
-    if(index == correctAnswer){
-        setCorrectAnswer(-1)
-        return;
+    if (index == correctAnswer) {
+      setCorrectAnswer(-1);
+      return;
     }
   };
 
   const addAnswer = () => {
-    const newAnswers = [...answers, ''];
-    setAnswers(newAnswers)
-  }
+    const newAnswers = [...answers, ""];
+    setAnswers(newAnswers);
+  };
 
   const goBackClickHandler = () => {
     nav.toPreviousPage();
   };
 
   const onCancelHandler = () => {
-      nav.toPreviousPage();
+    nav.toPreviousPage();
   };
 
   const answersView = answers.map((value, index) => {
     return (
       <div key={index} className={classes["answer"]}>
         <div className={classes["answer__switch"]}>
-          <Switch
-            value={index == correctAnswer}
-            onChange={(newState) => correctAnswerChangeHandler(index, newState)}
-          />
+          <Switch value={index == correctAnswer} onChange={(newState) => correctAnswerChangeHandler(index, newState)} />
         </div>
         <div className={classes["answer__text"]}>
           <FormInput value={value} onChange={(event) => answerChangeHandler(event, index)} placeholder="answer" />
@@ -98,7 +94,7 @@ const QuestionCreatePage = () => {
   });
 
   return (
-    <WindowUnloadListener isModify={isModify} >
+    <WindowUnloadListener isModify={isModify}>
       <Subpage>
         <TitleSection>
           <GoBackButton onClick={goBackClickHandler} />
@@ -109,12 +105,9 @@ const QuestionCreatePage = () => {
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
             placeholder="Question"
+            errorMessage={error.question}
           />
-          <Switch
-            label="Private"
-            value={isPrivate}
-            onChange={(newState) => setIsPrivate(newState)}
-          />
+          <Switch label="Private" value={isPrivate} onChange={(newState) => setIsPrivate(newState)} />
           <div>
             <DropdownInput
               value={category}
@@ -132,18 +125,28 @@ const QuestionCreatePage = () => {
             <RoundedButton disabled={answers.length >= 6} onClick={addAnswer}>
               + Add
             </RoundedButton>
+            <ErrorMessage message={error.answers} />
+            <ErrorMessage message={error.correctAnswerIndex} />
           </div>
         </AnswerSection>
         <FooterSection>
           <CancelButton onClick={onCancelHandler} />
-          <CreateButton onClick={() => dispatch(createQuestion({
-            answers: answers,
-            category: category,
-            correctAnswerIndex: correctAnswer,
-            defaultLanugage: "",
-            isPrivate: isPrivate,
-            question: question,
-          }as CreateQuestionRequest))}>Create</CreateButton>
+          <CreateButton
+            onClick={() =>
+              dispatch(
+                createQuestion({
+                  answers: answers,
+                  category: category,
+                  correctAnswerIndex: correctAnswer,
+                  defaultLanugage: "",
+                  isPrivate: isPrivate,
+                  question: question,
+                } as CreateQuestionRequest)
+              )
+            }
+          >
+            Create
+          </CreateButton>
         </FooterSection>
       </Subpage>
     </WindowUnloadListener>
