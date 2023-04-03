@@ -9,7 +9,7 @@ export interface CreateQuestionState {
     questions?: Array<Question>;
     questionsCount?: number;
     error: QuestionError;
-    state: ActionState;
+    onErrorHandler: () => void;
 }
 
 export interface QuestionError{
@@ -23,7 +23,7 @@ const initialState: CreateQuestionState = {
     createdQuestionId: undefined,
     questions: undefined,
     questionsCount: undefined,
-    state: ActionState.ready,
+    onErrorHandler: () => {},
     error: {
         answers: "",
         correctAnswerIndex: "",
@@ -60,6 +60,8 @@ export const questionStateSlice = createSlice({
             state.error.answers = payload.errors["Answers"];
             state.error.question = payload.errors["Description"];
             state.error.correctAnswerIndex = payload.errors["CorrectAnswerIndex"];
+        })
+        builder.addCase(createQuestion.pending, (state) => {
         })
     }});
 

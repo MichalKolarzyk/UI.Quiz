@@ -20,6 +20,8 @@ import { CreateQuestionRequest } from "../../../apis/apiQuiz/ApiQuizModels";
 import { useSelector } from "react-redux";
 import { questionStateSelector } from "../../../reducers/questionReducers/selectors";
 import ErrorMessage from "../../../components/errors/ErrorMessage";
+import { AppNotificationType, useNotifications } from "../../../notifications";
+import { ActionState } from "../../../reducers";
 
 const QuestionCreatePage = () => {
   const [isModify, setIsModify] = useState(false);
@@ -32,6 +34,7 @@ const QuestionCreatePage = () => {
   const nav = useAppNavigation();
   const dispatch = useAppDispatch();
   const { error } = useSelector(questionStateSelector);
+  const notify = useNotifications();
 
   const answerChangeHandler = (event: ChangeEvent<HTMLInputElement>, index: number) => {
     const newAnswers = [...answers];
@@ -50,6 +53,21 @@ const QuestionCreatePage = () => {
   const correctAnswerChangeHandler = (index: number, value: boolean) => {
     setCorrectAnswer(index);
   };
+
+  const onCreateQuestionClickHandler = () => {
+    dispatch(
+      createQuestion({
+        answers: answers,
+        category: category,
+        correctAnswerIndex: correctAnswer,
+        defaultLanugage: "",
+        isPrivate: isPrivate,
+        question: question,
+      } as CreateQuestionRequest)
+    );
+  };
+
+  
 
   const deleteAnswer = (index: number) => {
     answers.splice(index, 1);
@@ -132,18 +150,7 @@ const QuestionCreatePage = () => {
         <FooterSection>
           <CancelButton onClick={onCancelHandler} />
           <CreateButton
-            onClick={() =>
-              dispatch(
-                createQuestion({
-                  answers: answers,
-                  category: category,
-                  correctAnswerIndex: correctAnswer,
-                  defaultLanugage: "",
-                  isPrivate: isPrivate,
-                  question: question,
-                } as CreateQuestionRequest)
-              )
-            }
+            onClick={onCreateQuestionClickHandler}
           >
             Create
           </CreateButton>
