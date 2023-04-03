@@ -12,4 +12,15 @@
     color: $color-black;
     border-radius: .5rem;
     box-sizing: border-box;
+
+    &:disabled{
+        cursor: not-allowed;
+    }
+
+    &:focus{
+        outline-offset: 1px;
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: rgba($color-green, 1);
+    }
 }

@@ -22,6 +22,9 @@ import { questionStateSelector } from "../../../reducers/questionReducers/select
 import ErrorMessage from "../../../components/errors/ErrorMessage";
 import { AppNotificationType, useNotifications } from "../../../notifications";
 import { ActionState } from "../../../reducers";
+import { Await } from "react-router-dom";
+import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
+import { QuestionError } from "../../../reducers/questionReducers/slice";
 
 const QuestionCreatePage = () => {
   const [isModify, setIsModify] = useState(false);
@@ -33,7 +36,12 @@ const QuestionCreatePage = () => {
 
   const nav = useAppNavigation();
   const dispatch = useAppDispatch();
-  const { error } = useSelector(questionStateSelector);
+  //const { error } = useSelector(questionStateSelector);
+  const [error, setError] = useState<QuestionError>({
+    answers: "",
+    correctAnswerIndex: "",
+    question: "",
+  });
   const notify = useNotifications();
 
   const answerChangeHandler = (event: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -55,19 +63,30 @@ const QuestionCreatePage = () => {
   };
 
   const onCreateQuestionClickHandler = () => {
-    dispatch(
-      createQuestion({
-        answers: answers,
-        category: category,
-        correctAnswerIndex: correctAnswer,
-        defaultLanugage: "",
-        isPrivate: isPrivate,
-        question: question,
-      } as CreateQuestionRequest)
-    );
-  };
+    const request = {
+      answers: answers,
+      category: category,
+      correctAnswerIndex: correctAnswer,
+      defaultLanugage: "",
+      isPrivate: isPrivate,
+      question: question,
+    } as CreateQuestionRequest;
 
-  
+    ApiQuizInstance.createQuestion(request)
+      .then(() => {
+        notify.add({ message: "Question created", type: AppNotificationType.correct });
+      })
+      .catch((reason) => {
+        notify.add({ message: "Some informations are invalid", type: AppNotificationType.error });
+        setError({
+          answers: reason.response.data.errors["Answers"] ?? "",
+          correctAnswerIndex: reason.response.data.errors["CorrectAnswerIndex"] ?? "",
+          question: reason.response.data.errors["Description"] ?? "",
+        });
+      })
+      .finally(() => {
+      });
+  };
 
   const deleteAnswer = (index: number) => {
     answers.splice(index, 1);
@@ -112,7 +131,8 @@ const QuestionCreatePage = () => {
   });
 
   return (
-    <WindowUnloadListener isModify={isModify}>
+    <>
+      <WindowUnloadListener isModify={isModify} />
       <Subpage>
         <TitleSection>
           <GoBackButton onClick={goBackClickHandler} />
@@ -149,14 +169,10 @@ const QuestionCreatePage = () => {
         </AnswerSection>
         <FooterSection>
           <CancelButton onClick={onCancelHandler} />
-          <CreateButton
-            onClick={onCreateQuestionClickHandler}
-          >
-            Create
-          </CreateButton>
+          <CreateButton onClick={onCreateQuestionClickHandler}>Create</CreateButton>
         </FooterSection>
       </Subpage>
-    </WindowUnloadListener>
+    </>
   );
 };
 

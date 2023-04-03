@@ -9,7 +9,6 @@ export interface CreateQuestionState {
     questions?: Array<Question>;
     questionsCount?: number;
     error: QuestionError;
-    onErrorHandler: () => void;
 }
 
 export interface QuestionError{
@@ -23,7 +22,6 @@ const initialState: CreateQuestionState = {
     createdQuestionId: undefined,
     questions: undefined,
     questionsCount: undefined,
-    onErrorHandler: () => {},
     error: {
         answers: "",
         correctAnswerIndex: "",

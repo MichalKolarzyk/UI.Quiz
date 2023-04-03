@@ -2,18 +2,26 @@
 
 .input{
     box-sizing: border-box;
-    border: none;
     outline: none;
     border-radius: 5px;
+    border: none;
     color: $color-black;
     padding: 1.5rem 2rem;
     background-color: $color-white;
     width: 100%;
-    transition: all 0.3s;
+    transition: all 0.1s;
     margin: 0;
+    background-color: rgba($color-white, 0.9);
 
     &:disabled{
         cursor: not-allowed;
+    }
+
+    &:focus{
+        outline-offset: 1px;
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: rgba($color-green, 1);
     }
     
 }

@@ -59,7 +59,6 @@ const WindowUnloadListener = (props: WindowUnloadListenerProps) => {
   return (
     <>
       {blocker.state == "blocked" && prompt}
-      {props.children}
     </>
   );
 };

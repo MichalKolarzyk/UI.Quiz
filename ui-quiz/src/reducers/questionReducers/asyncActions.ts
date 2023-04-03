@@ -8,13 +8,14 @@ import {
 import { AppNotificationType, useNotifications } from "../../notifications";
 
 export const createQuestion = createAsyncThunk("createQuestion", async (request: CreateQuestionRequest, thunkAPI) => {
-  const notify = useNotifications();
+  //const notify = useNotifications();
+  debugger;
   try {
     const response = await ApiQuizInstance.createQuestion(request);
-    notify.add({ message: "Question created", type: AppNotificationType.correct });
+    //notify.add({ message: "Question created", type: AppNotificationType.correct });
     return response.data;
   } catch (err: any) {
-    notify.add({ message: "Some informations are invalid", type: AppNotificationType.error });
+    //notify.add({ message: "Some informations are invalid", type: AppNotificationType.error });
     return thunkAPI.rejectWithValue(err?.response?.data);
   }
 });
