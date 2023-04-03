@@ -13,7 +13,7 @@ const SessionsTablePage = () => {
         <Subpage>
           <TitleSection>
             <GoBackButton onClick={() => nav.toPreviousPage()} />
-            <span className="h3">Sessions</span>
+            <h3>Sessions</h3>
           </TitleSection>
           <FilterSection>
             <DropdownInput

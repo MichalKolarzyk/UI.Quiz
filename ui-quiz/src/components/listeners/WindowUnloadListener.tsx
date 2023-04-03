@@ -43,7 +43,7 @@ const WindowUnloadListener = (props: WindowUnloadListenerProps) => {
           <DarkCard>
             <Content >
               <TitleSection>
-                <div className="h3">Do you want to leave changes?</div>
+                <h4>Do you want to leave changes?</h4>
               </TitleSection>
               <FooterSection>
                 <CancelButton onClick={() => blocker.reset?.()}>No</CancelButton>

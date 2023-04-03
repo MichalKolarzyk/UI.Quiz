@@ -26,12 +26,14 @@ const RegisterPage = (props: RegisterPageProps) => {
   return (
     <div className={classes.page}>
       <div className={classes.desctiption}>
-        <div className="h1 u-center-text u-margin-bottom-big">Sign in</div>
-        <div className="h2 u-center-text u-margin-bottom-big">welcome in the first game for</div>
+        <div className="h1 u-center-text u-margin-bottom-big">
+          <h1>Sign in</h1>
+        </div>
+        <div className="u-center-text u-margin-bottom-big">
+          <h2>welcome in the first game for</h2>
+        </div>
         <div className="u-center-text">
-          <TextButton onClick={() => navigate("/login")}>
-            Go back to login page
-          </TextButton>
+          <TextButton onClick={() => navigate("/login")}>Go back to login page</TextButton>
         </div>
       </div>
       <div className={classes["form-section"]}>

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Question } from "../../apis/apiQuiz/ApiQuizModels";
 import { createQuestion, getQuestionById, getQuestions } from "./asyncActions";
+import { ActionState } from "..";
 
 export interface CreateQuestionState {
     question?: Question;
@@ -8,6 +9,7 @@ export interface CreateQuestionState {
     questions?: Array<Question>;
     questionsCount?: number;
     error: QuestionError;
+    state: ActionState;
 }
 
 export interface QuestionError{
@@ -21,6 +23,7 @@ const initialState: CreateQuestionState = {
     createdQuestionId: undefined,
     questions: undefined,
     questionsCount: undefined,
+    state: ActionState.ready,
     error: {
         answers: "",
         correctAnswerIndex: "",

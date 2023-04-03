@@ -99,7 +99,7 @@ const QuestionPage = () => {
       <Subpage>
         <TitleSection>
           <GoBackButton onClick={() => nav.toPreviousPage()} />
-          <span className="h3">Question</span>
+          <h3>Question</h3>
         </TitleSection>
         <QuestionSection>
           <Textarea placeholder="Question" value={question?.description} onChange={updateDescription} />

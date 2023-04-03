@@ -3,25 +3,21 @@ body {
   line-height: 1.7;
 }
 
-.h1 {
+h1 {
+  font-size: 6rem;
+  margin: 0;
   color: $color-white;
   text-transform: none;
   backface-visibility: hidden;
   display: block;
   font-weight: 600;
-  font-size: 5rem;
   letter-spacing: 0rem;
-
-  &--animated {
-    @extend .h1;
-    animation: moveInLeft 1s;
-    animation-timing-function: ease-out;
-  }
 }
 
-.h2 {
-  color: $color-white;
+h2 {
   font-size: 4rem;
+  margin: 0;
+  color: $color-white;
   text-transform: none;
   font-weight: 600;
   display: inline-block;
@@ -31,9 +27,10 @@ body {
   cursor: default;
 }
 
-.h3 {
-  color: $color-white;
+h3 {
   font-size: 3rem;
+  margin: 0;
+  color: $color-white;
   text-transform: none;
   font-weight: 600;
   display: inline-block;
@@ -43,13 +40,29 @@ body {
   cursor: default;
 }
 
-.h4 {
+h4 {
+  font-size: 2rem;
+  margin: 0;
   color: $color-white;
-  font-size: $default-font-size;
   font-weight: 700;
 }
 
-.p {
+h5{
+  font-size: 1.6rem;
+  margin: 0;
+  color: $color-white;
+  font-weight: 700;
+}
+
+h6{
+  font-size: 1.2rem;
+  margin: 0;
+  color: $color-white;
+  font-weight: 700;
+}
+
+
+p {
   color: $color-white;
   font-size: $default-font-size;
 }

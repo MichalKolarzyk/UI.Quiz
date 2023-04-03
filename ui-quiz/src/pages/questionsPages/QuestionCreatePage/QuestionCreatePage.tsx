@@ -98,7 +98,7 @@ const QuestionCreatePage = () => {
       <Subpage>
         <TitleSection>
           <GoBackButton onClick={goBackClickHandler} />
-          <span className="h3">Create Question</span>
+          <h3>Create Question</h3>
         </TitleSection>
         <QuestionSection>
           <Textarea

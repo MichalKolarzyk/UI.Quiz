@@ -54,7 +54,7 @@ const QuestionsTablePage = () => {
     <Subpage>
       <TitleSection>
         <GoBackButton onClick={() => nav.toPreviousPage()} />
-        <span className="h3">Quesions</span>
+        <h3>Quesions</h3>
       </TitleSection>
       <FilterSection>
         <DropdownInput

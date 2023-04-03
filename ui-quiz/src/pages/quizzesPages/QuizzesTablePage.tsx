@@ -31,7 +31,7 @@ const QuizTablePage = () => {
         <Subpage>
           <TitleSection>
             <GoBackButton onClick={() => nav.toPreviousPage()} />
-            <span className="h3">Quizzes</span>
+            <h3>Quizzes</h3>
           </TitleSection>
           <FilterSection>
             <DropdownInput

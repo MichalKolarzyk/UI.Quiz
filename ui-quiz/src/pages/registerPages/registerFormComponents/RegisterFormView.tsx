@@ -16,20 +16,23 @@ const RegisterFormView = (props: RegisterFormViewProps) => {
   const errors = useSelector(registrationErrors);
 
   const onSignUpHandler = () => {
-      dispatch(registrationClearLoginError);
-      dispatch(registerUser(
-      { 
-        login: viewModel.login, 
+    dispatch(registrationClearLoginError);
+    dispatch(
+      registerUser({
+        login: viewModel.login,
         password: viewModel.password,
         repetePassword: viewModel.repetePassword,
-      }));
-  }
+      })
+    );
+  };
 
   return (
     <Card>
       <div className={classes.header}>
         <IoMdPersonAdd className="u-icon-big" />
-        <div className="h2 u-center-text">New user</div>
+        <div className="u-center-text">
+          <h2>New user</h2>
+        </div>
       </div>
 
       <div className="u-margin-bottom-medium">
@@ -64,10 +67,7 @@ const RegisterFormView = (props: RegisterFormViewProps) => {
       </div>
 
       <div className="u-center-text">
-        <SignInButton
-          disabled={viewModel.disabled}
-          onClick={onSignUpHandler}
-        >
+        <SignInButton disabled={viewModel.disabled} onClick={onSignUpHandler}>
           Sign up!
         </SignInButton>
       </div>

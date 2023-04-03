@@ -36,13 +36,13 @@ const LoginPage = () => {
     <div className={classes["login-page"]}>
       <section className={classes["login-page__form"]}>
         <div className="u-margin-bottom-big u-center-text">
-          <span className="h1">Quiz</span>
+          <h1>Quiz</h1>
         </div>
 
         <div className="u-margin-bottom-big u-center-text">
-          <div className="h2">
+          <h2>
             Welcome in the <br /> quiz live game{" "}
-          </div>
+          </h2>
         </div>
         <div className="u-margin-bottom-medium">
           <FormInput
@@ -69,7 +69,9 @@ const LoginPage = () => {
           </SignInButton>
         </div>
 
-        <div className="h4 u-margin-bottom-small u-center-text">Or</div>
+        <div className="u-margin-bottom-small u-center-text">
+          <h5>Or</h5>
+        </div>
 
         <div className="u-margin-bottom-small u-center-text">
           <TransparentButton disabled={isLoading} onClick={() => nav("/register")}>

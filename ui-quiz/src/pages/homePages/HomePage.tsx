@@ -13,7 +13,7 @@ const HomePage = () => {
     <div className={classes.page}>
       <header className={classes.page__header}>
         <div className={classes.page__header__left}>
-          <div className="h2">Quiz</div>
+            <h2>Quiz</h2>
         </div>
         <div className={classes.page__header__center}>
           <HeaderPageButton to={navigate.aboutUrl}>About</HeaderPageButton>
