@@ -9,6 +9,8 @@ const Table = (props: TableProps) => {
 };
 
 export interface TableProps
-  extends React.DetailedHTMLProps<React.TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> {}
+  extends React.DetailedHTMLProps<React.TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> {
+    skip?: number
+  }
 
 export default Table;

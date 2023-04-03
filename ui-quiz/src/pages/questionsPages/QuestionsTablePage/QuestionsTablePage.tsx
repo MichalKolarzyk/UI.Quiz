@@ -12,66 +12,70 @@ import {
   TableSection,
   TitleSection,
 } from "../../../layouts/TablePageLayout";
-import QuestionTableLoader from "../../../components/loaders/QuestionTableLoader";
 import { useSelector } from "react-redux";
 import { questionStateSelector } from "../../../reducers/questionReducers/selectors";
 import { useAppDispatch } from "../../../store/store";
-import { setFilter } from "../../../reducers/questionReducers/slice";
 import Switch from "../../../components/switches/Switch";
+import { useEffect } from "react";
+import { getQuestions } from "../../../reducers/questionReducers/asyncActions";
+import { useQuestionsSearchParams } from "./searchParams";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
-  const {questions, questionsFilter, questionsPagesCount} = useSelector(questionStateSelector);
-
+  const { questions, questionsCount } = useSelector(questionStateSelector);
+  const searchParams = useQuestionsSearchParams();
   const appDispatch = useAppDispatch();
   const items = questions ?? [];
 
-  const onPageChangeHandler = (newPage: number) => {
-    appDispatch(setFilter({
-      ...questionsFilter,
-       skip: (newPage - 1) * 5,
-    }))
+  const onIsPrivateChange = (newState: boolean) => {
+    if(searchParams.isPrivate != newState){
+      searchParams.setPage(1);
+    }
+    searchParams.setIsPrivate(newState);
   }
 
-  const onPrivateChange = (newState: boolean) => {
-    appDispatch(setFilter({
-      ...questionsFilter,
-       isPrivate: newState,
-       skip:0,
-    }))
-  }
+  const take = 5;
+  const skip = (searchParams.page - 1) * take;
+  const count = questionsCount ?? 0
+  const questionPagesCount = Math.floor(count / take) + (count % take > 0 ? 1 : 0) ;
+
+  useEffect(() => {
+    appDispatch(
+      getQuestions({
+        isPrivate: searchParams.isPrivate,
+        skip: skip,
+        take: take,
+      })
+    );
+  }, [searchParams.isPrivate, searchParams.page]);
+
+
   return (
-    <QuestionTableLoader>
-      <Subpage>
-        <TitleSection>
-          <GoBackButton onClick={() => nav.toPreviousPage()} />
-          <span className="h3">Quesions</span>
-        </TitleSection>
-        <FilterSection>
-          <DropdownInput
-            labelTop="Category"
-            labelBottom="chose from list..."
-            items={["Math", "Geo", "IT", "Math", "Geo"]}
-          />
-          <DropdownInput
-            labelTop="State"
-            labelBottom="chose from list..."
-            items={["Math", "Geo", "IT", "Math", "Geo"]}
-          />
-          <FormInput placeholder="Author"></FormInput>
-          <Switch value={questionsFilter.isPrivate} onChange={onPrivateChange} label="IsPrivate"></Switch>
-        </FilterSection>
-        <ActionSection>
-          <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
-        </ActionSection>
-        <TableSection>
-          <QuestionsTable items={items} onEditClick={(item) => nav.toQuestionPage(item.id)} />
-        </TableSection>
-        <FooterSection>
-          <Paginator initialPage={1} onPageChange={onPageChangeHandler} pages={questionsPagesCount}/>
-        </FooterSection>
-      </Subpage>
-    </QuestionTableLoader>
+    <Subpage>
+      <TitleSection>
+        <GoBackButton onClick={() => nav.toPreviousPage()} />
+        <span className="h3">Quesions</span>
+      </TitleSection>
+      <FilterSection>
+        <DropdownInput
+          labelTop="Category"
+          labelBottom="chose from list..."
+          items={["Math", "Geo", "IT", "Math", "Geo"]}
+        />
+        <DropdownInput labelTop="State" labelBottom="chose from list..." items={["Math", "Geo", "IT", "Math", "Geo"]} />
+        <FormInput placeholder="Author"></FormInput>
+        <Switch value={searchParams.isPrivate} onChange={onIsPrivateChange} label="IsPrivate"></Switch>
+      </FilterSection>
+      <ActionSection>
+        <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
+      </ActionSection>
+      <TableSection>
+        <QuestionsTable skip={skip} items={items} onEditClick={(item) => nav.toQuestionPage(item.id)} />
+      </TableSection>
+      <FooterSection>
+        <Paginator page={searchParams.page} onPageChange={searchParams.setPage} pages={questionPagesCount} />
+      </FooterSection>
+    </Subpage>
   );
 };
 

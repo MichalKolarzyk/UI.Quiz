@@ -48,7 +48,7 @@ const QuizTablePage = () => {
             <QuizzesTable items={items} onEditClick={() => {}} />
           </TableSection>
           <FooterSection>
-            <Paginator initialPage={8} onPageChange={() => {}} pages={20} />
+            <Paginator page={8} onPageChange={() => {}} pages={20} />
           </FooterSection>
         </Subpage>
       );

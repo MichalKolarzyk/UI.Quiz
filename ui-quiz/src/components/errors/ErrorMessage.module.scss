@@ -1,8 +1,11 @@
 @import "../../scss/abstract/variables";
 
 .error{
-    position: absolute;
     color: rgba(rgb(255, 219, 219), 1);
     text-align: left;
     font-size: $small-font-size;
+
+    &--invisible{
+        color: rgba(rgb(255, 219, 219), 0);
+    }
 }

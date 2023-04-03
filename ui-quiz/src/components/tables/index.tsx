@@ -21,7 +21,7 @@ export const QuestionsTable: React.FC<QuestionsTableProps> = (props) => {
       {props.items.map((item, index) => {
         return (
           <TableRow key={index}>
-            <TableCell>{index + 1}</TableCell>
+            <TableCell>{index + 1 + (props.skip ?? 0)}</TableCell>
             <TableCell>{item.author}</TableCell>
             <TableCell>{item.category}</TableCell>
             <TableCell>{item.defaultLanugage}</TableCell>

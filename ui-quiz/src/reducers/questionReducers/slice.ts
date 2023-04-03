@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FilterQuestionsRequest, Question } from "../../apis/apiQuiz/ApiQuizModels";
+import { Question } from "../../apis/apiQuiz/ApiQuizModels";
 import { createQuestion, getQuestionById, getQuestions } from "./asyncActions";
 
 export interface CreateQuestionState {
@@ -7,8 +7,6 @@ export interface CreateQuestionState {
     createdQuestionId?: string;
     questions?: Array<Question>;
     questionsCount?: number;
-    questionsFilter: FilterQuestionsRequest;
-    questionsPagesCount: number;
     error: QuestionError;
 }
 
@@ -23,12 +21,6 @@ const initialState: CreateQuestionState = {
     createdQuestionId: undefined,
     questions: undefined,
     questionsCount: undefined,
-    questionsFilter: {
-        isPrivate: true,
-        skip: 0,
-        take: 5,
-    },
-    questionsPagesCount: 0,
     error: {
         answers: "",
         correctAnswerIndex: "",
@@ -40,9 +32,6 @@ export const questionStateSlice = createSlice({
     initialState,
     name: "question",
     reducers: {
-        setFilter: (state, action: PayloadAction<FilterQuestionsRequest>) => {
-            state.questionsFilter = action.payload;
-        },
         setQuestion: (state, action: PayloadAction<Question>) => {
             state.question = action.payload;
         }
@@ -62,7 +51,6 @@ export const questionStateSlice = createSlice({
         builder.addCase(getQuestions.fulfilled, (state, action) => {
             state.questions = action.payload.questions;
             state.questionsCount = action.payload.count;
-            state.questionsPagesCount = Math.floor(action.payload.count / state.questionsFilter.take) + (action.payload.count % state.questionsFilter.take > 0 ? 1 : 0) ;
         })
         builder.addCase(createQuestion.rejected, (state, action) => {
             const payload : any = action.payload;
@@ -77,6 +65,6 @@ export interface SetAnswerPayload {
     text: string,
 }
 
-export const {setFilter, setQuestion} = questionStateSlice.actions;
+export const {setQuestion} = questionStateSlice.actions;
 
 export default questionStateSlice.reducer;
