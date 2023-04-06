@@ -82,6 +82,7 @@ export interface FilterQuestionsRequest{
   take: number,
   skip: number,
   isPrivate: boolean,
+  author: string,
 }
 
 export interface FilterQuestionResponse{

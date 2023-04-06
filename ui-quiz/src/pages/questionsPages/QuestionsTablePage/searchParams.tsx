@@ -17,11 +17,20 @@ export const useQuestionsSearchParams = () => {
           })
       }
 
+      const setAuthor = (author: string) => {
+        setParams(prev => {
+            prev.set("author", author)
+            return prev;
+          })
+      }
+
     return{
         isPrivate: params.get("isPrivate") == "true",
         setIsPrivate,
         page: parseInt(params.get("page") ?? "1"),
-        setPage
+        setPage,
+        author: params.get("author") ?? "",
+        setAuthor,
     }
 }
 

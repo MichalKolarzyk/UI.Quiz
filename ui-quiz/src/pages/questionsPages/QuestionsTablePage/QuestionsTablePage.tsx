@@ -45,9 +45,10 @@ const QuestionsTablePage = () => {
         isPrivate: searchParams.isPrivate,
         skip: skip,
         take: take,
+        author: searchParams.author,
       })
     );
-  }, [searchParams.isPrivate, searchParams.page]);
+  }, [searchParams.isPrivate, searchParams.page, searchParams.author]);
 
 
   return (
@@ -63,7 +64,7 @@ const QuestionsTablePage = () => {
           items={["Math", "Geo", "IT", "Math", "Geo"]}
         />
         <DropdownInput labelTop="State" labelBottom="chose from list..." items={["Math", "Geo", "IT", "Math", "Geo"]} />
-        <FormInput placeholder="Author"></FormInput>
+        <FormInput value={searchParams.author} onChange={(event) => {searchParams.setAuthor(event.target.value); searchParams.setPage(1);}} placeholder="Author"></FormInput>
         <Switch value={searchParams.isPrivate} onChange={onIsPrivateChange} label="IsPrivate"></Switch>
       </FilterSection>
       <ActionSection>
