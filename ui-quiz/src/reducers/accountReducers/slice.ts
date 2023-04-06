@@ -3,17 +3,19 @@ import { accountLogIn } from "./asyncActions";
 
 export interface AccountState {
     token?: string,
-    isLoading: boolean
-    error: any
+    expires?: Date,
+    isLoading: boolean,
+    error: any,
 }
 
 const initialState: AccountState = {
     token: undefined,
+    expires: undefined,
     isLoading: false,
     error: null,
 }
 
-export const accountSlice = createSlice({
+const accountSlice = createSlice({
     initialState,
     name: "account",
     reducers: {
@@ -24,6 +26,7 @@ export const accountSlice = createSlice({
     extraReducers : (builder) => {
         builder.addCase(accountLogIn.fulfilled, (state, action) => {
             state.token = action.payload.token;
+            state.expires = action.payload.expires;
             state.isLoading = false;
         })
         builder.addCase(accountLogIn.pending, (state, action) => {

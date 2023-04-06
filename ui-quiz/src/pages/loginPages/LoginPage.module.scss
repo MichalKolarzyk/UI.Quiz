@@ -23,9 +23,9 @@
   }
 }
 
-@media all and (max-width: 800px) {
+@media all and (max-width: 1000px) {
   .login-page {
-    grid-template-columns: 100%;
-    grid-template-rows: 50rem 50rem;
+    grid-template-columns: auto;
+    grid-template-rows: auto
   }
 }

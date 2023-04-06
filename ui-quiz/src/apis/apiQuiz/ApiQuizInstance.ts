@@ -28,7 +28,7 @@ export class ApiQuizInstance{
     }
 
     getUserProfile = async () : Promise<AxiosResponse<IGetUserProfileResponse>> =>{
-        return await this.instance.get<IGetUserProfileResponse>("/userProfile")
+        return await this.instance.get<IGetUserProfileResponse>("/account")
     }
 
     createQuestion = async (request: CreateQuestionRequest) =>{
@@ -49,4 +49,5 @@ export class ApiQuizInstance{
 
 }
 
+// export default new ApiQuizInstance("http://localhost:49158");
 export default new ApiQuizInstance("http://localhost:5000");

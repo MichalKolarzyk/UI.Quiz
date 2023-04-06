@@ -5,6 +5,7 @@ export interface ISignInRequest {
 
 export interface ISignInResponse {
   token: string;
+  expires: Date;
 }
 
 export interface IRegisterRequest {
