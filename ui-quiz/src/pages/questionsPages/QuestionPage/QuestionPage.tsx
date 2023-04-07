@@ -11,83 +11,92 @@ import {
   FooterSection,
   Subpage,
 } from "../../../layouts/QuestionPageLayout";
-import QuestionLoader from "../../../components/loaders/QuestionLoader";
-import { useSelector } from "react-redux";
-import { questionStateSelector } from "../../../reducers/questionReducers/selectors";
 import classes from "./QuestionPage.module.scss";
 import FormInput from "../../../components/inputs/formInputs/FormInput";
-import { useAppDispatch } from "../../../store/store";
-import { updateQuestion } from "../../../reducers/questionReducers/asyncActions";
-import { setQuestion } from "../../../reducers/questionReducers/slice";
-import { Question } from "../../../apis/apiQuiz/ApiQuizModels";
+import { Question, UpdateQuestionRequest } from "../../../apis/apiQuiz/ApiQuizModels";
+import { useEffect, useState } from "react";
+import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
+import { useNotifications } from "../../../notifications";
 
 const QuestionPage = () => {
   const params = useParams();
-  const dispatch = useAppDispatch();
   const id = params["questionId"];
 
+  const notify = useNotifications();
   const nav = useAppNavigation();
-  const { question } = useSelector(questionStateSelector);
+
+  const [isPrivate, setIsPrivate] = useState(false);
+  const [correctAnswer, setCorrectAnswer] = useState(0);
+  const [question, setQuestion] = useState("");
+  const [defaultLanugage, setDefaultLanugage] = useState("");
+  const [category, setCategory] = useState("");
+  const [answers, setAnswers] = useState<Array<string>>(["", "", ""]);
+  const [canUserEdit, setCanUserEdit] = useState(true);
+
+  useEffect(() => {
+    ApiQuizInstance.getQuestionById(id ?? "").then((response) => {
+      setIsPrivate(response.data.isPrivate);
+      setCorrectAnswer(response.data.correctAnswerIndex);
+      setQuestion(response.data.description);
+      setCategory(response.data.category);
+      setAnswers(response.data.answers);
+      setCanUserEdit(response.data.canUserEdit)
+    });
+  }, []);
 
   const updateIsPrivate = (newState: boolean) => {
-    dispatch(setQuestion({ 
-      ...question ?? ({} as Question),
-      isPrivate: newState,
-    }));
+    setIsPrivate(newState);
   };
 
   const updateDescription = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(setQuestion({ 
-      ...question ?? ({} as Question),
-      description: event.target.value,
-    }));
-  }
+    setQuestion(event.target.value);
+  };
 
   const updateCorrectAnswer = (index: number, newState: boolean) => {
-    dispatch(setQuestion({ 
-      ...question ?? ({} as Question),
-      correctAnswerIndex: newState ? index : -1,
-    }));
-  }
+    if (newState === false) {
+      setCorrectAnswer(-1);
+      return;
+    }
+    setCorrectAnswer(index);
+  };
 
   const updateAnswer = (index: number, answer: string) => {
-    const newAnswers = [...question?.answers ?? []]
+    const newAnswers = [...answers];
     newAnswers[index] = answer;
-    dispatch(setQuestion({ 
-      ...question ?? ({} as Question),
-      answers: [...newAnswers]
-    }));
-  }
+    setAnswers([...newAnswers]);
+  };
 
   const addAnswer = () => {
-    const newAnswers = [...question?.answers ?? [], '']
-    dispatch(setQuestion({ 
-      ...question ?? ({} as Question),
-      answers: [...newAnswers]
-    }));
-  }
-
+    const newAnswers = [...answers, ""];
+    setAnswers([...newAnswers]);
+  };
 
   const onSaveHandler = () => {
-    dispatch(updateQuestion({
-      answers: question?.answers ?? [],
+    ApiQuizInstance.updateQuestion({
+      answers: answers ?? [],
       id: id ?? "",
-      category: question?.category ?? "",
-      correctAnswerIndex: question?.correctAnswerIndex ?? 1,
-      defaultLanugage: question?.defaultLanugage ?? "",
-      isPrivate: question?.isPrivate ?? true,
-      question: question?.description ?? "",
-    }))
-  }
+      category: category ?? "",
+      correctAnswerIndex: correctAnswer ?? 1,
+      defaultLanugage: defaultLanugage ?? "",
+      isPrivate: isPrivate ?? true,
+      question: question ?? "",
+    } as UpdateQuestionRequest)
+      .then((response) => {
+        notify.addCorrect("Question updated");
+      })
+      .catch((response) => {
+        notify.addError("Not all values are valid");
+      });
+  };
 
-  const answersView = question?.answers.map((value, index) => {
+  const answersView = answers.map((value, index) => {
     return (
       <div key={index} className={classes["answer"]}>
         <div className={classes["answer__switch"]}>
-          <Switch value={index == question?.correctAnswerIndex} onChange={(newState) => updateCorrectAnswer(index, newState)} />
+          <Switch disabled={!canUserEdit} value={index == correctAnswer} onChange={(newState) => updateCorrectAnswer(index, newState)} />
         </div>
         <div className={classes["answer__text"]}>
-          <FormInput value={value} onChange={(event) => updateAnswer(index, event.target.value)}/>
+          <FormInput disabled={!canUserEdit} value={value} onChange={(event) => updateAnswer(index, event.target.value)} />
         </div>
         <div className={classes["answer__switch"]}></div>
       </div>
@@ -95,42 +104,44 @@ const QuestionPage = () => {
   });
 
   return (
-    <QuestionLoader questionId={id}>
-      <Subpage>
-        <TitleSection>
-          <GoBackButton onClick={() => nav.toPreviousPage()} />
-          <h3>Question</h3>
-        </TitleSection>
-        <QuestionSection>
-          <Textarea placeholder="Question" value={question?.description} onChange={updateDescription} />
-          <Switch label="Private" value={question?.isPrivate} onChange={updateIsPrivate} />
-          <div>
-            <DropdownInput
-              value={question?.category}
-              labelTop="Category"
-              labelBottom="Choose from the list..."
-              items={["1", "2"]}
-            />
-            <DropdownInput
-              value={question?.defaultLanugage}
-              labelTop="Language"
-              labelBottom="Choose from the list..."
-              items={["1", "2"]}
-            />
-          </div>
-        </QuestionSection>
-        <AnswerSection>
-          {answersView}
-          <div>
-            <RoundedButton disabled={(question?.answers.length ?? 0) >= 6} onClick={addAnswer}>+ Add</RoundedButton>
-          </div>
-        </AnswerSection>
-        <FooterSection>
-          <CancelButton onClick={nav.toPreviousPage}/>
-          <RoundedButton onClick={onSaveHandler}>Save</RoundedButton>
-        </FooterSection>
-      </Subpage>
-    </QuestionLoader>
+    <Subpage>
+      <TitleSection>
+        <GoBackButton onClick={() => nav.toPreviousPage()} />
+        <h3>Question</h3>
+      </TitleSection>
+      <QuestionSection>
+        <Textarea disabled={!canUserEdit} placeholder="Question" value={question} onChange={updateDescription} />
+        <Switch disabled={!canUserEdit} label="Private" value={isPrivate} onChange={updateIsPrivate} />
+        <div>
+          <DropdownInput
+            disabled={!canUserEdit}
+            value={category}
+            labelTop="Category"
+            labelBottom="Choose from the list..."
+            items={["1", "2"]}
+          />
+          <DropdownInput
+            disabled={!canUserEdit}
+            value={defaultLanugage}
+            labelTop="Language"
+            labelBottom="Choose from the list..."
+            items={["1", "2"]}
+          />
+        </div>
+      </QuestionSection>
+      <AnswerSection>
+        {answersView}
+        <div>
+          <RoundedButton disabled={(answers.length ?? 0) >= 6} onClick={addAnswer}>
+            + Add
+          </RoundedButton>
+        </div>
+      </AnswerSection>
+      <FooterSection>
+        <CancelButton disabled={!canUserEdit} onClick={nav.toPreviousPage} />
+        <RoundedButton disabled={!canUserEdit} onClick={onSaveHandler}>Save</RoundedButton>
+      </FooterSection>
+    </Subpage>
   );
 };
 

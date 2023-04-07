@@ -14,15 +14,9 @@ import {
   Subpage,
   TitleSection,
 } from "../../../layouts/QuestionPageLayout";
-import { useAppDispatch } from "../../../store/store";
-import { createQuestion } from "../../../reducers/questionReducers/asyncActions";
 import { CreateQuestionRequest } from "../../../apis/apiQuiz/ApiQuizModels";
-import { useSelector } from "react-redux";
-import { questionStateSelector } from "../../../reducers/questionReducers/selectors";
 import ErrorMessage from "../../../components/errors/ErrorMessage";
 import { AppNotificationType, useNotifications } from "../../../notifications";
-import { ActionState } from "../../../reducers";
-import { Await } from "react-router-dom";
 import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
 
@@ -35,8 +29,6 @@ const QuestionCreatePage = () => {
   const [answers, setAnswers] = useState<Array<string>>(["", "", ""]);
 
   const nav = useAppNavigation();
-  const dispatch = useAppDispatch();
-  //const { error } = useSelector(questionStateSelector);
   const [error, setError] = useState<QuestionError>({
     answers: "",
     correctAnswerIndex: "",
@@ -44,11 +36,6 @@ const QuestionCreatePage = () => {
   });
   const notify = useNotifications();
 
-  const answerChangeHandler = (event: ChangeEvent<HTMLInputElement>, index: number) => {
-    const newAnswers = [...answers];
-    newAnswers[index] = event.target.value;
-    setAnswers([...newAnswers]);
-  };
 
   useEffect(() => {
     if (isPrivate == false && correctAnswer == 0 && question == "" && category == "" && answers.every((e) => e == "")) {
@@ -57,6 +44,12 @@ const QuestionCreatePage = () => {
       setIsModify(true);
     }
   }, [isPrivate, correctAnswer, question, category, answers]);
+
+  const answerChangeHandler = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+    const newAnswers = [...answers];
+    newAnswers[index] = event.target.value;
+    setAnswers([...newAnswers]);
+  };
 
   const correctAnswerChangeHandler = (index: number, value: boolean) => {
     setCorrectAnswer(index);
@@ -149,7 +142,7 @@ const QuestionCreatePage = () => {
           <div>
             <DropdownInput
               value={category}
-              onChange={(value, index) => setCategory(value)}
+              onChange={(event) => setCategory(event.target.value)}
               labelTop="Category"
               labelBottom="Choose from the list..."
               items={["1", "2"]}

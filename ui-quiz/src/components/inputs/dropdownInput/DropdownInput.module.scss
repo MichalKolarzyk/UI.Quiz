@@ -2,7 +2,8 @@
 
 .wrapper{
     display: inline-block;
-    min-width: 45rem
+    min-width: 45rem;
+
 }
 
 .dropdown{
@@ -22,8 +23,10 @@
     min-height: 4.8rem;
 
     &:disabled{
-        cursor: not-allowed;
+        cursor: default;
+        background-color: rgba($color-white, .7);
     }
+
 
     &:focus{
         outline-offset: 1px;

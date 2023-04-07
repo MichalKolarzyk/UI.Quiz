@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classes from "./DropdownInput.module.scss";
+import { FormInputProps } from "../formInputs/FormInput";
 
 const DropdownInput = (props: DropdownInputProps) => {
   const [isListVisible, setIsListVisible] = useState<boolean>(false);
@@ -8,13 +9,13 @@ const DropdownInput = (props: DropdownInputProps) => {
     setIsListVisible(!isListVisible);
   };
 
-  const onIntemClick = (value: string, index: number) => {
-    props.onChange?.(value, index);
+  const onIntemClick = (event : any) => {
+    props.onChange?.(event);
     setIsListVisible(false);
   };
 
   const itemsView = props.items.map((value, index) => (
-    <div onMouseDown={() => onIntemClick(value, index)} className={classes.item}>
+    <div onMouseDown={onIntemClick} className={classes.item}>
       {value}
     </div>
   ));
@@ -23,7 +24,7 @@ const DropdownInput = (props: DropdownInputProps) => {
     <div className={classes.wrapper}>
       <div className={classes.label}>{props.labelTop}</div>
       <div className={classes.dropdown}>
-        <button onBlur={() => setIsListVisible(false)} onClick={onClickHandler} className={classes.button}>
+        <button disabled={props.disabled} onBlur={() => setIsListVisible(false)} onClick={onClickHandler} className={classes.button}>
           {props.value}
         </button>
         <div
@@ -37,9 +38,7 @@ const DropdownInput = (props: DropdownInputProps) => {
   );
 };
 
-export interface DropdownInputProps {
-  onChange?: (value: string, index: number) => void;
-  value?: string,
+export interface DropdownInputProps extends FormInputProps {
   items: Array<string>;
   labelTop?: string;
   labelBottom?: string;

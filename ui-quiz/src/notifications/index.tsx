@@ -23,7 +23,15 @@ export const useNotifications = () => {
     }, 5000);
   };
 
-  return { add };
+  const addCorrect = (message: string) => {
+    return add({message, type: AppNotificationType.correct})
+  } 
+
+  const addError = (message: string) => {
+    return add({message, type: AppNotificationType.error})
+  } 
+
+  return { add, addCorrect, addError };
 };
 
 export const NotificationContainer = () => {

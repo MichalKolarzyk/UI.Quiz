@@ -10,10 +10,10 @@ const Switch = (props: SwitchProps) => {
 
   return (
     <div className={classes.box}>
-      <div onClick={onClickHandler} className={`${classes.switch} ${props.value ? classes.on : classes.off}`}>
+      <button disabled={props.disabled} onClick={onClickHandler} className={`${classes.switch} ${props.value ? classes.on : classes.off}`}>
         {props.value && <CheckIcon className={classes["check-icon"]}/>}
         <div className={classes.toggle}></div>
-      </div>
+      </button>
       <div className={classes.label}>{props.label ?? ""}</div>
     </div>
   );
@@ -22,7 +22,8 @@ const Switch = (props: SwitchProps) => {
 export interface SwitchProps {
   label?: string;
   value?: boolean;
-  onChange?: (newState: boolean) => void
+  onChange?: (newState: boolean) => void;
+  disabled?: boolean
 }
 
 export default Switch;

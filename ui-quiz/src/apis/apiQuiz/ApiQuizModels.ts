@@ -53,6 +53,7 @@ export interface Question{
   category: string,
   defaultLanugage: string,
   author: string,
+  canUserEdit: boolean,
 }
 
 export interface CreateQuestionRequest{

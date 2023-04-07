@@ -14,10 +14,28 @@
     cursor: pointer;
     position: relative;
     transition: all 0.35s;
+    border: none;
+
+    &:disabled{
+        cursor: default;
+
+
+        & > .toggle {
+            background-color: rgba($color-white, .4);
+        }
+
+        & > .check-icon, .label{
+            color: rgba($color-white, .4);
+        }
+    }
 }
 
 .on{
     background-color: $color-green;
+    &:disabled{
+        background-color: rgba($color-green, .7);
+    }
+
     & > .toggle{
         top: .3rem;
         left: 2.2rem
@@ -26,6 +44,10 @@
 
 .off{
     background-color: $color-grey-light;
+
+    &:disabled{
+        background-color: rgba($color-grey-light, .7);
+    }
     & > .toggle{
         top: .3rem;
         left: .4rem
@@ -54,4 +76,6 @@
     width: 2.4rem;
     height: 2.4rem;
     background-color: transparent;
+    left: 0;
+    top: 0;
 }
