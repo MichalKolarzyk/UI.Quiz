@@ -12,7 +12,7 @@ export interface CreateQuestionState {
 }
 
 export interface QuestionError{
-    question: string,
+    description: string,
     answers: string,
     correctAnswerIndex: string,
 }
@@ -25,7 +25,7 @@ const initialState: CreateQuestionState = {
     error: {
         answers: "",
         correctAnswerIndex: "",
-        question: "",
+        description: "",
     }
 }
 

@@ -17,10 +17,14 @@ import { Question, UpdateQuestionRequest } from "../../../apis/apiQuiz/ApiQuizMo
 import { useEffect, useState } from "react";
 import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
 import { useNotifications } from "../../../notifications";
+import { useApiError } from "../../../apis/apiQuiz/useApiError";
+import { QuestionError } from "../../../reducers/questionReducers/slice";
+import ErrorMessage from "../../../components/errors/ErrorMessage";
 
 const QuestionPage = () => {
   const params = useParams();
   const id = params["questionId"];
+  const apiError = useApiError<QuestionError>();
 
   const notify = useNotifications();
   const nav = useAppNavigation();
@@ -83,9 +87,11 @@ const QuestionPage = () => {
     } as UpdateQuestionRequest)
       .then((response) => {
         notify.addCorrect("Question updated");
+        apiError.restart();
       })
       .catch((response) => {
         notify.addError("Not all values are valid");
+        apiError.setError(response);
       });
   };
 
@@ -118,7 +124,7 @@ const QuestionPage = () => {
         <h3>Question</h3>
       </TitleSection>
       <QuestionSection>
-        <Textarea disabled={!canUserEdit} placeholder="Question" value={question} onChange={updateDescription} />
+        <Textarea errorMessage={apiError.erros?.description} disabled={!canUserEdit} placeholder="Question" value={question} onChange={updateDescription} />
         <Switch disabled={!canUserEdit} label="Private" value={isPrivate} onChange={updateIsPrivate} />
         <div>
           <DropdownInput
@@ -140,11 +146,13 @@ const QuestionPage = () => {
       <AnswerSection>
         {answersView}
         <div>
-          { canUserEdit &&
+          {canUserEdit && (
             <RoundedButton disabled={(answers.length ?? 0) >= 6} onClick={addAnswer}>
               + Add
             </RoundedButton>
-          }
+          )}
+          <ErrorMessage message={apiError.erros?.answers} />
+          <ErrorMessage message={apiError.erros?.correctAnswerIndex} />
         </div>
       </AnswerSection>
       <FooterSection>

@@ -5,19 +5,24 @@ export const useApiError = <T>() => {
     const [fieldErrors, setFieldErrors] = useState<T>();
 
     const setError = (reason : any) => {
-        let newError : any;
-        for(const item in fieldErrors){
-            newError[item] = reason.response.data.errors[capitalizeFirstLetter(item)] ?? ""
+        let newError = {} as any;
+        for(const error in reason.response.data.errors){
+            newError[lowerFirstLetter(error)] = reason.response.data.errors[error] ?? ""
         }
         setFieldErrors(newError as T)
     }
 
+    const restart = () => {
+        setFieldErrors({} as T);
+    } 
+
     return{
+        restart,
         setError,
         erros: fieldErrors
     }
 }
 
-function capitalizeFirstLetter(str: string) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+function lowerFirstLetter(str: string) {
+    return str.charAt(0).toLowerCase() + str.slice(1);
 }

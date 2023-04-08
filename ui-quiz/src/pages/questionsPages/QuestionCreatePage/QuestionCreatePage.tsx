@@ -19,6 +19,7 @@ import ErrorMessage from "../../../components/errors/ErrorMessage";
 import { AppNotificationType, useNotifications } from "../../../notifications";
 import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
+import { useApiError } from "../../../apis/apiQuiz/useApiError";
 
 const QuestionCreatePage = () => {
   const [isModify, setIsModify] = useState(false);
@@ -28,12 +29,9 @@ const QuestionCreatePage = () => {
   const [category, setCategory] = useState("");
   const [answers, setAnswers] = useState<Array<string>>(["", "", ""]);
 
+  
+  const apiError = useApiError<QuestionError>();
   const nav = useAppNavigation();
-  const [error, setError] = useState<QuestionError>({
-    answers: "",
-    correctAnswerIndex: "",
-    question: "",
-  });
   const notify = useNotifications();
 
 
@@ -68,14 +66,11 @@ const QuestionCreatePage = () => {
     ApiQuizInstance.createQuestion(request)
       .then(() => {
         notify.add({ message: "Question created", type: AppNotificationType.correct });
+        apiError.restart();
       })
       .catch((reason) => {
         notify.add({ message: "Some informations are invalid", type: AppNotificationType.error });
-        setError({
-          answers: reason.response.data.errors["Answers"] ?? "",
-          correctAnswerIndex: reason.response.data.errors["CorrectAnswerIndex"] ?? "",
-          question: reason.response.data.errors["Description"] ?? "",
-        });
+        apiError.setError(reason);
       })
       .finally(() => {
       });
@@ -136,7 +131,7 @@ const QuestionCreatePage = () => {
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
             placeholder="Question"
-            errorMessage={error.question}
+            errorMessage={apiError.erros?.description}
           />
           <Switch label="Private" value={isPrivate} onChange={(newState) => setIsPrivate(newState)} />
           <div>
@@ -156,8 +151,8 @@ const QuestionCreatePage = () => {
             <RoundedButton disabled={answers.length >= 6} onClick={addAnswer}>
               + Add
             </RoundedButton>
-            <ErrorMessage message={error.answers} />
-            <ErrorMessage message={error.correctAnswerIndex} />
+            <ErrorMessage message={apiError.erros?.answers} />
+            <ErrorMessage message={apiError.erros?.correctAnswerIndex} />
           </div>
         </AnswerSection>
         <FooterSection>
