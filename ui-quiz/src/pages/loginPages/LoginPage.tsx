@@ -7,7 +7,6 @@ import { accountLogIn } from "../../reducers/accountReducers/asyncActions";
 import { selectIsLogIn } from "../../reducers/accountReducers/selectors";
 import { useAppDispatch, RootState } from "../../store/store";
 import classes from "./LoginPage.module.scss";
-import ErrorMessage from "../../components/errors/ErrorMessage";
 import { TextInput } from "../../components/textInput";
 
 const LoginPage = () => {

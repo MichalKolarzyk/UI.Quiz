@@ -19,6 +19,7 @@ import Switch from "../../../components/switches/Switch";
 import { useEffect } from "react";
 import { getQuestions } from "../../../reducers/questionReducers/asyncActions";
 import { useQuestionsSearchParams } from "./searchParams";
+import { TextInput } from "../../../components/textInput";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
@@ -64,7 +65,7 @@ const QuestionsTablePage = () => {
           items={["Math", "Geo", "IT", "Math", "Geo"]}
         />
         <DropdownInput labelTop="State" labelBottom="chose from list..." items={["Math", "Geo", "IT", "Math", "Geo"]} />
-        <FormInput value={searchParams.author} onChange={(event) => {searchParams.setAuthor(event.target.value); searchParams.setPage(1);}} placeholder="Author"></FormInput>
+        <TextInput delay={300} value={searchParams.author} onChange={(value) => {searchParams.setAuthor(value); searchParams.setPage(1);}} placeholder="Author"></TextInput>
         <Switch value={searchParams.isPrivate} onChange={onIsPrivateChange} label="IsPrivate"></Switch>
       </FilterSection>
       <ActionSection>

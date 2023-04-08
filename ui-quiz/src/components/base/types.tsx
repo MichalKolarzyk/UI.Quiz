@@ -6,6 +6,15 @@ export interface ComponentProps{
 
 export interface InputComponentProps extends ComponentProps{
     placeholder?: string;
-    errorMessage?: string,
     type?: string,
+}
+
+export interface SingleValueProps{
+    value?: string,
+    setValue?: (newValue: string) => void;
+    placeholder?: string;
+}
+
+export interface ErrorComponent{
+    errorMessage?: string,
 }

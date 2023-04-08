@@ -1,5 +1,12 @@
 @import '../../scss/abstract/variables';
 
+.box{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
 .input{
     box-sizing: border-box;
     width: 100%;
@@ -8,7 +15,7 @@
     border: none !important;
     outline: none !important;
     padding: 1.5rem 2rem;
-    font-size: medium;
+    font-size: $default-font-size;
 }
 
 .icon{
@@ -17,14 +24,4 @@
     color: rgba(black, .5);
     width: 2rem;
     height: 2rem;
-}
-
-.placeholder{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0 2rem;
-    pointer-events: none;
-    color: rgba(black, .5);
-    font-size: medium;
 }
