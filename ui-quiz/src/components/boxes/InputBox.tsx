@@ -9,13 +9,10 @@ export const InputBox: React.FC<InputBoxProps> = (props) => {
 
   const hasError = (props.errorMessage?.length ?? 0) > 0
 
-  let boxClass = `${classes.box} 
-    ${boxFocus && classes["box--focus"]} 
-    ${boxHover && classes["box--hover"]} 
-    ${hasError && classes["box--error"]}`;
+  let boxClass = `${classes.box} ${boxFocus ? classes["box--focus"] : ""} ${boxHover ? classes["box--hover"] : ""} ${hasError ? classes["box--error"]: ""}`;
 
-  if (props.disabled) {
-    boxClass = `${classes.box} ${props.disabled && classes["box--disabled"]}`;
+  if (props.disabled || props.isLoading) {
+    boxClass = `${classes.box} ${classes["box--disabled"]}`;
   }
 
   return (

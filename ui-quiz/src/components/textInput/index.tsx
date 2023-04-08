@@ -20,7 +20,7 @@ export const TextInput: React.FC<DropdownProps> = (props) => {
 
   return (
     <>
-      <InputBox errorMessage={props.errorMessage} isLoading={true} disabled={props.disabled}>
+      <InputBox errorMessage={props.errorMessage} isLoading={props.isLoading} disabled={props.disabled}>
         <div className={classes.box}>
           <input
             disabled={props.disabled}

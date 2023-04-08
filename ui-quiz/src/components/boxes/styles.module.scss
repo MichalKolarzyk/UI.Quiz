@@ -29,4 +29,5 @@
 .box--disabled{
     background-color: rgba($color-white, .7);
     cursor: default;
+    pointer-events: none;
 }
