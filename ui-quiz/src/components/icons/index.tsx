@@ -5,6 +5,7 @@ import { MdClear, MdModeEdit } from "react-icons/md";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { BsCheck } from "react-icons/bs";
+import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 
 export const DeleteIcon = ImBin;
 export const CancelIcon = ImCancelCircle;
@@ -16,3 +17,5 @@ export const PreviousIcon = MdNavigateBefore;
 export const SpinnerIcon = CgSpinnerAlt;
 export const CheckIcon = BsCheck;
 export const ClearIcon = MdClear;
+export const DownIcon = BiCaretDown;
+export const UpIcon = BiCaretUp;

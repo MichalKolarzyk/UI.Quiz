@@ -21,6 +21,7 @@ import { useApiError } from "../../../apis/apiQuiz/useApiError";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
 import ErrorMessage from "../../../components/errors/ErrorMessage";
 import { TextInput } from "../../../components/textInput";
+import { Dropdown } from "../../../components/dropdown";
 
 const QuestionPage = () => {
   const params = useParams();
@@ -35,7 +36,7 @@ const QuestionPage = () => {
   const [question, setQuestion] = useState("");
   const [defaultLanugage, setDefaultLanugage] = useState("");
   const [category, setCategory] = useState("");
-  const [answers, setAnswers] = useState<Array<string>>(["", "", ""]);
+  const [answers, setAnswers] = useState<Array<string>>([]);
   const [canUserEdit, setCanUserEdit] = useState(true);
 
   useEffect(() => {
@@ -108,6 +109,7 @@ const QuestionPage = () => {
         </div>
         <div className={classes["answer__text"]}>
           <TextInput
+            placeholder="Answer"
             disabled={!canUserEdit}
             value={value}
             onChange={(value) => updateAnswer(index, value)}
@@ -125,21 +127,32 @@ const QuestionPage = () => {
         <h3>Question</h3>
       </TitleSection>
       <QuestionSection>
-        <Textarea errorMessage={apiError.erros?.description} disabled={!canUserEdit} placeholder="Question" value={question} onChange={updateDescription} />
+        <Textarea
+          errorMessage={apiError.erros?.description}
+          disabled={!canUserEdit}
+          placeholder="Question"
+          value={question}
+          onChange={updateDescription}
+        />
         <Switch disabled={!canUserEdit} label="Private" value={isPrivate} onChange={updateIsPrivate} />
         <div>
-          <DropdownInput
+          <h6>Category</h6>
+          <Dropdown
             disabled={!canUserEdit}
             value={category}
-            labelTop="Category"
-            labelBottom="Choose from the list..."
+            setValue={(value) => setCategory(value)}
+            placeholder="Select category..."
             items={["1", "2"]}
           />
-          <DropdownInput
+        </div>
+
+        <div>
+          <h6>Language</h6>
+          <Dropdown
             disabled={!canUserEdit}
-            value={defaultLanugage}
-            labelTop="Language"
-            labelBottom="Choose from the list..."
+            value={category}
+            setValue={(value) => setCategory(value)}
+            placeholder="Select Language..."
             items={["1", "2"]}
           />
         </div>

@@ -21,6 +21,7 @@ import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
 import { useApiError } from "../../../apis/apiQuiz/useApiError";
 import { TextInput } from "../../../components/textInput";
+import { Dropdown } from "../../../components/dropdown";
 
 const QuestionCreatePage = () => {
   const [isModify, setIsModify] = useState(false);
@@ -30,11 +31,9 @@ const QuestionCreatePage = () => {
   const [category, setCategory] = useState("");
   const [answers, setAnswers] = useState<Array<string>>(["", "", ""]);
 
-  
   const apiError = useApiError<QuestionError>();
   const nav = useAppNavigation();
   const notify = useNotifications();
-
 
   useEffect(() => {
     if (isPrivate == false && correctAnswer == 0 && question == "" && category == "" && answers.every((e) => e == "")) {
@@ -73,8 +72,7 @@ const QuestionCreatePage = () => {
         notify.add({ message: "Some informations are invalid", type: AppNotificationType.error });
         apiError.setError(reason);
       })
-      .finally(() => {
-      });
+      .finally(() => {});
   };
 
   const deleteAnswer = (index: number) => {
@@ -136,14 +134,12 @@ const QuestionCreatePage = () => {
           />
           <Switch label="Private" value={isPrivate} onChange={(newState) => setIsPrivate(newState)} />
           <div>
-            <DropdownInput
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
-              labelTop="Category"
-              labelBottom="Choose from the list..."
-              items={["1", "2"]}
-            />
-            <DropdownInput labelTop="Language" labelBottom="Choose from the list..." items={["1", "2"]} />
+            <h6>Category</h6>
+            <Dropdown placeholder="Select category..." value={category} setValue={(value) => setCategory(value)} items={["1", "2"]} />
+          </div>
+          <div>
+            <h6>Language</h6>
+            <Dropdown placeholder="Select language..." items={["1", "2"]} />
           </div>
         </QuestionSection>
         <AnswerSection>

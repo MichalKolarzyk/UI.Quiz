@@ -16,10 +16,11 @@ import { useSelector } from "react-redux";
 import { questionStateSelector } from "../../../reducers/questionReducers/selectors";
 import { useAppDispatch } from "../../../store/store";
 import Switch from "../../../components/switches/Switch";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getQuestions } from "../../../reducers/questionReducers/asyncActions";
 import { useQuestionsSearchParams } from "./searchParams";
 import { TextInput } from "../../../components/textInput";
+import { Dropdown } from "../../../components/dropdown";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
@@ -27,6 +28,8 @@ const QuestionsTablePage = () => {
   const searchParams = useQuestionsSearchParams();
   const appDispatch = useAppDispatch();
   const items = questions ?? [];
+
+  const [category, setCategory] = useState<string>();
 
   const onIsPrivateChange = (newState: boolean) => {
     if(searchParams.isPrivate != newState){
@@ -59,12 +62,8 @@ const QuestionsTablePage = () => {
         <h3>Quesions</h3>
       </TitleSection>
       <FilterSection>
-        <DropdownInput
-          labelTop="Category"
-          labelBottom="chose from list..."
-          items={["Math", "Geo", "IT", "Math", "Geo"]}
-        />
-        <DropdownInput labelTop="State" labelBottom="chose from list..." items={["Math", "Geo", "IT", "Math", "Geo"]} />
+        <Dropdown placeholder="Select category..." value={category} setValue={(newValue) => setCategory(newValue)} items={["Math", "Geo", "IT", "Math", "Geo"]}/>
+        <Dropdown placeholder="Select language..." value={category} setValue={(newValue) => setCategory(newValue)} items={["Math", "Geo", "IT", "Math", "Geo"]}/>
         <TextInput delay={300} value={searchParams.author} onChange={(value) => {searchParams.setAuthor(value); searchParams.setPage(1);}} placeholder="Author"></TextInput>
         <Switch value={searchParams.isPrivate} onChange={onIsPrivateChange} label="IsPrivate"></Switch>
       </FilterSection>
