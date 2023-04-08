@@ -8,6 +8,7 @@ import { selectIsLogIn } from "../../reducers/accountReducers/selectors";
 import { useAppDispatch, RootState } from "../../store/store";
 import classes from "./LoginPage.module.scss";
 import ErrorMessage from "../../components/errors/ErrorMessage";
+import { TextInput } from "../../components/textInput";
 
 const LoginPage = () => {
   const [login, setLogin] = useState<string>("");
@@ -17,15 +18,7 @@ const LoginPage = () => {
   const nav = useNavigate();
 
   const isLoading = useSelector((state: RootState) => state.account.isLoading);
-
-  const loginChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setLogin(event.target.value);
-  };
-
-  const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
+  
   useEffect(() => {
     if (isLogIn == true) {
       nav("/home");
@@ -45,21 +38,21 @@ const LoginPage = () => {
           </h2>
         </div>
         <div className="u-margin-bottom-medium">
-          <FormInput
+          <TextInput
             disabled={isLoading}
             value={login}
             errorMessage=""
-            onChange={loginChangeHandler}
+            onChange={setLogin}
             placeholder="Email *"
           />
         </div>
         <div className="u-margin-bottom-medium">
-          <FormInput
+          <TextInput
             type="password"
             disabled={isLoading}
             value={password}
             errorMessage=""
-            onChange={passwordChangeHandler}
+            onChange={setPassword}
             placeholder="Password *"
           />
         </div>

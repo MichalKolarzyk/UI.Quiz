@@ -20,6 +20,7 @@ import { AppNotificationType, useNotifications } from "../../../notifications";
 import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
 import { useApiError } from "../../../apis/apiQuiz/useApiError";
+import { TextInput } from "../../../components/textInput";
 
 const QuestionCreatePage = () => {
   const [isModify, setIsModify] = useState(false);
@@ -43,9 +44,9 @@ const QuestionCreatePage = () => {
     }
   }, [isPrivate, correctAnswer, question, category, answers]);
 
-  const answerChangeHandler = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+  const answerChangeHandler = (newValue: string, index: number) => {
     const newAnswers = [...answers];
-    newAnswers[index] = event.target.value;
+    newAnswers[index] = newValue;
     setAnswers([...newAnswers]);
   };
 
@@ -109,7 +110,7 @@ const QuestionCreatePage = () => {
           <Switch value={index == correctAnswer} onChange={(newState) => correctAnswerChangeHandler(index, newState)} />
         </div>
         <div className={classes["answer__text"]}>
-          <FormInput value={value} onChange={(event) => answerChangeHandler(event, index)} placeholder="answer" />
+          <TextInput value={value} onChange={(value) => answerChangeHandler(value, index)} placeholder="answer" />
         </div>
         <div className={classes["answer__switch"]}>
           <DeleteButton onClick={() => deleteAnswer(index)} />

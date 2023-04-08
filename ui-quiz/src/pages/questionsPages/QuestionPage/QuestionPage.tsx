@@ -20,6 +20,7 @@ import { useNotifications } from "../../../notifications";
 import { useApiError } from "../../../apis/apiQuiz/useApiError";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
 import ErrorMessage from "../../../components/errors/ErrorMessage";
+import { TextInput } from "../../../components/textInput";
 
 const QuestionPage = () => {
   const params = useParams();
@@ -106,10 +107,10 @@ const QuestionPage = () => {
           />
         </div>
         <div className={classes["answer__text"]}>
-          <FormInput
+          <TextInput
             disabled={!canUserEdit}
             value={value}
-            onChange={(event) => updateAnswer(index, event.target.value)}
+            onChange={(value) => updateAnswer(index, value)}
           />
         </div>
         <div className={classes["answer__switch"]}></div>
