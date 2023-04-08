@@ -40,7 +40,7 @@ const QuestionPage = () => {
       setQuestion(response.data.description);
       setCategory(response.data.category);
       setAnswers(response.data.answers);
-      setCanUserEdit(response.data.canUserEdit)
+      setCanUserEdit(response.data.canUserEdit);
     });
   }, []);
 
@@ -93,10 +93,18 @@ const QuestionPage = () => {
     return (
       <div key={index} className={classes["answer"]}>
         <div className={classes["answer__switch"]}>
-          <Switch disabled={!canUserEdit} value={index == correctAnswer} onChange={(newState) => updateCorrectAnswer(index, newState)} />
+          <Switch
+            disabled={!canUserEdit}
+            value={index == correctAnswer}
+            onChange={(newState) => updateCorrectAnswer(index, newState)}
+          />
         </div>
         <div className={classes["answer__text"]}>
-          <FormInput disabled={!canUserEdit} value={value} onChange={(event) => updateAnswer(index, event.target.value)} />
+          <FormInput
+            disabled={!canUserEdit}
+            value={value}
+            onChange={(event) => updateAnswer(index, event.target.value)}
+          />
         </div>
         <div className={classes["answer__switch"]}></div>
       </div>
@@ -132,14 +140,20 @@ const QuestionPage = () => {
       <AnswerSection>
         {answersView}
         <div>
-          <RoundedButton disabled={(answers.length ?? 0) >= 6} onClick={addAnswer}>
-            + Add
-          </RoundedButton>
+          { canUserEdit &&
+            <RoundedButton disabled={(answers.length ?? 0) >= 6} onClick={addAnswer}>
+              + Add
+            </RoundedButton>
+          }
         </div>
       </AnswerSection>
       <FooterSection>
-        <CancelButton disabled={!canUserEdit} onClick={nav.toPreviousPage} />
-        <RoundedButton disabled={!canUserEdit} onClick={onSaveHandler}>Save</RoundedButton>
+        <CancelButton onClick={nav.toPreviousPage} />
+        {canUserEdit && (
+          <RoundedButton disabled={!canUserEdit} onClick={onSaveHandler}>
+            Save
+          </RoundedButton>
+        )}
       </FooterSection>
     </Subpage>
   );
