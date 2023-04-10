@@ -22,6 +22,8 @@ import { QuestionError } from "../../../reducers/questionReducers/slice";
 import { useApiError } from "../../../apis/apiQuiz/useApiError";
 import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
+import { useSelector } from "react-redux";
+import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 
 const QuestionCreatePage = () => {
   const [isModify, setIsModify] = useState(false);
@@ -34,6 +36,10 @@ const QuestionCreatePage = () => {
   const apiError = useApiError<QuestionError>();
   const nav = useAppNavigation();
   const notify = useNotifications();
+
+  const {categories} = useSelector(referenceItemsStateSelector)
+  console.log(categories);
+  const categoryItems = categories?.map?.(c => c.value) ?? [];
 
   useEffect(() => {
     if (isPrivate == false && correctAnswer == 0 && question == "" && category == "" && answers.every((e) => e == "")) {
@@ -135,7 +141,7 @@ const QuestionCreatePage = () => {
           <Switch label="Private" value={isPrivate} onChange={(newState) => setIsPrivate(newState)} />
           <div>
             <h6>Category</h6>
-            <Dropdown placeholder="Select category..." value={category} setValue={(value) => setCategory(value)} items={["1", "2"]} />
+            <Dropdown placeholder="Select category..." value={category} setValue={(value) => setCategory(value)} items={categoryItems} />
           </div>
           <div>
             <h6>Language</h6>

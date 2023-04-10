@@ -15,7 +15,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
   };
 
   const itemsView = filteredItems.map((value, index) => (
-    <div onMouseEnter={() => props.setValue?.(value)} onMouseDown={() => onIntemClick(value)} className={classes.item}>
+    <div onMouseDown={() => onIntemClick(value)} className={classes.item}>
       {value}
     </div>
   ));
@@ -27,13 +27,13 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
     }
     newFilterdItems = props.items?.filter((i) => i.startsWith(categorySearch ?? "")) ?? [];
     setFilteredItems([...newFilterdItems]);
-  }, [categorySearch]);
+  }, [categorySearch,props.items]);
 
   useEffect(() => {
-    if(isListVisible == true){
-        return;
+    if (isListVisible == true) {
+      return;
     }
-    setCategorySearch("")
+    setCategorySearch("");
   }, [isListVisible]);
 
   const inputValue = isListVisible ? categorySearch : props.value;
@@ -50,10 +50,12 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
             className={classes.input}
             placeholder={props.placeholder}
           ></input>
-          <ClearIcon className={classes.icon} onClick={() => props.setValue?.("")}/>
-          {!isListVisible && <DownIcon onClick={() => setIsListVisible(true)} className={classes.icon} />}
+          {!isListVisible && props.value && <ClearIcon className={classes.icon} onClick={() => props.setValue?.("")} />}
           {isListVisible && <UpIcon onClick={() => setIsListVisible(false)} className={classes.icon} />}
-          {isListVisible && <div className={classes.list}>{itemsView}</div>}
+          {isListVisible && <div className={classes.list}>
+            {itemsView}
+            {filteredItems.length == 0 && <div className={classes.empty}>Not found ...</div>}
+          </div>}
         </div>
       </InputBox>
     </>

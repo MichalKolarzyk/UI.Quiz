@@ -91,6 +91,16 @@ export interface FilterQuestionResponse{
   count: number,
 }
 
+export interface GetReferenceItemsResponse{
+  referenceItems: Array<ReferenceItems>,
+}
+
+export interface ReferenceItems{
+  id: string,
+  key: string,
+  value: string
+}
+
 export interface IErrorResponse {
   errors: any;
 }

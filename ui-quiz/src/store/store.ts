@@ -5,6 +5,7 @@ import userReducer from '../reducers/userReducer'
 import registrationReducer from '../reducers/registrationReducers/slice'
 import createQuestionReducer from '../reducers/questionReducers/slice'
 import notificationReducer from '../notifications/reducer/slice'
+import referenceItemsReducer from '../reducers/referenceItems/slice'
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         registration: registrationReducer,
         createQuestion: createQuestionReducer,
         nofifications: notificationReducer,
+        referenceItems: referenceItemsReducer
     }
 })
 
