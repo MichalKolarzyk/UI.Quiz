@@ -10,7 +10,7 @@ export interface InputComponentProps extends ComponentProps{
 }
 
 export interface SingleValueProps{
-    value?: string,
+    value?: string | null,
     setValue?: (newValue: string) => void;
     placeholder?: string;
 }

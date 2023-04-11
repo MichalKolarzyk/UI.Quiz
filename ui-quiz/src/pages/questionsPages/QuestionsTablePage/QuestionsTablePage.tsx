@@ -21,16 +21,16 @@ import { getQuestions } from "../../../reducers/questionReducers/asyncActions";
 import { useQuestionsSearchParams } from "./searchParams";
 import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
+import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
   const { questions, questionsCount } = useSelector(questionStateSelector);
+  const { categories } = useSelector(referenceItemsStateSelector);
   const searchParams = useQuestionsSearchParams();
   const appDispatch = useAppDispatch();
   const items = questions ?? [];
-
-  const [category, setCategory] = useState<string>();
-
+  
   const onIsPrivateChange = (newState: boolean) => {
     if(searchParams.isPrivate != newState){
       searchParams.setPage(1);
@@ -49,10 +49,11 @@ const QuestionsTablePage = () => {
         isPrivate: searchParams.isPrivate,
         skip: skip,
         take: take,
-        author: searchParams.author,
+        author: searchParams.author == "" ? null : searchParams.author,
+        category: searchParams.category== "" ? null : searchParams.category,
       })
     );
-  }, [searchParams.isPrivate, searchParams.page, searchParams.author]);
+  }, [searchParams.isPrivate, searchParams.page, searchParams.author, searchParams.category]);
 
 
   return (
@@ -62,8 +63,8 @@ const QuestionsTablePage = () => {
         <h3>Quesions</h3>
       </TitleSection>
       <FilterSection>
-        <Dropdown placeholder="Select category..." value={category} setValue={(newValue) => setCategory(newValue)} items={["Math", "Geo", "IT", "Math", "Geo"]}/>
-        <Dropdown placeholder="Select language..." value={category} setValue={(newValue) => setCategory(newValue)} items={["Math", "Geo", "IT", "Math", "Geo"]}/>
+        <Dropdown placeholder="Select category..." value={searchParams.category} setValue={(value) => {searchParams.setCategory(value); searchParams.setPage(1);}} items={categories?.map(c => c.value)}/>
+        <Dropdown placeholder="Select language..."/>
         <TextInput delay={300} value={searchParams.author} onChange={(value) => {searchParams.setAuthor(value); searchParams.setPage(1);}} placeholder="Author"></TextInput>
         <Switch value={searchParams.isPrivate} onChange={onIsPrivateChange} label="IsPrivate"></Switch>
       </FilterSection>

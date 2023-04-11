@@ -21,7 +21,7 @@ const Switch = (props: SwitchProps) => {
 
 export interface SwitchProps {
   label?: string;
-  value?: boolean;
+  value?: boolean | null;
   onChange?: (newState: boolean) => void;
   disabled?: boolean
 }

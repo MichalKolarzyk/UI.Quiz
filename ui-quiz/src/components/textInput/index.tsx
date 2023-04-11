@@ -38,7 +38,7 @@ export const TextInput: React.FC<DropdownProps> = (props) => {
 };
 
 export interface DropdownProps extends InputComponentProps, ErrorComponent {
-  value?: string;
+  value?: string | null;
   onChange?: (newValue: string) => void;
   delay?: number;
 }

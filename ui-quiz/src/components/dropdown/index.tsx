@@ -36,7 +36,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
     setCategorySearch("");
   }, [isListVisible]);
 
-  const inputValue = isListVisible ? categorySearch : props.value;
+  const inputValue = isListVisible ? categorySearch : props.value ?? "";
 
   return (
     <>

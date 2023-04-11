@@ -22,14 +22,17 @@ import { QuestionError } from "../../../reducers/questionReducers/slice";
 import ErrorMessage from "../../../components/errors/ErrorMessage";
 import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
+import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
+import { useSelector } from "react-redux";
 
 const QuestionPage = () => {
   const params = useParams();
   const id = params["questionId"];
   const apiError = useApiError<QuestionError>();
-
+  
   const notify = useNotifications();
   const nav = useAppNavigation();
+  const { categories } = useSelector(referenceItemsStateSelector);
 
   const [isPrivate, setIsPrivate] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(0);
@@ -142,7 +145,7 @@ const QuestionPage = () => {
             value={category}
             setValue={(value) => setCategory(value)}
             placeholder="Select category..."
-            items={["1", "2"]}
+            items={categories?.map(c => c.value)}
           />
         </div>
 
@@ -150,8 +153,8 @@ const QuestionPage = () => {
           <h6>Language</h6>
           <Dropdown
             disabled={!canUserEdit}
-            value={category}
-            setValue={(value) => setCategory(value)}
+            // value={category}
+            // setValue={(value) => setCategory(value)}
             placeholder="Select Language..."
             items={["1", "2"]}
           />

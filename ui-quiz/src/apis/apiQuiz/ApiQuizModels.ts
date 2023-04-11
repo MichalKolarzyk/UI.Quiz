@@ -80,10 +80,11 @@ export interface UpdateQuestionRequest{
 }
 
 export interface FilterQuestionsRequest{
-  take: number,
-  skip: number,
-  isPrivate: boolean,
-  author: string,
+  take: number | null,
+  skip: number | null,
+  isPrivate: boolean | null,
+  author: string | null,
+  category: string | null,
 }
 
 export interface FilterQuestionResponse{
