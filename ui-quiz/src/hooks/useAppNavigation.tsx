@@ -16,6 +16,10 @@ const useAppNavigation = () => {
     const toCreateQuestionPage = () => {
         nav("/home/create-question");
     }
+
+    const toCreateQuizPage = () => {
+        nav("/home/create-quiz");
+    }
     
     const toQuestionPage = (questionId: string) => {
         nav(`/home/questions/${questionId}`);
@@ -58,6 +62,7 @@ const useAppNavigation = () => {
         toQuizzesPage,
         sessionsUrl,
         toSessionsPage,
+        toCreateQuizPage,
     }
 }
 

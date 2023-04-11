@@ -19,7 +19,7 @@ import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
 import { useNotifications } from "../../../notifications";
 import { useApiError } from "../../../apis/apiQuiz/useApiError";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
-import ErrorMessage from "../../../components/errors/ErrorMessage";
+import ErrorMessage from "../../../components/errors";
 import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
@@ -141,6 +141,7 @@ const QuestionPage = () => {
         <div>
           <h6>Category</h6>
           <Dropdown
+          errorMessage={apiError.erros?.category}
             disabled={!canUserEdit}
             value={category}
             setValue={(value) => setCategory(value)}

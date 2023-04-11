@@ -15,6 +15,7 @@ export interface QuestionError{
     description: string,
     answers: string,
     correctAnswerIndex: string,
+    category: string,
 }
 
 const initialState: CreateQuestionState = {
@@ -26,6 +27,7 @@ const initialState: CreateQuestionState = {
         answers: "",
         correctAnswerIndex: "",
         description: "",
+        category: "",
     }
 }
 

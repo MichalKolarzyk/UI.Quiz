@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ComponentProps, ErrorComponent } from "../base/types";
 import classes from "./styles.module.scss";
-import ErrorMessage from "../errors/ErrorMessage";
+import ErrorMessage from "../errors";
 
 export const InputBox: React.FC<InputBoxProps> = (props) => {
   const [boxFocus, setBoxFocus] = useState<boolean>(false);

@@ -15,7 +15,7 @@ import {
   TitleSection,
 } from "../../../layouts/QuestionPageLayout";
 import { CreateQuestionRequest } from "../../../apis/apiQuiz/ApiQuizModels";
-import ErrorMessage from "../../../components/errors/ErrorMessage";
+import ErrorMessage from "../../../components/errors";
 import { AppNotificationType, useNotifications } from "../../../notifications";
 import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
@@ -38,7 +38,6 @@ const QuestionCreatePage = () => {
   const notify = useNotifications();
 
   const {categories} = useSelector(referenceItemsStateSelector)
-  console.log(categories);
   const categoryItems = categories?.map?.(c => c.value) ?? [];
 
   useEffect(() => {
@@ -141,7 +140,7 @@ const QuestionCreatePage = () => {
           <Switch label="Private" value={isPrivate} onChange={(newState) => setIsPrivate(newState)} />
           <div>
             <h6>Category</h6>
-            <Dropdown placeholder="Select category..." value={category} setValue={(value) => setCategory(value)} items={categoryItems} />
+            <Dropdown errorMessage={apiError.erros?.category} placeholder="Select category..." value={category} setValue={(value) => setCategory(value)} items={categoryItems} />
           </div>
           <div>
             <h6>Language</h6>

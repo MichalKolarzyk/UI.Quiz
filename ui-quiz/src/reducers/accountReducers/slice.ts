@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { accountLogIn } from "./asyncActions";
+import { Console } from "console";
 
 export interface AccountState {
     token?: string,
@@ -33,8 +34,9 @@ const accountSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(accountLogIn.rejected, (state, action) => {
+            const payload : any = action.payload;
             state.isLoading = false;
-            state.error = action.error
+            state.error = payload?.errors?.[""]
         })
     }
 });

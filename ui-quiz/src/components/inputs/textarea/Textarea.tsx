@@ -1,4 +1,4 @@
-import ErrorMessage from "../../errors/ErrorMessage";
+import ErrorMessage from "../../errors";
 import classes from "./Textarea.module.scss";
 
 const Textarea: React.FC<TextareaProps> = (props: TextareaProps) => {

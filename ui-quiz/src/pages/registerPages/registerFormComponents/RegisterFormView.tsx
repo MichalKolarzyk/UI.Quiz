@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { registrationErrors } from "../../../reducers/registrationReducers/selectors";
 import { registrationClearLoginError } from "../../../reducers/registrationReducers/slice";
 import { SignInButton } from "../../../components/buttons";
+import { TextInput } from "../../../components/textInput";
 
 const RegisterFormView = (props: RegisterFormViewProps) => {
   const viewModel = props.viewModel;
@@ -36,33 +37,33 @@ const RegisterFormView = (props: RegisterFormViewProps) => {
       </div>
 
       <div className="u-margin-bottom-medium">
-        <FormInput
+        <TextInput
           disabled={viewModel.disabled}
           placeholder="login"
           errorMessage={errors.login}
           value={viewModel.login}
-          onChange={(event) => viewModel.setLogin(event.target.value)}
+          onChange={(value) => viewModel.setLogin(value)}
         />
       </div>
       <div className="u-margin-bottom-medium">
-        <FormInput
+        <TextInput
           disabled={viewModel.disabled}
           type="password"
           errorMessage={errors.password}
           placeholder="password"
           value={viewModel.password}
-          onChange={(event) => viewModel.setPassword(event.target.value)}
+          onChange={(value) => viewModel.setPassword(value)}
         />
       </div>
 
       <div className="u-margin-bottom-big">
-        <FormInput
+        <TextInput
           disabled={viewModel.disabled}
           type="password"
           placeholder="repete password"
           errorMessage={errors.repetePassword}
           value={viewModel.repetePassword}
-          onChange={(event) => viewModel.setRepetePassword(event.target.value)}
+          onChange={(value) => viewModel.setRepetePassword(value)}
         />
       </div>
 

@@ -2,12 +2,12 @@ import { useState, ChangeEvent, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SignInButton, TransparentButton } from "../../components/buttons";
-import FormInput from "../../components/inputs/formInputs/FormInput";
 import { accountLogIn } from "../../reducers/accountReducers/asyncActions";
 import { selectIsLogIn } from "../../reducers/accountReducers/selectors";
 import { useAppDispatch, RootState } from "../../store/store";
 import classes from "./LoginPage.module.scss";
 import { TextInput } from "../../components/textInput";
+import { ErrorMessageBlock } from "../../components/errors";
 
 const LoginPage = () => {
   const [login, setLogin] = useState<string>("");
@@ -16,8 +16,9 @@ const LoginPage = () => {
   const isLogIn = useSelector(selectIsLogIn);
   const nav = useNavigate();
 
-  const isLoading = useSelector((state: RootState) => state.account.isLoading);
-  
+  const { isLoading, error } = useSelector((state: RootState) => state.account);
+  console.log(error);
+
   useEffect(() => {
     if (isLogIn == true) {
       nav("/home");
@@ -37,25 +38,23 @@ const LoginPage = () => {
           </h2>
         </div>
         <div className="u-margin-bottom-medium">
-          <TextInput
-            disabled={isLoading}
-            value={login}
-            errorMessage=""
-            onChange={setLogin}
-            placeholder="Email *"
-          />
+          <TextInput disabled={isLoading} value={login} errorMessage="" onChange={setLogin} placeholder="Email *" />
         </div>
         <div className="u-margin-bottom-medium">
           <TextInput
             type="password"
             disabled={isLoading}
             value={password}
-            errorMessage=""
             onChange={setPassword}
             placeholder="Password *"
           />
         </div>
-        <div className="u-margin-bottom-small u-center-text">
+
+        <div className="u-margin-bottom-medium">
+          <ErrorMessageBlock message={error} />
+        </div>
+
+        <div className=" u-center-text">
           <SignInButton disabled={isLoading} onClick={() => dispatch(accountLogIn({ login, password }))}>
             Sign in
           </SignInButton>

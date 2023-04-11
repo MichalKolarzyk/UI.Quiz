@@ -6,6 +6,7 @@ import TableHeaderCell from "./table/TableHeaderCell";
 import TableRow from "./table/TableRow";
 import classes from './table/Table.module.scss'
 import { Question } from "../../apis/apiQuiz/ApiQuizModels";
+import { Quiz } from "../../apis/apiQuiz/models/quiz";
 
 export const QuestionsTable: React.FC<QuestionsTableProps> = (props) => {
   return (
@@ -53,16 +54,16 @@ export const QuizzesTable: React.FC<QuizzesTableProps> = (props)  => {
         <TableHeaderCell>Questions number</TableHeaderCell>
         <TableHeaderCell className={classes['small-column']}>Edit</TableHeaderCell>
       </TableHeader>
-      {props.items.map((item, index) => {
+      {props.items?.map((item, index) => {
         return (
           <TableRow key={index}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>{item.author}</TableCell>
-            <TableCell>{item.category}</TableCell>
-            <TableCell>{item.approved}</TableCell>
-            <TableCell>{item.defaultLanguage}</TableCell>
+            <TableCell>{item.category?.[0]}</TableCell>
+            <TableCell>{item.name}</TableCell>
+            <TableCell>{item.questionCount}</TableCell>
             <TableCell>
-              <EdiiButton onClick={() => props.onEditClick(item)} />
+              <EdiiButton onClick={() => props.onEditClick?.(item)} />
             </TableCell>
           </TableRow>
         );
@@ -72,17 +73,8 @@ export const QuizzesTable: React.FC<QuizzesTableProps> = (props)  => {
 }
 
 export interface QuizzesTableProps extends TableProps {
-  onEditClick: (row: QuizRow) => void;
-  items: Array<QuizRow>;
-}
-
-export interface QuizRow {
-  id: string;
-  author: string;
-  category: string;
-  approved: number;
-  defaultLanguage: string;
-  question: string;
+  onEditClick?: (row: Quiz) => void;
+  items?: Array<Quiz>;
 }
 
 

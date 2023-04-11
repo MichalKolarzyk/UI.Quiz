@@ -1,4 +1,4 @@
-import ErrorMessage from '../../errors/ErrorMessage';
+import ErrorMessage from '../../errors';
 import classes from './FormInput.module.scss'
 
 const FormInput = (props: FormInputProps) => {

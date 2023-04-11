@@ -38,7 +38,7 @@ const QuestionsTablePage = () => {
     searchParams.setIsPrivate(newState);
   }
 
-  const take = 5;
+  const take = 7;
   const skip = (searchParams.page - 1) * take;
   const count = questionsCount ?? 0
   const questionPagesCount = Math.floor(count / take) + (count % take > 0 ? 1 : 0) ;
@@ -59,7 +59,7 @@ const QuestionsTablePage = () => {
   return (
     <Subpage>
       <TitleSection>
-        <GoBackButton onClick={() => nav.toPreviousPage()} />
+        <GoBackButton onClick={() => nav.toHomePage()} />
         <h3>Quesions</h3>
       </TitleSection>
       <FilterSection>

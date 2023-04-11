@@ -10,6 +10,7 @@ import QuestionCreatePage from "../pages/questionsPages/QuestionCreatePage/Quest
 import QuestionPage from "../pages/questionsPages/QuestionPage/QuestionPage";
 import QuizTablePage from "../pages/quizzesPages/QuizzesTablePage";
 import SessionsTablePage from "../pages/sessionsPages/SessionsTablePage";
+import CreateQuizPage from "../pages/createQuizPages/CreateQuizPage";
 
 const AppRouter = () => {
   const registerPageViewModel = RegisterFormViewModel();
@@ -30,6 +31,7 @@ const AppRouter = () => {
         >
           <Route index element={<AboutPage />} />
           <Route path="quizzes" element={<QuizTablePage />} />
+          <Route path="create-quiz" element={<CreateQuizPage />} />
           <Route path="sessions" element={<SessionsTablePage />} />
           <Route path="questions" element={<QuestionsTablePage />} />
           <Route path="questions/:questionId" element={<QuestionPage />} />
