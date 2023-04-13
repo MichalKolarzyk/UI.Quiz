@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { unstable_useBlocker as useBlocker } from "react-router-dom";
-import { Content, FooterSection, Prompt, TitleSection } from "../../layouts/PromptLayout";
 import { CancelButton, RoundedButton } from "../buttons";
 import { DarkCard } from "../cards";
 import { Portal, PortalOverlay } from "../portals";
+import PromptLayout from "../../layouts/PromptLayout";
+import FlexRow, { RowPositionEnum } from "../containers/FlexRow";
 
 const WindowUnloadListener = (props: WindowUnloadListenerProps) => {
   const blocker = useBlocker(props.isModify);
@@ -39,28 +40,26 @@ const WindowUnloadListener = (props: WindowUnloadListenerProps) => {
   prompt = (
     <Portal>
       <PortalOverlay>
-        <Prompt>
+        <PromptLayout.Prompt>
           <DarkCard>
-            <Content >
-              <TitleSection>
+            <PromptLayout.Content>
+              <PromptLayout.TitleSection>
                 <h4>Do you want to leave changes?</h4>
-              </TitleSection>
-              <FooterSection>
-                <CancelButton onClick={() => blocker.reset?.()}>No</CancelButton>
-                <RoundedButton onClick={() => blocker.proceed?.()}>Yes</RoundedButton>
-              </FooterSection>
-            </Content>
+              </PromptLayout.TitleSection>
+              <PromptLayout.FooterSection>
+                <FlexRow.Container itemsPosition={RowPositionEnum.center}>
+                  <CancelButton onClick={() => blocker.reset?.()}>No</CancelButton>
+                  <RoundedButton onClick={() => blocker.proceed?.()}>Yes</RoundedButton>
+                </FlexRow.Container>
+              </PromptLayout.FooterSection>
+            </PromptLayout.Content>
           </DarkCard>
-        </Prompt>
+        </PromptLayout.Prompt>
       </PortalOverlay>
     </Portal>
   );
 
-  return (
-    <>
-      {blocker.state == "blocked" && prompt}
-    </>
-  );
+  return <>{blocker.state == "blocked" && prompt}</>;
 };
 
 export interface WindowUnloadListenerProps {

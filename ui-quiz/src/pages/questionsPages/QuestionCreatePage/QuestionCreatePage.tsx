@@ -1,30 +1,23 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import DropdownInput from "../../../components/inputs/dropdownInput/DropdownInput";
-import FormInput from "../../../components/inputs/formInputs/FormInput";
+import { useEffect, useState } from "react";
 import Textarea from "../../../components/inputs/textarea/Textarea";
 import WindowUnloadListener from "../../../components/listeners/WindowUnloadListener";
 import Switch from "../../../components/switches/Switch";
 import useAppNavigation from "../../../hooks/useAppNavigation";
-import classes from "./QuestionCreatePage.module.scss";
 import { CancelButton, CreateButton, DeleteButton, GoBackButton, RoundedButton } from "../../../components/buttons";
-import {
-  AnswerSection,
-  FooterSection,
-  QuestionSection,
-  Subpage,
-  TitleSection,
-} from "../../../layouts/QuestionPageLayout";
 import { CreateQuestionRequest, CreateQuestionResponse } from "../../../apis/apiQuiz/ApiQuizModels";
-import ErrorMessage from "../../../components/errors";
-import { AppNotificationType, useNotifications } from "../../../notifications";
+import ErrorMessage, { ErrorMessageBlock } from "../../../components/errors";
+import { useNotifications } from "../../../notifications";
 import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
-import { useApiError } from "../../../apis/apiQuiz/useApiError";
 import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
 import { useSelector } from "react-redux";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 import useQuizApi from "../../../apis/apiQuiz/useQuizApi";
+import { QuestionPageLayout } from "../../../layouts/QuestionPageLayout";
+import FlexContainer, { GapRowEnum, RowPositionEnum } from "../../../components/containers/FlexRow";
+import FlexRow from "../../../components/containers/FlexRow";
+import FlexColumn, { GapColumnEnum } from "../../../components/containers/FlexColumn";
 
 const QuestionCreatePage = () => {
   const [isModify, setIsModify] = useState(false);
@@ -105,82 +98,90 @@ const QuestionCreatePage = () => {
 
   const answersView = answers.map((value, index) => {
     return (
-      <div key={index} className={classes["answer"]}>
-        <div className={classes["answer__switch"]}>
+      <FlexRow.Container gap={GapRowEnum.medium}>
+        <FlexRow.Item>
           <Switch
             disabled={endpoint.isLoading}
             value={index == correctAnswer}
             onChange={(newState) => correctAnswerChangeHandler(index, newState)}
           />
-        </div>
-        <div className={classes["answer__text"]}>
+        </FlexRow.Item>
+        <FlexRow.Item grow={1}>
           <TextInput
             disabled={endpoint.isLoading}
             value={value}
             onChange={(value) => answerChangeHandler(value, index)}
             placeholder="answer"
           />
-        </div>
-        <div className={classes["answer__switch"]}>
+        </FlexRow.Item>
+        <FlexRow.Item>
           <DeleteButton onClick={() => deleteAnswer(index)} />
-        </div>
-      </div>
+        </FlexRow.Item>
+      </FlexRow.Container>
     );
   });
 
   return (
     <>
       <WindowUnloadListener isModify={isModify} />
-      <Subpage>
-        <TitleSection>
-          <GoBackButton onClick={goBackClickHandler} />
-          <h3>Create Question</h3>
-        </TitleSection>
-        <QuestionSection>
-          <Textarea
-            disabled={endpoint.isLoading}
-            value={question}
-            onChange={(event) => setQuestion(event.target.value)}
-            placeholder="Question"
-            errorMessage={endpoint.errors.erros?.description}
-          />
-          <Switch
-            disabled={endpoint.isLoading}
-            label="Private"
-            value={isPrivate}
-            onChange={(newState) => setIsPrivate(newState)}
-          />
-          <div>
-            <h6>Category</h6>
-            <Dropdown
+      <QuestionPageLayout.Main>
+        <QuestionPageLayout.TitleSection>
+          <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
+            <GoBackButton onClick={goBackClickHandler} />
+            <h3>Create Question</h3>
+          </FlexRow.Container>
+        </QuestionPageLayout.TitleSection>
+        <QuestionPageLayout.QuestionSection>
+          <FlexColumn.Container gap={GapColumnEnum.big}>
+            <Textarea
               disabled={endpoint.isLoading}
-              errorMessage={endpoint.errors.erros?.category}
-              placeholder="Select category..."
-              value={category}
-              setValue={(value) => setCategory(value)}
-              items={categoryItems}
+              value={question}
+              onChange={(event) => setQuestion(event.target.value)}
+              placeholder="Question"
+              errorMessage={endpoint.errors.erros?.description}
             />
-          </div>
-          <div>
-            <h6>Language</h6>
-            <Dropdown placeholder="Select language..." items={["1", "2"]} />
-          </div>
-        </QuestionSection>
-        <AnswerSection>
-          {answersView}
-          <div>
-            <RoundedButton disabled={answers.length >= 6} onClick={addAnswer}>
-              + Add
-            </RoundedButton>
+            <Switch
+              disabled={endpoint.isLoading}
+              label="Private"
+              value={isPrivate}
+              onChange={(newState) => setIsPrivate(newState)}
+            />
+            <div>
+              <h6>Category</h6>
+              <Dropdown
+                disabled={endpoint.isLoading}
+                errorMessage={endpoint.errors.erros?.category}
+                placeholder="Select category..."
+                value={category}
+                setValue={(value) => setCategory(value)}
+                items={categoryItems}
+              />
+            </div>
+            <div>
+              <h6>Language</h6>
+              <Dropdown placeholder="Select language..." items={["1", "2"]} />
+            </div>
+          </FlexColumn.Container>
+        </QuestionPageLayout.QuestionSection>
+        <QuestionPageLayout.AnswerSection>
+          <FlexColumn.Container gap={GapColumnEnum.big}>
+            {answersView}
             <ErrorMessage message={endpoint.errors.erros?.answers} />
             <ErrorMessage message={endpoint.errors.erros?.correctAnswerIndex} />
-          </div>
-        </AnswerSection>
-        <FooterSection>
-          <CancelButton onClick={onCancelHandler} />
-          <CreateButton onClick={onCreateQuestionClickHandler}>Create</CreateButton>
-        </FooterSection>
-      </Subpage>
+            <FlexRow.Container itemsPosition={RowPositionEnum.center}>
+              <RoundedButton disabled={answers.length >= 6} onClick={addAnswer}>
+                + Add
+              </RoundedButton>
+            </FlexRow.Container>
+          </FlexColumn.Container>
+        </QuestionPageLayout.AnswerSection>
+        <QuestionPageLayout.FooterSection>
+          <FlexRow.Container itemsPosition={RowPositionEnum.right}>
+            <CancelButton onClick={onCancelHandler} />
+            <CreateButton onClick={onCreateQuestionClickHandler}>Create</CreateButton>
+          </FlexRow.Container>
+        </QuestionPageLayout.FooterSection>
+      </QuestionPageLayout.Main>
     </>
   );
 };

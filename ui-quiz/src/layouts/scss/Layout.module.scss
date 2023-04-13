@@ -18,9 +18,6 @@
 
   &__title {
     height: 10rem;
-    display: flex;
-    gap: 3rem;
-    align-items: center;
   }
 
   &__sub-title {
@@ -49,32 +46,15 @@
     "footer footer footer footer";
 
   &__title {
-    height: 10rem;
-    display: flex;
-    gap: 3rem;
-    align-items: center;
     grid-area: title;
   }
 
   &__filter {
-    height: 13rem;
     grid-area: filter;
-    place-self: center stretch;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: row;
-    align-items: center;
-    gap: 2rem;
-
-    & > div {
-      flex-grow: 1;
-    }
   }
 
   &__action {
     grid-area: action;
-    place-self: center end;
   }
 
   &__table {
@@ -83,8 +63,6 @@
 
   &__footer {
     grid-area: footer;
-    place-self: center;
-    align-self: start;
   }
 }
 
@@ -101,30 +79,19 @@
     "footer footer";
 
   &__title {
-    display: flex;
-    gap: 3rem;
     grid-area: title;
-    align-items: center;
   }
 
   &__question {
     grid-area: question;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
   }
 
   &__action {
     grid-area: action;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
   }
 
   &__footer {
     grid-area: footer;
-    place-self: end;
-    align-self: start;
   }
 }
 
@@ -146,7 +113,6 @@
 
     &__title {
       grid-area: title;
-      place-self: center;
     }
 
     &__article {
@@ -155,7 +121,6 @@
 
     &__footer {
       grid-area: footer;
-      place-self: center;
     }
   }
 }
