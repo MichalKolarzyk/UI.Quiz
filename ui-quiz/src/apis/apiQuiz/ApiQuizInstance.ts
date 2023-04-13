@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { ISignInRequest, ISignInResponse, IGetUserProfileResponse, IRegisterRequest, IRegisterResponse, CreateQuestionRequest, UpdateQuestionRequest, Question, FilterQuestionsRequest, FilterQuestionResponse, CreateQuestionResponse, GetReferenceItemsResponse, ReferenceItems } from "./ApiQuizModels";
-import { GetQuizzesRequest, GetQuizzesResponse } from "./models/quiz";
+import { CreateQuizRequest, CreateQuizResponse, GetQuizResponse, GetQuizzesRequest, GetQuizzesResponse } from "./models/quiz";
 
 export class ApiQuizInstance{
     instance: AxiosInstance;
@@ -55,6 +55,15 @@ export class ApiQuizInstance{
     getQuizzes = async (request: GetQuizzesRequest): Promise<AxiosResponse<GetQuizzesResponse>> => {
         return await this.instance.post<GetQuizzesRequest, AxiosResponse<GetQuizzesResponse>>("/quiz", request)
     }
+
+    getQuiz = async (id: string): Promise<AxiosResponse<GetQuizResponse>> => {
+        return await this.instance.get(`/quiz/${id}`);
+    }
+
+    createQuiz =  async (request: CreateQuizRequest): Promise<AxiosResponse<CreateQuizResponse>> => {
+        return await this.instance.post<CreateQuizRequest, AxiosResponse<CreateQuizResponse>>("/quiz/create", request)
+    }
+
 
 }
 

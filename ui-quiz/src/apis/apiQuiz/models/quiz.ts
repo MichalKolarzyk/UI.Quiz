@@ -1,3 +1,5 @@
+import { Question } from "../ApiQuizModels";
+
 export interface GetQuizzesResponse{
     quizes: Array<Quiz>
     count: number
@@ -16,4 +18,19 @@ export interface GetQuizzesRequest{
     category: string | null,
     take: number,
     skip: number,
+}
+
+export interface CreateQuizRequest{
+    name: string;
+}
+
+
+export interface CreateQuizResponse{
+    id: string;
+}
+
+export interface GetQuizResponse{
+    questions: Array<Question>;
+    name: string,
+    author: string,
 }

@@ -57,7 +57,7 @@ const QuizTablePage = () => {
         </FlexRow.Container>
       </TablePageLayout.ActionSection>
       <TablePageLayout.TableSection>
-        <QuizzesTable items={items} onEditClick={() => {}} />
+        <QuizzesTable items={items} onEditClick={(quiz) => {nav.toQuizPage(quiz.id)}} />
       </TablePageLayout.TableSection>
       <TablePageLayout.FooterSection>
         <FlexRow.Container itemsPosition={RowPositionEnum.center}>
