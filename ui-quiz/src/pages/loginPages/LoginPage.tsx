@@ -1,13 +1,16 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SignInButton, TransparentButton } from "../../components/buttons";
-import { accountLogIn } from "../../reducers/accountReducers/asyncActions";
 import { selectIsLogIn } from "../../reducers/accountReducers/selectors";
-import { useAppDispatch, RootState } from "../../store/store";
+import { useAppDispatch } from "../../store/store";
 import classes from "./LoginPage.module.scss";
 import { TextInput } from "../../components/textInput";
 import { ErrorMessageBlock } from "../../components/errors";
+import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
+import { setToken } from "../../reducers/accountReducers/slice";
+import useQuizApi from "../../apis/apiQuiz/useQuizApi";
+import { ISignInRequest } from "../../apis/apiQuiz/ApiQuizModels";
 
 const LoginPage = () => {
   const [login, setLogin] = useState<string>("");
@@ -16,14 +19,25 @@ const LoginPage = () => {
   const isLogIn = useSelector(selectIsLogIn);
   const nav = useNavigate();
 
-  const { isLoading, error } = useSelector((state: RootState) => state.account);
-  console.log(error);
-
   useEffect(() => {
     if (isLogIn == true) {
       nav("/home");
     }
   }, [isLogIn]);
+
+  const request = useQuizApi(
+    (request: ISignInRequest) => ApiQuizInstance.signIn(request),
+    (response) => {
+      dispatch(setToken(response.data.token));
+    }
+  );
+
+  const onSignInClickHandler = () => {
+    request.call({
+      login: login,
+      password: password,
+    });
+  };
 
   return (
     <div className={classes["login-page"]}>
@@ -38,12 +52,18 @@ const LoginPage = () => {
           </h2>
         </div>
         <div className="u-margin-bottom-medium">
-          <TextInput disabled={isLoading} value={login} errorMessage="" onChange={setLogin} placeholder="Email *" />
+          <TextInput
+            disabled={request.isLoading}
+            value={login}
+            errorMessage=""
+            onChange={setLogin}
+            placeholder="Email *"
+          />
         </div>
         <div className="u-margin-bottom-medium">
           <TextInput
             type="password"
-            disabled={isLoading}
+            disabled={request.isLoading}
             value={password}
             onChange={setPassword}
             placeholder="Password *"
@@ -51,11 +71,11 @@ const LoginPage = () => {
         </div>
 
         <div className="u-margin-bottom-medium">
-          <ErrorMessageBlock message={error} />
+          <ErrorMessageBlock message={request.errors.message} />
         </div>
 
         <div className=" u-center-text">
-          <SignInButton disabled={isLoading} onClick={() => dispatch(accountLogIn({ login, password }))}>
+          <SignInButton disabled={request.isLoading} onClick={onSignInClickHandler}>
             Sign in
           </SignInButton>
         </div>
@@ -65,7 +85,7 @@ const LoginPage = () => {
         </div>
 
         <div className="u-margin-bottom-small u-center-text">
-          <TransparentButton disabled={isLoading} onClick={() => nav("/register")}>
+          <TransparentButton disabled={request.isLoading} onClick={() => nav("/register")}>
             Sign up
           </TransparentButton>
         </div>

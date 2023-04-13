@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { CancelButton, GoBackButton, RoundedButton } from "../../../components/buttons";
+import { CancelButton, DeleteButton, GoBackButton, RoundedButton } from "../../../components/buttons";
 import DropdownInput from "../../../components/inputs/dropdownInput/DropdownInput";
 import Textarea from "../../../components/inputs/textarea/Textarea";
 import Switch from "../../../components/switches/Switch";
@@ -69,6 +69,19 @@ const QuestionPage = () => {
     setCorrectAnswer(index);
   };
 
+  const deleteAnswer = (index: number) => {
+    answers.splice(index, 1);
+    setAnswers([...answers]);
+    if (index < correctAnswer) {
+      setCorrectAnswer(correctAnswer - 1);
+      return;
+    }
+    if (index == correctAnswer) {
+      setCorrectAnswer(-1);
+      return;
+    }
+  };
+
   const updateAnswer = (index: number, answer: string) => {
     const newAnswers = [...answers];
     newAnswers[index] = answer;
@@ -117,6 +130,9 @@ const QuestionPage = () => {
             value={value}
             onChange={(value) => updateAnswer(index, value)}
           />
+        </div>
+        <div className={classes["answer__switch"]}>
+          <DeleteButton onClick={() => deleteAnswer(index)} />
         </div>
         <div className={classes["answer__switch"]}></div>
       </div>

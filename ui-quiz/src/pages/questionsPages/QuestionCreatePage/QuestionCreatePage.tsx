@@ -14,7 +14,7 @@ import {
   Subpage,
   TitleSection,
 } from "../../../layouts/QuestionPageLayout";
-import { CreateQuestionRequest } from "../../../apis/apiQuiz/ApiQuizModels";
+import { CreateQuestionRequest, CreateQuestionResponse } from "../../../apis/apiQuiz/ApiQuizModels";
 import ErrorMessage from "../../../components/errors";
 import { AppNotificationType, useNotifications } from "../../../notifications";
 import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
@@ -24,6 +24,7 @@ import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
 import { useSelector } from "react-redux";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
+import useQuizApi from "../../../apis/apiQuiz/useQuizApi";
 
 const QuestionCreatePage = () => {
   const [isModify, setIsModify] = useState(false);
@@ -33,12 +34,11 @@ const QuestionCreatePage = () => {
   const [category, setCategory] = useState("");
   const [answers, setAnswers] = useState<Array<string>>(["", "", ""]);
 
-  const apiError = useApiError<QuestionError>();
   const nav = useAppNavigation();
   const notify = useNotifications();
 
-  const {categories} = useSelector(referenceItemsStateSelector)
-  const categoryItems = categories?.map?.(c => c.value) ?? [];
+  const { categories } = useSelector(referenceItemsStateSelector);
+  const categoryItems = categories?.map?.((c) => c.value) ?? [];
 
   useEffect(() => {
     if (isPrivate == false && correctAnswer == 0 && question == "" && category == "" && answers.every((e) => e == "")) {
@@ -58,6 +58,12 @@ const QuestionCreatePage = () => {
     setCorrectAnswer(index);
   };
 
+  const endpoint = useQuizApi<CreateQuestionRequest, CreateQuestionResponse, QuestionError>(
+    (request) => ApiQuizInstance.createQuestion(request),
+    () => notify.addCorrect("Question created"),
+    () => notify.addError("Some informations are invalid")
+  );
+
   const onCreateQuestionClickHandler = () => {
     const request = {
       answers: answers,
@@ -68,16 +74,7 @@ const QuestionCreatePage = () => {
       question: question,
     } as CreateQuestionRequest;
 
-    ApiQuizInstance.createQuestion(request)
-      .then(() => {
-        notify.add({ message: "Question created", type: AppNotificationType.correct });
-        apiError.restart();
-      })
-      .catch((reason) => {
-        notify.add({ message: "Some informations are invalid", type: AppNotificationType.error });
-        apiError.setError(reason);
-      })
-      .finally(() => {});
+    endpoint.call(request);
   };
 
   const deleteAnswer = (index: number) => {
@@ -110,10 +107,19 @@ const QuestionCreatePage = () => {
     return (
       <div key={index} className={classes["answer"]}>
         <div className={classes["answer__switch"]}>
-          <Switch value={index == correctAnswer} onChange={(newState) => correctAnswerChangeHandler(index, newState)} />
+          <Switch
+            disabled={endpoint.isLoading}
+            value={index == correctAnswer}
+            onChange={(newState) => correctAnswerChangeHandler(index, newState)}
+          />
         </div>
         <div className={classes["answer__text"]}>
-          <TextInput value={value} onChange={(value) => answerChangeHandler(value, index)} placeholder="answer" />
+          <TextInput
+            disabled={endpoint.isLoading}
+            value={value}
+            onChange={(value) => answerChangeHandler(value, index)}
+            placeholder="answer"
+          />
         </div>
         <div className={classes["answer__switch"]}>
           <DeleteButton onClick={() => deleteAnswer(index)} />
@@ -132,15 +138,28 @@ const QuestionCreatePage = () => {
         </TitleSection>
         <QuestionSection>
           <Textarea
+            disabled={endpoint.isLoading}
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
             placeholder="Question"
-            errorMessage={apiError.erros?.description}
+            errorMessage={endpoint.errors.erros?.description}
           />
-          <Switch label="Private" value={isPrivate} onChange={(newState) => setIsPrivate(newState)} />
+          <Switch
+            disabled={endpoint.isLoading}
+            label="Private"
+            value={isPrivate}
+            onChange={(newState) => setIsPrivate(newState)}
+          />
           <div>
             <h6>Category</h6>
-            <Dropdown errorMessage={apiError.erros?.category} placeholder="Select category..." value={category} setValue={(value) => setCategory(value)} items={categoryItems} />
+            <Dropdown
+              disabled={endpoint.isLoading}
+              errorMessage={endpoint.errors.erros?.category}
+              placeholder="Select category..."
+              value={category}
+              setValue={(value) => setCategory(value)}
+              items={categoryItems}
+            />
           </div>
           <div>
             <h6>Language</h6>
@@ -153,8 +172,8 @@ const QuestionCreatePage = () => {
             <RoundedButton disabled={answers.length >= 6} onClick={addAnswer}>
               + Add
             </RoundedButton>
-            <ErrorMessage message={apiError.erros?.answers} />
-            <ErrorMessage message={apiError.erros?.correctAnswerIndex} />
+            <ErrorMessage message={endpoint.errors.erros?.answers} />
+            <ErrorMessage message={endpoint.errors.erros?.correctAnswerIndex} />
           </div>
         </AnswerSection>
         <FooterSection>
