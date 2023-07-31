@@ -23,6 +23,7 @@ export const InputBox: React.FC<InputBoxProps> = (props) => {
         onMouseLeave={() => setBoxHover(false)}
         onBlur={() => setBoxFocus(false)}
         className={boxClass}
+        style={{width: props.fullWidth ? "100%" : ""}}
       >
         {props.children}
       </div>
@@ -31,4 +32,6 @@ export const InputBox: React.FC<InputBoxProps> = (props) => {
   );
 };
 
-export interface InputBoxProps extends ComponentProps, ErrorComponent {}
+export interface InputBoxProps extends ComponentProps, ErrorComponent {
+  fullWidth?: boolean
+}

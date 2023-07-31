@@ -8,7 +8,7 @@ import { useAppDispatch } from "../../../store/store";
 import { useSelector } from "react-redux";
 import { registrationErrors } from "../../../reducers/registrationReducers/selectors";
 import { registrationClearLoginError } from "../../../reducers/registrationReducers/slice";
-import { SignInButton } from "../../../components/buttons";
+import { ButtonDark } from "../../../components/buttons";
 import { TextInput } from "../../../components/textInput";
 
 const RegisterFormView = (props: RegisterFormViewProps) => {
@@ -68,9 +68,9 @@ const RegisterFormView = (props: RegisterFormViewProps) => {
       </div>
 
       <div className="u-center-text">
-        <SignInButton disabled={viewModel.disabled} onClick={onSignUpHandler}>
+        <ButtonDark disabled={viewModel.disabled} onClick={onSignUpHandler}>
           Sign up!
-        </SignInButton>
+        </ButtonDark>
       </div>
     </Card>
   );

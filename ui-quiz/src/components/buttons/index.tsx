@@ -51,7 +51,7 @@ export const TransparentButton: React.FC<ButtonProps> = (props) => {
   return <Button {...props} className={`${classes["button--transparent"]}`}></Button>;
 };
 
-export const SignInButton: React.FC<ButtonProps> = (props) => {
+export const ButtonDark: React.FC<ButtonProps> = (props) => {
   return <Button {...props} className={`${classes["button--dark"]}`}></Button>;
 };
 
