@@ -17,15 +17,15 @@ const LoginPage = () => {
   return (
     <div className={classes["login-page"]}>
       <section className={classes["login-page__form"]}>
+        <div className="u-margin-bottom-big u-center-text">
+          <h1>Quiz</h1>
+        </div>
+        <div className="u-margin-bottom-big u-center-text">
+          <h2>
+            Welcome in the <br /> quiz live game{" "}
+          </h2>
+        </div>
         <LoginForm.Form>
-          <div className="u-margin-bottom-big u-center-text">
-            <h1>Quiz</h1>
-          </div>
-          <div className="u-margin-bottom-big u-center-text">
-            <h2>
-              Welcome in the <br /> quiz live game{" "}
-            </h2>
-          </div>
           <div className="u-margin-bottom-medium">
             <LoginForm.EmailInput />
           </div>

@@ -9,6 +9,7 @@ export interface ILoginFormState{
     setPassword?: (value : string) => void,
     isLoading?: boolean
     errorMessage?: string,
+    clearError?: () => void;
     signIn?: () => void;
     signUp?: () => void;
 }

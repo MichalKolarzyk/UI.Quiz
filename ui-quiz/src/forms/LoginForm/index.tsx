@@ -53,7 +53,7 @@ const SignUpButton = () => {
 
 const ErrorMessage = () => {
   const context = useContext(LoginFormContext);
-  return <ErrorMessageBlock message={context.errorMessage} />;
+  return <ErrorMessageBlock onClear={context.clearError} message={context.errorMessage} />;
 };
 
 const LoginForm = {
