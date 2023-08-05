@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./LoginPage.module.scss";
-import LoginForm from "../../forms/LoginForm";
+import LoginForm from "../../compoundComponents/LoginForm";
 import useToken from "../../hooks/useToken";
 
 const LoginPage = () => {

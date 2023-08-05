@@ -3,7 +3,7 @@ import { QuestionPageLayout } from "../../../layouts/QuestionPageLayout";
 import { GapRowEnum, RowPositionEnum } from "../../../components/containers/FlexRow";
 import FlexRow from "../../../components/containers/FlexRow";
 import FlexColumn, { GapColumnEnum } from "../../../components/containers/FlexColumn";
-import CreateQuestionForm from "../../../forms/CreateQuestionForm";
+import CreateQuestionForm from "../../../compoundComponents/CreateQuestionForm";
 
 const QuestionCreatePage = () => {
   return (
