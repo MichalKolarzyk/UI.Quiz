@@ -7,7 +7,7 @@ import { QuestionError } from "../../reducers/questionReducers/slice";
 import { useSelector } from "react-redux";
 import { referenceItemsStateSelector } from "../../reducers/referenceItems/slice";
 import useAppNavigation from "../../hooks/useAppNavigation";
-import { useNotifications } from "../../notifications/hooks";
+import { useNotifications } from "../Notifications/hooks";
 
 const CreateQuestionProvider = (): ICreateQuestionState => {
   const notify = useNotifications();

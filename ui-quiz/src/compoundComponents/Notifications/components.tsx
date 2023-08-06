@@ -1,4 +1,4 @@
-import { DeleteButton } from "../components/buttons";
+import { DeleteButton } from "../../components/buttons";
 import { AppNotification, AppNotificationType } from "./types";
 import classes from "./Notification.module.scss";
 

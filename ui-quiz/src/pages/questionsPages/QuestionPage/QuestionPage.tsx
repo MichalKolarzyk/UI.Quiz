@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import { QuestionPageLayout } from "../../../layouts/QuestionPageLayout";
 import FlexRow, { GapRowEnum, RowPositionEnum } from "../../../components/containers/FlexRow";
 import FlexColumn, { GapColumnEnum } from "../../../components/containers/FlexColumn";
-import { useNotifications } from "../../../notifications/hooks";
+import { useNotifications } from "../../../compoundComponents/Notifications/hooks";
 
 const QuestionPage = () => {
   const params = useParams();
