@@ -1,6 +1,8 @@
-import { DeleteButton } from "../../components/buttons";
+import { DeleteButton, EmptyButton } from "../../components/buttons";
 import { AppNotification, AppNotificationType } from "./types";
 import classes from "./Notification.module.scss";
+import { Icon, IconComponents } from "../../components/icons";
+import { IconSize } from "../../components/icons/types";
 
 export const NotificationBlock = (props: NotificationProps) => {
   let className;
@@ -13,7 +15,9 @@ export const NotificationBlock = (props: NotificationProps) => {
   return (
     <div className={`${className} ${classes.notification}`}>
       <h6>{props.appnotification.message}</h6>
-      <DeleteButton onClick={props.onDelete} />
+      <EmptyButton onClick={props.onDelete}>
+        <Icon iconComponent={IconComponents.Close} size={IconSize.L}/>
+      </EmptyButton>
     </div>
   );
 };

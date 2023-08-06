@@ -12,9 +12,9 @@ import { useQuestionsSearchParams } from "./searchParams";
 import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
-import TablePageLayout from "../../../layouts/TablePageLayout";
 import FlexRow from "../../../components/flex/FlexRow";
 import { GapRowEnum, RowPositionEnum } from "../../../components/flex/types";
+import { TablePageLayout } from "../../../layouts";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
@@ -50,13 +50,13 @@ const QuestionsTablePage = () => {
 
   return (
     <TablePageLayout.Subpage>
-      <TablePageLayout.TitleSection>
+      <TablePageLayout.Title>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <GoBackButton onClick={() => nav.toHomePage()} />
           <h3>Quesions</h3>
         </FlexRow.Container>
-      </TablePageLayout.TitleSection>
-      <TablePageLayout.FilterSection>
+      </TablePageLayout.Title>
+      <TablePageLayout.Filter>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <Dropdown
             placeholder="Select category..."
@@ -78,20 +78,20 @@ const QuestionsTablePage = () => {
           ></TextInput>
           <Switch value={searchParams.isPrivate} onChange={onIsPrivateChange} label="IsPrivate"></Switch>
         </FlexRow.Container>
-      </TablePageLayout.FilterSection>
-      <TablePageLayout.ActionSection>
+      </TablePageLayout.Filter>
+      <TablePageLayout.Action>
         <FlexRow.Container fullHeight itemsPosition={RowPositionEnum.right}>
           <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
         </FlexRow.Container>
-      </TablePageLayout.ActionSection>
-      <TablePageLayout.TableSection>
+      </TablePageLayout.Action>
+      <TablePageLayout.Table>
         <QuestionsTable skip={skip} items={items} onEditClick={(item) => nav.toQuestionPage(item.id)} />
-      </TablePageLayout.TableSection>
-      <TablePageLayout.FooterSection>
+      </TablePageLayout.Table>
+      <TablePageLayout.Footer>
         <FlexRow.Container itemsPosition={RowPositionEnum.center}>
           <Paginator page={searchParams.page} onPageChange={searchParams.setPage} pages={questionPagesCount} />
         </FlexRow.Container>
-      </TablePageLayout.FooterSection>
+      </TablePageLayout.Footer>
     </TablePageLayout.Subpage>
   );
 };

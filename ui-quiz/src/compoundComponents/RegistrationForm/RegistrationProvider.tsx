@@ -6,6 +6,7 @@ import useQuizApi from "../../apis/apiQuiz/useQuizApi";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
 import { useNotifications } from "../Notifications/hooks";
 import usePrompt from "../Prompt/hooks";
+import { CreateButton } from "../../components/buttons";
 
 const RegistrationProvider = (): IRegistrationState => {
   const [login, setLogin] = useState("")
@@ -21,9 +22,9 @@ const RegistrationProvider = (): IRegistrationState => {
         <div>
           <div className="h2 u-color-white">Congratulations! </div>
           <div className="h3 u-color-white u-margin-bottom-big">{`${login} account has been created `}</div>
-          <button onClick={nav.toLoginPage} className="button">
+          <CreateButton onClick={nav.toLoginPage} className="button">
             Continue
-          </button>
+          </CreateButton>
         </div>
     );
   }

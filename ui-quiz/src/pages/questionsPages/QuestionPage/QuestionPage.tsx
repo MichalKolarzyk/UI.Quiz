@@ -13,11 +13,11 @@ import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 import { useSelector } from "react-redux";
-import { QuestionPageLayout } from "../../../layouts/QuestionPageLayout";
 import FlexRow  from "../../../components/flex/FlexRow";
 import FlexColumn from "../../../components/flex/FlexColumn";
 import { useNotifications } from "../../../compoundComponents/Notifications/hooks";
 import { GapColumnEnum, GapRowEnum, RowPositionEnum } from "../../../components/flex/types";
+import { QuestionPageLayout } from "../../../layouts";
 
 const QuestionPage = () => {
   const params = useParams();
@@ -134,13 +134,13 @@ const QuestionPage = () => {
 
   return (
     <QuestionPageLayout.Main>
-      <QuestionPageLayout.TitleSection>
+      <QuestionPageLayout.Title>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <GoBackButton onClick={() => nav.toPreviousPage()} />
           <h3>Question</h3>
         </FlexRow.Container>
-      </QuestionPageLayout.TitleSection>
-      <QuestionPageLayout.QuestionSection>
+      </QuestionPageLayout.Title>
+      <QuestionPageLayout.Question>
         <FlexColumn.Container gap={GapColumnEnum.big}>
           <Textarea
             errorMessage={apiError.erros?.description}
@@ -167,8 +167,8 @@ const QuestionPage = () => {
             <Dropdown disabled={!canUserEdit} placeholder="Select Language..." items={["1", "2"]} />
           </div>
         </FlexColumn.Container>
-      </QuestionPageLayout.QuestionSection>
-      <QuestionPageLayout.AnswerSection>
+      </QuestionPageLayout.Question>
+      <QuestionPageLayout.Answer>
         <FlexColumn.Container gap={GapColumnEnum.big}>
           {answersView}
           <div>
@@ -184,8 +184,8 @@ const QuestionPage = () => {
             <ErrorMessage message={apiError.erros?.correctAnswerIndex} />
           </div>
         </FlexColumn.Container>
-      </QuestionPageLayout.AnswerSection>
-      <QuestionPageLayout.FooterSection>
+      </QuestionPageLayout.Answer>
+      <QuestionPageLayout.Footer>
         <FlexRow.Container itemsPosition={RowPositionEnum.right}>
           <CancelButton onClick={nav.toPreviousPage} />
           {canUserEdit && (
@@ -194,7 +194,7 @@ const QuestionPage = () => {
             </RoundedButton>
           )}
         </FlexRow.Container>
-      </QuestionPageLayout.FooterSection>
+      </QuestionPageLayout.Footer>
     </QuestionPageLayout.Main>
   );
 };

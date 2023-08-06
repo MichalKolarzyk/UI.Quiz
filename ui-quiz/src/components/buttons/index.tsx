@@ -40,6 +40,16 @@ export const GoBackButton: React.FC<ButtonProps> = (props) => {
   );
 };
 
+export const CloseButton: React.FC<ButtonProps> = (props) => {
+  return (
+    <TextButton {...props}>
+      <ButtonContainer>
+        <Icon iconComponent={IconComponents.Close} size={IconSize.L} />
+      </ButtonContainer>
+    </TextButton>
+  );
+};
+
 export const DeleteButton: React.FC<ButtonProps> = (props) => {
   return (
     <TextButton {...props}>

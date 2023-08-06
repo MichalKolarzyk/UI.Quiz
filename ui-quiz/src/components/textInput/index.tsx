@@ -1,12 +1,14 @@
 import { ErrorComponent, InputComponentProps } from "../base/types";
-import { ClearIcon, IconComponents } from "../icons";
+import { IconComponents } from "../icons";
 import classes from "./styles.module.scss";
 import { InputBox } from "../boxes/InputBox";
+import FlexRow from "../flex/FlexRow";
+import { GapRowEnum, RowPositionEnum } from "../flex/types";
 
 export const TextInput: React.FC<DropdownProps> = (props) => {
   return (
       <InputBox errorMessage={props.errorMessage} isLoading={props.isLoading} disabled={props.disabled}>
-        <div className={classes.box}>
+        <FlexRow.Container itemsPosition={RowPositionEnum.left} gap={GapRowEnum.small}>
           <input
             disabled={props.disabled}
             type={props.type}
@@ -16,7 +18,7 @@ export const TextInput: React.FC<DropdownProps> = (props) => {
             placeholder={props.placeholder}
           />
           {props.value && !props.disabled && <IconComponents.Close onClick={() => props.onChange?.("")} className={classes.icon} />}
-        </div>
+        </FlexRow.Container>
       </InputBox>
   );
 };

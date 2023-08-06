@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
-import TablePageLayout from "../../layouts/TablePageLayout";
-import { CreateButton, GoBackButton, RoundedButton, ButtonDark } from "../../components/buttons";
+import { CreateButton, GoBackButton, RoundedButton } from "../../components/buttons";
 import useAppNavigation from "../../hooks/useAppNavigation";
 import FlexRow from "../../components/flex/FlexRow";
 import { useEffect, useState } from "react";
@@ -9,6 +8,7 @@ import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
 import { GetQuizResponse } from "../../apis/apiQuiz/models/quiz";
 import { QuestionsTable } from "../../components/tables";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
+import { TablePageLayout } from "../../layouts";
 
 const QuizPage = () => {
   const params = useParams();
@@ -28,21 +28,21 @@ const QuizPage = () => {
 
   return (
     <TablePageLayout.Subpage>
-      <TablePageLayout.TitleSection>
+      <TablePageLayout.Title>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <GoBackButton onClick={nav.toPreviousPage} />
           <h3>{quiz?.name ?? "Quiz"}</h3>
         </FlexRow.Container>
-      </TablePageLayout.TitleSection>
-      <TablePageLayout.ActionSection>
+      </TablePageLayout.Title>
+      <TablePageLayout.Action>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium} itemsPosition={RowPositionEnum.right}>
           <RoundedButton>+ Add Questions</RoundedButton>
           <CreateButton>Create session</CreateButton>
         </FlexRow.Container>
-      </TablePageLayout.ActionSection>
-      <TablePageLayout.TableSection>
+      </TablePageLayout.Action>
+      <TablePageLayout.Table>
         <QuestionsTable onEditClick={() => {}}  items={quiz?.questions ?? []}/>
-      </TablePageLayout.TableSection>
+      </TablePageLayout.Table>
     </TablePageLayout.Subpage>
   );
 };

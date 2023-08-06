@@ -8,8 +8,8 @@ import FlexRow from "../../components/flex/FlexRow";
 import { Portal, PortalOverlay } from "../../components/portals";
 import { TextInput } from "../../components/textInput";
 import useAppNavigation from "../../hooks/useAppNavigation";
-import PromptLayout from "../../layouts/PromptLayout";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
+import { PromptLayout } from "../../layouts";
 
 const CreateQuizPage = () => {
   const nav = useAppNavigation();
@@ -31,21 +31,21 @@ const CreateQuizPage = () => {
         <PromptLayout.Prompt>
           <DarkCard>
             <PromptLayout.Content>
-              <PromptLayout.TitleSection>
+              <PromptLayout.Title>
                 <FlexRow.Container gap={GapRowEnum.small}>
                   <GoBackButton onClick={nav.toPreviousPage} />
                   <h4>Create new Quizs:</h4>
                 </FlexRow.Container>
-              </PromptLayout.TitleSection>
+              </PromptLayout.Title>
               <PromptLayout.Content>
                 <TextInput value={name} onChange={setName} placeholder="Quiz name" />
               </PromptLayout.Content>
-              <PromptLayout.FooterSection>
+              <PromptLayout.Footer>
                 <FlexRow.Container itemsPosition={RowPositionEnum.right}>
                   <CancelButton onClick={nav.toPreviousPage} />
                   <RoundedButton onClick={onCreateHandler}>Create</RoundedButton>
                 </FlexRow.Container>
-              </PromptLayout.FooterSection>
+              </PromptLayout.Footer>
             </PromptLayout.Content>
           </DarkCard>
         </PromptLayout.Prompt>

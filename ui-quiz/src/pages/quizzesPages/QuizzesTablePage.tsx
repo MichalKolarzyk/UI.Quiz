@@ -10,9 +10,9 @@ import { referenceItemsStateSelector } from "../../reducers/referenceItems/slice
 import { Dropdown } from "../../components/dropdown";
 import { TextInput } from "../../components/textInput";
 import useQuizzesSearchParams from "./searchParams";
-import TablePageLayout from "../../layouts/TablePageLayout";
 import FlexRow from "../../components/flex/FlexRow";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
+import { TablePageLayout } from "../../layouts";
 
 const QuizTablePage = () => {
   const nav = useAppNavigation();
@@ -35,13 +35,13 @@ const QuizTablePage = () => {
 
   return (
     <TablePageLayout.Subpage>
-      <TablePageLayout.TitleSection>
+      <TablePageLayout.Title>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <GoBackButton onClick={() => nav.toHomePage()} />
           <h3>Quizzes</h3>
         </FlexRow.Container>
-      </TablePageLayout.TitleSection>
-      <TablePageLayout.FilterSection>
+      </TablePageLayout.Title>
+      <TablePageLayout.Filter>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <Dropdown
             value={params.category}
@@ -51,20 +51,20 @@ const QuizTablePage = () => {
           />
           <TextInput onChange={params.setAuthor} placeholder="Author"></TextInput>
         </FlexRow.Container>
-      </TablePageLayout.FilterSection>
-      <TablePageLayout.ActionSection>
+      </TablePageLayout.Filter>
+      <TablePageLayout.Action>
         <FlexRow.Container fullHeight itemsPosition={RowPositionEnum.right}>
           <CreateButton onClick={nav.toCreateQuizPage}>Create Quiz</CreateButton>
         </FlexRow.Container>
-      </TablePageLayout.ActionSection>
-      <TablePageLayout.TableSection>
+      </TablePageLayout.Action>
+      <TablePageLayout.Table>
         <QuizzesTable items={items} onEditClick={(quiz) => {nav.toQuizPage(quiz.id)}} />
-      </TablePageLayout.TableSection>
-      <TablePageLayout.FooterSection>
+      </TablePageLayout.Table>
+      <TablePageLayout.Footer>
         <FlexRow.Container itemsPosition={RowPositionEnum.center}>
           <Paginator page={params.page} onPageChange={params.setPage} pages={1} />
         </FlexRow.Container>
-      </TablePageLayout.FooterSection>
+      </TablePageLayout.Footer>
     </TablePageLayout.Subpage>
   );
 };
