@@ -1,5 +1,3 @@
-import Card from "../../../components/cards/Card";
-import FormInput from "../../../components/inputs/formInputs/FormInput";
 import { IRegisterFormViewModel } from "./IRegisterFormViewModel";
 import classes from "./RegisterForm.module.scss";
 import { IoMdPersonAdd } from "react-icons/io";
@@ -10,6 +8,7 @@ import { registrationErrors } from "../../../reducers/registrationReducers/selec
 import { registrationClearLoginError } from "../../../reducers/registrationReducers/slice";
 import { ButtonDark } from "../../../components/buttons";
 import { TextInput } from "../../../components/textInput";
+import { Card } from "../../../components/cards";
 
 const RegisterFormView = (props: RegisterFormViewProps) => {
   const viewModel = props.viewModel;

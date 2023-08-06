@@ -1,0 +1,10 @@
+@import '../../scss/abstract/variables';
+
+.label{
+    color: $color-white;
+    display: inline;
+
+    &--bold{
+        font-weight: 600;
+    }
+}

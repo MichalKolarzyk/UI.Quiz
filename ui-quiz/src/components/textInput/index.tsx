@@ -1,5 +1,5 @@
 import { ErrorComponent, InputComponentProps } from "../base/types";
-import { ClearIcon } from "../icons";
+import { ClearIcon, IconComponents } from "../icons";
 import classes from "./styles.module.scss";
 import { InputBox } from "../boxes/InputBox";
 
@@ -15,7 +15,7 @@ export const TextInput: React.FC<DropdownProps> = (props) => {
             className={classes.input}
             placeholder={props.placeholder}
           />
-          {!props.value && !props.disabled && <ClearIcon onClick={() => props.onChange?.("")} className={classes.icon} />}
+          {props.value && !props.disabled && <IconComponents.Close onClick={() => props.onChange?.("")} className={classes.icon} />}
         </div>
       </InputBox>
   );

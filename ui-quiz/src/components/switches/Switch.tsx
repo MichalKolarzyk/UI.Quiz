@@ -1,29 +1,32 @@
-import { useState } from "react";
 import classes from "./Switch.module.scss";
-import { CheckIcon } from "../icons";
+import { Icon, IconComponents } from "../icons";
+import { SwitchProps } from "./types";
+import FlexRow from "../flex/FlexRow";
+import { GapRowEnum } from "../flex/types";
+import { IconSize } from "../icons/types";
+import { Label } from "../labels";
 
 const Switch = (props: SwitchProps) => {
   const onClickHandler = () => {
-    const newState = !props.value
+    const newState = !props.value;
     props?.onChange?.(newState);
-  }
+  };
 
   return (
-    <div className={classes.box}>
-      <button disabled={props.disabled} onClick={onClickHandler} className={`${classes.switch} ${props.value ? classes.on : classes.off}`}>
-        {props.value && <CheckIcon className={classes["check-icon"]}/>}
-        <div className={classes.toggle}></div>
-      </button>
-      <div className={classes.label}>{props.label ?? ""}</div>
+    <div>
+      <FlexRow.Container gap={GapRowEnum.small}>
+        <button
+          disabled={props.disabled}
+          onClick={onClickHandler}
+          className={`${classes.switch} ${props.value ? classes.on : classes.off}`}
+        >
+          {props.value && <Icon className={classes["check-icon"]} iconComponent={IconComponents.Check} size={IconSize.L} />}
+          <div className={classes.toggle}></div>
+        </button>
+        <Label text={props.label}/>
+      </FlexRow.Container>
     </div>
   );
 };
-
-export interface SwitchProps {
-  label?: string;
-  value?: boolean | null;
-  onChange?: (newState: boolean) => void;
-  disabled?: boolean
-}
 
 export default Switch;

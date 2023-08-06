@@ -1,42 +1,50 @@
-import { CancelIcon, DeleteIcon, EditIcon, GoBackIcon, NextIcon, PreviousIcon } from "../icons";
+import { Icon, IconComponents } from "../icons";
 import classes from "./Button.module.scss";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import WithStyles from "../base/WithStyles";
 import { ButtonProps } from "./types";
+import { IconSize } from "../icons/types";
+import FlexRow from "../flex/FlexRow";
+import { GapRowEnum } from "../flex/types";
 
 export const Button = (props: ButtonProps) => {
-  return <button {...props} className={`${classes.button} ${props.className}`}>{props.children}</button>
-}
-
-export const TextButton =  WithStyles(Button, `${classes["button--text"]} ${classes["button-padding-small"]}`)
-export const TextBlackButton =  WithStyles(Button, `${classes["button--text"]} ${classes["button-padding-none"]} ${classes["button-color-black"]}`)
-export const CreateButton =  WithStyles(Button, `${classes["button--create"]}`)
-export const RoundedButton =  WithStyles(Button, `${classes["button--rounded"]}`)
-export const TransparentButton =  WithStyles(Button, `${classes["button--transparent"]}`)
-export const ButtonDark =  WithStyles(Button, `${classes["button--dark"]}`)
-
-
-const ButtonContainer: React.FC<ButtonProps> = (props) => {
-  return <div className={classes.buttonContainer}>{props.children}</div>;
+  return (
+    <button {...props} className={`${classes.button} ${props.className}`}>
+      {props.children}
+    </button>
+  );
 };
 
+export const TextButton = WithStyles(Button, `${classes["button--text"]} ${classes["button-padding-small"]}`);
+export const IconBlackButton = WithStyles(
+  Button,
+  `${classes["button--text"]} ${classes["button-padding-none"]} ${classes["button-color-black"]}`
+);
+export const EmptyButton = WithStyles(Button, `${classes["button--text"]} ${classes["button-padding-none"]}`);
+export const CreateButton = WithStyles(Button, `${classes["button--create"]}`);
+export const RoundedButton = WithStyles(Button, `${classes["button--rounded"]}`);
+export const TransparentButton = WithStyles(Button, `${classes["button--transparent"]}`);
+export const ButtonDark = WithStyles(Button, `${classes["button--dark"]}`);
+
+const ButtonContainer = (props: any) => {
+  return <FlexRow.Container gap={GapRowEnum.small}>{props.children}</FlexRow.Container>;
+};
 
 export const GoBackButton: React.FC<ButtonProps> = (props) => {
   return (
     <TextButton {...props}>
       <ButtonContainer>
-        <GoBackIcon className={classes.icon} />
+        <Icon iconComponent={IconComponents.GoBack} size={IconSize.L} />
       </ButtonContainer>
     </TextButton>
   );
 };
 
-
 export const DeleteButton: React.FC<ButtonProps> = (props) => {
   return (
     <TextButton {...props}>
       <ButtonContainer>
-        <DeleteIcon className={classes.icon} />
+        <Icon iconComponent={IconComponents.Delete} size={IconSize.L} />
       </ButtonContainer>
     </TextButton>
   );
@@ -47,7 +55,7 @@ export const CancelButton: React.FC<ButtonProps> = (props) => {
     <TextButton {...props}>
       <ButtonContainer>
         <div>Cancel</div>
-        <CancelIcon className={classes.icon} />
+        <Icon iconComponent={IconComponents.Cancel} size={IconSize.L} />
       </ButtonContainer>
     </TextButton>
   );
@@ -55,11 +63,11 @@ export const CancelButton: React.FC<ButtonProps> = (props) => {
 
 export const EdiiButton: React.FC<ButtonProps> = (props) => {
   return (
-    <TextBlackButton {...props}>
+    <IconBlackButton {...props}>
       <ButtonContainer>
-        <EditIcon className={classes.icon} />
+        <Icon iconComponent={IconComponents.Edit} size={IconSize.L} />
       </ButtonContainer>
-    </TextBlackButton>
+    </IconBlackButton>
   );
 };
 
@@ -68,7 +76,7 @@ export const NextButton: React.FC<ButtonProps> = (props) => {
     <TextButton {...props}>
       <ButtonContainer>
         <div>Next</div>
-        <NextIcon className={classes.icon} />
+        <Icon iconComponent={IconComponents.Next} size={IconSize.L} />
       </ButtonContainer>
     </TextButton>
   );
@@ -78,7 +86,7 @@ export const PreviousButton: React.FC<ButtonProps> = (props) => {
   return (
     <TextButton {...props}>
       <ButtonContainer>
-        <PreviousIcon className={classes.icon} />
+        <Icon iconComponent={IconComponents.Previous} size={IconSize.L} />
         <div>Prev</div>
       </ButtonContainer>
     </TextButton>
@@ -90,7 +98,11 @@ export const HeaderPageButton: React.FC<HeaderPageButtonProps> = (props) => {
     <NavLink
       {...props}
       end
-      className={({ isActive, isPending }) => `${classes.button} ${classes['button--text']} ${(isPending ? "" : isActive ? classes["button--text--active"] : "")}`}
+      className={({ isActive, isPending }) =>
+        `${classes.button} ${classes["button--text"]} ${
+          isPending ? "" : isActive ? classes["button--text--active"] : ""
+        }`
+      }
     ></NavLink>
   );
 };

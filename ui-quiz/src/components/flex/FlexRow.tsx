@@ -7,6 +7,7 @@ const FlexRowContainer: React.FC<FlexRowProps> = (props) => {
         gap: props.gap?.toString(),
         justifyContent:  props.itemsPosition,
         height: props.fullHeight ? "100%" : "",
+        
       }}
       className={`${classes.row}`}
     >

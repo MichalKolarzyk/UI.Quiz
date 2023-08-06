@@ -92,20 +92,6 @@
   padding: 0rem;
 }
 
-
 .button-color-black{
   color: $color-black;
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  align-items: center;
-}
-
-.icon {
-  height: 2.4rem;
-  width: 2.4rem;
-  transition: all 0.3s;
 }

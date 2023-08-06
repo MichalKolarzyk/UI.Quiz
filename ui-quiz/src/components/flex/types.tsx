@@ -32,5 +32,6 @@ export interface FlexRowProps {
     left = "left",
     center = "center",
     right = "right",
+    spaceBetween = "space-between"
   }
   

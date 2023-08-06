@@ -1,17 +1,42 @@
-@import '../../scss/abstract/variables';
+@import "../../scss/abstract/variables";
 
-.card{
-    display: block;
-    background-color: $color-primary-light;
-    border: solid $color-white .5rem;
-    padding: 8rem;
-    border-radius: 1rem;
+.card {
+  display: block;
+  background-color: $color-primary-light;
+  border: solid $color-white 0.5rem;
+  padding: 8rem;
+  border-radius: 1rem;
 }
 
-.dark-card{
-    display: block;
-    background-color: $color-primary-dark;
-    border: solid rgba($color-white, .5) .5rem;
-    padding: 3.1rem;
-    border-radius: 1rem;
+.dark-card {
+  display: block;
+  background-color: $color-primary-dark;
+  border: solid rgba($color-white, 0.5) 0.5rem;
+  padding: 3.1rem;
+  border-radius: 1rem;
+}
+
+.red-card {
+  display: block;
+  color: $color-white;
+  text-align: left;
+  font-size: $small-font-size;
+  animation: 0.2s ease-out 0s 1 slideFromTop;
+  text-align: center;
+  background-color: rgba(rgb(255, 33, 33), 0.7);
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  &--invisible {
+    color: transparent;
+  }
+}
+
+@keyframes slideFromTop {
+  0% {
+    font-size: 0;
+    opacity: 0;
+  }
+  100% {
+  }
 }

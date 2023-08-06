@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ErrorComponent, InputComponentProps, SingleValueProps } from "../base/types";
 import { InputBox } from "../boxes/InputBox";
-import { AddIcon, ClearIcon, DownIcon, UpIcon } from "../icons";
+import { ClearIcon, DownIcon, UpIcon } from "../icons";
 import classes from "./styles.module.scss";
 import React from "react";
 

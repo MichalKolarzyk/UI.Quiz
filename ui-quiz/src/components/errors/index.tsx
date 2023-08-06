@@ -1,5 +1,10 @@
+import { Button, IconBlackButton, EmptyButton, TransparentButton } from "../buttons";
+import { RedCard } from "../cards";
 import FlexRow from "../flex/FlexRow";
-import { ClearIcon } from "../icons";
+import { RowPositionEnum } from "../flex/types";
+import { ClearIcon, Icon, IconComponents } from "../icons";
+import { IconSize } from "../icons/types";
+import { Label } from "../labels";
 import classes from "./ErrorMessage.module.scss";
 
 const ErrorMessage: React.FC<ErrorMessageProps> = (props) => {
@@ -14,15 +19,14 @@ export const ErrorMessageBlock: React.FC<ErrorMessageProps> = (props) => {
     return <></>;
   }
   return (
-    <div className={classes["error-block"]}>
-      <FlexRow.Container>
-        <FlexRow.Item>
-          <span>{props.message}</span>
-        </FlexRow.Item>
-
-        <ClearIcon onClick={props.onClear} className={classes.icon} />
+    <RedCard>
+      <FlexRow.Container itemsPosition={RowPositionEnum.spaceBetween}>
+        <Label text={props.message}/>
+        <EmptyButton onClick={props.onClear}>
+          <Icon iconComponent={IconComponents.Close} size={IconSize.M}/>
+        </EmptyButton>
       </FlexRow.Container>
-    </div>
+    </RedCard>
   );
 };
 

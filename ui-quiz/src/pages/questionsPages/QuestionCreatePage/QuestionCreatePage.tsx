@@ -1,4 +1,3 @@
-import WindowUnloadListener from "../../../components/listeners/WindowUnloadListener";
 import { QuestionPageLayout } from "../../../layouts/QuestionPageLayout";
 import FlexRow from "../../../components/flex/FlexRow";
 import FlexColumn from "../../../components/flex/FlexColumn";
@@ -8,7 +7,6 @@ import { GapRowEnum, GapColumnEnum, RowPositionEnum } from "../../../components/
 const QuestionCreatePage = () => {
   return (
     <CreateQuestionForm.Form>
-      <WindowUnloadListener isModify={false} />
       <QuestionPageLayout.Main>
         <QuestionPageLayout.TitleSection>
           <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
