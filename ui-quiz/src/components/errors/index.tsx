@@ -1,11 +1,12 @@
-import { Button, IconBlackButton, EmptyButton, TransparentButton } from "../buttons";
+import { EmptyButton } from "../buttons";
 import { RedCard } from "../cards";
 import FlexRow from "../flex/FlexRow";
 import { RowPositionEnum } from "../flex/types";
-import { ClearIcon, Icon, IconComponents } from "../icons";
+import { Icon, IconComponents } from "../icons";
 import { IconSize } from "../icons/types";
 import { Label } from "../labels";
 import classes from "./ErrorMessage.module.scss";
+import { ErrorMessageProps } from "./types";
 
 const ErrorMessage: React.FC<ErrorMessageProps> = (props) => {
   if (props.message == undefined) {
@@ -29,11 +30,5 @@ export const ErrorMessageBlock: React.FC<ErrorMessageProps> = (props) => {
     </RedCard>
   );
 };
-
-export interface ErrorMessageProps
-  extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  message?: string;
-  onClear?: () => void;
-}
 
 export default ErrorMessage;

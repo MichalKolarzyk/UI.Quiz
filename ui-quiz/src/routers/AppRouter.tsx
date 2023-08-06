@@ -1,7 +1,6 @@
 import { BrowserRouter, createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Routes } from "react-router-dom";
 import HomePage from "../pages/homePages/HomePage";
 import RegisterPage from "../pages/registerPages/RegisterPage";
-import RegisterFormViewModel from "../pages/registerPages/registerFormComponents/RegisterFormViewModel";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginPage from "../pages/loginPages/LoginPage";
 import AboutPage from "../pages/aboutPages/AboutPage";
@@ -14,14 +13,12 @@ import CreateQuizPage from "../pages/createQuizPages/CreateQuizPage";
 import QuizPage from "../pages/quizPages/QuizPage";
 
 const AppRouter = () => {
-  const registerPageViewModel = RegisterFormViewModel();
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route index element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage registerFormViewModel={registerPageViewModel} />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route
           path="/home"
           element={

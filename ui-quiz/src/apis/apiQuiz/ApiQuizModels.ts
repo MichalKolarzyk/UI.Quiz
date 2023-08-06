@@ -16,6 +16,12 @@ export interface IRegisterRequest {
 
 export interface IRegisterResponse {}
 
+export interface IRegisterError{
+  login: string,
+  password: string,
+  repetePassword: string,
+}
+
 export interface IGetUserProfileResponse {
   id: string;
   accountId: string;
