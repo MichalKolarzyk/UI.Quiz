@@ -1,3 +1,4 @@
+import FlexRow, { RowPositionEnum } from "../containers/FlexRow";
 import { ClearIcon } from "../icons";
 import classes from "./ErrorMessage.module.scss";
 
@@ -14,8 +15,13 @@ export const ErrorMessageBlock: React.FC<ErrorMessageProps> = (props) => {
   }
   return (
     <div className={classes["error-block"]}>
-      <span>{props.message}</span>
-      <ClearIcon onClick={props.onClear} className={classes.icon} />
+      <FlexRow.Container>
+        <FlexRow.Item>
+          <span>{props.message}</span>
+        </FlexRow.Item>
+
+        <ClearIcon onClick={props.onClear} className={classes.icon} />
+      </FlexRow.Container>
     </div>
   );
 };

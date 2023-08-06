@@ -1,14 +1,16 @@
 import { PortalRoot } from "./components/portals";
 import AppRouter from "./routers/AppRouter";
 import UserTokenLoader from "./components/loaders/UserTokenLoader";
-import { NotificationContainer } from "./notifications";
+import Notifications from "./notifications";
 
 const App = () => {
   return (
     <UserTokenLoader>
-      <NotificationContainer/>
-      <PortalRoot />
-      <AppRouter />
+      <Notifications.Context>
+        <Notifications.View />
+        <PortalRoot />
+        <AppRouter />
+      </Notifications.Context>
     </UserTokenLoader>
   );
 };

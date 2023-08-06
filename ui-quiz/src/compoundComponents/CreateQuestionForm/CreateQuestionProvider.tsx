@@ -4,10 +4,10 @@ import useQuizApi from "../../apis/apiQuiz/useQuizApi";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
 import { CreateQuestionRequest, CreateQuestionResponse } from "../../apis/apiQuiz/ApiQuizModels";
 import { QuestionError } from "../../reducers/questionReducers/slice";
-import { useNotifications } from "../../notifications";
 import { useSelector } from "react-redux";
 import { referenceItemsStateSelector } from "../../reducers/referenceItems/slice";
 import useAppNavigation from "../../hooks/useAppNavigation";
+import { useNotifications } from "../../notifications/hooks";
 
 const CreateQuestionProvider = (): ICreateQuestionState => {
   const notify = useNotifications();
@@ -19,7 +19,7 @@ const CreateQuestionProvider = (): ICreateQuestionState => {
   const [category, setCategory] = useState("");
   const [language, setLanguage] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState(0);
-  const [answers, setAnswers] = useState(["", "", ""]);
+  const [answers, setAnswers] = useState([""]);
 
   useEffect(() => {
     if (isPrivate == false && correctAnswer == 0 && question == "" && category == "" && answers.every((e) => e == "")) {
@@ -52,7 +52,7 @@ const CreateQuestionProvider = (): ICreateQuestionState => {
 
   const endpoint = useQuizApi<CreateQuestionRequest, CreateQuestionResponse, QuestionError>(
     (request) => ApiQuizInstance.createQuestion(request),
-    () => notify.addCorrect("Question created"),
+    () => notify.addInfo("Question created"),
     () => notify.addError("Some informations are invalid")
   );
 

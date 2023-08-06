@@ -1,7 +1,7 @@
 @import '../../scss/abstract/variables';
 
 .box{
-    display: inline-block;
+    display: block;
     background-color: rgba($color-white, 1);
     border-radius: .5rem;
     min-width: 45rem;

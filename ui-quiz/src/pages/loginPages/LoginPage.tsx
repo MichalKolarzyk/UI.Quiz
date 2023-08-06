@@ -17,7 +17,7 @@ const LoginPage = () => {
   return (
     <div className={classes["login-page"]}>
       <section className={classes["login-page__form"]}>
-        <div className="u-margin-bottom-big u-center-text">
+        <div className="u-margin-bottom-medium u-center-text">
           <h1>Quiz</h1>
         </div>
         <div className="u-margin-bottom-big u-center-text">

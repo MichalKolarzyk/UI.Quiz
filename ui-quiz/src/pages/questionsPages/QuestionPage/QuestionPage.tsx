@@ -6,7 +6,6 @@ import useAppNavigation from "../../../hooks/useAppNavigation";
 import { UpdateQuestionRequest } from "../../../apis/apiQuiz/ApiQuizModels";
 import { useEffect, useState } from "react";
 import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
-import { useNotifications } from "../../../notifications";
 import { useApiError } from "../../../apis/apiQuiz/useApiError";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
 import ErrorMessage from "../../../components/errors";
@@ -17,6 +16,7 @@ import { useSelector } from "react-redux";
 import { QuestionPageLayout } from "../../../layouts/QuestionPageLayout";
 import FlexRow, { GapRowEnum, RowPositionEnum } from "../../../components/containers/FlexRow";
 import FlexColumn, { GapColumnEnum } from "../../../components/containers/FlexColumn";
+import { useNotifications } from "../../../notifications/hooks";
 
 const QuestionPage = () => {
   const params = useParams();
@@ -97,7 +97,7 @@ const QuestionPage = () => {
       question: question ?? "",
     } as UpdateQuestionRequest)
       .then((response) => {
-        notify.addCorrect("Question updated");
+        notify.addInfo("Question updated");
         apiError.restart();
       })
       .catch((response) => {
