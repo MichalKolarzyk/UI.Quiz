@@ -1,4 +1,4 @@
-import FlexRow, { RowPositionEnum } from "../containers/FlexRow";
+import FlexRow from "../flex/FlexRow";
 import { ClearIcon } from "../icons";
 import classes from "./ErrorMessage.module.scss";
 

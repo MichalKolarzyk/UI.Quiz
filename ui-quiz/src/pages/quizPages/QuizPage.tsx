@@ -2,12 +2,13 @@ import { useParams } from "react-router-dom";
 import TablePageLayout from "../../layouts/TablePageLayout";
 import { CreateButton, GoBackButton, RoundedButton, ButtonDark } from "../../components/buttons";
 import useAppNavigation from "../../hooks/useAppNavigation";
-import FlexRow, { GapRowEnum, RowPositionEnum } from "../../components/containers/FlexRow";
+import FlexRow from "../../components/flex/FlexRow";
 import { useEffect, useState } from "react";
 import useQuizApi from "../../apis/apiQuiz/useQuizApi";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
 import { GetQuizResponse } from "../../apis/apiQuiz/models/quiz";
 import { QuestionsTable } from "../../components/tables";
+import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 
 const QuizPage = () => {
   const params = useParams();

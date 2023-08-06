@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom'
-import { ButtonProps } from '../buttons/Button'
 import classes from './Portals.module.scss'
 
 const portalRootId = "portal-root";

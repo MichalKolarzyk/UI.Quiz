@@ -1,4 +1,5 @@
 import classes from "./FlexContainer.module.scss";
+import { FlexRowItemProps, FlexRowProps } from "./types";
 const FlexRowContainer: React.FC<FlexRowProps> = (props) => {
   return (
     <div
@@ -27,28 +28,5 @@ const FlexRow = {
   Item,
 };
 
-export interface FlexRowProps {
-  children?: any;
-  gap?: GapRowEnum;
-  itemsPosition? : RowPositionEnum,
-  fullHeight?: boolean;
-}
-
-export interface FlexRowItemProps {
-  grow?: number;
-  children?: any;
-}
-
-export enum GapRowEnum {
-  small = "1rem",
-  medium = "2rem",
-  big = "3rem",
-}
-
-export enum RowPositionEnum {
-  left = "left",
-  center = "center",
-  right = "right",
-}
 
 export default FlexRow;

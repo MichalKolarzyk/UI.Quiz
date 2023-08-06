@@ -14,9 +14,10 @@ import { Dropdown } from "../../../components/dropdown";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 import { useSelector } from "react-redux";
 import { QuestionPageLayout } from "../../../layouts/QuestionPageLayout";
-import FlexRow, { GapRowEnum, RowPositionEnum } from "../../../components/containers/FlexRow";
-import FlexColumn, { GapColumnEnum } from "../../../components/containers/FlexColumn";
+import FlexRow  from "../../../components/flex/FlexRow";
+import FlexColumn from "../../../components/flex/FlexColumn";
 import { useNotifications } from "../../../compoundComponents/Notifications/hooks";
+import { GapColumnEnum, GapRowEnum, RowPositionEnum } from "../../../components/flex/types";
 
 const QuestionPage = () => {
   const params = useParams();

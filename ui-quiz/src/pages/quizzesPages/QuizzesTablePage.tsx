@@ -11,7 +11,8 @@ import { Dropdown } from "../../components/dropdown";
 import { TextInput } from "../../components/textInput";
 import useQuizzesSearchParams from "./searchParams";
 import TablePageLayout from "../../layouts/TablePageLayout";
-import FlexRow, { GapRowEnum, RowPositionEnum } from "../../components/containers/FlexRow";
+import FlexRow from "../../components/flex/FlexRow";
+import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 
 const QuizTablePage = () => {
   const nav = useAppNavigation();

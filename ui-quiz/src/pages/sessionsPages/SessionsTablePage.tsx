@@ -1,13 +1,12 @@
-import { CreateButton, GoBackButton } from "../../components/buttons";
-import FlexRow, { GapRowEnum, RowPositionEnum } from "../../components/containers/FlexRow";
+import { GoBackButton } from "../../components/buttons";
+import FlexRow from "../../components/flex/FlexRow";
 import { Dropdown } from "../../components/dropdown";
-import DropdownInput from "../../components/inputs/dropdownInput/DropdownInput";
-import FormInput from "../../components/inputs/formInputs/FormInput";
 import { SessionsTable } from "../../components/tables";
 import Paginator from "../../components/tables/paginator/Paginator";
 import { TextInput } from "../../components/textInput";
 import useAppNavigation from "../../hooks/useAppNavigation";
 import TablePageLayout from "../../layouts/TablePageLayout";
+import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 
 const SessionsTablePage = () => {
   const nav = useAppNavigation();

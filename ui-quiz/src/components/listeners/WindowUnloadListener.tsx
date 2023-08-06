@@ -4,7 +4,8 @@ import { CancelButton, RoundedButton } from "../buttons";
 import { DarkCard } from "../cards";
 import { Portal, PortalOverlay } from "../portals";
 import PromptLayout from "../../layouts/PromptLayout";
-import FlexRow, { RowPositionEnum } from "../containers/FlexRow";
+import FlexRow from "../flex/FlexRow";
+import { RowPositionEnum } from "../flex/types";
 
 const WindowUnloadListener = (props: WindowUnloadListenerProps) => {
   const blocker = useBlocker(props.isModify);

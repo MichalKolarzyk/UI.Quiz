@@ -4,11 +4,12 @@ import { CreateQuizRequest } from "../../apis/apiQuiz/models/quiz";
 import useApiRequest from "../../apis/apiQuiz/useQuizApi";
 import { CancelButton, GoBackButton, RoundedButton } from "../../components/buttons";
 import { DarkCard } from "../../components/cards";
-import FlexRow, { GapRowEnum, RowPositionEnum } from "../../components/containers/FlexRow";
+import FlexRow from "../../components/flex/FlexRow";
 import { Portal, PortalOverlay } from "../../components/portals";
 import { TextInput } from "../../components/textInput";
 import useAppNavigation from "../../hooks/useAppNavigation";
 import PromptLayout from "../../layouts/PromptLayout";
+import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 
 const CreateQuizPage = () => {
   const nav = useAppNavigation();

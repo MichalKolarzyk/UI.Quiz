@@ -13,7 +13,8 @@ import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 import TablePageLayout from "../../../layouts/TablePageLayout";
-import FlexRow, { GapRowEnum, RowPositionEnum } from "../../../components/containers/FlexRow";
+import FlexRow from "../../../components/flex/FlexRow";
+import { GapRowEnum, RowPositionEnum } from "../../../components/flex/types";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();

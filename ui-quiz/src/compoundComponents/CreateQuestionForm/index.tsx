@@ -4,10 +4,10 @@ import CreateQuestionContext from "./CreateQuestionContext";
 import CreateQuestionProvider from "./CreateQuestionProvider";
 import Switch from "../../components/switches/Switch";
 import { Dropdown } from "../../components/dropdown";
-import FlexRow, { GapRowEnum, RowPositionEnum } from "../../components/containers/FlexRow";
+import FlexRow from "../../components/flex/FlexRow";
 import { CancelButton, CreateButton, DeleteButton, GoBackButton, RoundedButton } from "../../components/buttons";
 import { TextInput } from "../../components/textInput";
-import ErrorMessage from "../../components/errors";
+import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 
 const GoBack = () => {
   const context = useContext(CreateQuestionContext);

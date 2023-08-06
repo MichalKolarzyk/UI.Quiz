@@ -1,9 +1,9 @@
 import WindowUnloadListener from "../../../components/listeners/WindowUnloadListener";
 import { QuestionPageLayout } from "../../../layouts/QuestionPageLayout";
-import { GapRowEnum, RowPositionEnum } from "../../../components/containers/FlexRow";
-import FlexRow from "../../../components/containers/FlexRow";
-import FlexColumn, { GapColumnEnum } from "../../../components/containers/FlexColumn";
+import FlexRow from "../../../components/flex/FlexRow";
+import FlexColumn from "../../../components/flex/FlexColumn";
 import CreateQuestionForm from "../../../compoundComponents/CreateQuestionForm";
+import { GapRowEnum, GapColumnEnum, RowPositionEnum } from "../../../components/flex/types";
 
 const QuestionCreatePage = () => {
   return (

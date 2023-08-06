@@ -1,92 +1,87 @@
 import { CancelIcon, DeleteIcon, EditIcon, GoBackIcon, NextIcon, PreviousIcon } from "../icons";
-import Button, { ButtonProps } from "./Button";
-import ButtonContainer from "./ButtonContainer";
 import classes from "./Button.module.scss";
 import { NavLink, NavLinkProps } from "react-router-dom";
+import WithStyles from "../base/WithStyles";
+import { ButtonProps } from "./types";
+
+export const Button = (props: ButtonProps) => {
+  return <button {...props} className={`${classes.button} ${props.className}`}>{props.children}</button>
+}
+
+export const TextButton =  WithStyles(Button, `${classes["button--text"]} ${classes["button-padding-small"]}`)
+export const TextBlackButton =  WithStyles(Button, `${classes["button--text"]} ${classes["button-padding-none"]} ${classes["button-color-black"]}`)
+export const CreateButton =  WithStyles(Button, `${classes["button--create"]}`)
+export const RoundedButton =  WithStyles(Button, `${classes["button--rounded"]}`)
+export const TransparentButton =  WithStyles(Button, `${classes["button--transparent"]}`)
+export const ButtonDark =  WithStyles(Button, `${classes["button--dark"]}`)
+
+
+const ButtonContainer: React.FC<ButtonProps> = (props) => {
+  return <div className={classes.buttonContainer}>{props.children}</div>;
+};
+
 
 export const GoBackButton: React.FC<ButtonProps> = (props) => {
   return (
-    <Button {...props} className={`${classes["button--text"]} ${classes["button-padding-small"]}`}>
+    <TextButton {...props}>
       <ButtonContainer>
         <GoBackIcon className={classes.icon} />
       </ButtonContainer>
-    </Button>
+    </TextButton>
   );
 };
 
-export const TextButton: React.FC<ButtonProps> = (props) => {
-  return <Button {...props} className={`${classes["button--text"]} ${classes["button-padding-small"]}`}></Button>;
-};
 
 export const DeleteButton: React.FC<ButtonProps> = (props) => {
   return (
-    <Button {...props} className={`${classes["button--text"]} ${classes["button-padding-small"]}`}>
+    <TextButton {...props}>
       <ButtonContainer>
         <DeleteIcon className={classes.icon} />
       </ButtonContainer>
-    </Button>
+    </TextButton>
   );
 };
 
 export const CancelButton: React.FC<ButtonProps> = (props) => {
   return (
-    <Button {...props} className={`${classes["button--text"]}`}>
+    <TextButton {...props}>
       <ButtonContainer>
         <div>Cancel</div>
         <CancelIcon className={classes.icon} />
       </ButtonContainer>
-    </Button>
+    </TextButton>
   );
-};
-
-export const CreateButton: React.FC<ButtonProps> = (props) => {
-  return <Button {...props} className={`${classes["button--create"]}`}></Button>;
-};
-
-export const RoundedButton: React.FC<ButtonProps> = (props) => {
-  return <Button {...props} className={`${classes["button--rounded"]}`}></Button>;
-};
-
-export const TransparentButton: React.FC<ButtonProps> = (props) => {
-  return <Button {...props} className={`${classes["button--transparent"]}`}></Button>;
-};
-
-export const ButtonDark: React.FC<ButtonProps> = (props) => {
-  return <Button {...props} className={`${classes["button--dark"]}`}></Button>;
 };
 
 export const EdiiButton: React.FC<ButtonProps> = (props) => {
   return (
-    <Button
-      {...props}
-      className={`${classes["button--text"]} ${classes["button-padding-none"]} ${classes["button-color-black"]}`}
-    >
+    <TextBlackButton {...props}>
       <ButtonContainer>
         <EditIcon className={classes.icon} />
       </ButtonContainer>
-    </Button>
+    </TextBlackButton>
   );
 };
 
 export const NextButton: React.FC<ButtonProps> = (props) => {
   return (
-    <Button {...props} className={`${classes["button--text"]}`}>
+    <TextButton {...props}>
       <ButtonContainer>
         <div>Next</div>
         <NextIcon className={classes.icon} />
       </ButtonContainer>
-    </Button>
+    </TextButton>
   );
 };
 
 export const PreviousButton: React.FC<ButtonProps> = (props) => {
   return (
-    <Button {...props} className={`${classes["button--text"]}`}>
+    <TextButton {...props}>
       <ButtonContainer>
         <PreviousIcon className={classes.icon} />
         <div>Prev</div>
       </ButtonContainer>
-    </Button>
+    </TextButton>
   );
 };
 
