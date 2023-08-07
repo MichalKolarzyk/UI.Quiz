@@ -1,4 +1,4 @@
-import { EmptyButton } from "../buttons";
+import { CloseButton, EmptyButton } from "../buttons";
 import { RedCard } from "../cards";
 import FlexRow from "../flex/FlexRow";
 import { RowPositionEnum } from "../flex/types";
@@ -23,9 +23,7 @@ export const ErrorMessageBlock: React.FC<ErrorMessageProps> = (props) => {
     <RedCard>
       <FlexRow.Container itemsPosition={RowPositionEnum.spaceBetween}>
         <Label text={props.message}/>
-        <EmptyButton onClick={props.onClear}>
-          <Icon iconComponent={IconComponents.Close} size={IconSize.M}/>
-        </EmptyButton>
+        <CloseButton onClick={props.onClear}/>
       </FlexRow.Container>
     </RedCard>
   );

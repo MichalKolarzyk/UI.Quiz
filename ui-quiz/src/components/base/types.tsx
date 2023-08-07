@@ -9,12 +9,20 @@ export interface InputComponentProps extends ComponentProps{
     type?: string,
 }
 
-export interface SingleValueProps{
-    value?: string | null,
-    setValue?: (newValue: string) => void;
+//new interfaces
+export interface IDisabled{
+    disabled?: boolean,
+}
+
+export interface ISingleValue<T>{
+    value?: T,
+    onChange?: (value: T) => void,
+}
+
+export interface IPlaceholder{
     placeholder?: string;
 }
 
-export interface ErrorComponent{
-    errorMessage?: string,
+export interface IError{
+    error?: string,
 }

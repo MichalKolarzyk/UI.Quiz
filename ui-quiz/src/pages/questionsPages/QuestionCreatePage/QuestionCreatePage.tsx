@@ -2,38 +2,38 @@ import FlexRow from "../../../components/flex/FlexRow";
 import FlexColumn from "../../../components/flex/FlexColumn";
 import CreateQuestionForm from "../../../compoundComponents/CreateQuestionForm";
 import { GapRowEnum, GapColumnEnum, RowPositionEnum } from "../../../components/flex/types";
-import { QuestionPageLayout } from "../../../layouts";
+import { QuestionLayout } from "../../../layouts";
 
 const QuestionCreatePage = () => {
   return (
     <CreateQuestionForm.Form>
-      <QuestionPageLayout.Main>
-        <QuestionPageLayout.Title>
+      <QuestionLayout.Main>
+        <QuestionLayout.Title>
           <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
             <CreateQuestionForm.GoBack/>
             <h3>Create Question</h3>
           </FlexRow.Container>
-        </QuestionPageLayout.Title>
-        <QuestionPageLayout.Question>
+        </QuestionLayout.Title>
+        <QuestionLayout.Question>
           <FlexColumn.Container gap={GapColumnEnum.big}>
             <CreateQuestionForm.Question/>
             <CreateQuestionForm.IsPrivate/>
             <CreateQuestionForm.Category/>
             <CreateQuestionForm.Language/>
           </FlexColumn.Container>
-        </QuestionPageLayout.Question>
-        <QuestionPageLayout.Answer>
+        </QuestionLayout.Question>
+        <QuestionLayout.Answer>
           <FlexColumn.Container gap={GapColumnEnum.big}>
             <CreateQuestionForm.Answers/>
           </FlexColumn.Container>
-        </QuestionPageLayout.Answer>
-        <QuestionPageLayout.Footer>
-          <FlexRow.Container itemsPosition={RowPositionEnum.right}>
+        </QuestionLayout.Answer>
+        <QuestionLayout.Footer>
+          <FlexRow.Container itemsPosition={RowPositionEnum.right} gap={GapRowEnum.medium}>
             <CreateQuestionForm.Cancel/>
             <CreateQuestionForm.CreateQuestion/>
           </FlexRow.Container>
-        </QuestionPageLayout.Footer>
-      </QuestionPageLayout.Main>
+        </QuestionLayout.Footer>
+      </QuestionLayout.Main>
     </CreateQuestionForm.Form>
   );
 };

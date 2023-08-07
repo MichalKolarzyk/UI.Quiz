@@ -8,7 +8,7 @@ import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
 import { GetQuizResponse } from "../../apis/apiQuiz/models/quiz";
 import { QuestionsTable } from "../../components/tables";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
-import { TablePageLayout } from "../../layouts";
+import { TableLayout } from "../../layouts";
 
 const QuizPage = () => {
   const params = useParams();
@@ -27,23 +27,23 @@ const QuizPage = () => {
   }, []);
 
   return (
-    <TablePageLayout.Subpage>
-      <TablePageLayout.Title>
+    <TableLayout.Subpage>
+      <TableLayout.Title>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <GoBackButton onClick={nav.toPreviousPage} />
           <h3>{quiz?.name ?? "Quiz"}</h3>
         </FlexRow.Container>
-      </TablePageLayout.Title>
-      <TablePageLayout.Action>
+      </TableLayout.Title>
+      <TableLayout.Action>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium} itemsPosition={RowPositionEnum.right}>
           <RoundedButton>+ Add Questions</RoundedButton>
           <CreateButton>Create session</CreateButton>
         </FlexRow.Container>
-      </TablePageLayout.Action>
-      <TablePageLayout.Table>
+      </TableLayout.Action>
+      <TableLayout.Table>
         <QuestionsTable onEditClick={() => {}}  items={quiz?.questions ?? []}/>
-      </TablePageLayout.Table>
-    </TablePageLayout.Subpage>
+      </TableLayout.Table>
+    </TableLayout.Subpage>
   );
 };
 

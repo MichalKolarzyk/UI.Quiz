@@ -1,4 +1,4 @@
-import { DeleteButton, EmptyButton } from "../../components/buttons";
+import { CloseButton, DeleteButton, EmptyButton } from "../../components/buttons";
 import { AppNotification, AppNotificationType } from "./types";
 import classes from "./Notification.module.scss";
 import { Icon, IconComponents } from "../../components/icons";
@@ -15,9 +15,7 @@ export const NotificationBlock = (props: NotificationProps) => {
   return (
     <div className={`${className} ${classes.notification}`}>
       <h6>{props.appnotification.message}</h6>
-      <EmptyButton onClick={props.onDelete}>
-        <Icon iconComponent={IconComponents.Close} size={IconSize.L}/>
-      </EmptyButton>
+      <CloseButton onClick={props.onDelete}/>
     </div>
   );
 };

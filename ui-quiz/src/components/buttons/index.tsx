@@ -42,11 +42,11 @@ export const GoBackButton: React.FC<ButtonProps> = (props) => {
 
 export const CloseButton: React.FC<ButtonProps> = (props) => {
   return (
-    <TextButton {...props}>
+    <EmptyButton {...props}>
       <ButtonContainer>
         <Icon iconComponent={IconComponents.Close} size={IconSize.L} />
       </ButtonContainer>
-    </TextButton>
+    </EmptyButton>
   );
 };
 

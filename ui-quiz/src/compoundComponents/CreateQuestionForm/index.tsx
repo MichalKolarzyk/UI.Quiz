@@ -8,6 +8,7 @@ import FlexRow from "../../components/flex/FlexRow";
 import { CancelButton, CreateButton, DeleteButton, GoBackButton, RoundedButton } from "../../components/buttons";
 import { TextInput } from "../../components/textInput";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
+import ErrorMessage from "../../components/errors";
 
 const GoBack = () => {
   const context = useContext(CreateQuestionContext);
@@ -20,7 +21,7 @@ const Question = () => {
     <Textarea
       disabled={context.isLoading}
       value={context.question}
-      onChange={(event) => context.setQuestion(event.target.value)}
+      onChange={context.setQuestion}
       placeholder="Question"
       errorMessage={context.questionError}
     />
@@ -64,10 +65,10 @@ const Category = () => {
       <h6>Category</h6>
       <Dropdown
         disabled={context.isLoading}
-        errorMessage={context.categoryError}
+        error={context.categoryError}
         placeholder="Select category..."
         value={context.category}
-        setValue={(value) => context.setCategory(value)}
+        onChange={(value) => context.setCategory(value)}
         items={context.categoryItems}
       />
     </div>
@@ -111,8 +112,8 @@ const Answers = () => {
           </FlexRow.Container>
         );
       })}
-      {/* <ErrorMessage message={endpoint.errors.erros?.answers} />
-      <ErrorMessage message={endpoint.errors.erros?.correctAnswerIndex} /> */}
+      <ErrorMessage message={context.answersError} />
+      <ErrorMessage message={context.correctAnswerError} />
       <FlexRow.Container itemsPosition={RowPositionEnum.center}>
         <RoundedButton disabled={context.answers.length >= 6} onClick={context.addAnswear}>
           + Add

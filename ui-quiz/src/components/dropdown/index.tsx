@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ErrorComponent, InputComponentProps, SingleValueProps } from "../base/types";
+import { IError, ISingleValue, InputComponentProps } from "../base/types";
 import { InputBox } from "../boxes/InputBox";
 import { ClearIcon, DownIcon, UpIcon } from "../icons";
 import classes from "./styles.module.scss";
@@ -31,7 +31,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 
   const onIntemClick = (value: string) => {
     setIsListVisible(false);
-    props.setValue?.(value);
+    props.onChange?.(value);
   };
 
   const setIsListVisibleToTrue = () => {
@@ -49,7 +49,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 
   return (
     <>
-      <InputBox errorMessage={props.errorMessage}>
+      <InputBox error={props.error}>
         <div onBlur={() => setIsListVisible(false)} className={classes.box}>
           <input
             value={inputValue}
@@ -60,7 +60,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
             ref={inputRef}
             placeholder={props.placeholder}
           ></input>
-          {!isListVisible && props.value && <ClearIcon className={classes.icon} onClick={() => props.setValue?.("")} />}
+          {!isListVisible && props.value && <ClearIcon className={classes.icon} onClick={() => props.onChange?.("")} />}
           {!isListVisible && <DownIcon onClick={setIsListVisibleToTrue} className={classes.icon} />}
           {isListVisible && <UpIcon onClick={() => setIsListVisible(false)} className={classes.icon} />}
           {isListVisible && <div className={classes.list}>
@@ -73,6 +73,6 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
   );
 };
 
-export interface DropdownProps extends InputComponentProps, SingleValueProps, ErrorComponent {
+export interface DropdownProps extends InputComponentProps, ISingleValue<string>, IError {
   items?: Array<string>;
 }

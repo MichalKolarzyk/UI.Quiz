@@ -12,10 +12,14 @@ import { TextInput } from "../../components/textInput";
 import useQuizzesSearchParams from "./searchParams";
 import FlexRow from "../../components/flex/FlexRow";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
-import { TablePageLayout } from "../../layouts";
+import { TableLayout } from "../../layouts";
+import Prompt from "../../compoundComponents/Prompt";
+import usePrompt from "../../compoundComponents/Prompt/hooks";
+import CreateQuizPage from "../createQuizPages/CreateQuizPage";
 
 const QuizTablePage = () => {
   const nav = useAppNavigation();
+  const prompt = usePrompt();
   const [quizResponse, setQuizResponse] = useState<GetQuizzesResponse>();
   const { categories } = useSelector(referenceItemsStateSelector);
   const params = useQuizzesSearchParams();
@@ -34,38 +38,43 @@ const QuizTablePage = () => {
   const items = quizResponse?.quizes;
 
   return (
-    <TablePageLayout.Subpage>
-      <TablePageLayout.Title>
+    <TableLayout.Subpage>
+      <TableLayout.Title>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <GoBackButton onClick={() => nav.toHomePage()} />
           <h3>Quizzes</h3>
         </FlexRow.Container>
-      </TablePageLayout.Title>
-      <TablePageLayout.Filter>
+      </TableLayout.Title>
+      <TableLayout.Filter>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <Dropdown
-            value={params.category}
-            setValue={params.setCategory}
+            value={params.category ?? undefined}
+            onChange={(value) => params.setCategory(value ?? "")}
             placeholder="Select category..."
             items={categories?.map((i) => i.value)}
           />
           <TextInput onChange={params.setAuthor} placeholder="Author"></TextInput>
         </FlexRow.Container>
-      </TablePageLayout.Filter>
-      <TablePageLayout.Action>
+      </TableLayout.Filter>
+      <TableLayout.Action>
         <FlexRow.Container fullHeight itemsPosition={RowPositionEnum.right}>
-          <CreateButton onClick={nav.toCreateQuizPage}>Create Quiz</CreateButton>
+          <CreateButton onClick={() => prompt.show("Create quiz", CreateQuizPage)}>Create Quiz</CreateButton>
         </FlexRow.Container>
-      </TablePageLayout.Action>
-      <TablePageLayout.Table>
-        <QuizzesTable items={items} onEditClick={(quiz) => {nav.toQuizPage(quiz.id)}} />
-      </TablePageLayout.Table>
-      <TablePageLayout.Footer>
+      </TableLayout.Action>
+      <TableLayout.Table>
+        <QuizzesTable
+          items={items}
+          onEditClick={(quiz) => {
+            nav.toQuizPage(quiz.id);
+          }}
+        />
+      </TableLayout.Table>
+      <TableLayout.Footer>
         <FlexRow.Container itemsPosition={RowPositionEnum.center}>
           <Paginator page={params.page} onPageChange={params.setPage} pages={1} />
         </FlexRow.Container>
-      </TablePageLayout.Footer>
-    </TablePageLayout.Subpage>
+      </TableLayout.Footer>
+    </TableLayout.Subpage>
   );
 };
 

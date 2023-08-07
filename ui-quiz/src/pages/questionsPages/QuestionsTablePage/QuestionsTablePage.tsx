@@ -14,7 +14,7 @@ import { Dropdown } from "../../../components/dropdown";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 import FlexRow from "../../../components/flex/FlexRow";
 import { GapRowEnum, RowPositionEnum } from "../../../components/flex/types";
-import { TablePageLayout } from "../../../layouts";
+import { TableLayout } from "../../../layouts";
 
 const QuestionsTablePage = () => {
   const nav = useAppNavigation();
@@ -49,20 +49,20 @@ const QuestionsTablePage = () => {
   }, [searchParams.isPrivate, searchParams.page, searchParams.author, searchParams.category]);
 
   return (
-    <TablePageLayout.Subpage>
-      <TablePageLayout.Title>
+    <TableLayout.Subpage>
+      <TableLayout.Title>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <GoBackButton onClick={() => nav.toHomePage()} />
           <h3>Quesions</h3>
         </FlexRow.Container>
-      </TablePageLayout.Title>
-      <TablePageLayout.Filter>
+      </TableLayout.Title>
+      <TableLayout.Filter>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
           <Dropdown
             placeholder="Select category..."
-            value={searchParams.category}
-            setValue={(value) => {
-              searchParams.setCategory(value);
+            value={searchParams.category ?? undefined}
+            onChange={(value) => {
+              searchParams.setCategory(value ?? "");
               searchParams.setPage(1);
             }}
             items={categories?.map((c) => c.value)}
@@ -78,21 +78,21 @@ const QuestionsTablePage = () => {
           ></TextInput>
           <Switch value={searchParams.isPrivate} onChange={onIsPrivateChange} label="IsPrivate"></Switch>
         </FlexRow.Container>
-      </TablePageLayout.Filter>
-      <TablePageLayout.Action>
+      </TableLayout.Filter>
+      <TableLayout.Action>
         <FlexRow.Container fullHeight itemsPosition={RowPositionEnum.right}>
           <CreateButton onClick={() => nav.toCreateQuestionPage()}>Create Question</CreateButton>
         </FlexRow.Container>
-      </TablePageLayout.Action>
-      <TablePageLayout.Table>
+      </TableLayout.Action>
+      <TableLayout.Table>
         <QuestionsTable skip={skip} items={items} onEditClick={(item) => nav.toQuestionPage(item.id)} />
-      </TablePageLayout.Table>
-      <TablePageLayout.Footer>
+      </TableLayout.Table>
+      <TableLayout.Footer>
         <FlexRow.Container itemsPosition={RowPositionEnum.center}>
           <Paginator page={searchParams.page} onPageChange={searchParams.setPage} pages={questionPagesCount} />
         </FlexRow.Container>
-      </TablePageLayout.Footer>
-    </TablePageLayout.Subpage>
+      </TableLayout.Footer>
+    </TableLayout.Subpage>
   );
 };
 

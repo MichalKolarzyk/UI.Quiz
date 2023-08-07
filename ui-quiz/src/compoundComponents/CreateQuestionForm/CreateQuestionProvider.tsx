@@ -52,7 +52,10 @@ const CreateQuestionProvider = (): ICreateQuestionState => {
 
   const endpoint = useQuizApi<CreateQuestionRequest, CreateQuestionResponse, QuestionError>(
     (request) => ApiQuizInstance.createQuestion(request),
-    () => notify.addInfo("Question created"),
+    (response) => {
+      notify.addInfo("Question created");
+      nav.toQuestionPage(response.data.id);
+    },
     () => notify.addError("Some informations are invalid")
   );
 
@@ -94,10 +97,12 @@ const CreateQuestionProvider = (): ICreateQuestionState => {
     setLanguage,
     correctAnswer,
     setCorrectAnswer,
+    correctAnswerError: endpoint.errors.erros?.correctAnswerIndex,
     answers,
     addAnswear,
     removeAnswear,
     createQuestion,
+    answersError: endpoint.errors.erros?.answers,
     setAnswear, 
     isLoading: endpoint.isLoading,
     categoryItems,

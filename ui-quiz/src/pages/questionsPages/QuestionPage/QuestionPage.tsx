@@ -13,11 +13,12 @@ import { TextInput } from "../../../components/textInput";
 import { Dropdown } from "../../../components/dropdown";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 import { useSelector } from "react-redux";
-import FlexRow  from "../../../components/flex/FlexRow";
+import FlexRow from "../../../components/flex/FlexRow";
 import FlexColumn from "../../../components/flex/FlexColumn";
 import { useNotifications } from "../../../compoundComponents/Notifications/hooks";
 import { GapColumnEnum, GapRowEnum, RowPositionEnum } from "../../../components/flex/types";
-import { QuestionPageLayout } from "../../../layouts";
+import { QuestionLayout } from "../../../layouts";
+import QuestionForm from "../../../compoundComponents/QuestionForm";
 
 const QuestionPage = () => {
   const params = useParams();
@@ -133,69 +134,71 @@ const QuestionPage = () => {
   });
 
   return (
-    <QuestionPageLayout.Main>
-      <QuestionPageLayout.Title>
-        <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
-          <GoBackButton onClick={() => nav.toPreviousPage()} />
-          <h3>Question</h3>
-        </FlexRow.Container>
-      </QuestionPageLayout.Title>
-      <QuestionPageLayout.Question>
-        <FlexColumn.Container gap={GapColumnEnum.big}>
-          <Textarea
-            errorMessage={apiError.erros?.description}
-            disabled={!canUserEdit}
-            placeholder="Question"
-            value={question}
-            onChange={updateDescription}
-          />
-          <Switch disabled={!canUserEdit} label="Private" value={isPrivate} onChange={updateIsPrivate} />
-          <div>
-            <h6>Category</h6>
-            <Dropdown
-              errorMessage={apiError.erros?.category}
+    <QuestionForm.Form>
+      <QuestionLayout.Main>
+        <QuestionLayout.Title>
+          <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
+            <QuestionForm.GoBack/>
+            <h3>Question</h3>
+          </FlexRow.Container>
+        </QuestionLayout.Title>
+        <QuestionLayout.Question>
+          <FlexColumn.Container gap={GapColumnEnum.big}>
+            <Textarea
+              errorMessage={apiError.erros?.description}
               disabled={!canUserEdit}
-              value={category}
-              setValue={(value) => setCategory(value)}
-              placeholder="Select category..."
-              items={categories?.map((c) => c.value)}
+              placeholder="Question"
+              value={question}
+              onChange={setQuestion}
             />
-          </div>
+            <QuestionForm.IsPrivate/>
+            <div>
+              <h6>Category</h6>
+              <Dropdown
+                error={apiError.erros?.category}
+                disabled={!canUserEdit}
+                value={category}
+                onChange={(value) => setCategory(value ?? "")}
+                placeholder="Select category..."
+                items={categories?.map((c) => c.value)}
+              />
+            </div>
 
-          <div>
-            <h6>Language</h6>
-            <Dropdown disabled={!canUserEdit} placeholder="Select Language..." items={["1", "2"]} />
-          </div>
-        </FlexColumn.Container>
-      </QuestionPageLayout.Question>
-      <QuestionPageLayout.Answer>
-        <FlexColumn.Container gap={GapColumnEnum.big}>
-          {answersView}
-          <div>
+            <div>
+              <h6>Language</h6>
+              <Dropdown disabled={!canUserEdit} placeholder="Select Language..." items={["1", "2"]} />
+            </div>
+          </FlexColumn.Container>
+        </QuestionLayout.Question>
+        <QuestionLayout.Answer>
+          <FlexColumn.Container gap={GapColumnEnum.big}>
+            {answersView}
+            <div>
+              {canUserEdit && (
+                <FlexRow.Container itemsPosition={RowPositionEnum.center}>
+                  <RoundedButton disabled={(answers.length ?? 0) >= 6} onClick={addAnswer}>
+                    + Add
+                  </RoundedButton>
+                </FlexRow.Container>
+              )}
+
+              <ErrorMessage message={apiError.erros?.answers} />
+              <ErrorMessage message={apiError.erros?.correctAnswerIndex} />
+            </div>
+          </FlexColumn.Container>
+        </QuestionLayout.Answer>
+        <QuestionLayout.Footer>
+          <FlexRow.Container itemsPosition={RowPositionEnum.right}>
+            <CancelButton onClick={nav.toPreviousPage} />
             {canUserEdit && (
-              <FlexRow.Container itemsPosition={RowPositionEnum.center}>
-                <RoundedButton disabled={(answers.length ?? 0) >= 6} onClick={addAnswer}>
-                  + Add
-                </RoundedButton>
-              </FlexRow.Container>
+              <RoundedButton disabled={!canUserEdit} onClick={onSaveHandler}>
+                Save
+              </RoundedButton>
             )}
-
-            <ErrorMessage message={apiError.erros?.answers} />
-            <ErrorMessage message={apiError.erros?.correctAnswerIndex} />
-          </div>
-        </FlexColumn.Container>
-      </QuestionPageLayout.Answer>
-      <QuestionPageLayout.Footer>
-        <FlexRow.Container itemsPosition={RowPositionEnum.right}>
-          <CancelButton onClick={nav.toPreviousPage} />
-          {canUserEdit && (
-            <RoundedButton disabled={!canUserEdit} onClick={onSaveHandler}>
-              Save
-            </RoundedButton>
-          )}
-        </FlexRow.Container>
-      </QuestionPageLayout.Footer>
-    </QuestionPageLayout.Main>
+          </FlexRow.Container>
+        </QuestionLayout.Footer>
+      </QuestionLayout.Main>
+    </QuestionForm.Form>
   );
 };
 

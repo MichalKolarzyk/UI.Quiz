@@ -23,7 +23,7 @@ const Login = () => {
     <TextInput
       disabled={context.isLoading}
       placeholder="login"
-      errorMessage={context.loginError}
+      error={context.loginError}
       value={context.login}
       onChange={(value) => context.setLogin(value)}
     />
@@ -36,7 +36,7 @@ const Password = () => {
     <TextInput
       disabled={context.isLoading}
       type="password"
-      errorMessage={context.passwordError}
+      error={context.passwordError}
       placeholder="password"
       value={context.password}
       onChange={(value) => context.setPassword(value)}
@@ -51,7 +51,7 @@ const RepetePassword = () => {
       disabled={context.isLoading}
       type="password"
       placeholder="repete password"
-      errorMessage={context.repetePasswordError}
+      error={context.repetePasswordError}
       value={context.repetePassword}
       onChange={(value) => context.setRepetePassword(value)}
     />

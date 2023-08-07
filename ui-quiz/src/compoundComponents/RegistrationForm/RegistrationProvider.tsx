@@ -18,11 +18,15 @@ const RegistrationProvider = (): IRegistrationState => {
   const nav = useAppNavigation();
 
   const promptContent = () => {
+    const onClick = () => {
+      nav.toLoginPage();
+      prompt.hide();
+    }
     return (
         <div>
           <div className="h2 u-color-white">Congratulations! </div>
           <div className="h3 u-color-white u-margin-bottom-big">{`${login} account has been created `}</div>
-          <CreateButton onClick={nav.toLoginPage} className="button">
+          <CreateButton onClick={onClick} className="button">
             Continue
           </CreateButton>
         </div>

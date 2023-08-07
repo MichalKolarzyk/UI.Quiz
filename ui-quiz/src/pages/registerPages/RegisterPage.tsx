@@ -1,20 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import classes from "./RegisterPage.module.scss";
 import RegistrationForm from "../../compoundComponents/RegistrationForm";
 import { Card } from "../../components/cards";
 import { IoMdPersonAdd } from "react-icons/io";
 import FlexRow from "../../components/flex/FlexRow";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
-import Prompt from "../../compoundComponents/Prompt";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
-  const [succeedRegister, setSucceedRegister] = useState<Boolean>(false);
-
   return (
-    <Prompt.Context>
-      <Prompt.View />
       <RegistrationForm.Form>
         <div className={classes.page}>
           <div className={classes.desctiption}>
@@ -59,7 +51,6 @@ const RegisterPage = () => {
           </div>
         </div>
       </RegistrationForm.Form>
-    </Prompt.Context>
   );
 };
 

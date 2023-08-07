@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ComponentProps, ErrorComponent } from "../base/types";
+import { ComponentProps, IError } from "../base/types";
 import classes from "./styles.module.scss";
 import ErrorMessage from "../errors";
 
@@ -7,7 +7,7 @@ export const InputBox: React.FC<InputBoxProps> = (props) => {
   const [boxFocus, setBoxFocus] = useState<boolean>(false);
   const [boxHover, setBoxHover] = useState<boolean>(false);
 
-  const hasError = (props.errorMessage?.length ?? 0) > 0
+  const hasError = (props.error?.length ?? 0) > 0
 
   let boxClass = `${classes.box} ${boxFocus ? classes["box--focus"] : ""} ${boxHover ? classes["box--hover"] : ""} ${hasError ? classes["box--error"]: ""}`;
 
@@ -27,11 +27,11 @@ export const InputBox: React.FC<InputBoxProps> = (props) => {
       >
         {props.children}
       </div>
-      <ErrorMessage message={props.errorMessage} />
+      <ErrorMessage message={props.error} />
     </>
   );
 };
 
-export interface InputBoxProps extends ComponentProps, ErrorComponent {
+export interface InputBoxProps extends ComponentProps, IError {
   fullWidth?: boolean
 }

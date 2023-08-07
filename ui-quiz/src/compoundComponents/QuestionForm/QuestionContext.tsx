@@ -1,6 +1,7 @@
 import React from "react";
 
-const CreateQuestionContext = React.createContext<ICreateQuestionState>({
+const QuestionContext = React.createContext<IQuestionState>({
+    canUserEdit: false,
     isModify: false,
     question: "",
     setQuestion: () => {},
@@ -21,9 +22,10 @@ const CreateQuestionContext = React.createContext<ICreateQuestionState>({
     goBack: () => {},
 });
 
-export default CreateQuestionContext;
+export default QuestionContext;
 
-export interface ICreateQuestionState{
+export interface IQuestionState{
+    canUserEdit: boolean,
     isModify: boolean,
     question: string,
     setQuestion: (question: string) => void,

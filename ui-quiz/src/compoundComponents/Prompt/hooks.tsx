@@ -8,6 +8,7 @@ const usePrompt = () => {
         context.setTitle(title);
         context.setContent(content);
         context.setIsVisible(true);
+        console.log(context.isVisible)
     }
 
     const hide = () => {
