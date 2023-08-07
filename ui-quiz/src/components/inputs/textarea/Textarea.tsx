@@ -16,7 +16,7 @@ const Textarea: React.FC<TextareaProps> = (props: TextareaProps) => {
         onChange={onChangeHandler}
         placeholder={props.placeholder}
       />
-      <ErrorMessage message={props.error} />
+      <ErrorMessage error={props.error} />
     </div>
   );
 };

@@ -11,7 +11,7 @@ const FormInput = (props: FormInputProps) => {
         onChange={(e) => props.onChange?.(e.target.value)}
         disabled={props.disabled}
       />
-      <ErrorMessage message={props.errorMessage} />
+      <ErrorMessage error={props.errorMessage} />
     </>
   );
 };

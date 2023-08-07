@@ -8,8 +8,13 @@ import FlexRow from "../flex/FlexRow";
 import { GapRowEnum } from "../flex/types";
 
 export const Button = (props: ButtonProps) => {
+  if(props.isHidden) return <></>
   return (
-    <button {...props} className={`${classes.button} ${props.className}`}>
+    <button 
+      className={`${classes.button} ${props.className}`}
+      disabled={props.disabled}
+      onClick={props.onClick}
+      >
       {props.children}
     </button>
   );

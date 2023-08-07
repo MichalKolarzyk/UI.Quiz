@@ -1,5 +1,5 @@
-export interface ErrorMessageProps
-  extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  message?: string;
+import { IError } from "../base/types";
+
+export interface ErrorMessageProps extends IError{
   onClear?: () => void;
 }

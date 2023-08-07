@@ -112,8 +112,8 @@ const Answers = () => {
           </FlexRow.Container>
         );
       })}
-      <ErrorMessage message={context.answersError} />
-      <ErrorMessage message={context.correctAnswerError} />
+      <ErrorMessage error={context.answersError} />
+      <ErrorMessage error={context.correctAnswerError} />
       <FlexRow.Container itemsPosition={RowPositionEnum.center}>
         <RoundedButton disabled={context.answers.length >= 6} onClick={context.addAnswear}>
           + Add

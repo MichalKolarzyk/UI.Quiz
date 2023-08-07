@@ -119,7 +119,7 @@ const Answears = () => {
               />
             </FlexRow.Item>
             <FlexRow.Item>
-              <DeleteButton disabled={!context.canUserEdit} onClick={() => context.removeAnswear(index)} />
+              <DeleteButton isHidden={!context.canUserEdit} onClick={() => context.removeAnswear(index)} />
             </FlexRow.Item>
           </FlexRow.Container>
         );

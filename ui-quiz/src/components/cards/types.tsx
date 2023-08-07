@@ -1,1 +1,3 @@
-export interface CardProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>{}
+import { IChildren } from "../base/types";
+
+export interface CardProps extends IChildren {}

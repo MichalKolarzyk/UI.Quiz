@@ -48,13 +48,6 @@ const QuestionPage = () => {
     });
   }, []);
 
-  const updateCorrectAnswer = (index: number, newState: boolean) => {
-    if (newState === false) {
-      setCorrectAnswer(-1);
-      return;
-    }
-    setCorrectAnswer(index);
-  };
 
   const deleteAnswer = (index: number) => {
     answers.splice(index, 1);
@@ -95,31 +88,6 @@ const QuestionPage = () => {
       });
   };
 
-  const answersView = answers.map((value, index) => {
-    return (
-      <FlexRow.Container gap={GapRowEnum.medium}>
-        <FlexRow.Item>
-          <Switch
-            disabled={!canUserEdit}
-            value={index == correctAnswer}
-            onChange={(newState) => updateCorrectAnswer(index, newState)}
-          />
-        </FlexRow.Item>
-        <FlexRow.Item grow={1}>
-          <TextInput
-            placeholder="Answer"
-            disabled={!canUserEdit}
-            value={value}
-            onChange={(value) => updateAnswer(index, value)}
-          />
-        </FlexRow.Item>
-        <FlexRow.Item>
-          <DeleteButton onClick={() => deleteAnswer(index)} />
-        </FlexRow.Item>
-      </FlexRow.Container>
-    );
-  });
-
   return (
     <QuestionForm.Form>
       <QuestionLayout.Main>
@@ -144,9 +112,8 @@ const QuestionPage = () => {
               <FlexRow.Container itemsPosition={RowPositionEnum.center}>
                 <QuestionForm.AddAnswear />
               </FlexRow.Container>
-
-              <ErrorMessage message={apiError.erros?.answers} />
-              <ErrorMessage message={apiError.erros?.correctAnswerIndex} />
+              <ErrorMessage error={apiError.erros?.answers} />
+              <ErrorMessage error={apiError.erros?.correctAnswerIndex} />
             </div>
           </FlexColumn.Container>
         </QuestionLayout.Answer>

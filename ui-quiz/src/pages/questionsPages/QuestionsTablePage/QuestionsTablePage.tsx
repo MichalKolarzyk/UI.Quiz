@@ -76,7 +76,7 @@ const QuestionsTablePage = () => {
             }}
             placeholder="Author"
           ></TextInput>
-          <Switch value={searchParams.isPrivate} onChange={onIsPrivateChange} label="IsPrivate"></Switch>
+          <Switch value={searchParams.isPrivate ?? undefined} onChange={onIsPrivateChange} label="IsPrivate"></Switch>
         </FlexRow.Container>
       </TableLayout.Filter>
       <TableLayout.Action>

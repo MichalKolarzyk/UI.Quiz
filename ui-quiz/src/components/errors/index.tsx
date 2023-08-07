@@ -9,20 +9,20 @@ import classes from "./ErrorMessage.module.scss";
 import { ErrorMessageProps } from "./types";
 
 const ErrorMessage: React.FC<ErrorMessageProps> = (props) => {
-  if (props.message == undefined) {
+  if (props.error == undefined) {
     return <></>;
   }
-  return <div className={classes.error}>{props.message}</div>;
+  return <div className={classes.error}>{props.error}</div>;
 };
 
 export const ErrorMessageBlock: React.FC<ErrorMessageProps> = (props) => {
-  if (props.message == undefined || props.message == "") {
+  if (props.error == undefined || props.error == "") {
     return <></>;
   }
   return (
     <RedCard>
       <FlexRow.Container itemsPosition={RowPositionEnum.spaceBetween}>
-        <Label text={props.message}/>
+        <Label text={props.error}/>
         <CloseButton onClick={props.onClear}/>
       </FlexRow.Container>
     </RedCard>
