@@ -5,8 +5,8 @@ import TableHeader from "./table/TableHeader";
 import TableHeaderCell from "./table/TableHeaderCell";
 import TableRow from "./table/TableRow";
 import classes from './table/Table.module.scss'
-import { Question } from "../../apis/apiQuiz/ApiQuizModels";
-import { Quiz } from "../../apis/apiQuiz/models/quiz";
+import { FilterQuestionItem } from "../../apis/apiQuiz/models/FilterQuestions";
+import { GetQuizzesItem } from "../../apis/apiQuiz/models/GetQuizzes";
 
 export const QuestionsTable: React.FC<QuestionsTableProps> = (props) => {
   return (
@@ -38,8 +38,8 @@ export const QuestionsTable: React.FC<QuestionsTableProps> = (props) => {
 };
 
 export interface QuestionsTableProps extends TableProps {
-  onEditClick: (row: Question) => void;
-  items: Array<Question>;
+  onEditClick: (row: FilterQuestionItem) => void;
+  items: Array<FilterQuestionItem>;
 }
 
 
@@ -73,8 +73,8 @@ export const QuizzesTable: React.FC<QuizzesTableProps> = (props)  => {
 }
 
 export interface QuizzesTableProps extends TableProps {
-  onEditClick?: (row: Quiz) => void;
-  items?: Array<Quiz>;
+  onEditClick?: (row: GetQuizzesItem) => void;
+  items?: Array<GetQuizzesItem>;
 }
 
 

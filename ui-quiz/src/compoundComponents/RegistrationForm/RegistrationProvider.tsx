@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { IRegistrationState } from "./RegistrationContext";
 import useAppNavigation from "../../hooks/useAppNavigation";
-import { IRegisterError, IRegisterRequest, IRegisterResponse } from "../../apis/apiQuiz/ApiQuizModels";
 import useQuizApi from "../../apis/apiQuiz/useQuizApi";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
 import { useNotifications } from "../Notifications/hooks";
 import usePrompt from "../Prompt/hooks";
 import { CreateButton } from "../../components/buttons";
+import { IRegisterError, IRegisterRequest, IRegisterResponse } from "../../apis/apiQuiz/models/Register";
 
 const RegistrationProvider = (): IRegistrationState => {
   const [login, setLogin] = useState("")

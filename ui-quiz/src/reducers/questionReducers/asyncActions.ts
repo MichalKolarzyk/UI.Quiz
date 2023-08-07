@@ -1,10 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
-import {
-  CreateQuestionRequest,
-  FilterQuestionsRequest,
-  UpdateQuestionRequest,
-} from "../../apis/apiQuiz/ApiQuizModels";
+import { FilterQuestionsRequest } from "../../apis/apiQuiz/models/FilterQuestions";
+
 
 export const getQuestions = createAsyncThunk("getQuestions", async (request: FilterQuestionsRequest, thunkAPI) => {
   try {

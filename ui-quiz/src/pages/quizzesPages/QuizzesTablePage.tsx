@@ -4,7 +4,6 @@ import { QuizzesTable } from "../../components/tables";
 import Paginator from "../../components/tables/paginator/Paginator";
 import useAppNavigation from "../../hooks/useAppNavigation";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
-import { GetQuizzesResponse } from "../../apis/apiQuiz/models/quiz";
 import { useSelector } from "react-redux";
 import { referenceItemsStateSelector } from "../../reducers/referenceItems/slice";
 import { Dropdown } from "../../components/dropdown";
@@ -15,6 +14,7 @@ import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 import { TableLayout } from "../../layouts";
 import usePrompt from "../../compoundComponents/Prompt/hooks";
 import CreateQuizPage from "../createQuizPages/CreateQuizPage";
+import { GetQuizzesResponse } from "../../apis/apiQuiz/models/GetQuizzes";
 
 const QuizTablePage = () => {
   const nav = useAppNavigation();

@@ -1,16 +1,10 @@
 import { useParams } from "react-router-dom";
-import { CancelButton, DeleteButton, GoBackButton, RoundedButton } from "../../../components/buttons";
-import Textarea from "../../../components/inputs/textarea/Textarea";
-import Switch from "../../../components/switches/Switch";
 import useAppNavigation from "../../../hooks/useAppNavigation";
-import { UpdateQuestionRequest } from "../../../apis/apiQuiz/ApiQuizModels";
 import { useEffect, useState } from "react";
 import ApiQuizInstance from "../../../apis/apiQuiz/ApiQuizInstance";
 import { useApiError } from "../../../apis/apiQuiz/useApiError";
 import { QuestionError } from "../../../reducers/questionReducers/slice";
 import ErrorMessage from "../../../components/errors";
-import { TextInput } from "../../../components/textInput";
-import { Dropdown } from "../../../components/dropdown";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 import { useSelector } from "react-redux";
 import FlexRow from "../../../components/flex/FlexRow";
@@ -19,6 +13,7 @@ import { useNotifications } from "../../../compoundComponents/Notifications/hook
 import { GapColumnEnum, GapRowEnum, RowPositionEnum } from "../../../components/flex/types";
 import { QuestionLayout } from "../../../layouts";
 import QuestionForm from "../../../compoundComponents/QuestionForm";
+import { UpdateQuestionRequest } from "../../../apis/apiQuiz/models/UpdateQuestion";
 
 const QuestionPage = () => {
   const params = useParams();

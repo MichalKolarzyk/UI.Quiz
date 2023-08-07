@@ -1,10 +1,10 @@
 import { useState } from "react";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
-import { CreateQuizRequest } from "../../apis/apiQuiz/models/quiz";
 import useApiRequest from "../../apis/apiQuiz/useQuizApi";
 import { CancelButton, RoundedButton } from "../../components/buttons";
 import { TextInput } from "../../components/textInput";
 import useAppNavigation from "../../hooks/useAppNavigation";
+import { CreateQuizRequest } from "../../apis/apiQuiz/models/CreateQuiz";
 
 
 const CreateQuizPage = () => {

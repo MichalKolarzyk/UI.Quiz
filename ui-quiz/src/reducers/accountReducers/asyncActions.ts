@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
-import { ISignInRequest } from "../../apis/apiQuiz/ApiQuizModels";
+import { ISignInRequest } from "../../apis/apiQuiz/models/SignIn";
 
 export const accountLogIn = createAsyncThunk("accountLogIn", async (request: ISignInRequest, thunkAPI)=> {
     try{

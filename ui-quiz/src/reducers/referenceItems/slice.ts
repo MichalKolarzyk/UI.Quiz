@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ReferenceItems } from "../../apis/apiQuiz/ApiQuizModels";
 import { RootState } from "../../store/store";
 import { getCategories } from "./asyncActions";
+import { ReferenceItems } from "../../apis/apiQuiz/models/GetReferenceItems";
 
 export interface ReferenceItemsState {
   categories?: Array<ReferenceItems>;

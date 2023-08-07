@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { registerUser } from "./asyncActions";
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface RegistrationState {
     userRegistered: boolean;
@@ -31,22 +30,6 @@ export const registrationSlice = createSlice({
         registrationClearLoginError: (state) => {
             state.error.login = "";
         },
-    },
-    extraReducers : (builder) => {
-        builder.addCase(registerUser.fulfilled, (state, action) => {
-            state.userRegistered = true;
-            state.isLoading = false;
-        })
-        builder.addCase(registerUser.pending, (state, action) => {
-            state.isLoading = true;
-        })
-        builder.addCase(registerUser.rejected, (state, action) => {
-            const payload : any = action.payload;
-            state.isLoading = false;
-            state.error.repetePassword = payload.errors["RepetePassword"];
-            state.error.password = payload.errors["Password"];
-            state.error.login = payload.errors["Login"];
-        })
     }
 });
 

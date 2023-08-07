@@ -1,6 +1,15 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
-import { ISignInRequest, ISignInResponse, IGetUserProfileResponse, IRegisterRequest, IRegisterResponse, CreateQuestionRequest, UpdateQuestionRequest, Question, FilterQuestionsRequest, FilterQuestionResponse, CreateQuestionResponse, GetReferenceItemsResponse, ReferenceItems } from "./ApiQuizModels";
-import { CreateQuizRequest, CreateQuizResponse, GetQuizResponse, GetQuizzesRequest, GetQuizzesResponse } from "./models/quiz";
+import { IRegisterRequest, IRegisterResponse } from "./models/Register";
+import { ISignInRequest, ISignInResponse } from "./models/SignIn";
+import { IGetUserProfileResponse } from "./models/GetUserProfile";
+import { CreateQuestionRequest, CreateQuestionResponse } from "./models/CreateQuestion";
+import { UpdateQuestionRequest } from "./models/UpdateQuestion";
+import { GetQuestionResponse } from "./models/GetQuestion";
+import { FilterQuestionResponse, FilterQuestionsRequest } from "./models/FilterQuestions";
+import { GetQuizResponse } from "./models/GetQuiz";
+import { ReferenceItems } from "./models/GetReferenceItems";
+import { GetQuizzesRequest, GetQuizzesResponse } from "./models/GetQuizzes";
+import { CreateQuizRequest, CreateQuizResponse } from "./models/CreateQuiz";
 
 export class ApiQuizInstance{
     instance: AxiosInstance;
@@ -40,7 +49,7 @@ export class ApiQuizInstance{
         return await this.instance.put<CreateQuestionRequest, AxiosResponse>("/question/update", request)
     }
 
-    getQuestionById = async (id: string) : Promise<AxiosResponse<Question>>=>{
+    getQuestionById = async (id: string) : Promise<AxiosResponse<GetQuestionResponse>>=>{
         return await this.instance.get(`/question/${id}`)
     }
 

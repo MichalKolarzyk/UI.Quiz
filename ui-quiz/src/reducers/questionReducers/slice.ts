@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Question } from "../../apis/apiQuiz/ApiQuizModels";
 import { getQuestions } from "./asyncActions";
-import { ActionState } from "..";
+import { FilterQuestionItem } from "../../apis/apiQuiz/models/FilterQuestions";
 
 export interface CreateQuestionState {
-    question?: Question;
+    question?: FilterQuestionItem;
     createdQuestionId?: string;
-    questions?: Array<Question>;
+    questions?: Array<FilterQuestionItem>;
     questionsCount?: number;
     error: QuestionError;
 }
@@ -35,7 +34,7 @@ export const questionStateSlice = createSlice({
     initialState,
     name: "question",
     reducers: {
-        setQuestion: (state, action: PayloadAction<Question>) => {
+        setQuestion: (state, action: PayloadAction<FilterQuestionItem>) => {
             state.question = action.payload;
         }
     },

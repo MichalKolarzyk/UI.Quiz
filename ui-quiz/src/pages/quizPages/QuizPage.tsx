@@ -5,10 +5,10 @@ import FlexRow from "../../components/flex/FlexRow";
 import { useEffect, useState } from "react";
 import useQuizApi from "../../apis/apiQuiz/useQuizApi";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
-import { GetQuizResponse } from "../../apis/apiQuiz/models/quiz";
 import { QuestionsTable } from "../../components/tables";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 import { TableLayout } from "../../layouts";
+import { GetQuizResponse } from "../../apis/apiQuiz/models/GetQuiz";
 
 const QuizPage = () => {
   const params = useParams();

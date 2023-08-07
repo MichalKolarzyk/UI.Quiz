@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { ICreateQuestionState } from "./CreateQuestionContext";
 import useQuizApi from "../../apis/apiQuiz/useQuizApi";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
-import { CreateQuestionRequest, CreateQuestionResponse } from "../../apis/apiQuiz/ApiQuizModels";
 import { QuestionError } from "../../reducers/questionReducers/slice";
 import { useSelector } from "react-redux";
 import { referenceItemsStateSelector } from "../../reducers/referenceItems/slice";
 import useAppNavigation from "../../hooks/useAppNavigation";
 import { useNotifications } from "../Notifications/hooks";
+import { CreateQuestionRequest, CreateQuestionResponse } from "../../apis/apiQuiz/models/CreateQuestion";
 
 const CreateQuestionProvider = (): ICreateQuestionState => {
   const notify = useNotifications();
