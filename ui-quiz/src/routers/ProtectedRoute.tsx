@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { selectIsLogIn } from "../reducers/accountReducers/selectors";
+import useToken from "../hooks/useToken";
 
 
 const ProtectedRoute = ({children}: any) => {
-  const isLogIn = useSelector(selectIsLogIn);
-  if (!isLogIn) {
+  const token = useToken();
+  if (!token.isActive()) {
     return <Navigate to="/login" replace />;
   }
 

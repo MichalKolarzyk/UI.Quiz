@@ -19,10 +19,15 @@ const useToken = () => {
         return token != "" && token != undefined && token != null
     }
 
+    const clear = () => {
+        set("");
+    }
+
     return {
         set,
         get,
         isActive,
+        clear,
     }
 }
 

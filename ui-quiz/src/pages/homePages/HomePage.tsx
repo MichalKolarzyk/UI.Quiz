@@ -1,14 +1,13 @@
-import { useDispatch } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
-import { setToken } from "../../reducers/accountReducers/slice";
+import { Outlet } from "react-router-dom";
 import classes from "./HomePage.module.scss";
 import useAppNavigation from "../../hooks/useAppNavigation";
-import { HeaderPageButton, RoundedButton, TextButton } from "../../components/buttons";
+import { HeaderPageButton, RoundedButton } from "../../components/buttons";
 import ReferenceItemsLoader from "../../components/loaders/ReferenceItemsLoader";
+import useToken from "../../hooks/useToken";
 
 const HomePage = () => {
   const navigate = useAppNavigation();
-  const dispatch = useDispatch();
+  const token = useToken();
 
   return (
     <ReferenceItemsLoader>
@@ -24,7 +23,7 @@ const HomePage = () => {
             <HeaderPageButton to={navigate.questionsUrl}>Questions</HeaderPageButton>
           </div>
           <div className={classes.page__header__right}>
-            <RoundedButton onClick={() => dispatch(setToken(""))}>Sing out</RoundedButton>
+            <RoundedButton onClick={token.clear}>Sing out</RoundedButton>
           </div>
         </header>
         <Outlet />
