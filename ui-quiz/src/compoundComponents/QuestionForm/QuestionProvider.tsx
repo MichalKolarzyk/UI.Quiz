@@ -8,7 +8,7 @@ const QuestionProvider = () : IQuestionState => {
     const [category, setCategory] = useState("");
     const [language, setLanguage] = useState("");
     const [correctAnswer, setCorrectAnswer] = useState(0);
-    const [answers, setAnswers] = useState<Array<string>>([]);
+    const [answers, setAnswers] = useState<Array<string>>(["", "", ""]);
 
     const nav = useAppNavigation();
 
@@ -29,7 +29,7 @@ const QuestionProvider = () : IQuestionState => {
         addAnswear: () => {},
         removeAnswear: () => {},
         setAnswear: () => {},
-        createQuestion: () => {},
+        save: () => {},
         isLoading: false,
         goBack: nav.toQuestionsPage,
     }

@@ -69,7 +69,7 @@ const QuestionsTablePage = () => {
           />
           <Dropdown placeholder="Select language..." />
           <TextInput
-            value={searchParams.author}
+            value={searchParams.author ?? undefined}
             onChange={(value) => {
               searchParams.setAuthor(value);
               searchParams.setPage(1);

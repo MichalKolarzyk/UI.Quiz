@@ -48,14 +48,6 @@ const QuestionPage = () => {
     });
   }, []);
 
-  const updateIsPrivate = (newState: boolean) => {
-    setIsPrivate(newState);
-  };
-
-  const updateDescription = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setQuestion(event.target.value);
-  };
-
   const updateCorrectAnswer = (index: number, newState: boolean) => {
     if (newState === false) {
       setCorrectAnswer(-1);
@@ -80,11 +72,6 @@ const QuestionPage = () => {
   const updateAnswer = (index: number, answer: string) => {
     const newAnswers = [...answers];
     newAnswers[index] = answer;
-    setAnswers([...newAnswers]);
-  };
-
-  const addAnswer = () => {
-    const newAnswers = [...answers, ""];
     setAnswers([...newAnswers]);
   };
 
@@ -138,49 +125,25 @@ const QuestionPage = () => {
       <QuestionLayout.Main>
         <QuestionLayout.Title>
           <FlexRow.Container fullHeight gap={GapRowEnum.medium}>
-            <QuestionForm.GoBack/>
+            <QuestionForm.GoBack />
             <h3>Question</h3>
           </FlexRow.Container>
         </QuestionLayout.Title>
         <QuestionLayout.Question>
           <FlexColumn.Container gap={GapColumnEnum.big}>
-            <Textarea
-              error={apiError.erros?.description}
-              disabled={!canUserEdit}
-              placeholder="Question"
-              value={question}
-              onChange={setQuestion}
-            />
-            <QuestionForm.IsPrivate/>
-            <div>
-              <h6>Category</h6>
-              <Dropdown
-                error={apiError.erros?.category}
-                disabled={!canUserEdit}
-                value={category}
-                onChange={(value) => setCategory(value ?? "")}
-                placeholder="Select category..."
-                items={categories?.map((c) => c.value)}
-              />
-            </div>
-
-            <div>
-              <h6>Language</h6>
-              <Dropdown disabled={!canUserEdit} placeholder="Select Language..." items={["1", "2"]} />
-            </div>
+            <QuestionForm.Question />
+            <QuestionForm.IsPrivate />
+            <QuestionForm.Category />
+            <QuestionForm.Language />
           </FlexColumn.Container>
         </QuestionLayout.Question>
         <QuestionLayout.Answer>
           <FlexColumn.Container gap={GapColumnEnum.big}>
-            {answersView}
+            <QuestionForm.Answears />
             <div>
-              {canUserEdit && (
-                <FlexRow.Container itemsPosition={RowPositionEnum.center}>
-                  <RoundedButton disabled={(answers.length ?? 0) >= 6} onClick={addAnswer}>
-                    + Add
-                  </RoundedButton>
-                </FlexRow.Container>
-              )}
+              <FlexRow.Container itemsPosition={RowPositionEnum.center}>
+                <QuestionForm.AddAnswear />
+              </FlexRow.Container>
 
               <ErrorMessage message={apiError.erros?.answers} />
               <ErrorMessage message={apiError.erros?.correctAnswerIndex} />
@@ -189,12 +152,8 @@ const QuestionPage = () => {
         </QuestionLayout.Answer>
         <QuestionLayout.Footer>
           <FlexRow.Container itemsPosition={RowPositionEnum.right}>
-            <CancelButton onClick={nav.toPreviousPage} />
-            {canUserEdit && (
-              <RoundedButton disabled={!canUserEdit} onClick={onSaveHandler}>
-                Save
-              </RoundedButton>
-            )}
+            <QuestionForm.Cancel />
+            <QuestionForm.Save />
           </FlexRow.Container>
         </QuestionLayout.Footer>
       </QuestionLayout.Main>

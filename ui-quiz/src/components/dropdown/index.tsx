@@ -49,7 +49,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 
   return (
     <>
-      <InputBox error={props.error}>
+      <InputBox disabled={props.disabled} error={props.error}>
         <div onBlur={() => setIsListVisible(false)} className={classes.box}>
           <input
             value={inputValue}

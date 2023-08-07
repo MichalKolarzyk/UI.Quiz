@@ -17,7 +17,7 @@ const QuestionContext = React.createContext<IQuestionState>({
     addAnswear: () => {},
     removeAnswear: () => {},
     setAnswear: () => {},
-    createQuestion: () => {},
+    save: () => {},
     isLoading: false,
     goBack: () => {},
 });
@@ -46,7 +46,7 @@ export interface IQuestionState{
     removeAnswear: (index: number) => void,
     setAnswear: (answer: string, index: number) => void,
     answersError? :string,
-    createQuestion: () => void,
+    save: () => void,
     isLoading: boolean,
     categoryItems?: Array<string>, 
     goBack: () => void,

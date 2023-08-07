@@ -1,11 +1,11 @@
-import { IDisabled, IError, ILoading, IPlaceholder, IType } from "../base/types";
+import { IDisabled, IError, ILoading, IPlaceholder, ISingleValue, IType } from "../base/types";
 import { IconComponents } from "../icons";
 import classes from "./styles.module.scss";
 import { InputBox } from "../boxes/InputBox";
 import FlexRow from "../flex/FlexRow";
 import { GapRowEnum, RowPositionEnum } from "../flex/types";
 
-export const TextInput: React.FC<DropdownProps> = (props) => {
+export const TextInput: React.FC<TextInputProps> = (props) => {
   return (
       <InputBox error={props.error} isLoading={props.isLoading} disabled={props.disabled}>
         <FlexRow.Container itemsPosition={RowPositionEnum.left} gap={GapRowEnum.small}>
@@ -23,7 +23,5 @@ export const TextInput: React.FC<DropdownProps> = (props) => {
   );
 };
 
-export interface DropdownProps extends IError, IPlaceholder, IDisabled, IType, ILoading {
-  value?: string | null;
-  onChange?: (newValue: string) => void;
+export interface TextInputProps extends IError, IPlaceholder, IDisabled, IType, ILoading, ISingleValue<string> {
 }
