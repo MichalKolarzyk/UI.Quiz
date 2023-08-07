@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { IError, ISingleValue, InputComponentProps } from "../base/types";
+import { IDisabled, IError, IList, IPlaceholder, ISingleValue } from "../base/types";
 import { InputBox } from "../boxes/InputBox";
 import { ClearIcon, DownIcon, UpIcon } from "../icons";
 import classes from "./styles.module.scss";
@@ -73,6 +73,5 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
   );
 };
 
-export interface DropdownProps extends InputComponentProps, ISingleValue<string>, IError {
-  items?: Array<string>;
+export interface DropdownProps extends IPlaceholder, ISingleValue<string>, IError, IDisabled, IList<string> {
 }

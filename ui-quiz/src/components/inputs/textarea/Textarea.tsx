@@ -1,4 +1,4 @@
-import { IDisabled, IPlaceholder, ISingleValue } from "../../base/types";
+import { IDisabled, IError, IPlaceholder, ISingleValue } from "../../base/types";
 import ErrorMessage from "../../errors";
 import classes from "./Textarea.module.scss";
 
@@ -14,15 +14,14 @@ const Textarea: React.FC<TextareaProps> = (props: TextareaProps) => {
         disabled={props.disabled}
         value={props.value}
         onChange={onChangeHandler}
-        //{...props} 
+        placeholder={props.placeholder}
       />
-      <ErrorMessage message={props.errorMessage} />
+      <ErrorMessage message={props.error} />
     </div>
   );
 };
 
-export interface TextareaProps extends IDisabled, ISingleValue<string>, IPlaceholder {
-  errorMessage?: string;
+export interface TextareaProps extends IDisabled, ISingleValue<string>, IPlaceholder, IError {
 }
 
 export default Textarea;

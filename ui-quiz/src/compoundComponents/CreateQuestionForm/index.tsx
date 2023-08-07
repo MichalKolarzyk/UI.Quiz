@@ -23,7 +23,7 @@ const Question = () => {
       value={context.question}
       onChange={context.setQuestion}
       placeholder="Question"
-      errorMessage={context.questionError}
+      error={context.questionError}
     />
   );
 };

@@ -1,16 +1,22 @@
-import ErrorMessage from '../../errors';
-import classes from './FormInput.module.scss'
+import { IDisabled, IError, ISingleValue } from "../../base/types";
+import ErrorMessage from "../../errors";
+import classes from "./FormInput.module.scss";
 
 const FormInput = (props: FormInputProps) => {
   return (
     <>
-      <input {...props} className={classes.input} ></input>
-      <ErrorMessage message={props.errorMessage}/>
+      <input
+        className={classes.input}
+        value={props.value}
+        onChange={(e) => props.onChange?.(e.target.value)}
+        disabled={props.disabled}
+      />
+      <ErrorMessage message={props.errorMessage} />
     </>
   );
 };
 
-export interface FormInputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+export interface FormInputProps extends IError, ISingleValue<string>, IDisabled {
   errorMessage?: string;
 }
 

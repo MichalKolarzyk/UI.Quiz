@@ -1,15 +1,3 @@
-export interface ComponentProps{
-    disabled?: boolean,
-    isLoading?: boolean,
-    children?: any,
-}
-
-export interface InputComponentProps extends ComponentProps{
-    placeholder?: string;
-    type?: string,
-}
-
-//new interfaces
 export interface IDisabled{
     disabled?: boolean,
 }
@@ -26,3 +14,20 @@ export interface IPlaceholder{
 export interface IError{
     error?: string,
 }
+
+export interface IList<T>{
+    items?: Array<T>,
+}
+
+export interface ILoading{
+    isLoading?: boolean,
+}
+
+export interface IType{
+    type?: string,
+}
+
+export interface IChildren{
+    children?: any,
+}
+

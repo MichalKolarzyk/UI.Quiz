@@ -29,7 +29,7 @@ const Question = () => {
   const context = useContext(QuestionContext);
   return (
     <Textarea
-      errorMessage={context.questionError}
+      error={context.questionError}
       disabled={!context.canUserEdit}
       placeholder="Question"
       value={context.question}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import classes from "./DropdownInput.module.scss";
 import { FormInputProps } from "../formInputs/FormInput";
+import { IList } from "../../base/types";
 
 const DropdownInput = (props: DropdownInputProps) => {
   const [isListVisible, setIsListVisible] = useState<boolean>(false);
@@ -14,7 +15,7 @@ const DropdownInput = (props: DropdownInputProps) => {
     setIsListVisible(false);
   };
 
-  const itemsView = props.items.map((value, index) => (
+  const itemsView = props.items?.map((value, index) => (
     <div onMouseDown={onIntemClick} className={classes.item}>
       {value}
     </div>
@@ -38,8 +39,7 @@ const DropdownInput = (props: DropdownInputProps) => {
   );
 };
 
-export interface DropdownInputProps extends FormInputProps {
-  items: Array<string>;
+export interface DropdownInputProps extends FormInputProps, IList<string> {
   labelTop?: string;
   labelBottom?: string;
 }

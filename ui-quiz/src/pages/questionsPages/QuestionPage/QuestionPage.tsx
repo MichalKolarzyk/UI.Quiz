@@ -145,7 +145,7 @@ const QuestionPage = () => {
         <QuestionLayout.Question>
           <FlexColumn.Container gap={GapColumnEnum.big}>
             <Textarea
-              errorMessage={apiError.erros?.description}
+              error={apiError.erros?.description}
               disabled={!canUserEdit}
               placeholder="Question"
               value={question}

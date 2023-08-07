@@ -13,7 +13,6 @@ import useQuizzesSearchParams from "./searchParams";
 import FlexRow from "../../components/flex/FlexRow";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 import { TableLayout } from "../../layouts";
-import Prompt from "../../compoundComponents/Prompt";
 import usePrompt from "../../compoundComponents/Prompt/hooks";
 import CreateQuizPage from "../createQuizPages/CreateQuizPage";
 

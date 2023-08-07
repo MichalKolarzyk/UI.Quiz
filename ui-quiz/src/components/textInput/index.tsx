@@ -1,4 +1,4 @@
-import { IError, InputComponentProps } from "../base/types";
+import { IDisabled, IError, ILoading, IPlaceholder, IType } from "../base/types";
 import { IconComponents } from "../icons";
 import classes from "./styles.module.scss";
 import { InputBox } from "../boxes/InputBox";
@@ -23,7 +23,7 @@ export const TextInput: React.FC<DropdownProps> = (props) => {
   );
 };
 
-export interface DropdownProps extends InputComponentProps, IError {
+export interface DropdownProps extends IError, IPlaceholder, IDisabled, IType, ILoading {
   value?: string | null;
   onChange?: (newValue: string) => void;
 }

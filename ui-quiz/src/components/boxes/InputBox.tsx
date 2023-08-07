@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ComponentProps, IError } from "../base/types";
+import { IChildren, IDisabled, IError, ILoading } from "../base/types";
 import classes from "./styles.module.scss";
 import ErrorMessage from "../errors";
 
@@ -32,6 +32,6 @@ export const InputBox: React.FC<InputBoxProps> = (props) => {
   );
 };
 
-export interface InputBoxProps extends ComponentProps, IError {
+export interface InputBoxProps extends IDisabled, ILoading, IError, IChildren {
   fullWidth?: boolean
 }
