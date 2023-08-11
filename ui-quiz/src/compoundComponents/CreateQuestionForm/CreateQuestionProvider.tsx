@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ICreateQuestionState } from "./CreateQuestionContext";
-import useQuizApi from "../../apis/apiQuiz/useQuizApi";
-import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
-import { QuestionError } from "../../reducers/questionReducers/slice";
 import { useSelector } from "react-redux";
 import { referenceItemsStateSelector } from "../../reducers/referenceItems/slice";
-import useAppNavigation from "../../hooks/useAppNavigation";
+import useAppNavigation from "../Navigation/useAppNavigation";
 import { useNotifications } from "../Notifications/hooks";
-import { CreateQuestionRequest, CreateQuestionResponse } from "../../apis/apiQuiz/models/CreateQuestion";
+import useList from "../../hooks/useList";
+import QuizApiRequests from "../../apis/apiQuiz";
 
 const CreateQuestionProvider = (): ICreateQuestionState => {
   const notify = useNotifications();
@@ -15,26 +13,16 @@ const CreateQuestionProvider = (): ICreateQuestionState => {
 
   const [question, setQuestion] = useState("");
   const [isPrivate, setIsPrivate] = useState(true);
-  const [isModify, setIsModify] = useState(false);
   const [category, setCategory] = useState("");
   const [language, setLanguage] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState(0);
-  const [answers, setAnswers] = useState([""]);
-
-  useEffect(() => {
-    if (isPrivate == false && correctAnswer == 0 && question == "" && category == "" && answers.every((e) => e == "")) {
-      setIsModify(false);
-    } else {
-      setIsModify(true);
-    }
-  }, [isPrivate, correctAnswer, question, category, answers]);
+  const answers = useList([""]);
 
   const { categories } = useSelector(referenceItemsStateSelector);
   const categoryItems = categories?.map?.((c) => c.value) ?? [];
 
   const removeAnswear = (index: number) => {
-    answers.splice(index, 1);
-    setAnswers([...answers]);
+    answers.remove(index);
     if (index < correctAnswer) {
       setCorrectAnswer(correctAnswer - 1);
       return;
@@ -45,66 +33,64 @@ const CreateQuestionProvider = (): ICreateQuestionState => {
     }
   };
 
-  const addAnswear = () => {
-    const newAnswers = [...answers, ""];
-    setAnswers(newAnswers);
+  const getIsModify = () => {
+    if (
+      isPrivate == false &&
+      correctAnswer == 0 &&
+      question == "" &&
+      category == "" &&
+      answers.items.every((e) => e == "")
+    ) {
+      return false;
+    }
+    return true;
   };
 
-  const endpoint = useQuizApi<CreateQuestionRequest, CreateQuestionResponse, QuestionError>(
-    (request) => ApiQuizInstance.createQuestion(request),
-    (response) => {
+  const createQuestionRequest = QuizApiRequests.useCreateQuestionRequest(
+    (data) => {
       notify.addInfo("Question created");
-      nav.toQuestionPage(response.data.id);
+      nav.toQuestionPage(data.id);
     },
     () => notify.addError("Some informations are invalid")
   );
 
   const createQuestion = () => {
-    const request = {
-      answers: answers,
+    createQuestionRequest.call({
+      answers: answers.items,
       category: category,
       correctAnswerIndex: correctAnswer,
       defaultLanugage: "",
       isPrivate: isPrivate,
       question: question,
-    } as CreateQuestionRequest;
-
-    endpoint.call(request);
-  };
-
-  const setAnswear = (newValue: string, index: number) => {
-    const newAnswers = [...answers];
-    newAnswers[index] = newValue;
-    setAnswers([...newAnswers]);
+    });
   };
 
   const goBack = () => {
     nav.toQuestionsPage();
-  }
-
+  };
 
   return {
-    isModify,
+    isModify: getIsModify(),
     question,
     setQuestion,
-    questionError: endpoint.errors.erros?.description,
+    questionError: createQuestionRequest.fieldErrors?.description,
     isPrivate,
     setIsPrivate,
     category,
     setCategory,
-    categoryError: endpoint.errors.erros?.category,
+    categoryError: createQuestionRequest.fieldErrors?.category,
     language,
     setLanguage,
     correctAnswer,
     setCorrectAnswer,
-    correctAnswerError: endpoint.errors.erros?.correctAnswerIndex,
-    answers,
-    addAnswear,
+    correctAnswerError: createQuestionRequest.fieldErrors?.correctAnswerIndex,
+    answers: answers.items,
+    addAnswear: () => answers.add(""),
     removeAnswear,
     createQuestion,
-    answersError: endpoint.errors.erros?.answers,
-    setAnswear, 
-    isLoading: endpoint.isLoading,
+    answersError: createQuestionRequest.fieldErrors?.answers,
+    setAnswear: answers.setItem,
+    isLoading: createQuestionRequest.isLoading,
     categoryItems,
     goBack,
   };

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import RegistrationContext from "./RegistrationContext";
 import { ButtonDark, TextButton } from "../../components/buttons";
 import RegistrationProvider from "./RegistrationProvider";
-import { TextInput } from "../../components/textInput";
+import { TextInput } from "../../components/inputs/textInput";
 
 const Form = (props: any) => {
   return (

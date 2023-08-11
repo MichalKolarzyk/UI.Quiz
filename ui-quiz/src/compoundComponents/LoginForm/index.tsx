@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { LoginFormContext } from "./LoginFormContext";
 import { LoginFormProvider } from "./LoginFormProvider";
-import { TextInput } from "../../components/textInput";
+import { TextInput } from "../../components/inputs/textInput";
 import { ButtonDark, TransparentButton } from "../../components/buttons";
 import { ErrorMessageBlock } from "../../components/errors";
 

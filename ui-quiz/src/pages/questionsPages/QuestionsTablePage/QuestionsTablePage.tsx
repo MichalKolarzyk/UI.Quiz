@@ -1,5 +1,5 @@
 import Paginator from "../../../components/tables/paginator/Paginator";
-import useAppNavigation from "../../../hooks/useAppNavigation";
+import useAppNavigation from "../../../compoundComponents/Navigation/useAppNavigation";
 import { CreateButton, GoBackButton } from "../../../components/buttons";
 import { QuestionsTable } from "../../../components/tables";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import Switch from "../../../components/switches/Switch";
 import { useEffect, useState } from "react";
 import { getQuestions } from "../../../reducers/questionReducers/asyncActions";
 import { useQuestionsSearchParams } from "./searchParams";
-import { TextInput } from "../../../components/textInput";
+import { TextInput } from "../../../components/inputs/textInput";
 import { Dropdown } from "../../../components/dropdown";
 import { referenceItemsStateSelector } from "../../../reducers/referenceItems/slice";
 import FlexRow from "../../../components/flex/FlexRow";

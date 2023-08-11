@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import useToken from "../hooks/useToken";
+import useToken from "../apis/utils/useToken";
 
 
 const ProtectedRoute = ({children}: any) => {

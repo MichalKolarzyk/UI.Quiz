@@ -10,3 +10,10 @@ export interface CreateQuestionRequest {
 export interface CreateQuestionResponse {
   id: string;
 }
+
+export interface CreateQuestionError{
+  description: string,
+  answers: string,
+  correctAnswerIndex: string,
+  category: string,
+}

@@ -6,8 +6,9 @@ import Switch from "../../components/switches/Switch";
 import Textarea from "../../components/inputs/textarea/Textarea";
 import { Dropdown } from "../../components/dropdown";
 import FlexRow from "../../components/flex/FlexRow";
-import { GapRowEnum } from "../../components/flex/types";
-import { TextInput } from "../../components/textInput";
+import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
+import { TextInput } from "../../components/inputs/textInput";
+import ErrorMessage from "../../components/errors";
 
 const Form = (props: any) => {
   return (
@@ -71,8 +72,8 @@ const Language = () => {
 
 const AddAnswear = () => {
   const context = useContext(QuestionContext);
-  if(!context.canUserEdit) return <></>
-  
+  if (!context.canUserEdit) return <></>;
+
   return (
     <RoundedButton disabled={(context.answers.length ?? 0) >= 6} onClick={context.addAnswear}>
       + Add
@@ -124,6 +125,8 @@ const Answears = () => {
           </FlexRow.Container>
         );
       })}{" "}
+      <ErrorMessage error={context.answersError} />
+      <ErrorMessage error={context.correctAnswerError} />
     </>
   );
 };

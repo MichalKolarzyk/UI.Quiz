@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { CreateButton, GoBackButton, RoundedButton } from "../../components/buttons";
-import useAppNavigation from "../../hooks/useAppNavigation";
+import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
 import FlexRow from "../../components/flex/FlexRow";
 import { useEffect, useState } from "react";
-import useQuizApi from "../../apis/apiQuiz/useQuizApi";
+import useApi from "../../apis/utils/useApi";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
 import { QuestionsTable } from "../../components/tables";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
@@ -16,9 +16,9 @@ const QuizPage = () => {
   const id = params["quizId"];
   const [quiz, setQuiz] = useState<GetQuizResponse>();
 
-  const endpoint = useQuizApi(
-    (request: string) => ApiQuizInstance.getQuiz(request),
-    (response) => setQuiz(response.data)
+  const endpoint = useApi(
+    ApiQuizInstance.getQuiz,
+    setQuiz
   );
 
   useEffect(() => {

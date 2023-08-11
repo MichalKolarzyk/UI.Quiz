@@ -1,26 +1,14 @@
-import { useState } from "react";
 import { INotificationState } from "./NotificationContext";
 import { AppNotification, AppNotificationType } from "./types";
+import useList from "../../hooks/useList";
 
 const NotificationProvider = () : INotificationState => {
-    const [notifications, setNotifications] = useState<Array<AppNotification>>([]);
-
-    const addNotification = (notification: AppNotification) => {
-      setNotifications((prevNotifications) => [...prevNotifications, notification]);
-    }
-  
-    const removeNotification = (index: number) => {
-      setNotifications((prevNotifications) => {
-        const updatedNotifications = [...prevNotifications];
-        updatedNotifications.splice(index, 1);
-        return updatedNotifications;
-      });
-    }
+    const notifications = useList<AppNotification>([]);
 
     const add = (notification: AppNotification) => {
-        addNotification(notification);
+      notifications.add(notification);
         setTimeout(() => {
-          removeNotification(0);
+          notifications.remove(0);
         }, 5000);
       };
     
@@ -34,10 +22,10 @@ const NotificationProvider = () : INotificationState => {
 
 
     return {
-        notifications,
+        notifications : notifications.items,
+        removeNotification: notifications.remove,
         addInfo,
         addError,
-        removeNotification,
     }
 }
 

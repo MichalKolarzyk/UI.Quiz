@@ -3,8 +3,8 @@ import FlexRow from "../../components/flex/FlexRow";
 import { Dropdown } from "../../components/dropdown";
 import { SessionsTable } from "../../components/tables";
 import Paginator from "../../components/tables/paginator/Paginator";
-import { TextInput } from "../../components/textInput";
-import useAppNavigation from "../../hooks/useAppNavigation";
+import { TextInput } from "../../components/inputs/textInput";
+import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 import { TableLayout } from "../../layouts";
 

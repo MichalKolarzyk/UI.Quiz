@@ -6,7 +6,7 @@ import Switch from "../../components/switches/Switch";
 import { Dropdown } from "../../components/dropdown";
 import FlexRow from "../../components/flex/FlexRow";
 import { CancelButton, CreateButton, DeleteButton, GoBackButton, RoundedButton } from "../../components/buttons";
-import { TextInput } from "../../components/textInput";
+import { TextInput } from "../../components/inputs/textInput";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 import ErrorMessage from "../../components/errors";
 

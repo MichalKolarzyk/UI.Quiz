@@ -1,35 +1,25 @@
 import { useState } from "react";
 import { ILoginFormState } from "./LoginFormContext";
-import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
-import useToken from "../../hooks/useToken";
 import { useNavigate } from "react-router-dom";
+import QuizApiRequests from "../../apis/apiQuiz";
+import useToken from "../../apis/utils/useToken";
+
 
 export const LoginFormProvider = (): ILoginFormState => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const token = useToken();
   const nav = useNavigate();
+  const token = useToken();
+
+  const signInRequest = QuizApiRequests.useSignInRequest(
+    (data) => token.set(data.token)
+  );
 
   const signIn = () => {
-    clearError();
-    setIsLoading(true);
-    ApiQuizInstance.signIn({
+    signInRequest.call({
       login: email,
       password: password,
     })
-      .then((response) => token.set(response.data.token))
-      .catch((error) => {
-        setError(error.response.data.errors[""]);
-        setEmail("");
-        setPassword("");
-      })
-      .finally(() => setIsLoading(false));
-  };
-
-  const clearError = () => {
-    setError("");
   };
 
   const signUp = () => {
@@ -41,9 +31,9 @@ export const LoginFormProvider = (): ILoginFormState => {
     setEmail,
     password,
     setPassword,
-    isLoading: isLoading,
-    errorMessage: error,
-    clearError,
+    isLoading: signInRequest.isLoading,
+    errorMessage: signInRequest.errorMessage,
+    clearError: signInRequest.clearErrors,
     signIn,
     signUp,
   } as ILoginFormState;

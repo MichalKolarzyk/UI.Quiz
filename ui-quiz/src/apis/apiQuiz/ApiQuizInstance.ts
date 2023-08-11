@@ -72,8 +72,6 @@ export class ApiQuizInstance{
     createQuiz =  async (request: CreateQuizRequest): Promise<AxiosResponse<CreateQuizResponse>> => {
         return await this.instance.post<CreateQuizRequest, AxiosResponse<CreateQuizResponse>>("/quiz/create", request)
     }
-
-
 }
 
 // export default new ApiQuizInstance("http://localhost:49158");

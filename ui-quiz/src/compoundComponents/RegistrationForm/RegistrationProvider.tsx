@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { IRegistrationState } from "./RegistrationContext";
-import useAppNavigation from "../../hooks/useAppNavigation";
-import useQuizApi from "../../apis/apiQuiz/useQuizApi";
-import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
+import useAppNavigation from "../Navigation/useAppNavigation";
 import { useNotifications } from "../Notifications/hooks";
 import usePrompt from "../Prompt/hooks";
 import { CreateButton } from "../../components/buttons";
-import { IRegisterError, IRegisterRequest, IRegisterResponse } from "../../apis/apiQuiz/models/Register";
+import QuizApiRequests from "../../apis/apiQuiz";
 
 const RegistrationProvider = (): IRegistrationState => {
-  const [login, setLogin] = useState("")
-  const [password, setPassword] = useState("")
-  const [repetePassword, setRepetePassword] = useState("")
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [repetePassword, setRepetePassword] = useState("");
 
   const notify = useNotifications();
   const prompt = usePrompt();
@@ -21,49 +19,45 @@ const RegistrationProvider = (): IRegistrationState => {
     const onClick = () => {
       nav.toLoginPage();
       prompt.hide();
-    }
+    };
     return (
-        <div>
-          <div className="h2 u-color-white">Congratulations! </div>
-          <div className="h3 u-color-white u-margin-bottom-big">{`${login} account has been created `}</div>
-          <CreateButton onClick={onClick} className="button">
-            Continue
-          </CreateButton>
-        </div>
+      <div>
+        <div className="h2 u-color-white">Congratulations! </div>
+        <div className="h3 u-color-white u-margin-bottom-big">{`${login} account has been created `}</div>
+        <CreateButton onClick={onClick} className="button">
+          Continue
+        </CreateButton>
+      </div>
     );
-  }
+  };
 
-  const endpoint = useQuizApi<IRegisterRequest, IRegisterResponse, IRegisterError>(
-    (request) => ApiQuizInstance.register(request),
+  const registerRequest = QuizApiRequests.useRegisterUser(
     () => prompt.show("User created", promptContent),
     () => notify.addError("User not created")
-  );
+  )
 
   const register = () => {
-    const request = {
+    registerRequest.call({
       login: login,
       password: password,
       repetePassword: repetePassword,
-    } as IRegisterRequest;
-
-    endpoint.call(request);
+    });
   };
 
   return {
     login,
     setLogin,
-    loginError: endpoint.errors.erros?.login,
+    loginError: registerRequest.fieldErrors?.login,
     password,
     setPassword,
-    passwordError: endpoint.errors.erros?.password,
+    passwordError: registerRequest.fieldErrors?.password,
     repetePassword,
     setRepetePassword,
-    repetePasswordError: endpoint.errors.erros?.repetePassword,
+    repetePasswordError: registerRequest.fieldErrors?.repetePassword,
     goBack: nav.toLoginPage,
     register,
-    isLoading: endpoint.isLoading,
+    isLoading: registerRequest.isLoading,
   };
 };
-
 
 export default RegistrationProvider;

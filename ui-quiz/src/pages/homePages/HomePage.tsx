@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import classes from "./HomePage.module.scss";
-import useAppNavigation from "../../hooks/useAppNavigation";
+import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
 import { HeaderPageButton, RoundedButton } from "../../components/buttons";
 import ReferenceItemsLoader from "../../components/loaders/ReferenceItemsLoader";
-import useToken from "../../hooks/useToken";
+import useToken from "../../apis/utils/useToken";
 
 const HomePage = () => {
   const navigate = useAppNavigation();

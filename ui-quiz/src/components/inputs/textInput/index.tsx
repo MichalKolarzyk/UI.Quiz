@@ -1,9 +1,9 @@
-import { IDisabled, IError, ILoading, IPlaceholder, ISingleValue, IType } from "../base/types";
-import { IconComponents } from "../icons";
+import { IDisabled, IError, ILoading, IPlaceholder, ISingleValue, IType } from "../../base/types";
+import { IconComponents } from "../../icons";
 import classes from "./styles.module.scss";
-import { InputBox } from "../boxes/InputBox";
-import FlexRow from "../flex/FlexRow";
-import { GapRowEnum, RowPositionEnum } from "../flex/types";
+import { InputBox } from "../../boxes/InputBox";
+import FlexRow from "../../flex/FlexRow";
+import { GapRowEnum, RowPositionEnum } from "../../flex/types";
 
 export const TextInput: React.FC<TextInputProps> = (props) => {
   return (
@@ -12,7 +12,7 @@ export const TextInput: React.FC<TextInputProps> = (props) => {
           <input
             disabled={props.disabled}
             type={props.type}
-            value={props.value ?? ""}
+            value={props.value}
             onChange={(event) => props.onChange?.(event.target.value)}
             className={classes.input}
             placeholder={props.placeholder}

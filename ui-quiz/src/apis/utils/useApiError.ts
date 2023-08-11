@@ -21,7 +21,7 @@ export const useApiError = <T>() => {
     return{
         restart,
         setError,
-        erros: fieldErrors,
+        errors: fieldErrors,
         message,
     }
 }

@@ -1,7 +1,7 @@
-import { useAppDispatch } from "../store/store";
-import { setToken } from "../reducers/accountReducers/slice";
+import { useAppDispatch } from "../../store/store";
+import { setToken } from "../../reducers/accountReducers/slice";
 import { useSelector } from "react-redux";
-import { accountStateSelector } from "../reducers/accountReducers/selectors";
+import { accountStateSelector } from "../../reducers/accountReducers/selectors";
 
 const useToken = () => {
     const dispatch = useAppDispatch();

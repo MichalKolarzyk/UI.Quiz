@@ -1,10 +1,9 @@
 import { AxiosResponse } from "axios";
 import { useApiError } from "./useApiError";
 import { useState } from "react";
-
-const useQuizApi = <TRequest, TResponse, TError>(
+const useApi = <TRequest, TResponse, TError>(
   promise: (request: TRequest) => Promise<AxiosResponse<TResponse>>,
-  onThen?: (data: AxiosResponse<TResponse, any>) => void,
+  onThen?: (data: TResponse) => void,
   onCatch?: () => void
 ) => {
   const apiError = useApiError<TError>();
@@ -14,7 +13,7 @@ const useQuizApi = <TRequest, TResponse, TError>(
     setIsLoading(true);
     promise(request)
       .then((data) => {
-        onThen?.(data);
+        onThen?.(data.data);
         apiError.restart();
       })
       .catch((error) => {
@@ -29,9 +28,11 @@ const useQuizApi = <TRequest, TResponse, TError>(
 
   return {
     isLoading,
-    errors: apiError,
+    fieldErrors: apiError.errors,
+    errorMessage: apiError.message,
+    clearErrors: apiError.restart,
     call,
   };
 };
 
-export default useQuizApi;
+export default useApi;

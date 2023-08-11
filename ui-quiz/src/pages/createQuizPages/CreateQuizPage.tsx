@@ -1,10 +1,9 @@
 import { useState } from "react";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
-import useApiRequest from "../../apis/apiQuiz/useQuizApi";
-import { CancelButton, RoundedButton } from "../../components/buttons";
-import { TextInput } from "../../components/textInput";
-import useAppNavigation from "../../hooks/useAppNavigation";
-import { CreateQuizRequest } from "../../apis/apiQuiz/models/CreateQuiz";
+import useApiRequest from "../../apis/utils/useApi";
+import { RoundedButton } from "../../components/buttons";
+import { TextInput } from "../../components/inputs/textInput";
+import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
 
 
 const CreateQuizPage = () => {
@@ -12,9 +11,9 @@ const CreateQuizPage = () => {
   const [name, setName] = useState<string>("");
 
   const request = useApiRequest(
-    (request: CreateQuizRequest) => ApiQuizInstance.createQuiz(request),
+    ApiQuizInstance.createQuiz,
     (response) => {
-      nav.toQuizPage(response.data.id);
+      nav.toQuizPage(response.id);
     }
   );
 

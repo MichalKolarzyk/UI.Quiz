@@ -1,5 +1,5 @@
 import { CreateButton, TextButton } from "../../components/buttons";
-import useAppNavigation from "../../hooks/useAppNavigation";
+import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
 import classes from "./AboutPage.module.scss";
 
 const AboutPage = () => {
