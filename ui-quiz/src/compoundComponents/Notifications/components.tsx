@@ -1,8 +1,6 @@
 import { CloseButton, DeleteButton, EmptyButton } from "../../components/buttons";
 import { AppNotification, AppNotificationType } from "./types";
 import classes from "./Notification.module.scss";
-import { Icon, IconComponents } from "../../components/icons";
-import { IconSize } from "../../components/icons/types";
 
 export const NotificationBlock = (props: NotificationProps) => {
   let className;

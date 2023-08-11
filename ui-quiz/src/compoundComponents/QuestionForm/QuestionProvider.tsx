@@ -5,6 +5,7 @@ import useList from "../../hooks/useList";
 import QuizApiRequests from "../../apis/apiQuiz";
 import { useParams } from "react-router-dom";
 import { useNotifications } from "../Notifications/hooks";
+import { GetQuestionResponse } from "../../apis/apiQuiz/models/GetQuestion";
 
 const QuestionProvider = (): IQuestionState => {
   const notify = useNotifications();
@@ -15,6 +16,8 @@ const QuestionProvider = (): IQuestionState => {
   const [language, setLanguage] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [canUserEdit, setCanUserEdit] = useState(false);
+
+  const [oryginalQuestion, setOryginalQuestion] = useState<GetQuestionResponse>();
   const answers = useList([""]);
 
   const params = useParams();
@@ -27,7 +30,21 @@ const QuestionProvider = (): IQuestionState => {
     setCategory(question.category);
     answers.setItems(question.answers);
     setCanUserEdit(question.canUserEdit);
+    setOryginalQuestion(question);
   });
+
+  const getIsModify = () => {
+    if (
+      isPrivate == oryginalQuestion?.isPrivate &&
+      correctAnswer == oryginalQuestion.correctAnswerIndex &&
+      question == oryginalQuestion.description &&
+      category == oryginalQuestion.category &&
+      answers.items.length == oryginalQuestion.answers.length
+    ) {
+      return false;
+    }
+    return true;
+  };
 
   const updateQuestionRequest = QuizApiRequests.useUpdateQuestion(
     () => notify.addInfo("Question updated"),
@@ -67,7 +84,7 @@ const QuestionProvider = (): IQuestionState => {
 
   return {
     canUserEdit,
-    isModify: false,
+    isModify: getIsModify(),
     question,
     setQuestion,
     questionError: updateQuestionRequest.fieldErrors?.description,

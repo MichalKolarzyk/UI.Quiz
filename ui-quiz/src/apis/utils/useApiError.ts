@@ -16,6 +16,7 @@ export const useApiError = <T>() => {
 
     const restart = () => {
         setFieldErrors({} as T);
+        setMessage("");
     }
 
     return{
