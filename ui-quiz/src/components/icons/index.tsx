@@ -7,15 +7,17 @@ import { CgSpinnerAlt } from "react-icons/cg";
 import { BsCheck } from "react-icons/bs";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import { IconProps } from "./types";
+import classNames from "classnames";
+import classes from './Icon.module.scss'
 
 export const Icon = (props: IconProps) => {
+  if(!props.iconComponent) return <></>
+
+  const classname = classNames(classes.icon, props.className, props.color)
+
   return (
-    <props.iconComponent
-      style={{
-        height: props.size,
-        width: props.size,
-      }}
-      className={props.className}
+    <props.iconComponent height={props.size} width={props.size} 
+      className={ classname}
     ></props.iconComponent>
   );
 };

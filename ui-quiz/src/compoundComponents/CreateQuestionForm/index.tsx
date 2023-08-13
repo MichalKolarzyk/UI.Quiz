@@ -5,10 +5,11 @@ import CreateQuestionProvider from "./CreateQuestionProvider";
 import Switch from "../../components/switches/Switch";
 import { Dropdown } from "../../components/dropdown";
 import FlexRow from "../../components/flex/FlexRow";
-import { CancelButton, CreateButton, DeleteButton, GoBackButton, RoundedButton } from "../../components/buttons";
+import { CancelButton, CreateButton, DeleteButton, GoBackButton, PrimaryButton, RoundedButton, SecondaryButton } from "../../components/buttons";
 import { TextInput } from "../../components/inputs/textInput";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 import ErrorMessage from "../../components/errors";
+import { Icon, IconComponents } from "../../components/icons";
 
 const GoBack = () => {
   const context = useContext(CreateQuestionContext);
@@ -30,12 +31,12 @@ const Question = () => {
 
 const CreateQuestion = () => {
   const context = useContext(CreateQuestionContext);
-  return <CreateButton onClick={context.createQuestion}>Create</CreateButton>;
+  return <PrimaryButton onClick={context.createQuestion} label="Create"/>;
 };
 
 const Cancel = () => {
   const context = useContext(CreateQuestionContext);
-  return <CancelButton onClick={context.goBack} />;
+  return <SecondaryButton onClick={context.goBack} label="Cancel" icon={IconComponents.Cancel} />;
 };
 
 const Form = (props: any) => {
@@ -114,10 +115,9 @@ const Answers = () => {
       })}
       <ErrorMessage error={context.answersError} />
       <ErrorMessage error={context.correctAnswerError} />
-      <FlexRow.Container itemsPosition={RowPositionEnum.center}>
-        <RoundedButton disabled={context.answers.length >= 6} onClick={context.addAnswear}>
-          + Add
-        </RoundedButton>
+      <FlexRow.Container itemsPosition={RowPositionEnum.left}>
+        <SecondaryButton disabled={context.answers.length >= 6} onClick={context.addAnswear} label="Add answear" icon={IconComponents.Add} iconPosition="left"/>
+
       </FlexRow.Container>
     </>
   );

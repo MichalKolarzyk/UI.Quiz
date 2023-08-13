@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GoBackButton, CreateButton } from "../../components/buttons";
+import { GoBackButton, CreateButton, SecondaryButton } from "../../components/buttons";
 import { QuizzesTable } from "../../components/tables";
 import Paginator from "../../components/tables/paginator/Paginator";
 import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
@@ -57,7 +57,7 @@ const QuizTablePage = () => {
       </TableLayout.Filter>
       <TableLayout.Action>
         <FlexRow.Container fullHeight itemsPosition={RowPositionEnum.right}>
-          <CreateButton onClick={() => prompt.show("Create quiz", CreateQuizPage)}>Create Quiz</CreateButton>
+          <SecondaryButton onClick={() => prompt.show("Create quiz", CreateQuizPage)} label="Create Quiz"/>
         </FlexRow.Container>
       </TableLayout.Action>
       <TableLayout.Table>

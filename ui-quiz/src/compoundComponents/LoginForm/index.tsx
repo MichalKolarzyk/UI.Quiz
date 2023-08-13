@@ -2,8 +2,9 @@ import { useContext } from "react";
 import { LoginFormContext } from "./LoginFormContext";
 import { LoginFormProvider } from "./LoginFormProvider";
 import { TextInput } from "../../components/inputs/textInput";
-import { ButtonDark, TransparentButton } from "../../components/buttons";
+import { PrimaryButton, SecondaryButton } from "../../components/buttons";
 import { ErrorMessageBlock } from "../../components/errors";
+import { IconComponents } from "../../components/icons";
 
 const Form = (props: any) => {
   return (
@@ -36,18 +37,22 @@ const PasswordInput = () => {
 const SignInButton = () => {
   const context = useContext(LoginFormContext);
   return (
-    <ButtonDark disabled={context.isLoading} onClick={context.signIn}>
-      Sign in
-    </ButtonDark>
+    <PrimaryButton
+      label="Sign in"
+      disabled={context.isLoading}
+      onClick={context.signIn}
+      iconPosition="right"
+    />
   );
 };
 
 const SignUpButton = () => {
   const context = useContext(LoginFormContext);
   return (
-    <TransparentButton disabled={context.isLoading} onClick={context.signUp}>
-      Sign up
-    </TransparentButton>
+    <SecondaryButton 
+      disabled={context.isLoading} 
+      onClick={context.signUp}
+      label="Sign up"/>
   );
 };
 

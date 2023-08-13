@@ -4,7 +4,8 @@
   display: inline;
   cursor: pointer;
   border-radius: 0.5rem;
-  padding: 1.5rem 4rem;
+  height: 5.2rem;
+  padding: 0rem 3rem;
   transition: all 0.3s;
 
   font-family:'Montserrat', sans-serif;
@@ -83,6 +84,27 @@
     }
   }
 }
+
+.primary{
+  background-color: $color-green;
+  color: $color-white;
+  border: solid rgba($color-white, 0.5) 2px;
+
+  &:disabled {
+    background-color: rgba($color: $color-green, $alpha: 0.75);
+  }
+}
+
+.secondary{
+  background-color: transparent;
+  color: $color-black;
+  border: solid rgba($color-white, 0.5) 2px;
+
+  &:disabled {
+    background-color: rgba($color: $color-white, $alpha: 0.35);
+  }
+}
+
 
 .button-padding-small {
   padding: 1.5rem 0rem;

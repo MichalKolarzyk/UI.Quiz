@@ -1,6 +1,7 @@
 export interface FlexColumnProps {
   children?: any;
   gap?: GapColumnEnum;
+  reverse?: boolean,
 }
 
 export enum GapColumnEnum {
@@ -15,6 +16,7 @@ export interface FlexRowProps {
     gap?: GapRowEnum;
     itemsPosition? : RowPositionEnum,
     fullHeight?: boolean;
+    reverse?: boolean,
   }
   
   export interface FlexRowItemProps {
