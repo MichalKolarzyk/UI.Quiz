@@ -1,4 +1,4 @@
-import { EdiiButton } from "../buttons";
+import { TertiaryButton } from "../buttons";
 import Table, { TableProps } from "./table/Table";
 import TableCell from "./table/TableCell";
 import TableHeader from "./table/TableHeader";
@@ -7,6 +7,8 @@ import TableRow from "./table/TableRow";
 import classes from './table/Table.module.scss'
 import { FilterQuestionItem } from "../../apis/apiQuiz/models/FilterQuestions";
 import { GetQuizzesItem } from "../../apis/apiQuiz/models/GetQuizzes";
+import { Colors } from "../../scss/colors/types";
+import { IconComponents } from "../icons";
 
 export const QuestionsTable: React.FC<QuestionsTableProps> = (props) => {
   return (
@@ -28,7 +30,7 @@ export const QuestionsTable: React.FC<QuestionsTableProps> = (props) => {
             <TableCell>{item.defaultLanugage}</TableCell>
             <TableCell>{item.description}</TableCell>
             <TableCell>
-              <EdiiButton onClick={() => props.onEditClick(item)} />
+              <TertiaryButton icon={IconComponents.Edit} color={Colors.black} onClick={() => props.onEditClick(item)} />
             </TableCell>
           </TableRow>
         );
@@ -63,7 +65,7 @@ export const QuizzesTable: React.FC<QuizzesTableProps> = (props)  => {
             <TableCell>{item.name}</TableCell>
             <TableCell>{item.questionCount}</TableCell>
             <TableCell>
-              <EdiiButton onClick={() => props.onEditClick?.(item)} />
+            <TertiaryButton icon={IconComponents.Edit} color={Colors.black} onClick={() => props.onEditClick?.(item)} />
             </TableCell>
           </TableRow>
         );
@@ -100,7 +102,7 @@ export const SessionsTable: React.FC<SessionsTableProps> = (props) => {
             <TableCell>{item.defaultLanguage}</TableCell>
             <TableCell>{item.defaultLanguage}</TableCell>
             <TableCell>
-              <EdiiButton onClick={() => props.onEditClick(item)} />
+            <TertiaryButton icon={IconComponents.Edit} color={Colors.black}  onClick={() => props.onEditClick(item)} />
             </TableCell>
           </TableRow>
         );

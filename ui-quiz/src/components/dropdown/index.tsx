@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { IDisabled, IError, IList, IPlaceholder, ISingleValue } from "../base/types";
 import { InputBox } from "../boxes/InputBox";
-import { ClearIcon, DownIcon, UpIcon } from "../icons";
+import { ClearIcon, DownIcon, IconComponents, UpIcon } from "../icons";
 import classes from "./styles.module.scss";
 import React from "react";
+import { TertiaryButton } from "../buttons";
+import { Colors } from "../../scss/colors/types";
 
 export const Dropdown: React.FC<DropdownProps> = (props) => {
   const [isListVisible, setIsListVisible] = useState<boolean>(false);
@@ -17,7 +19,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
     }
     newFilterdItems = props.items?.filter((i) => i.startsWith(categorySearch ?? "")) ?? [];
     setFilteredItems([...newFilterdItems]);
-  }, [categorySearch,props.items]);
+  }, [categorySearch, props.items]);
 
   useEffect(() => {
     if (isListVisible == true) {
@@ -28,7 +30,6 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-
   const onIntemClick = (value: string) => {
     setIsListVisible(false);
     props.onChange?.(value);
@@ -37,7 +38,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
   const setIsListVisibleToTrue = () => {
     inputRef.current?.focus();
     setIsListVisible(true);
-  }
+  };
 
   const itemsView = filteredItems.map((value, index) => (
     <div onMouseDown={() => onIntemClick(value)} className={classes.item}>
@@ -48,30 +49,46 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
   const inputValue = isListVisible ? categorySearch : props.value ?? "";
 
   return (
-    <>
-      <InputBox disabled={props.disabled} error={props.error}>
-        <div onBlur={() => setIsListVisible(false)} className={classes.box}>
-          <input
-            value={inputValue}
-            onChange={(event) => setCategorySearch(event.target.value)}
-            onFocus={() => setIsListVisible(true)}
-            onBlur={() => setIsListVisible(false)}
-            className={classes.input}
-            ref={inputRef}
-            placeholder={props.placeholder}
-          ></input>
-          {!isListVisible && props.value && <ClearIcon className={classes.icon} onClick={() => props.onChange?.("")} />}
-          {!isListVisible && <DownIcon onClick={setIsListVisibleToTrue} className={classes.icon} />}
-          {isListVisible && <UpIcon onClick={() => setIsListVisible(false)} className={classes.icon} />}
-          {isListVisible && <div className={classes.list}>
+    <InputBox disabled={props.disabled} error={props.error}>
+      <div onBlur={() => setIsListVisible(false)} className={classes.box}>
+        <input
+          value={inputValue}
+          onChange={(event) => setCategorySearch(event.target.value)}
+          onFocus={() => setIsListVisible(true)}
+          onBlur={() => setIsListVisible(false)}
+          className={classes.input}
+          ref={inputRef}
+          placeholder={props.placeholder}
+        ></input>
+        <TertiaryButton
+          icon={IconComponents.Clear}
+          onClick={() => props.onChange?.("")}
+          color={Colors.black}
+          isHidden={isListVisible || !props.value || props.disabled}
+        />
+
+        <TertiaryButton
+          icon={IconComponents.Down}
+          onClick={() => setIsListVisible(true)}
+          color={Colors.black}
+          isHidden={isListVisible || props.disabled}
+        />
+
+        <TertiaryButton
+          icon={IconComponents.Up}
+          onClick={() => setIsListVisible(false)}
+          color={Colors.black}
+          isHidden={!isListVisible || props.disabled}
+        />
+        {isListVisible && (
+          <div className={classes.list}>
             {itemsView}
             {filteredItems.length == 0 && <div className={classes.empty}>Not found ...</div>}
-          </div>}
-        </div>
-      </InputBox>
-    </>
+          </div>
+        )}
+      </div>
+    </InputBox>
   );
 };
 
-export interface DropdownProps extends IPlaceholder, ISingleValue<string>, IError, IDisabled, IList<string> {
-}
+export interface DropdownProps extends IPlaceholder, ISingleValue<string>, IError, IDisabled, IList<string> {}

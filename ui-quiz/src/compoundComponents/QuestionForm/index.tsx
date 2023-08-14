@@ -1,14 +1,16 @@
 import { useContext } from "react";
 import QuestionContext from "./QuestionContext";
-import { CancelButton, DeleteButton, GoBackButton, RoundedButton } from "../../components/buttons";
+import { GoBackButton, PrimaryButton, SecondaryButton, TertiaryButton } from "../../components/buttons";
 import QuestionProvider from "./QuestionProvider";
 import Switch from "../../components/switches/Switch";
 import Textarea from "../../components/inputs/textarea/Textarea";
 import { Dropdown } from "../../components/dropdown";
 import FlexRow from "../../components/flex/FlexRow";
-import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
+import { GapRowEnum } from "../../components/flex/types";
 import { TextInput } from "../../components/inputs/textInput";
 import ErrorMessage from "../../components/errors";
+import { IconComponents } from "../../components/icons";
+import { Colors } from "../../scss/colors/types";
 
 const Form = (props: any) => {
   return (
@@ -75,9 +77,7 @@ const AddAnswear = () => {
   if (!context.canUserEdit) return <></>;
 
   return (
-    <RoundedButton disabled={(context.answers.length ?? 0) >= 6} onClick={context.addAnswear}>
-      + Add
-    </RoundedButton>
+    <SecondaryButton disabled={(context.answers.length ?? 0) >= 6} onClick={context.addAnswear} icon={IconComponents.Add} iconPosition="left" label="Add answear"/>
   );
 };
 
@@ -86,15 +86,13 @@ const Save = () => {
   if (!context.canUserEdit) return <></>;
 
   return (
-    <RoundedButton  disabled={!context.canUserEdit} onClick={context.save}>
-      Save
-    </RoundedButton>
+    <PrimaryButton disabled={!context.canUserEdit} onClick={context.save} label="Update"/>
   );
 };
 
 const Cancel = () => {
   const context = useContext(QuestionContext);
-  return <CancelButton onClick={context.goBack} />;
+  return <SecondaryButton label="Cancel" icon={IconComponents.Cancel} onClick={context.goBack} />;
 };
 
 const Answears = () => {
@@ -120,7 +118,7 @@ const Answears = () => {
               />
             </FlexRow.Item>
             <FlexRow.Item>
-              <DeleteButton isHidden={!context.canUserEdit} onClick={() => context.removeAnswear(index)} />
+              <TertiaryButton icon={IconComponents.Delete} color={Colors.white} isHidden={!context.canUserEdit} onClick={() => context.removeAnswear(index)} />
             </FlexRow.Item>
           </FlexRow.Container>
         );

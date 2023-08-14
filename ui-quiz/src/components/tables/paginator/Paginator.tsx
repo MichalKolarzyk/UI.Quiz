@@ -1,4 +1,8 @@
-import { NextButton, PreviousButton } from "../../buttons";
+import { Colors } from "../../../scss/colors/types";
+import { TertiaryButton } from "../../buttons";
+import FlexRow from "../../flex/FlexRow";
+import { GapRowEnum, RowPositionEnum } from "../../flex/types";
+import { IconComponents } from "../../icons";
 import NumberView from "./NumberView";
 import classes from "./Paginator.module.scss";
 
@@ -11,10 +15,14 @@ const Paginator = (props: PaginatorProps) => {
 
   const getNumberView = (number: number) => {
     return (
-      <NumberView key={number} isSelected={number == props.page} number={number} onClick={() => onNumberClickHandler(number)} />
+      <NumberView
+        key={number}
+        isSelected={number == props.page}
+        number={number}
+        onClick={() => onNumberClickHandler(number)}
+      />
     );
   };
-
 
   const getDotsView = () => {
     return <div className={classes.space}>...</div>;
@@ -53,25 +61,34 @@ const Paginator = (props: PaginatorProps) => {
   };
 
   const onPrevClickHandler = () => {
-    const newNumber = props.page - 1
+    const newNumber = props.page - 1;
     props.onPageChange(newNumber);
   };
 
   const onNextClickHandler = () => {
-    const newNumber = props.page + 1
+    const newNumber = props.page + 1;
     props.onPageChange(newNumber);
   };
 
   return (
-    <div className={classes.paginator}>
-      <PreviousButton disabled={props.page <= 1} onClick={onPrevClickHandler}>
-        Prev
-      </PreviousButton>
+    <FlexRow.Container itemsPosition={RowPositionEnum.center} gap={GapRowEnum.medium}>
+      <TertiaryButton
+        color={Colors.white}
+        icon={IconComponents.Previous}
+        label="Prev"
+        disabled={props.page <= 1}
+        iconPosition="left"
+        onClick={onPrevClickHandler}
+      />
       {numberView}
-      <NextButton disabled={props.page >= props.pages} onClick={onNextClickHandler}>
-        Next
-      </NextButton>
-    </div>
+      <TertiaryButton
+        color={Colors.white}
+        icon={IconComponents.Next}
+        label="Next"
+        disabled={props.page >= props.pages}
+        onClick={onNextClickHandler}
+      />
+    </FlexRow.Container>
   );
 };
 

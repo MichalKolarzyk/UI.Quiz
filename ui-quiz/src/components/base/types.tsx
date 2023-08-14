@@ -1,3 +1,6 @@
+import { BackgroundColors } from "../../scss/backgroundColors/types";
+import { Colors } from "../../scss/colors/types";
+
 export interface IStyle{
     className?: string,
 }
@@ -41,4 +44,12 @@ export interface IChildren{
 
 export interface IClick{
     onClick?: () => void;
+}
+
+export interface IColor{
+    color?: Colors
+}
+
+export interface IBackgroundColor{
+    backgroundColor?: BackgroundColors
 }

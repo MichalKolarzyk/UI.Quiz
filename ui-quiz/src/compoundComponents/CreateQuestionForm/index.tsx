@@ -5,11 +5,12 @@ import CreateQuestionProvider from "./CreateQuestionProvider";
 import Switch from "../../components/switches/Switch";
 import { Dropdown } from "../../components/dropdown";
 import FlexRow from "../../components/flex/FlexRow";
-import { CancelButton, CreateButton, DeleteButton, GoBackButton, PrimaryButton, RoundedButton, SecondaryButton } from "../../components/buttons";
+import { GoBackButton, PrimaryButton, SecondaryButton, TertiaryButton } from "../../components/buttons";
 import { TextInput } from "../../components/inputs/textInput";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 import ErrorMessage from "../../components/errors";
-import { Icon, IconComponents } from "../../components/icons";
+import { IconComponents } from "../../components/icons";
+import { Colors } from "../../scss/colors/types";
 
 const GoBack = () => {
   const context = useContext(CreateQuestionContext);
@@ -36,7 +37,7 @@ const CreateQuestion = () => {
 
 const Cancel = () => {
   const context = useContext(CreateQuestionContext);
-  return <SecondaryButton onClick={context.goBack} label="Cancel" icon={IconComponents.Cancel} />;
+  return <TertiaryButton color={Colors.white} onClick={context.goBack} label="Cancel" icon={IconComponents.Cancel} />;
 };
 
 const Form = (props: any) => {
@@ -108,7 +109,7 @@ const Answers = () => {
               />
             </FlexRow.Item>
             <FlexRow.Item>
-              <DeleteButton onClick={() => context.removeAnswear(index)} />
+              <TertiaryButton icon={IconComponents.Delete} color={Colors.white} onClick={() => context.removeAnswear(index)} />
             </FlexRow.Item>
           </FlexRow.Container>
         );

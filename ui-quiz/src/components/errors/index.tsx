@@ -1,9 +1,10 @@
-import { CloseButton, EmptyButton } from "../buttons";
-import { RedCard } from "../cards";
+import { BackgroundColors } from "../../scss/backgroundColors/types";
+import { Colors } from "../../scss/colors/types";
+import { TertiaryButton } from "../buttons";
+import { Card } from "../cards";
 import FlexRow from "../flex/FlexRow";
 import { RowPositionEnum } from "../flex/types";
-import { Icon, IconComponents } from "../icons";
-import { IconSize } from "../icons/types";
+import { IconComponents } from "../icons";
 import { Label } from "../labels";
 import classes from "./ErrorMessage.module.scss";
 import { ErrorMessageProps } from "./types";
@@ -20,12 +21,12 @@ export const ErrorMessageBlock: React.FC<ErrorMessageProps> = (props) => {
     return <></>;
   }
   return (
-    <RedCard>
+    <Card backgroundColor={BackgroundColors.error}>
       <FlexRow.Container itemsPosition={RowPositionEnum.spaceBetween}>
-        <Label text={props.error}/>
-        <CloseButton onClick={props.onClear}/>
+        <Label color={Colors.error} text={props.error}/>
+        <TertiaryButton icon={IconComponents.Close} color={Colors.white} onClick={props.onClear}/>
       </FlexRow.Container>
-    </RedCard>
+    </Card>
   );
 };
 

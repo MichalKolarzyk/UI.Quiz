@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IChildren, IDisabled, IError, ILoading } from "../base/types";
 import classes from "./styles.module.scss";
 import ErrorMessage from "../errors";
+import classNames from "classnames";
 
 export const InputBox: React.FC<InputBoxProps> = (props) => {
   const [boxFocus, setBoxFocus] = useState<boolean>(false);
@@ -9,11 +10,12 @@ export const InputBox: React.FC<InputBoxProps> = (props) => {
 
   const hasError = (props.error?.length ?? 0) > 0
 
-  let boxClass = `${classes.box} ${boxFocus ? classes["box--focus"] : ""} ${boxHover ? classes["box--hover"] : ""} ${hasError ? classes["box--error"]: ""}`;
-
-  if (props.disabled || props.isLoading) {
-    boxClass = `${classes.box} ${classes["box--disabled"]}`;
-  }
+  let boxClass = classNames(classes.box, {
+    [classes["box--focus"]] : boxFocus,
+    [classes["box--hover"]] : boxHover,
+    [classes["box--error"]] : hasError,
+    [classes["box--disabled"]] : props.disabled || props.isLoading
+  })
 
   return (
     <>

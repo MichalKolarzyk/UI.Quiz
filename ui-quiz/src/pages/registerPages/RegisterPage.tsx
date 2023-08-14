@@ -4,6 +4,7 @@ import { Card } from "../../components/cards";
 import { IoMdPersonAdd } from "react-icons/io";
 import FlexRow from "../../components/flex/FlexRow";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
+import { BackgroundColors } from "../../scss/backgroundColors/types";
 
 const RegisterPage = () => {
   return (
@@ -22,7 +23,7 @@ const RegisterPage = () => {
           </div>
           <div className={classes["form-section"]}>
             <div className={classes["form-section__box"]}>
-              <Card>
+              <Card backgroundColor={BackgroundColors.primaryLight}>
                 <div className="u-margin-bottom-medium">
                   <FlexRow.Container itemsPosition={RowPositionEnum.center} gap={GapRowEnum.big}>
                     <IoMdPersonAdd className="u-icon-big" />

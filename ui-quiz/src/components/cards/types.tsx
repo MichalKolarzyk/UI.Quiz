@@ -1,3 +1,4 @@
-import { IChildren, IStyle } from "../base/types";
+import { IBackgroundColor, IChildren, IStyle } from "../base/types";
 
-export interface CardProps extends IChildren, IStyle {}
+export interface CardProps extends IChildren, IStyle, IBackgroundColor {
+}

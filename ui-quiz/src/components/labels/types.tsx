@@ -1,4 +1,4 @@
-import { Colors } from "../../scss/types"
+import { Colors } from "../../scss/colors/types"
 
 export interface LabelProps{
     text?: string

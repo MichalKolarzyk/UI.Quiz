@@ -1,4 +1,4 @@
-import { PrimaryButton, SecondaryButton } from "../../components/buttons";
+import { PrimaryButton, SecondaryButton, TertiaryButton } from "../../components/buttons";
 import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
 import classes from "./AboutPage.module.scss";
 
@@ -16,7 +16,7 @@ const AboutPage = () => {
         </h3>
       </div>
       <div className="u-margin-bottom-big">
-        <SecondaryButton onClick={() => nav.toSessionsPage()} label="Go to the session page" />
+        <TertiaryButton onClick={() => nav.toSessionsPage()} label="Go to the session page" />
       </div>
       <div className="h3 u-margin-bottom-medium">
         <h3>
@@ -26,7 +26,7 @@ const AboutPage = () => {
         </h3>
       </div>
       <div>
-        <SecondaryButton label="Create Quiz"/>
+        <PrimaryButton label="Create Quiz"/>
       </div>
     </div>
   );

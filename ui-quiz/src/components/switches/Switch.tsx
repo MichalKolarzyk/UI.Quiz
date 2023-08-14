@@ -23,7 +23,7 @@ const Switch = (props: SwitchProps) => {
           {props.value && <Icon className={classes["check-icon"]} iconComponent={IconComponents.Check} size={IconSize.L} />}
           <div className={classes.toggle}></div>
         </button>
-        <Label text={props.label}/>
+        <Label bold text={props.label}/>
       </FlexRow.Container>
     </div>
   );

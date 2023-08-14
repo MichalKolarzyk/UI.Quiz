@@ -1,9 +1,9 @@
 import { useState } from "react";
 import ApiQuizInstance from "../../apis/apiQuiz/ApiQuizInstance";
 import useApiRequest from "../../apis/utils/useApi";
-import { RoundedButton } from "../../components/buttons";
 import { TextInput } from "../../components/inputs/textInput";
 import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
+import { PrimaryButton, SecondaryButton } from "../../components/buttons";
 
 
 const CreateQuizPage = () => {
@@ -25,7 +25,7 @@ const CreateQuizPage = () => {
   return (
     <>
       <TextInput value={name} onChange={setName} placeholder="Quiz name" />
-      <RoundedButton onClick={onCreateHandler}>Create</RoundedButton>
+      <PrimaryButton onClick={onCreateHandler} label="Create"/>
     </>
   );
 };

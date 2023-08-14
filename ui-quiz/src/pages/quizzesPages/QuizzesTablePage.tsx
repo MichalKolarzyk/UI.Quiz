@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GoBackButton, CreateButton, SecondaryButton } from "../../components/buttons";
+import { GoBackButton, SecondaryButton } from "../../components/buttons";
 import { QuizzesTable } from "../../components/tables";
 import Paginator from "../../components/tables/paginator/Paginator";
 import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";

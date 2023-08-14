@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { CreateButton, GoBackButton, RoundedButton } from "../../components/buttons";
+import { GoBackButton, PrimaryButton, SecondaryButton } from "../../components/buttons";
 import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
 import FlexRow from "../../components/flex/FlexRow";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import { QuestionsTable } from "../../components/tables";
 import { GapRowEnum, RowPositionEnum } from "../../components/flex/types";
 import { TableLayout } from "../../layouts";
 import { GetQuizResponse } from "../../apis/apiQuiz/models/GetQuiz";
+import { IconComponents } from "../../components/icons";
 
 const QuizPage = () => {
   const params = useParams();
@@ -36,8 +37,8 @@ const QuizPage = () => {
       </TableLayout.Title>
       <TableLayout.Action>
         <FlexRow.Container fullHeight gap={GapRowEnum.medium} itemsPosition={RowPositionEnum.right}>
-          <RoundedButton>+ Add Questions</RoundedButton>
-          <CreateButton>Create session</CreateButton>
+          <SecondaryButton icon={IconComponents.Add} label="Add Questions" iconPosition="left"/>
+          <PrimaryButton label="Create session"/>
         </FlexRow.Container>
       </TableLayout.Action>
       <TableLayout.Table>

@@ -9,7 +9,7 @@ const FlexRowContainer: React.FC<FlexRowProps> = (props) => {
         height: props.fullHeight ? "100%" : "",
         flexDirection: props.reverse ? "row-reverse" : "row"
       }}
-      className={`${classes.row}`}
+      className={classes.row}
     >
       {props.children}
     </div>

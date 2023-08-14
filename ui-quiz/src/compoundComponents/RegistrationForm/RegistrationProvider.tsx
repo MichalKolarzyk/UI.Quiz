@@ -3,8 +3,8 @@ import { IRegistrationState } from "./RegistrationContext";
 import useAppNavigation from "../Navigation/useAppNavigation";
 import { useNotifications } from "../Notifications/hooks";
 import usePrompt from "../Prompt/hooks";
-import { CreateButton } from "../../components/buttons";
 import QuizApiRequests from "../../apis/apiQuiz";
+import { PrimaryButton, SecondaryButton } from "../../components/buttons";
 
 const RegistrationProvider = (): IRegistrationState => {
   const [login, setLogin] = useState("");
@@ -24,9 +24,7 @@ const RegistrationProvider = (): IRegistrationState => {
       <div>
         <div className="h2 u-color-white">Congratulations! </div>
         <div className="h3 u-color-white u-margin-bottom-big">{`${login} account has been created `}</div>
-        <CreateButton onClick={onClick} className="button">
-          Continue
-        </CreateButton>
+        <SecondaryButton onClick={onClick} label="Continue"/>
       </div>
     );
   };

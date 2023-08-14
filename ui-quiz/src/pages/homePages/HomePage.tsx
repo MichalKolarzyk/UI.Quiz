@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
 import classes from "./HomePage.module.scss";
 import useAppNavigation from "../../compoundComponents/Navigation/useAppNavigation";
-import { HeaderPageButton, RoundedButton } from "../../components/buttons";
+import { NavButton, SecondaryButton, TertiaryButton } from "../../components/buttons";
 import ReferenceItemsLoader from "../../components/loaders/ReferenceItemsLoader";
 import useToken from "../../apis/utils/useToken";
+import { Colors } from "../../scss/colors/types";
 
 const HomePage = () => {
   const navigate = useAppNavigation();
@@ -17,13 +18,13 @@ const HomePage = () => {
             <h2>Quiz</h2>
           </div>
           <div className={classes.page__header__center}>
-            <HeaderPageButton to={navigate.aboutUrl}>About</HeaderPageButton>
-            <HeaderPageButton to={navigate.quizzesUrl}>Quizzes</HeaderPageButton>
-            <HeaderPageButton to={navigate.sessionsUrl}>Sessions</HeaderPageButton>
-            <HeaderPageButton to={navigate.questionsUrl}>Questions</HeaderPageButton>
+            <NavButton to={navigate.aboutUrl} label="About"/>
+            <NavButton to={navigate.quizzesUrl} label="Quizzes"/>
+            <NavButton to={navigate.sessionsUrl} label="Sessions"/>
+            <NavButton to={navigate.questionsUrl} label="Questions"/>
           </div>
           <div className={classes.page__header__right}>
-            <RoundedButton onClick={token.clear}>Sing out</RoundedButton>
+            <TertiaryButton color={Colors.white} onClick={token.clear} label="Sing out"/>
           </div>
         </header>
         <Outlet />
