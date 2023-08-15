@@ -16,8 +16,11 @@ export const Icon = (props: IconProps) => {
   const classname = classNames(classes.icon, props.className, props.color)
 
   return (
-    <props.iconComponent height={props.size} width={props.size} 
-      className={ classname}
+    <props.iconComponent style={{
+      height: props.size,
+      width: props.size,
+    }}
+      className={classname}
     ></props.iconComponent>
   );
 };

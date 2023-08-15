@@ -7,5 +7,9 @@
 }
 
 .color-error{
-    color: rgba(rgb(255, 219, 219), 1);
+    color: $color-error;
+}
+
+.color-grey{
+    color: $color-grey
 }

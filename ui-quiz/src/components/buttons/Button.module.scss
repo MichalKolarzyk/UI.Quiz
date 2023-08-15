@@ -67,3 +67,14 @@
     background-color: rgba($color: $color-white, $alpha: 0.35);
   }
 }
+
+.component-action{
+  background-color: transparent;
+  border: none;
+  padding: 0rem;
+  height: auto;
+
+  &:hover:enabled {
+    transform: translateY(0px);
+  }
+}

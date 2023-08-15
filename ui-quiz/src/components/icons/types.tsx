@@ -1,5 +1,6 @@
 import { IconType } from "react-icons";
 import { Colors } from "../../scss/colors/types";
+import { IClick, IColor, IStyle } from "../base/types";
 
 export enum IconSize{
     S = "1rem",
@@ -8,9 +9,7 @@ export enum IconSize{
     XL = "5rem",
 }
 
-export interface IconProps{
+export interface IconProps extends IColor, IStyle{
     size?: IconSize,
     iconComponent?: IconType,
-    className?: string,
-    color?: Colors,
 }

@@ -1,7 +1,7 @@
 import { Icon, IconComponents } from "../icons";
 import classes from "./Button.module.scss";
 import { NavLink, NavLinkProps } from "react-router-dom";
-import { BasicButtonProps, BasincComponentButtonProps, ButtonProps, NavButtonProps, TertiaryButtonProps } from "./types";
+import { BasicButtonProps, BasincComponentButtonProps, ButtonProps, ComponentActionButtonProps, NavButtonProps, TertiaryButtonProps } from "./types";
 import { IconSize } from "../icons/types";
 import FlexRow from "../flex/FlexRow";
 import { GapRowEnum } from "../flex/types";
@@ -22,7 +22,7 @@ export const BasicComponentButton = (props: BasincComponentButtonProps) => {
     <BasicButton disabled={props.disabled} onClick={props.onClick} className={props.className} isHidden={props.isHidden}>
       <FlexRow.Container gap={GapRowEnum.small} reverse={props.iconPosition == "left"}>
         <Label color={props.labelColor} text={props.label} bold />
-        <Icon color={props.labelColor} iconComponent={props.icon} size={IconSize.L} />
+        <Icon color={props.labelColor} iconComponent={props.icon} size={props.iconSize ?? IconSize.L} />
       </FlexRow.Container>
     </BasicButton>
   );
@@ -40,6 +40,10 @@ export const TertiaryButton = (props: TertiaryButtonProps) => {
   return <BasicComponentButton labelColor={props.color ?? Colors.white} className={classes.tertiary} {...props} />;
 }
 
+export const ComponentActionButton = (props: ComponentActionButtonProps) => {
+  return <BasicComponentButton iconSize={IconSize.L} labelColor={props.color ?? Colors.grey} className={classes["component-action"]} {...props} />;
+}
+
 export const NavButton = (props: NavButtonProps) => {
   return (
     <NavLink
@@ -51,6 +55,7 @@ export const NavButton = (props: NavButtonProps) => {
     >{props.label}</NavLink>
   );
 };
+
 
 export const GoBackButton: React.FC<BasicButtonProps> = (props: ButtonProps) => {
   return <TertiaryButton color={Colors.white} onClick={props.onClick} icon={IconComponents.Previous} label="Back" iconPosition="left" />;

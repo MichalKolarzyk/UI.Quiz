@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { IDisabled, IError, IList, IPlaceholder, ISingleValue } from "../base/types";
 import { InputBox } from "../boxes/InputBox";
-import { ClearIcon, DownIcon, IconComponents, UpIcon } from "../icons";
+import { ClearIcon, DownIcon, Icon, IconComponents, UpIcon } from "../icons";
 import classes from "./styles.module.scss";
 import React from "react";
-import { TertiaryButton } from "../buttons";
+import { ComponentActionButton, TertiaryButton } from "../buttons";
 import { Colors } from "../../scss/colors/types";
+import { IconSize } from "../icons/types";
 
 export const Dropdown: React.FC<DropdownProps> = (props) => {
   const [isListVisible, setIsListVisible] = useState<boolean>(false);
@@ -60,24 +61,22 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
           ref={inputRef}
           placeholder={props.placeholder}
         ></input>
-        <TertiaryButton
+        <ComponentActionButton
           icon={IconComponents.Clear}
           onClick={() => props.onChange?.("")}
-          color={Colors.black}
           isHidden={isListVisible || !props.value || props.disabled}
         />
 
-        <TertiaryButton
+
+        <ComponentActionButton
           icon={IconComponents.Down}
           onClick={() => setIsListVisible(true)}
-          color={Colors.black}
           isHidden={isListVisible || props.disabled}
         />
 
-        <TertiaryButton
+        <ComponentActionButton
           icon={IconComponents.Up}
           onClick={() => setIsListVisible(false)}
-          color={Colors.black}
           isHidden={!isListVisible || props.disabled}
         />
         {isListVisible && (
