@@ -29,7 +29,7 @@ export const InputBox: React.FC<InputBoxProps> = (props) => {
       >
         {props.children}
       </div>
-      <ErrorMessage error={props.error} />
+      <ErrorMessage error={props.error}/>
     </>
   );
 };

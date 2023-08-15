@@ -1,4 +1,4 @@
-@import '../../../scss/abstract/variables';
+@import '../../../scss/main';
 
 .paginator{
     display: inline-flex;
@@ -44,7 +44,7 @@
 .selected-number{
     cursor: pointer;
     color: $color-white;
-    background-color: $color-primary-light2;
+    background-color: $color-primary-light-1;
     border-radius: 10rem;
     padding: 1rem 0rem;
     font-weight: 700;
@@ -56,6 +56,6 @@
     padding: 1rem 2rem;
 
     :disabled{
-        color: $color-grey-dark;
+        color: $color-grey-dark-1;
     }
 }

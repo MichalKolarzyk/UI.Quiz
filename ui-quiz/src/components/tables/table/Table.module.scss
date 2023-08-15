@@ -1,5 +1,6 @@
+@import '../../../scss/main.scss';
 .table {
-  background-color: white;
+  background-color: $color-white;
   border-radius: 1rem;
   width: 100%;
   border-collapse: collapse;
@@ -8,13 +9,13 @@
 
 td,
 th {
-  border: 1px solid #dddddd;
+  border: 1px solid $color-grey-light-2;
   text-align: left;
   padding: 1.5rem;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: $color-grey-light-3;
 }
 
 

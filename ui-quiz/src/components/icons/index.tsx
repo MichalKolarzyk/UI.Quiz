@@ -3,7 +3,7 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { IoMdAddCircleOutline, IoMdClose } from "react-icons/io";
 import { MdClear, MdModeEdit } from "react-icons/md";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
-import { CgSpinnerAlt } from "react-icons/cg";
+import { CgLogOut, CgSpinnerAlt } from "react-icons/cg";
 import { BsCheck } from "react-icons/bs";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import { IconProps } from "./types";
@@ -36,6 +36,7 @@ export const IconComponents = {
   Clear: MdClear,
   Down: BiCaretDown,
   Up: BiCaretUp,
+  Logout: CgLogOut
 };
 
 export const DeleteIcon = ImBin;

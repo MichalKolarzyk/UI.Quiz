@@ -27,11 +27,11 @@
 }
 
 .primary{
-  background-color: $color-green;
+  background-color: $color-succed-dark-1;
   border: none;
 
   &:disabled {
-    background-color: rgba($color: $color-green, $alpha: 0.75);
+    background-color: rgba($color: $color-succed-dark-1, $alpha: 0.75);
   }
 }
 

@@ -4,7 +4,7 @@
   min-height: 100vh;
   display: grid;
   grid-template-columns: 30% auto;
-  background-color: $color-primary-dark;
+  background-color: $color-primary-dark-3;
   box-sizing: border-box;
 
   &__form {
@@ -13,7 +13,7 @@
   }
 
   &__description {
-    background-color: $color-primary-dark;
+    background-color: $color-primary-dark-1;
   }
 }
 

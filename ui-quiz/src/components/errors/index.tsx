@@ -13,7 +13,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = (props) => {
   if (props.error == undefined) {
     return <></>;
   }
-  return <div className={classes.error}>{props.error}</div>;
+  return <Label color={Colors.error} text={props.error}/>;
 };
 
 export const ErrorMessageBlock: React.FC<ErrorMessageProps> = (props) => {

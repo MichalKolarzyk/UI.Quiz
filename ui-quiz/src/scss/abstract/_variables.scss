@@ -1,38 +1,58 @@
 //https://mycolor.space/?hex=%23251762&sub=1
 
-$color-primary-dark2: #0087ca;
-$color-primary-dark: #0191D8;
-$color-primary-light: #07AFF0;
-$color-primary-light2: #23A6F0;
-
-$color-white: #F9F9F9;
-$color-black: #000000;
-
-$color-text-grey-light: #737373;
-
-$color-green: #3DD267;
-
-//Old variables
-$color-primary: #251762;
-
-
-
-$color-secondary: #FFB551;
-
-
-$color-grey-dark: #777;
-$color-grey-light: rgb(173, 173, 173);
-
-$color-blue-dark: #251762;
-
-$color-red: #C53D63;
-
 $default-font-size: 1.4rem;
 $small-font-size: 1.2rem;
 
-$color-gradient1: #251762;
-$color-gradient2: #821D6B;
-$color-gradient3: #C53D63;
-$color-gradient4: #F07455;
-$color-gradient5: #FFB551;
-$color-gradient6: #F9F871;
+//new colors
+$color-primary: #07AFF0;
+$color-primary-light-1: #14BCFC;
+$color-primary-light-2: #21C1FF;
+$color-primary-light-3: #3BC8FF;
+$color-primary-light-4: #54CFFF;
+$color-primary-light-5: #6ED6FF;
+$color-primary-light-6: #87DEFF;
+
+$color-primary-dark-1: #00A4E3;
+$color-primary-dark-2: #0091C9;
+$color-primary-dark-3: #007FB0;
+$color-primary-dark-4: #006C96;
+$color-primary-dark-5: #005A7D;
+$color-primary-dark-6: #004863;
+
+
+$color-error: #F04907;
+$color-error-light-1: #FC5614;
+$color-error-light-2: #FC682D;
+$color-error-light-3: #FC7A47;
+$color-error-light-4: #FC8C60;
+$color-error-light-5: #FC9E79;
+$color-error-light-6: #FCB092;
+
+$color-succed: #39F007;
+$color-succed-light-1: #4CF01F;
+$color-succed-light-2: #5FF037;
+$color-succed-light-3: #72F04F;
+$color-succed-light-4: #85F067;
+$color-succed-light-5: #98F07F;
+$color-succed-light-6: #AAF097;
+
+$color-succed-dark-1: #33D606;
+$color-succed-dark-2: #2DBD06;
+$color-succed-dark-3: #27A305;
+
+$color-grey: #939FA3;
+$color-grey-light-1: #AAB7BD;
+$color-grey-light-2: #C1D0D6;
+$color-grey-light-3: #D8E9F0;
+$color-grey-light-4: #E5F8FF;
+
+$color-grey-dark-1: #7C868A;
+$color-grey-dark-2: #656D70;
+$color-grey-dark-3: #4E5457;
+$color-grey-dark-4: #373B3D;
+
+$color-white: $color-grey-light-4;
+$color-black: $color-grey-dark-4;
+
+
+

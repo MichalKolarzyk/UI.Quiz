@@ -1,8 +1,8 @@
-@import '../../scss/abstract/variables';
+@import '../../scss/main';
 
 .box{
     display: block;
-    background-color: rgba($color-white, 1);
+    background-color: $color-white;
     border-radius: .5rem;
     min-width: 45rem;
 }
@@ -10,13 +10,13 @@
 .box--focus{
     outline-width: 2px;
     outline-style: solid;
-    outline-color: rgba($color-green, 1);
+    outline-color: rgba($color-succed, 1);
 }
 
 .box--hover{
     outline-width: 3px;
     outline-style: solid;
-    outline-color: rgba($color-green, .7);
+    outline-color: rgba($color-succed, .7);
 }
 
 .box--error{

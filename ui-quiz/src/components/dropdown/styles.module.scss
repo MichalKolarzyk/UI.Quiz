@@ -56,17 +56,17 @@
 
 .item{
     padding: 1.5rem 3rem;
-    border-bottom: solid 1px rgba($color-grey-light, .25);
+    border-bottom: solid 1px rgba($color-grey-light-1, .25);
     cursor: pointer;
 
     &:hover{
-        background-color: rgba($color-grey-light, .25);
+        background-color: rgba($color-grey-light-1, .25);
     }
 }
 
 .empty{
     padding: 1.5rem 3rem;
-    border-bottom: solid 1px rgba($color-grey-light, .25);
+    border-bottom: solid 1px rgba($color-grey-light-1, .25);
     color: gray;
 }
 

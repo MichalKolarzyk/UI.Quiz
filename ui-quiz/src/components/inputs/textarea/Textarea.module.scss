@@ -1,4 +1,4 @@
-@import '../../../scss/abstract/variables';
+@import '../../../scss/main';
 
 .textarea{
     display: block;
@@ -12,6 +12,7 @@
     color: $color-black;
     border-radius: .5rem;
     box-sizing: border-box;
+    background-color: $color-white;
 
     &:disabled{
         cursor: default;
@@ -22,6 +23,6 @@
         outline-offset: 1px;
         outline-width: 2px;
         outline-style: solid;
-        outline-color: rgba($color-green, 1);
+        outline-color: rgba($color-succed, 1);
     }
 }

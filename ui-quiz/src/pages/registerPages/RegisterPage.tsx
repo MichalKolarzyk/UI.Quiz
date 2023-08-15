@@ -23,7 +23,7 @@ const RegisterPage = () => {
           </div>
           <div className={classes["form-section"]}>
             <div className={classes["form-section__box"]}>
-              <Card backgroundColor={BackgroundColors.primaryLight}>
+              <Card backgroundColor={BackgroundColors.primaryDark1}>
                 <div className="u-margin-bottom-medium">
                   <FlexRow.Container itemsPosition={RowPositionEnum.center} gap={GapRowEnum.big}>
                     <IoMdPersonAdd className="u-icon-big" />

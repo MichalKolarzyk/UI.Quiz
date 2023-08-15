@@ -92,7 +92,7 @@ const Save = () => {
 
 const Cancel = () => {
   const context = useContext(QuestionContext);
-  return <SecondaryButton label="Cancel" icon={IconComponents.Cancel} onClick={context.goBack} />;
+  return <TertiaryButton label="Cancel" icon={IconComponents.Cancel} onClick={context.goBack} />;
 };
 
 const Answears = () => {

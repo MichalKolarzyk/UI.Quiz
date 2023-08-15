@@ -31,7 +31,7 @@ const QuestionPage = () => {
           </FlexColumn.Container>
         </QuestionLayout.Answer>
         <QuestionLayout.Footer>
-          <FlexRow.Container itemsPosition={RowPositionEnum.right}>
+          <FlexRow.Container itemsPosition={RowPositionEnum.right} gap={GapRowEnum.medium}>
             <QuestionForm.Cancel />
             <QuestionForm.Save />
           </FlexRow.Container>

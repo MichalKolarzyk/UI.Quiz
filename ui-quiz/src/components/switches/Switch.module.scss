@@ -1,4 +1,4 @@
-@import '../../scss/abstract/variables';
+@import '../../scss/main';
 
 .switch{
     display: inline-block;
@@ -26,9 +26,9 @@
 }
 
 .on{
-    background-color: $color-green;
+    background-color: $color-succed-dark-1;
     &:disabled{
-        background-color: rgba($color-green, .7);
+        background-color: rgba($color-succed-dark-1, .7);
     }
 
     & > .toggle{
@@ -38,10 +38,10 @@
 }
 
 .off{
-    background-color: $color-grey-light;
+    background-color: $color-grey;
 
     &:disabled{
-        background-color: rgba($color-grey-light, .7);
+        background-color: rgba($color-grey, .7);
     }
     & > .toggle{
         top: .3rem;

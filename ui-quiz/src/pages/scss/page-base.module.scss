@@ -1,9 +1,9 @@
-@import "../../scss/abstract/variables";
+@import "../../scss/main";
 
 .page{
     display: flex;
     flex-direction: column;
-    background-color: $color-primary-dark;
+    background-color: $color-primary-dark-5;
     min-height: 100vh;
 
     &__header{

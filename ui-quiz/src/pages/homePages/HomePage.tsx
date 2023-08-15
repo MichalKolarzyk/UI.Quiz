@@ -5,6 +5,7 @@ import { NavButton, SecondaryButton, TertiaryButton } from "../../components/but
 import ReferenceItemsLoader from "../../components/loaders/ReferenceItemsLoader";
 import useToken from "../../apis/utils/useToken";
 import { Colors } from "../../scss/colors/types";
+import { IconComponents } from "../../components/icons";
 
 const HomePage = () => {
   const navigate = useAppNavigation();
@@ -24,7 +25,7 @@ const HomePage = () => {
             <NavButton to={navigate.questionsUrl} label="Questions"/>
           </div>
           <div className={classes.page__header__right}>
-            <TertiaryButton color={Colors.white} onClick={token.clear} label="Sing out"/>
+            <TertiaryButton icon={IconComponents.Logout} color={Colors.white} onClick={token.clear} label="Sing out"/>
           </div>
         </header>
         <Outlet />
